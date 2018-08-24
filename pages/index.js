@@ -1,5 +1,8 @@
+import Page from '../layouts/main.js'
+
+
 export default () => (
-  <div>
-    Hola mundo!
-  </div>
+  <Page>
+    <p>Hola mundo!</p>
+  </Page>
 )
