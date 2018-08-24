@@ -1,3 +1,1 @@
-import '../style.css'
-
-export default () => <div>Hola mundo!</div>
+export default () => <div>Hola mundo</div>
