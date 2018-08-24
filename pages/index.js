@@ -1,8 +1,3 @@
-import Page from '../layouts/main.js'
+import '../style.css'
 
-
-export default () => (
-  <Page>
-    <p>Hola mundo!</p>
-  </Page>
-)
+export default () => <div>Hola mundo!</div>
