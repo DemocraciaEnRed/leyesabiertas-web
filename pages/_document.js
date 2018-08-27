@@ -1,55 +1,46 @@
+import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet, injectGlobal } from 'styled-components'
 
 injectGlobal`
   @font-face {
-    font-family: OpenSans-Bold;
-    src: url('/static/fonts/Open_Sans/OpenSans-Bold.ttf');
+    font-family: Inter-UI-Black;
+    src: url('/static/fonts/Inter_UI/Inter-UI-Black.woff');
   }
 
   @font-face {
-    font-family: OpenSans-BoldItalic;
-    src: url('/static/fonts/Open_Sans/OpenSans-BoldItalic.ttf');
+    font-family: Inter-UI-BlackItalic;
+    src: url('/static/fonts/Inter_UI/Inter-UI-BlackItalic.woff');
   }
 
   @font-face {
-    font-family: OpenSans-ExtraBold;
-    src: url('/static/fonts/Open_Sans/OpenSans-ExtraBold.ttf');
+    font-family: Inter-UI-Bold;
+    src: url('/static/fonts/Inter_UI/Inter-UI-Bold.woff');
   }
 
   @font-face {
-    font-family: OpenSans-BoldItalic;
-    src: url('/static/fonts/Open_Sans/OpenSans-ExtraBoldItalic.ttf');
+    font-family: Inter-UI-BoldItalic;
+    src: url('/static/fonts/Inter_UI/Inter-UI-BoldItalic.woff');
   }
 
   @font-face {
-    font-family: OpenSans-Italic;
-    src: url('/static/fonts/Open_Sans/OpenSans-Italic.ttf');
+    font-family: Inter-UI-Italic;
+    src: url('/static/fonts/Inter_UI/Inter-UI-Italic.woff');
   }
 
   @font-face {
-    font-family: OpenSans-Light;
-    src: url('/static/fonts/Open_Sans/OpenSans-Light.ttf');
+    font-family: Inter-UI-Medium;
+    src: url('/static/fonts/Inter_UI/Inter-UI-Medium.woff');
   }
 
   @font-face {
-    font-family: OpenSans-LightItalic;
-    src: url('/static/fonts/Open_Sans/OpenSans-LightItalic.ttf');
+    font-family: Inter-UI-MediumItalic;
+    src: url('/static/fonts/Inter_UI/Inter-UI-MediumItalic.woff');
   }
 
   @font-face {
-    font-family: 'OpenSans-Regular';
-    src: url('/static/fonts/Open_Sans/OpenSans-Regular.ttf');
-  }
-
-  @font-face {
-    font-family: OpenSans-SemiBold;
-    src: url('/static/fonts/Open_Sans/OpenSans-SemiBold.ttf');
-  }
-
-  @font-face {
-    font-family: OpenSans-SemiBoldItalic;
-    src: url('/static/fonts/Open_Sans/OpenSans-SemiBoldItalic.ttf');
+    font-family: Inter-UI-Regular;
+    src: url('/static/fonts/Inter_UI/Inter-UI-Regular.woff');
   }
 
   :root {
@@ -63,16 +54,14 @@ injectGlobal`
     --warning: #E86062;
 
     /* Fonts */
-    --regular: 'OpenSans-Regular';
-    --bold: 'OpenSans-Bold';
-    --bold-italic: 'OpenSans-BoldItalic';
-    --extra-bold: 'OpenSans-ExtraBold';
-    --extra-bold-italic: 'OpenSans-ExtraBoldItalic';
-    --italic: 'OpenSans-Italic';
-    --light: 'OpenSans-Light';
-    --light-italic: 'OpenSans-LightItalic';
-    --semi-bold: 'OpenSans-SemiBold';
-    --semi-bold-italic: 'OpenSans-SemiBoldItalic';
+    --regular: 'Inter-UI-Regular';
+    --black: 'Inter-UI-Black';
+    --black-italic: 'Inter-UI-BlackItalic';
+    --bold: 'Inter-UI-Bold';
+    --bold-italic: 'Inter-UI-BoldItalic';
+    --italic: 'Inter-UI-Italic';
+    --medium: 'Inter-UI-Medium';
+    --medium-italic: 'Inter-UI-MediumItalic';
 
     font-size: 10px;
   }
@@ -85,7 +74,7 @@ injectGlobal`
     color: var(--black);
     font-family: var(--regular), 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
-`;
+`
 
 export default class MyDocument extends Document {
   static getInitialProps ({ renderPage }) {
