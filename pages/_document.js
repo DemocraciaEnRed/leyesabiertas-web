@@ -79,6 +79,16 @@ injectGlobal`
   a {
     cursor: pointer;
   }
+
+  section {
+    margin-left: 5.5rem;
+    padding: 7rem 3.5rem;
+    background-color: var(--white);
+  }
+
+  section:nth-child(even) {
+    background-color: #5c97bc;
+  }
 `
 
 export default class MyDocument extends Document {
