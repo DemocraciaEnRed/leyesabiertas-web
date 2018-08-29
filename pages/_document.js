@@ -70,9 +70,14 @@ injectGlobal`
     margin:0;
     padding:0;
     width: 100%;
-    background-color: var(--white);
+    background-color: #ddeef7;
+    background-image: linear-gradient(214deg, #ddeef7, #b8d8ec);
     color: var(--black);
     font-family: var(--regular), 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  a {
+    cursor: pointer;
   }
 `
 
