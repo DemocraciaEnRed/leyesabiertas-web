@@ -1,17 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
-import { TitleH2 } from 'ui'
-
-const Participar = styled.section`
-  &:nth-child(even) {
-    > h2 {
-      color: var(--white);
-    }
-  }
-`
+import { Section, TitleH2 } from 'ui'
 
 export default () => (
-  <Participar>
+  <Section>
     <TitleH2>Como participar</TitleH2>
-  </Participar>
+  </Section>
 )
