@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/DemocraciaEnRed/congreso#readme",
   "dependencies": {
+    "babel-plugin-inline-dotenv": "^1.1.2",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "dotenv": "^6.0.0",
     "isomorphic-unfetch": "^2.1.1",
     "jump.js": "^1.0.2",
@@ -36,6 +38,7 @@
   },
   "now": {
     "name": "colegis",
-    "alias": "colegis-test"
+    "alias": "colegis-test",
+    "dotenv": true
   }
 }
