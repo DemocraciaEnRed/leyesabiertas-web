@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import fetch from 'isomorphic-unfetch'
 import { Section, TitleH2, SubtitleH3, Grid } from 'ui'
 const API_KEY = process.env.API_KEY
 
@@ -18,18 +19,29 @@ const project = {
 const projects = Array(6).fill(project)
 
 export default class extends Component {
-  componentDidMount () {
-    console.log(API_KEY)
+  state = {
+    projects: null
+  }
+
+  async componentDidMount () {
+    try {
+      const projects = await (await fetch(`https://my.api.mockaroo.com/projects.json?key=${API_KEY}`)).json()
+      this.setState({ projects })
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   render () {
+    const { projects } = this.state
     return (
       <Section>
         <TitleH2>Proyectos en debate</TitleH2>
         <SubtitleH3>Estos son los proyectos que podes mirar y comentar para ayudar a hacerlos lo mejor posible.</SubtitleH3>
-        <Grid projects={projects} />
+        { projects &&
+          <Grid projects={projects} />
+        }
       </Section>
     )
   }
 }
-  
