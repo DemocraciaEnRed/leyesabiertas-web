@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Section, TitleH2, SubtitleH3, Grid } from 'ui'
+const API_KEY = process.env.API_KEY
 
 const project = {
   img: 'https://images.unsplash.com/photo-1521058798685-39dd95c33314?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ca1817a75cc6664f629f2e871589c258&auto=format&fit=crop&w=1050&q=80',
@@ -16,10 +17,19 @@ const project = {
 
 const projects = Array(6).fill(project)
 
-export default () => (
-  <Section>
-    <TitleH2>Proyectos en debate</TitleH2>
-    <SubtitleH3>Estos son los proyectos que podes mirar y comentar para ayudar a hacerlos lo mejor posible.</SubtitleH3>
-    <Grid projects={projects} />
-  </Section>
-)
+export default class extends Component {
+  componentDidMount () {
+    console.log(API_KEY)
+  }
+
+  render () {
+    return (
+      <Section>
+        <TitleH2>Proyectos en debate</TitleH2>
+        <SubtitleH3>Estos son los proyectos que podes mirar y comentar para ayudar a hacerlos lo mejor posible.</SubtitleH3>
+        <Grid projects={projects} />
+      </Section>
+    )
+  }
+}
+  
