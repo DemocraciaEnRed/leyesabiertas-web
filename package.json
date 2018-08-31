@@ -33,5 +33,9 @@
   "devDependencies": {
     "eslint": "^5.4.0",
     "eslint-config-democracyos": "^2.0.2"
+  },
+  "now": {
+    "name": "colegis",
+    "alias": "colegis-test"
   }
 }
