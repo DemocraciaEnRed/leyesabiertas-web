@@ -8,9 +8,6 @@ import Footer from '../containers/footer'
 export default () => (
   <div>
     <Navbar />
-    <Hero />
     <Proyectos />
-    <Participar />
-    <Footer />
   </div>
 )

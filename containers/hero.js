@@ -5,7 +5,7 @@ import {
   HeroTitle,
   HeroSubtitle,
   HeroButton
-} from 'ui'
+} from 'democracyos-ui'
 
 export default () => (
   <Hero>

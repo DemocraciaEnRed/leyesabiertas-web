@@ -4,23 +4,23 @@ import {
   Navbar,
   NavBarTitle,
   LinkBar,
-  UserBar
-} from 'ui'
+  UserBar,
+  Button
+} from 'democracyos-ui'
 
 export default () => (
   <Navbar>
     <NavBarTitle>
-      <Link to='/'><a>Co-Legis</a></Link>
+      <Link to='/'><a>co<span>legis</span></a></Link>
     </NavBarTitle>
     <LinkBar>
-      <Link to='/'><a>Inicio</a></Link>
       <Link to='/'><a>Proyectos</a></Link>
       <Link to='/'><a>Cómo participar</a></Link>
       <Link to='/'><a>La Propuesta</a></Link>
     </LinkBar>
     <UserBar>
-      <Link to='/'><a>Crear cuenta</a></Link>
-      <Link to='/'><a>Ingresar</a></Link>
+      <Button>Iniciar sesión</Button>
+      <Button primary>Registrarse</Button>
     </UserBar>
   </Navbar>
 )
