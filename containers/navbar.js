@@ -11,15 +11,15 @@ import {
 export default () => (
   <Navbar>
     <NavBarTitle>
-      <Link to='/'><a>co<span>legis</span></a></Link>
+      <Link href='/'><a>co<span>legis</span></a></Link>
     </NavBarTitle>
     <LinkBar>
-      <Link to='/'><a>Proyectos</a></Link>
-      <Link to='/'><a>Cómo participar</a></Link>
-      <Link to='/'><a>La Propuesta</a></Link>
+      <Link href='/'><a>Proyectos</a></Link>
+      <Link href='/'><a>Cómo participar</a></Link>
+      <Link href='/'><a>La Propuesta</a></Link>
     </LinkBar>
     <UserBar>
-      <Button>Iniciar sesión</Button>
+      <Button withBorder>Iniciar sesión</Button>
       <Button primary>Registrarse</Button>
     </UserBar>
   </Navbar>
