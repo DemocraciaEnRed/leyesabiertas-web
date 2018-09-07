@@ -1,6 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import HeroImg from '../../elements/hero-img/component'
+import HeroLeftColumn from '../../components/hero-left-column/component'
+import HeroTitle from '../../elements/hero-title/component'
+import HeroSubtitle from '../../elements/hero-subtitle/component'
 
 const StyledHero = styled.div`
   margin: 10rem 10.2rem 10.8rem;
@@ -11,7 +15,11 @@ const StyledHero = styled.div`
 
 const Hero = ({ children }) => (
   <StyledHero>
-    { children }
+    <HeroLeftColumn>
+      <HeroTitle>La ciudadanía y sus representantes conectados para co-crear mejores leyes</HeroTitle>
+      <HeroSubtitle>¡Participá haciendo comentarios y sugerencias en los propuestas de ley! Los/as diputados/as tendrán en cuenta tus aportes</HeroSubtitle>
+    </HeroLeftColumn>
+    <HeroImg />
   </StyledHero>
 )
 
