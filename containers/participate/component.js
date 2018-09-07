@@ -21,7 +21,7 @@ const StyledParticipateSection = styled.section`
 `
 
 const Participate = ({ children }) => (
-  <StyledParticipateSection>
+  <StyledParticipateSection id='participate'>
     <ParticipateTitle>Cómo puedo participar</ParticipateTitle>
     <ParticipateContainer>
       <ParticipateItem>
