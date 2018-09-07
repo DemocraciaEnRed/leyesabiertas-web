@@ -22,13 +22,14 @@ const StyledSection = styled.section`
     }
 `
 
-const Section = ({ children }) => (
-  <StyledSection>
+const Section = ({ id, children }) => (
+  <StyledSection id={id}>
     { children }
   </StyledSection>
 )
 
 Section.propTypes = {
+  id: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
