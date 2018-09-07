@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import NavBar from '../containers/navbar/component'
 import ProjectContainer from '../containers/project-container/component'
 import Footer from '../containers/footer/component'
 
-export default class extends Component {
+class Proyecto extends Component {
   static getInitialProps ({ query: { id } }) {
     return { id }
   }
@@ -12,9 +13,15 @@ export default class extends Component {
     return (
       <div>
         <NavBar />
-        <ProjectContainer />
+        <ProjectContainer project={this.props.id} />
         <Footer />
       </div>
     )
   }
 }
+
+Proyecto.propTypes = {
+  id: PropTypes.string.isRequired
+}
+
+export default Proyecto
