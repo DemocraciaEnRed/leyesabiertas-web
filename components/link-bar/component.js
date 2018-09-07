@@ -16,17 +16,17 @@ const Wrapper = styled.div`
     font-size: 1.6rem;
   }
 `
-const Linkbar = ({ children }) => (
+const LinkBar = ({ children }) => (
   <Wrapper>
     { children }
   </Wrapper>
 )
 
-Linkbar.propTypes = {
+LinkBar.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired
 }
 
-export default Linkbar
+export default LinkBar
