@@ -1,7 +1,8 @@
 import React from 'react'
+import Hero from '../containers/hero/component'
 
 export default () => (
   <div>
-    Hola Mundo
+    <Hero />
   </div>
 )
