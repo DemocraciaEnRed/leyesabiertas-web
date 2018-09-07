@@ -22,14 +22,14 @@ const FooterWrapper = styled.footer`
 const Footer = ({ children }) => (
   <FooterWrapper>
     <FooterBar>
-      <NavBarTitle footer>
-        <Link to='/'><FooterLogo img={'https://i.ytimg.com/vi/US8BmC2ZeBE/hqdefault.jpg'} /></Link>
+      <NavBarTitle>
+        <Link href='/'><a>co<span>legis</span></a></Link>
       </NavBarTitle>
       <SocialBar>
         <SocialIcon
-          img={'https://i.ytimg.com/vi/US8BmC2ZeBE/hqdefault.jpg'}
+          img={'/static/assets/facebook-icon.svg'}
           link={'/'} />
-        <SocialIcon img={'https://i.ytimg.com/vi/US8BmC2ZeBE/hqdefault.jpg'}
+        <SocialIcon img={'/static/assets/twitter-icon.svg'}
           link={'/'} />
       </SocialBar>
       <Link to='/'><a>Proyectos</a></Link>
