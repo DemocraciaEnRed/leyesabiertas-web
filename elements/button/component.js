@@ -11,6 +11,7 @@ const StyledButton = styled.button`
   color: #5c97bc;
   border-style: none;
   border-radius: 3px;
+  cursor: pointer;
 
 /* primary = blue background, secondary = white background */
   background-color: ${(props) => props.primary ? '#5c97bc' : 'var(--white)'};
