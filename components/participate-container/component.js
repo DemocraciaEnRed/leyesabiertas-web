@@ -6,7 +6,10 @@ const StyledParticipateContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  margin-bottom: 3rem;
+  margin-bottom: 4.8rem;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
 `
 
 const ParticipateContainer = ({ children }) => (
@@ -14,5 +17,12 @@ const ParticipateContainer = ({ children }) => (
     { children }
   </StyledParticipateContainer>
 )
+
+ParticipateContainer.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
+}
 
 export default ParticipateContainer
