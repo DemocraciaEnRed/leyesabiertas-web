@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import img from '../../assets/comment-icon.svg'
 
 const Wrapper = styled.div`
 height:85px;
@@ -28,7 +27,7 @@ align-items: center;
 const CommentaryIcon = styled.div`
   width: 18px;
   height: 17px;
-  background-image: url(${img});
+  background-image: url(${'/static/assets/comment-icon.svg'});
   background-size: cover;
   background-repeat: no-repeat;
 `

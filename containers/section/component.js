@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const StyledSection = styled.section`
-    width: 100%;
     margin-left: 5rem;
     padding: 8.4rem 4.3rem;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: flex-start;
+    box-sizing: border-box;
     &:nth-child(odd) {
       background-color: #f2f5f8;
     }
