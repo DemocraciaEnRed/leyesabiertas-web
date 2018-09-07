@@ -5,6 +5,9 @@ import PropTypes from 'prop-types'
 const StyledText = styled.div`
   padding: 3.9rem 17.5rem 3.9rem;
   background-color: #2c4c61;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
   text-align: center;
   height: 12.6rem;
 `

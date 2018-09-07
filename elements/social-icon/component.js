@@ -6,7 +6,6 @@ const StyledIcon = styled.div`
   width: 30px;
   height: 30px;
   border-radius:50%;
-  background-color: #a4cee8;
   background-image: url('${(props) => props.img}');
   background-size: cover;
   background-position: center;
