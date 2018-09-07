@@ -13,6 +13,8 @@ const StyledButton = styled.button`
   border-radius: 3px;
   cursor: pointer;
 
+  padding: 0 2rem;
+  font-family: var(--bold);
 /* primary = blue background, secondary = white background */
   background-color: ${(props) => props.primary ? '#5c97bc' : 'var(--white)'};
   color: ${(props) => props.primary ? 'var(--white)' : '#2c4c61'};
