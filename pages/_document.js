@@ -66,6 +66,14 @@ injectGlobal`
     font-size: 10px;
   }
 
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--regular), 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: var(--black);
+  }
+  
   body {
     margin:0;
     padding:0;
