@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const ParticipateTextbox = styled.div`
   width: 370px;
-  height: 125px;
+  min-height: 135px;
   display:flex;
   flex-direction:column;
   justify-content:center;

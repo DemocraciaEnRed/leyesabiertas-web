@@ -10,7 +10,6 @@ import ParticipateContainer from '../../components/participate-container/compone
 import ParticipateItem from '../../components/participate-item/component'
 
 const StyledParticipateSection = styled.section`
-  margin-left: 5rem;
   padding: 8.4rem 4.3rem;
   background-size: 60px 60px;
   background-image: linear-gradient(to right, #f2f5f8 1px, transparent 1px);

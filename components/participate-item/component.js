@@ -10,8 +10,10 @@ const ParticipateItem = styled.div`
   justify-content:space-between;
   align-items:flex-end;
   box-sizing: border-box;
-  margin-left:2rem;
-
+  &:nth-child(odd) {
+      padding-left:1rem;
+      padding-right:1rem;
+    }
 `
 
 const participateItem = ({ children }) => (
