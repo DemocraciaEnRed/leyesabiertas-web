@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import CardHeader from '../../elements/card-header/component'
@@ -16,22 +17,25 @@ flex-direction:column;
 justify-content:space-between;
 background: #fff;
 box-sizing: border-box;
+cursor: pointer;
 
 `
 
 const Card = ({ project }) => (
-  <CardContainer>
-    { project.img &&
+  <Link href={{ pathname: '/proyecto', query: { id: project.id['$oid'] } }}>
+    <CardContainer>
+      { project.img &&
       <CardHeader img={project.img} />
-    }
-    <CardContent tagTitle={project.tagTitle}
-      title={project.title}
-      avatarImg={project.author.avatarImg}
-      name={project.author.name}
-      party={project.author.party} />
-    <CardSocial commentaries={project.commentaries}
-      limitDate={project.limitDate} />
-  </CardContainer>
+      }
+      <CardContent tagTitle={project.tagTitle}
+        title={project.title}
+        avatarImg={project.author.avatarImg}
+        name={project.author.name}
+        party={project.author.party} />
+      <CardSocial commentaries={project.commentaries}
+        limitDate={project.limitDate} />
+    </CardContainer>
+  </Link>
 )
 
 Card.propTypes = {
