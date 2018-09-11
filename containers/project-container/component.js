@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import fetch from 'isomorphic-unfetch'
 import ProjectBar from '../../elements/project-bar/component'
-import ProjectBanner from '../../elements/project-banner/component'
+import ProjectHeader from '../../components/project-header/component'
+
 const API_KEY = process.env.API_KEY
 
 class ProjectContainer extends Component {
@@ -13,7 +14,7 @@ class ProjectContainer extends Component {
   async componentDidMount () {
     try {
       const project = await (await fetch(`https://my.api.mockaroo.com/projects/${this.props.project}.json?key=${API_KEY}`)).json()
-      this.setState({ project }, () => console.log(this.state.project))
+      this.setState({ project })
     } catch (error) {
       console.error(error)
     }
@@ -25,7 +26,7 @@ class ProjectContainer extends Component {
     return (
       <div>
         <ProjectBar />
-        <ProjectBanner img={project.img} />
+        <ProjectHeader project={project} />
       </div>
     )
   }
