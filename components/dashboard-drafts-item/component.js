@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 import React from 'react'
 import PropTypes from 'prop-types'
+import CircularProgressBar from '../../components/circular-progress-bar/component'
+import CircularProgressBarTitle from '../../elements/circular-progress-bar-title/component'
+import CircularBar from '../../elements/circular-bar/component'
 
 const DraftContainer = styled.div`
   width: 85%;
@@ -63,14 +66,13 @@ const DashboardDraftItem = ({ project }) => (
     <LeftContainer>
       <TagTitle>{project.tagTitle}</TagTitle>
       <Title>{project.title}</Title>
-      <DateCreated>{project.DateCreated}</DateCreated>
+      <DateCreated>{project.limitDate}</DateCreated>
     </LeftContainer>
     <RightContainer>
-      { /*  <Progress></Progress>
-      <Edit>
-        <Button>Editar</Button>
-        <Button>Borrar</Button>
-   </Edit> */ }
+      <CircularProgressBar>
+        <CircularProgressBarTitle>Estado</CircularProgressBarTitle>
+        <CircularBar progress={80 + '%'} />
+      </CircularProgressBar>
     </RightContainer>
 
   </DraftContainer>

@@ -3,9 +3,10 @@ import fetch from 'isomorphic-unfetch'
 import styled from 'styled-components'
 import DashboardDraftsItem from '../../components/dashboard-drafts-item/component'
 import DashboardDraftsTitle from '../../elements/dashboard-drafts-title/component'
+const API_KEY = process.env.API_KEY
 
 const StyledDraftsContainer = styled.div`
-  height:640px;
+  min-height:640px;
   width:100%;
   display:flex;
   flex-direction:column;
@@ -39,8 +40,8 @@ class DashboardDrafts extends Component {
         <DashboardDraftsTitle>Borradores</DashboardDraftsTitle>
 
         { projects &&
-         projects.map((p, i) => (
-           <DashboardDraftsItem project={p} key={i} />
+         projects.map((a, i) => (
+           <DashboardDraftsItem project={a} key={i} />
          ))
         }
       </StyledDraftsContainer>
