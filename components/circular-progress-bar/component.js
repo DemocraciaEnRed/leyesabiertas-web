@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const StyledProgressBar = styled.div`
   width:7rem;
-  height:7.7rem;
+  height:7.9rem;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
