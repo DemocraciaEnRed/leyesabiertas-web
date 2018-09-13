@@ -7,7 +7,6 @@ const Separator = styled.hr`
   background-color: #5c97bc;
   margin-right:auto;
   margin-left:0;
-  margin-top: 17px;
   padding:0;
   }
 `

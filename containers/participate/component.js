@@ -10,13 +10,17 @@ import ParticipateContainer from '../../components/participate-container/compone
 import ParticipateItem from '../../components/participate-item/component'
 
 const StyledParticipateSection = styled.section`
-  padding: 8.4rem 4.3rem;
-  background-size: 60px 60px;
+  width:90%;
+  margin-left:auto;
+  margin-right:auto;
+  padding: 8.4rem 0rem;
+  background-size: 4.6007%;
   background-image: linear-gradient(to right, #f2f5f8 1px, transparent 1px);
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
+  box-sizing:border-box;
 `
 
 const Participate = ({ children }) => (

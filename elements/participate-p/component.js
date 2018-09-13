@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const ParticipateP = styled.p`
-  width: 370px;
+  width: 350px;
   height: 189px;
   font-size: 1.6rem;
   font-weight: normal;

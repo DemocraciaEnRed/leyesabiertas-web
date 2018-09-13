@@ -6,7 +6,9 @@ const StyledParticipateContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  width: 97%;
+  width: 100%;
+  padding-left:3.7%;
+  padding-right:3.7%;
   justify-content: space-between;
   margin-bottom: 4.8rem;
   @media (max-width: 1024px) {

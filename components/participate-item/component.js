@@ -4,11 +4,11 @@ import styled from 'styled-components'
 
 const ParticipateItem = styled.div`
   width: 370px;
-  height: 340px;
+  height: 380px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-  align-items:flex-end;
+  align-items:flex-start;
   box-sizing: border-box;
   &:nth-child(odd) {
       padding-left:1rem;

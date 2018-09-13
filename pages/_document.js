@@ -63,6 +63,9 @@ injectGlobal`
     --medium: 'Inter-UI-Medium';
     --medium-italic: 'Inter-UI-MediumItalic';
 
+    /*background sizes */
+    --lined: calc(width/22);
+
     font-size: 10px;
   }
 
