@@ -3,10 +3,11 @@ import styled from 'styled-components'
 
 const HeroImg = styled.img`
   margin-left: 3.4rem;
-  width: 61.6rem;
-  height: 31.5rem;
-  background-color: #5c97bc;
-  border: solid 1px #979797;
+  width: 47rem;
+  height: 39.1rem;
+  background-image:url(${'/static/assets/hero-illustration.svg'});
+  background-size: cover;
+  background-position: center;  
 `
 
 export default HeroImg

@@ -11,7 +11,7 @@ const StyledSection = styled.section`
     align-items: flex-start;
     box-sizing: border-box;
     &:nth-child(odd) {
-      background-color: #f2f5f8;
+      background-color: #f6f6f6;
     }
     &:nth-child(even) {
       background-size: 60px 60px;

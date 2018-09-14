@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="470" height="391" viewBox="0 0 470 391">
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#F1F5F8" fill-rule="nonzero" d="M275.22 363.564c-56.882-5.46-73.156 4.941-102.744 9.399C109.01 382.524 15.66 421.996.126 341.016-3.018 324.62 52.644 205.802 193.927 230.32c141.284 24.517 253.718 21.545 265.553 47.548 11.836 26.003 37.725 98.81-88.024 91.381l-96.235-5.684z"/>
+        <path fill="#AEC6D6" fill-rule="nonzero" d="M330 303l-14.762 28L299 320.405z"/>
+        <path fill="#AEC6D6" fill-rule="nonzero" d="M329 323l-14.762 28L298 340.405zM358.985 311L375 319.672 347 338"/>
+        <path fill="#C5D9E9" fill-rule="nonzero" d="M129 231.713L410.524 316 426 258.566S394.31 236.106 238.809 225c-26.037 8.705-83.772-1.992-109.809 6.713z"/>
+        <path fill="#F1F5F8" fill-rule="nonzero" d="M225 254.444L252.652 0l158.54 45.926L437 63.704 411.56 310z"/>
+        <ellipse cx="46.5" cy="277.5" fill="#C5D9E9" fill-rule="nonzero" rx="20.5" ry="6.5"/>
+        <path fill="#C5D9E9" fill-rule="nonzero" d="M366.85 90.582L277.803 64.19c-4.67-1.38-8.14-5.814-7.777-9.897.37-4.076 4.44-6.263 9.139-4.874l89.032 26.393c4.67 1.38 8.14 5.814 7.777 9.897-.37 4.076-4.47 6.263-9.124 4.874zM379.85 122.582L290.803 96.19c-4.67-1.38-8.14-5.814-7.777-9.897.37-4.076 4.44-6.263 9.139-4.874l89.032 26.393c4.67 1.38 8.14 5.814 7.777 9.897-.37 4.076-4.47 6.263-9.124 4.874zM374.85 152.582l-89.047-26.393c-4.67-1.38-8.14-5.814-7.777-9.897.37-4.076 4.44-6.263 9.139-4.874l89.032 26.393c4.67 1.38 8.14 5.814 7.777 9.897-.37 4.076-4.47 6.263-9.124 4.874z"/>
+        <path stroke="#C5D9E9" stroke-linecap="round" stroke-width="2" d="M242 104l34 10"/>
+        <path fill="#C5D9E9" fill-rule="nonzero" d="M319.456 168.543l-49.478-15.028c-4.822-1.454-8.388-6.027-7.94-10.179.426-4.166 4.684-6.347 9.506-4.878l49.478 15.02c4.822 1.455 8.388 6.028 7.94 10.18-.433 4.165-4.684 6.354-9.506 4.885z"/>
+        <path stroke="#2C4C61" stroke-linecap="round" stroke-width="2" d="M236 100l41 11"/>
+        <path fill="#5B97BD" fill-rule="nonzero" d="M89.82 267.385a3.647 3.647 0 0 1 2.177 3.208 3.651 3.651 0 0 1-1.931 3.362l-32.558 17.296s-8.92 5.232-14.123-11.96c-5.203-17.19-8.92-49.33 0-53.815 8.92-4.484 7.433 23.918 28.246 33.635 8.549 3.991 14.369 6.593 18.19 8.274z"/>
+        <ellipse cx="42" cy="210" fill="#5B97BD" fill-rule="nonzero" rx="6" ry="11"/>
+        <path stroke="#2C4C61" stroke-linecap="round" stroke-width="2" d="M80 278l18 9M66 285l18 10M51 236.196s23.42-4.616 21.932 4.29c-1.487 8.906-5.95 7.421-5.95 7.421M36.99 239s-14.01 8.812-8.848 14.116C33.303 258.419 51 250.843 51 250.843"/>
+        <path stroke="#C5D9E9" stroke-linecap="round" stroke-width="2" d="M236 141l30 7"/>
+        <path fill="#F1F5F8" fill-rule="nonzero" d="M52 243.303L64 238v20.455L52 263z"/>
+        <path stroke="#2C4C61" stroke-linecap="round" stroke-width="2" d="M258 106l-4 35"/>
+        <path stroke="#C5D9E9" stroke-linecap="round" stroke-width="2" d="M235 177l33 10M232 210l31 10M217 241l41 11"/>
+        <path stroke="#2C4C61" stroke-linecap="round" stroke-width="2" d="M251 104l-5 36"/>
+        <path fill="#5B97BD" fill-rule="nonzero" d="M246 117.582L265.921 122s7.115-81-4.98-81S246 117.582 246 117.582z"/>
+        <ellipse cx="262.5" cy="21" fill="#5B97BD" fill-rule="nonzero" rx="4.5" ry="10"/>
+        <path stroke="#2C4C61" stroke-linecap="round" stroke-width="2" d="M262 62s41-5.833 41-13.854C303 40.125 298.527 27 298.527 27M254 63s-8.319-10.62-5.366-15.172A48.455 48.455 0 0 1 253.8 41M283 92l-54 209M218 170l41 10M228 137l41 11M210 203l41 10M202 235l41 10M194 269l39 12"/>
+        <path stroke="#C5D9E9" stroke-linecap="round" stroke-width="2" d="M284 92l-30 177" style="mix-blend-mode:multiply"/>
+        <path stroke="#2C4C61" stroke-linecap="round" stroke-width="2" d="M239 82l-50 204"/>
+        <path fill="#C5D9E9" fill-rule="nonzero" d="M34.5 297L60 313.898 28.5 333 6 313.163z"/>
+        <path fill="#DAE8EE" fill-rule="nonzero" d="M34.5 309L60 325.898 28.5 345 6 325.163z"/>
+        <ellipse cx="445" cy="205" fill="#5B97BD" fill-rule="nonzero" rx="9" ry="6" transform="rotate(-78.23 445 205)"/>
+        <ellipse cx="415.5" cy="317.5" fill="#C5D9E9" fill-rule="nonzero" rx="12.5" ry="6.5"/>
+        <path stroke="#2C4C61" stroke-linecap="round" stroke-width="2" d="M427 276l-7 42"/>
+        <path stroke="#2C4C61" stroke-linecap="round" stroke-width="2.08" d="M415 275l-3 43"/>
+        <path fill="#5B97BD" fill-rule="nonzero" d="M436.191 221.204s8.98-4.423 9.729 3.685c.748 8.108-3.742 47.173-13.47 50.858-9.729 3.686-27.69 2.949-28.437-2.948-.749-5.897 32.178-51.595 32.178-51.595z"/>
+        <path stroke="#2C4C61" stroke-linecap="round" stroke-width="2" d="M396 220s25.99 30.086 39 22.887"/>
+        <path fill="#F1F5F8" fill-rule="nonzero" d="M53.5 291L79 307.898 47.5 327 25 307.163z"/>
+        <path fill="#C5D9E9" fill-rule="nonzero" d="M330.5 303l25.5 16.898L324.5 339 302 319.163z"/>
+        <path fill="#DAE8EE" fill-rule="nonzero" d="M329.5 323l25.5 16.898L323.5 359 301 339.163z"/>
+        <path fill="#AEC6D6" fill-rule="nonzero" d="M318 319l23.51 22 12.49-9.915z"/>
+        <path fill="#F1F5F8" fill-rule="nonzero" d="M347.5 303l25.5 16.898L341.5 339 319 319.163z"/>
+        <path fill="#C5D9E9" fill-rule="nonzero" d="M408.573 46L407 77l31-11.949zM412 46l-1 26"/>
+        <path fill="#F1F5F8" fill-rule="nonzero" d="M412 46v22l26-4.4z"/>
+        <path stroke="#C5D9E9" d="M313 339l13 13M315 335l13 13M318 334l13 13M321 332l13 13M324 329l13 13M329 324l14 12M332 319l14 12M333 317l14 12"/>
+    </g>
+</svg>
