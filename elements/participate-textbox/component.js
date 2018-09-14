@@ -11,11 +11,10 @@ const ParticipateTextbox = styled.div`
   box-sizing: border-box;
 `
 const Span = styled.span`
-  color:#f2f5f8;
+  color:#ef885d;
   font-family:var(--bold);
-  font-size:13rem;
-  position:absolute;
-  z-index:-1;
+  font-size:4rem;
+  padding-right:1rem;
 `
 const H2 = styled.div`
   font-size:3rem;
@@ -26,14 +25,21 @@ const H2 = styled.div`
   `
 
 const H3 = styled.div`
-  font-size:1.8rem;
+  font-size:2.2rem;
   color:#2c4c61;
+  line-height:6rem;
+`
+const ActionWrapper = styled.div`
+  display:flex;
+
 `
 
 const participateTextbox = ({ number, action, description }) => (
   <ParticipateTextbox>
-    <Span>{number}</Span>
-    <H3>{action}</H3>
+    <ActionWrapper>
+      <Span>{number}</Span>
+      <H3>{action}</H3>
+    </ActionWrapper>
     <H2>{description}</H2>
   </ParticipateTextbox>
 )

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const ParticipateItem = styled.div`
   width: 370px;
-  height: 380px;
+  height: 330px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
