@@ -8,6 +8,7 @@ const ArrowRight = styled.div`
   background-size: cover;
   background-position: center;
   margin-right: 2.0rem;
+  cursor: pointer;
 `
 
 export default ArrowRight

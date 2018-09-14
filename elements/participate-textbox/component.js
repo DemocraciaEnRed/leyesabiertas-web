@@ -4,12 +4,11 @@ import styled from 'styled-components'
 
 const ParticipateTextbox = styled.div`
   width: 370px;
-  min-height: 135px;
+  min-height: 100px;
   display:flex;
   flex-direction:column;
   justify-content:center;
   box-sizing: border-box;
-  margin-bottom:2rem;
 `
 const Span = styled.span`
   color:#f2f5f8;

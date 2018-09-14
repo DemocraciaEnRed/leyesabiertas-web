@@ -10,7 +10,6 @@ export default () => (
   <div>
     <NavBar />
     <Hero />
-    <Projects />
     <Participate />
     <About />
     <Footer />
