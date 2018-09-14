@@ -6,7 +6,7 @@ import styled from 'styled-components'
 const Bar = styled.div`
 display:flex;
 justify-content:space-between;
-min-width: 270px;
+min-width: 180px;
 
 `
 

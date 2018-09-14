@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import NavBar from '../containers/navbar/component'
 import ProjectContainer from '../containers/project-container/component'
 import Footer from '../containers/footer/component'
+import CommentCard from '../components/comment-card/component'
 
 class Proyecto extends Component {
   static getInitialProps ({ query: { id } }) {
@@ -14,6 +15,7 @@ class Proyecto extends Component {
       <div>
         <NavBar />
         <ProjectContainer project={this.props.id} />
+        <CommentCard />
         <Footer />
       </div>
     )

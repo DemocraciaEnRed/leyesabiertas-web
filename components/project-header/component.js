@@ -29,6 +29,7 @@ const ProjectHeader = ({ project }) => (
         version={project.version}
         createdAt={project.createdAt} />
       <ProjectTitle>{project.title}</ProjectTitle>
+      
     </ProjectHeaderWrapper>
   </ProjectHeaderContainer>
 )
