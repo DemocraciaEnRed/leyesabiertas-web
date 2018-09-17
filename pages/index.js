@@ -12,6 +12,7 @@ export default () => (
     <NavBar />
     <SecondaryNavbar />
     <Hero />
+    <Projects />
     <Participate />
     <About />
     <Footer />
