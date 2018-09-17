@@ -10,13 +10,8 @@ const StyledSection = styled.section`
     flex-direction: column;
     align-items: flex-start;
     box-sizing: border-box;
-    &:nth-child(odd) {
-      background-color: #f2f5f8;
-    }
-    &:nth-child(even) {
-      background-size: 60px 60px;
-      background-image: linear-gradient(to right, #f2f5f8 1px, transparent 1px);
-      > h2 {
+    background-color: #f2f5f8;
+    > h2 {
         color: #2c4c61;
       }
     }
