@@ -9,6 +9,7 @@ const NavbarStyledButton = styled.button`
   color: #5c97bc;
   border-style: none;
   cursor: pointer;
+  background:#fff;
 /* primary = blue background, secondary = white background 
   color: ${(props) => props.primary ? 'var(--white)' : '#2c4c61'};
   */
