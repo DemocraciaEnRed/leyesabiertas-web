@@ -12,7 +12,7 @@ import FooterLogo from '../../elements/footer-logo/component'
 
 const FooterWrapper = styled.footer`
   width: 100%;
-  height: 48.5rem;
+  height: 35rem;
   background-color: var(--white);
   display:flex;
   flex-direction:column;
@@ -22,21 +22,18 @@ const FooterWrapper = styled.footer`
 const Footer = ({ children }) => (
   <FooterWrapper>
     <FooterBar>
-      <NavBarTitle>
-        <Link href='/'><a>co<span>legis</span></a></Link>
-      </NavBarTitle>
-      <SocialBar>
-        <SocialIcon
-          img={'/static/assets/facebook-icon.svg'}
-          link={'/'} />
-        <SocialIcon img={'/static/assets/twitter-icon.svg'}
-          link={'/'} />
-      </SocialBar>
       <Link to='/'><a>Proyectos</a></Link>
       <Link to='/'><a>La Propuesta</a></Link>
       <Link to='/'><a>Preguntas Frecuentes</a></Link>
       <Link to='/'><a>Términos y condiciones</a></Link>
     </FooterBar>
+    <SocialBar>
+      <SocialIcon
+        img={'/static/assets/facebook-icon.svg'}
+        link={'/'} />
+      <SocialIcon img={'/static/assets/twitter-icon.svg'}
+        link={'/'} />
+    </SocialBar>
     <FooterTextWrapper>
       <P>Honorable Cámara de diputados de la Nación Argentina | Congreso de la Nación Argentina | Av. Rivadavia 1864 | Ciudad Autónoma de Bs. As. (C.P. C1033AAV) | (54-11) 4127-7100</P>
       <P>La información contenida en este sitio es de dominio público y puede ser utilizada libremente. Se solicita citar la fuente.</P>

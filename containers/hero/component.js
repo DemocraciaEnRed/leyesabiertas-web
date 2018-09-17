@@ -7,7 +7,7 @@ import HeroTitle from '../../elements/hero-title/component'
 import HeroSubtitle from '../../elements/hero-subtitle/component'
 
 const StyledHero = styled.div`
-  margin: 10rem 10.2rem 10.8rem;
+  margin: 5%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;

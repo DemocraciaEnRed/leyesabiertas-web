@@ -33,32 +33,3 @@ NavBar.propTypes = {
 }
 
 export default NavBar
-
-/*
-
-const links = [
-  {
-    name: 'Proyectos',
-    value: '#projects'
-  },
-  {
-    name: 'Cómo participar',
-    value: '#participate'
-  },
-  {
-    name: 'La propuesta',
-    value: '#about'
-  }
-]
-
-const scroll = (target) => (e) => {
-  jump(target)
-}
-
- <LinkBar>
-      {links.map((li, i) => (
-        <a onClick={scroll(li.value)}>{li.name}</a>
-      ))}
-    </LinkBar>
-
-    */
