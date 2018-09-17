@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import fetch from 'isomorphic-unfetch'
 import ProjectBar from '../../elements/project-bar/component'
 import ProjectHeader from '../../components/project-header/component'
+import CommentCard from '../../components/comment-card/component'
 
 const API_KEY = process.env.API_KEY
 
@@ -27,6 +28,7 @@ class ProjectContainer extends Component {
       <div>
         <ProjectBar />
         <ProjectHeader project={project} />
+        <CommentCard />
       </div>
     )
   }
