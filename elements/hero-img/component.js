@@ -1,12 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const HeroImg = styled.img`
+const HeroImg = styled.div`
   margin-left: 3.4rem;
-  width: 61.6rem;
-  height: 31.5rem;
-  background-color: #5c97bc;
-  border: solid 1px #979797;
+  width: 55rem;
+  height: 39.1rem;
+  background-image:url(${'/static/assets/hero-illustration.svg'});
+  background-position: center;  
+  background-repeat: no-repeat;
+  border:none !important;
 `
 
 export default HeroImg

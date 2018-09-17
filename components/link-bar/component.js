@@ -3,7 +3,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Wrapper = styled.div`
-  width: 600px;
   display:flex;
   flex-direction:row;
   align-items:center;
@@ -14,6 +13,9 @@ const Wrapper = styled.div`
     display: inline-block;
     padding: 10px 20px;
     font-size: 1.6rem;
+    &:last-child{
+      padding-right:0px;
+    }
   }
 `
 const LinkBar = ({ children }) => (

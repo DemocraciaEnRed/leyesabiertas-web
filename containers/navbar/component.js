@@ -1,50 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import jump from 'jump.js'
-import Link from 'next/link'
-import LinkBar from '../../components/link-bar/component'
+import NavbarLogo from '../../elements/navbar-logo/component'
 import UserBar from '../../components/user-bar/component'
-import NavBarTitle from '../../elements/navbar-title/component'
-import Button from '../../elements/button/component'
-
-const links = [
-  {
-    name: 'Proyectos',
-    value: '#projects'
-  },
-  {
-    name: 'Cómo participar',
-    value: '#participate'
-  },
-  {
-    name: 'La propuesta',
-    value: '#about'
-  }
-]
-
-const scroll = (target) => (e) => {
-  jump(target)
-}
+import Button from '../../elements/navbar-button/component'
 
 const StyledNav = styled.nav`
-  margin: 2.7rem 8.5rem 5.5rem;
+  height:14rem;
   display: flex;
+  padding:1.8rem 5%;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: baseline;
+  border-bottom:1px solid #dae1e7;
 `
 
 const NavBar = ({ children }) => (
   <StyledNav>
-    <NavBarTitle>
-      <Link href='/'><a>co<span>legis</span></a></Link>
-    </NavBarTitle>
-    <LinkBar>
-      {links.map((li, i) => (
-        <a onClick={scroll(li.value)}>{li.name}</a>
-      ))}
-    </LinkBar>
+    <NavbarLogo />
     <UserBar>
       <Button withBorder>Iniciar sesión</Button>
       <Button primary>Registrarse</Button>

@@ -3,22 +3,19 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const FooterBar = styled.div`
-  min-width:800px;  
+  width:60%;  
   margin-left:auto;
   margin-right:auto;
-  height: 110px;
+  height: 2rem;
   display: flex;
-  flex-wrap:wrap;
-  flex-direction:column;
-  box-sizing:border-box;
-  margin-bottom: 8.5rem;
+  justify-content:center;
+  margin-bottom: 2rem;
   > a {
     color: #2c4c61;
     display: inline-block;
-    font-family: var(--medium);
-    padding: 10px 10px;
+    padding: 10px 15px;
     font-size: 1.6rem;
-    width:200px;
+    max-width:220px;
 
     box-sizing:border-box;
   }
