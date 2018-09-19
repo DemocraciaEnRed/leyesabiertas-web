@@ -50,14 +50,19 @@ const CommentCardFooter = styled.div`
   box-sizing:border-box;
   padding-left:20px;
 `
+const CommentText = styled.p`
+  font-size:1.4rem;
+  color: #181818;
+`
 
 const CommentCard = ({ project }) => (
   <CommentCardContainer>
     <CommentCardHeader>Agregar comentario</CommentCardHeader>
     <CommentCardContent>
-      <UserAvatar
-        avatarImg={project.author.avatarImg}
-        name={project.author.name} />
+      <UserAvatar />
+      <CommentText>Hola! Sugiero que cambien una palabra
+para que esto pueda entenderse mejor.
+El cambio sería en: Desagregación y cambiarla por Detalle, para que pueda leerse más rápido.</CommentText>
     </CommentCardContent>
     <CommentCardFooter>Enviar comentario </CommentCardFooter>
 

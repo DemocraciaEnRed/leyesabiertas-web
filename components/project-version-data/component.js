@@ -7,7 +7,6 @@ import ProjectCreationDate from '../../elements/project-creation-date/component'
 const StyledProjectVersionData = styled.div`
   display: flex;
   flex-flow: column wrap;
-  margin-left: auto;
 `
 
 const ProjectVersionData = ({ version, createdAt }) => (

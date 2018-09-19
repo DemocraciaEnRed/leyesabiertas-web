@@ -8,7 +8,6 @@ const HeroImg = styled.div`
   background-image:url(${'/static/assets/hero-illustration.svg'});
   background-position: center;  
   background-repeat: no-repeat;
-  border:none !important;
 `
 
 export default HeroImg

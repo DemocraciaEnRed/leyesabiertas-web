@@ -5,9 +5,13 @@ import ProjectHeaderWrapper from '../../elements/project-header-wrapper/componen
 import UserAvatar from '../../elements/user-avatar/component'
 import ProjectVersionData from '../../components/project-version-data/component'
 import ProjectTitle from '../../elements/project-title/component'
+import ProjectHeaderComments from '../../elements/project-header-comments/component'
+import ProjectHeaderBarItem from '../../components/project-header-bar-item/component'
+import CommentIcon from '../../elements/comment-icon/component'
 
 const ProjectHeaderContainer = styled.div`
   height: 383px;
+  width:100%;
   background-color: #a4cee8;
   background-image: url('${(props) => props.img}');
   background-size: cover;
@@ -17,19 +21,41 @@ const ProjectHeaderContainer = styled.div`
   justify-content: center;
   align-items: flex-end;
 `
+const TopBarWrapper = styled.div`
+  display: flex;
+  width:100%;
+  flex-direction:row;
+  justify-content:space-between;
+  `
+const RightWrapper = styled.div`
+  display: flex;
+  flex-direction:row;
+`
 
 const ProjectHeader = ({ project }) => (
   <ProjectHeaderContainer img={project.img}>
     <ProjectHeaderWrapper>
-      <UserAvatar
-        avatarImg={project.author.avatarImg}
-        name={project.author.name}
-        party={project.author.party} />
-      <ProjectVersionData
-        version={project.version}
-        createdAt={project.createdAt} />
+
+      <TopBarWrapper>
+        <UserAvatar
+          avatarImg={project.author.avatarImg}
+          name={project.author.name}
+          party={project.author.party} />
+
+        <RightWrapper>
+          <ProjectHeaderBarItem>
+            <CommentIcon />
+            <ProjectHeaderComments number={5} />
+          </ProjectHeaderBarItem>
+          <ProjectVersionData
+            version={project.version}
+            createdAt={project.createdAt} />
+        </RightWrapper>
+
+      </TopBarWrapper>
+
       <ProjectTitle>{project.title}</ProjectTitle>
-      
+
     </ProjectHeaderWrapper>
   </ProjectHeaderContainer>
 )
