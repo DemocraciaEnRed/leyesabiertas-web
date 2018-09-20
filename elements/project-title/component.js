@@ -9,7 +9,7 @@ const ProjectTitle = styled.h1`
   line-height: 1.08;
   color: #203340;
   align-self: flex-end;
-  padding-top:2rem;
+  padding-top:4rem;
 `
 ProjectTitle.propTypes = {
   children: PropTypes.string.isRequired

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import UserAvatar from '../../elements/user-avatar/component'
+import UserAvatarLogged from '../../elements/user-avatar-logged/component'
 
 const CommentCardContainer = styled.div`
   width: 300px;
@@ -15,16 +15,24 @@ const CommentCardContainer = styled.div`
   justify-content:space-between;
   box-sizing: border-box;
   cursor: pointer;
+  z-index:2;
+  position: relative;
+  left: 102%;
+  bottom:900px;
+
 `
 
 const CommentCardContent = styled.div`
   display:flex;
+  min-height:210px;
   flex-direction:column;
   justify-content:flex-start;
   align-items:flex-start;
   box-sizing:border-box;
   padding-left:20px;
+  padding-right:20px;
   background-color:#fff;
+  padding-top:2rem;
 `
 const CommentCardHeader = styled.div`
   height: 40px;
@@ -59,7 +67,9 @@ const CommentCard = ({ project }) => (
   <CommentCardContainer>
     <CommentCardHeader>Agregar comentario</CommentCardHeader>
     <CommentCardContent>
-      <UserAvatar />
+      <UserAvatarLogged
+        avatarImg={project.author.avatarImg}
+        name={project.author.name} />
       <CommentText>Hola! Sugiero que cambien una palabra
 para que esto pueda entenderse mejor.
 El cambio sería en: Desagregación y cambiarla por Detalle, para que pueda leerse más rápido.</CommentText>
