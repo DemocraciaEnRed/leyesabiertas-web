@@ -19,7 +19,7 @@ const NavBar = ({ children }) => (
   <StyledNav>
     <NavbarLogo />
     <UserBar>
-      <Button withBorder>Iniciar sesión</Button>
+      <Button>Iniciar sesión</Button>
       <Button primary>Registrarse</Button>
     </UserBar>
   </StyledNav>

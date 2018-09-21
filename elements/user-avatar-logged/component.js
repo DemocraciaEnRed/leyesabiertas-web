@@ -10,35 +10,38 @@ width:296px;
 margin-bottom:2rem;
 `
 const Avatar = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius:50%;
   background-image: url('${(props) => props.avatarImg}');
   background-size: cover;
   background-position: center;
 `
 const Name = styled.div`
-color: #2d4b5e;
-font-size: 1.4rem;
+  font-size: 1.4rem;
+  font-family:var(--bold);
+  color: #2c4c61;
 `
-const Party = styled.div`
-font-size:1.2rem;
-color: #2d4b5e;
-text-transform:uppercase;
+const Charge = styled.div`
+  font-size:1.2rem;
+  color: #5c97bc;
+  font-size: 12px;
+  text-transform:uppercase;
+
 `
 const TextWrapper = styled.div`
-height:40px;
+height:35px;
 padding-left:10px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
 `
-const UserAvatar = ({ avatarImg, name, party }) => (
+const UserAvatar = ({ avatarImg, name, charge }) => (
   <Wrapper>
     <Avatar avatarImg={avatarImg} />
     <TextWrapper>
       <Name>{name} </Name>
-      <Party>{party}</Party>
+      <Charge>abogado</Charge>
     </TextWrapper>
   </Wrapper>
 )
@@ -46,7 +49,7 @@ const UserAvatar = ({ avatarImg, name, party }) => (
 UserAvatar.propTypes = {
   name: PropTypes.string.isRequired,
   avatarImg: PropTypes.string.isRequired,
-  party: PropTypes.string
+  charge: PropTypes.string
 }
 
 export default UserAvatar

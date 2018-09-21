@@ -13,6 +13,7 @@ const Logo = styled.div`
   background-size: cover;
   background-position: center;  
   box-sizing: border-box;
+  cursor:pointer;
 `
 
 const NavbarLogo = () => (
