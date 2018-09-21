@@ -39,7 +39,7 @@ const BoldP = styled.p`
 
 const ProjectBody = ({ project }) => (
   <ProjectBodyContainer>
-    <H2>Sarasa</H2>
+    <H2>Porque proponemos una Ley de Acceso a la información Pública</H2>
     <BoldP>ARTÍCULO 1 - </BoldP>
     <P>Kinfolk mlkshk pork belly normcore twee tattooed next level pinterest farm-to-table. Dreamcatcher intelligentsia kinfolk ramps swag next level disrupt, cred kale chips locavore XOXO before they sold out subway tile. Humblebrag lomo mixtape coloring book truffaut meditation, helvetica street art microdosing. Tattooed microdosing skateboard helvetica tumblr ennui.
 
