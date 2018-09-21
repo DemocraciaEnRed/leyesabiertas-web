@@ -9,8 +9,10 @@ const StyledItem = styled.div`
   display: flex;
   align-items:center;
   box-sizing:border-box;
-  border-left: ${(props) => props.grayborder ? '1px solid #e9e9e9' : 'none'};
-  border-right: ${(props) => props.grayborder ? '1px solid #e9e9e9' : 'none'};
+  &:nth-child(even) {
+    border-left:1px solid #e9e9e9;
+    border-right:1px solid #e9e9e9;
+  }
 
 `
 
