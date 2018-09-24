@@ -7,6 +7,8 @@ const NavbarStyledButton = styled.button`
   font-size: 1.4rem;
   color: #5c97bc;
   border-style: none;
+  padding-left:1.5rem;
+  text-transform:uppercase;
   cursor: pointer;
   background:#fff;
   color: ${(props) => props.primary ? '#5c97bc' : '#4a5d68'};
