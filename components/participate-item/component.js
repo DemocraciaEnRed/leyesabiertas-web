@@ -3,16 +3,20 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const ParticipateItem = styled.div`
-  width: 370px;
-  height: 330px;
+  width: 33%;
+  height: 200px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-  align-items:flex-start;
+  align-items:center;
   box-sizing: border-box;
-  &:nth-child(odd) {
+  &:nth-child(even) {
       padding-left:1rem;
       padding-right:1rem;
+      border-left:1px solid #dae1e7;
+      border-right:1px solid #dae1e7;
+      margin-left:.5rem;
+      margin-right:.5rem;
     }
 `
 
