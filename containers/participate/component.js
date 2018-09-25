@@ -9,7 +9,6 @@ import ParticipateContainer from '../../components/participate-container/compone
 import ParticipateItem from '../../components/participate-item/component'
 
 const StyledParticipateSection = styled.section`
-  width:90%;
   margin-left:auto;
   margin-right:auto;
   padding: 8.4rem 0rem;
@@ -25,19 +24,19 @@ const Participate = ({ children }) => (
     <ParticipateTitle>Cómo puedo participar</ParticipateTitle>
     <ParticipateContainer>
       <ParticipateItem>
-        <ParticipateTextbox number={'01'} action={'Informate'} description={'Entrá y lee'} />
-        <ParticipateP text={'Elegí un proyecto que te interese  o te parezca relevante. Primero vas a encontrar una introducción a la propuesta de ley con los antecedentes, fundamentos e información relevante. a la ley, como surgió y su importancia. Después podés pasar a leer el texto del proyecto de ley. '} />
+        <ParticipateTextbox number={'1'} action={'Infórmese'} />
+        <ParticipateP text={'Ingrese y lea las propuestas de ley que los diputados están creando.'} />
       </ParticipateItem>
       <ParticipateItem>
-        <ParticipateTextbox number={'02'} action={'Participá'} description={'Comentá y proponé'} />
-        <ParticipateP text={'Podés seleccionar parte del texto del proyecto de ley y hacer sugerencias. Éstos serán leídos y tenidos en cuenta por los/las diputados/as para generar nuevas versiones del documento, En caso de que tu comentario se incorpore a la nueva versión, vas a figurar como (aportante)'} />
+        <ParticipateTextbox number={'2'} action={'Participe'} />
+        <ParticipateP text={'Comente y proponga aportes sobre los textos de las propuestas.'} />
       </ParticipateItem>
       <ParticipateItem>
-        <ParticipateTextbox number={'03'} action={'Involucrate'} description={'Compartí y seguí'} />
-        <ParticipateP text={'Podés compartir el proyecto con tus contactos a través de redes sociales y otros medios, para que apoyen tus sugerencias y comentarios y para que más ciudadanos se involucren en la creación de leyes. Vas a recibir notificaciones de los cambios en el proyecto ¡seguilos!'} />
+        <ParticipateTextbox number={'3'} action={'Involúcrese'} />
+        <ParticipateP text={'Comparta y siga resultados para que más ciudadanos se involucren.'} />
       </ParticipateItem>
     </ParticipateContainer>
-    <Button primary>Registrate y participá</Button>
+    <Button primary >Registrate y participá</Button>
   </StyledParticipateSection>
 )
 

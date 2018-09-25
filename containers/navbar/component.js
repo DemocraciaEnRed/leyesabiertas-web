@@ -8,7 +8,7 @@ import Button from '../../elements/navbar-button/component'
 const StyledNav = styled.nav`
   height:12rem;
   display: flex;
-  padding:1rem 5%;
+  padding:1rem 4.5%;
   flex-direction: row;
   justify-content: center;
   align-items: baseline;

@@ -1,21 +1,18 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const StyledSecondaryNavbarTitle = styled.h2`
-  font-family: var(--bold);
   font-size: 2rem;
   color: #101a21;
 `
+const Span = styled.span`
+  font-family: var(--bold);
+`
 
-const SecondaryNavbarTitle = ({ children }) => (
+const SecondaryNavbarTitle = () => (
   <StyledSecondaryNavbarTitle>
-    {children}
+   Portal de <Span>Co-creación Legislativa</Span>
   </StyledSecondaryNavbarTitle>
 )
-
-SecondaryNavbarTitle.propTypes = {
-  children: PropTypes.string.isRequired
-}
 
 export default SecondaryNavbarTitle

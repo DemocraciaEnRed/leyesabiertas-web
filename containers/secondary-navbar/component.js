@@ -37,7 +37,7 @@ const scroll = (target) => (e) => {
 
 const SecondaryNavbar = ({ children }) => (
   <SecondaryBar>
-    <StyledSecondaryNavbarTitle>Elaboración de propuestas de ley</StyledSecondaryNavbarTitle>
+    <StyledSecondaryNavbarTitle />
     <LinkBar>
       {links.map((li, i) => (
         <a onClick={scroll(li.value)}>{li.name}</a>
