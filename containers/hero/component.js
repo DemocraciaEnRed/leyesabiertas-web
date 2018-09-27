@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import HeroImg from '../../elements/hero-img/component'
-import HeroLeftColumn from '../../components/hero-left-column/component'
 import HeroTitle from '../../elements/hero-title/component'
 import HeroSubtitle from '../../elements/hero-subtitle/component'
 
