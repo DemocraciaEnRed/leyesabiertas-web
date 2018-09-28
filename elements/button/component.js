@@ -10,9 +10,7 @@ const StyledButton = styled.button`
   font-size: 1.4rem;
   color: #5c97bc;
   border-style: none;
-  border-radius: 3px;
   cursor: pointer;
-
   padding: 0 2rem;
   font-family: var(--bold);
 /* primary = blue background, secondary = white background */

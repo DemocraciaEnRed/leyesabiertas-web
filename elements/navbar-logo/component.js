@@ -3,7 +3,10 @@ import styled from 'styled-components'
 import Link from 'next/link'
 
 const StyledLogo = styled.div`
-  margin-right:30%;
+width:33%;
+margin-left:33%;
+display:flex;
+justify-content:center;
 `
 
 const Logo = styled.div`

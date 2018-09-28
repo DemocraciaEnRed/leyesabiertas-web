@@ -5,9 +5,8 @@ import styled from 'styled-components'
 
 const Bar = styled.div`
 display:flex;
-justify-content:space-between;
-min-width: 180px;
-
+justify-content:flex-end;
+width:33%;
 `
 
 const UserBar = ({ children }) => (

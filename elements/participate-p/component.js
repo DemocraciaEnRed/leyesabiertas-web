@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const ParticipateP = styled.p`
-  width: 350px;
+  width: 270px;
   height: 189px;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;

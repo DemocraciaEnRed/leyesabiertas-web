@@ -6,11 +6,11 @@ import UserBar from '../../components/user-bar/component'
 import Button from '../../elements/navbar-button/component'
 
 const StyledNav = styled.nav`
-  height:14rem;
+  height:12rem;
   display: flex;
-  padding:1.8rem 5%;
+  padding:1rem 4.5%;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: baseline;
   border-bottom:1px solid #dae1e7;
 `

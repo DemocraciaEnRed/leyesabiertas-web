@@ -62,8 +62,8 @@ class Projects extends Component {
     } = this.state
     return (
       <Section id='projects'>
-        <TitleH2>Proyectos en debate</TitleH2>
-        <SubtitleH3>Estos son los proyectos que podes mirar y comentar para ayudar a hacerlos lo mejor posible.</SubtitleH3>
+        <TitleH2>Propuestas de ley abiertas para lo co-creación.</TitleH2>
+        <SubtitleH3>Estas son las propuestas disponibles para leer, comentar y hacer aportes . ¡Ayude a mejorarlos!</SubtitleH3>
         { projects &&
           <Fragment>
             <Grid>
@@ -73,7 +73,7 @@ class Projects extends Component {
             </Grid>
             {!noMore &&
               <Button
-                center
+                primary center
                 onClick={this.fetchMoreProjects}>
                   Ver más propuestas
               </Button>
