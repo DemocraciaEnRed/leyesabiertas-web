@@ -1,11 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import ProfileAvatar from '../../elements/profile-avatar/component'
+import ProfileCharge from '../../elements/profile-charge/component'
+import ProfileName from '../../elements/profile-name/component'
+import ProfileMail from '../../elements/profile-mail/component'
+import ProfilePeriod from '../../elements/profile-period/component'
+import ProfileResume from '../../elements/profile-resume/component'
 
 const StyledProfile = styled.div`
-  width:60%;
+  width:59%;
   margin-left:auto;
   margin-right:auto;
+  margin-top:8rem;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -13,54 +20,15 @@ const StyledProfile = styled.div`
     width:90%;
   }
 `
-const ProfileAvatar = styled.div`
-  width: 130px;
-  height: 130px;
-  border-radius:50%;
-  background-image: url('${(props) => props.avatarImg}');
-  background-size: cover;
-  background-position: center;
-`
-
-const ProfileName = styled.div`
-  font-size: 4rem;
-  color: #2c4c61;
-  font-family:var(--bold);
-`
-
-const ProfileCharge = styled.div`
-  font-size: 2.2rem;
-  font-family:var(--bold);
-  line-height: 1.55;
-  color: #5c97bc;
-  color: var(--faded-blue);
-`
-
-const ProfilePeriod = styled.div`
-  font-size: 1.6rem;
-  font-family:var(--bold);
-  color: #4a5d68;
-  `
-
-const ProfileMail = styled.div`
-  font-size: 1.4rem;
-  color: #5c97bc;
-  color: var(--faded-blue);`
-
-const ProfileResume = styled.div`
-  font-size: 1.8rem;
-  line-height: 1.94;
-  color: #203340;
-`
 
 const Profile = ({ user }) => (
   <StyledProfile>
-    <ProfileAvatar avatarImg={user.avatarImg} />
-    <ProfileName name={user.name} />
-    <ProfileCharge charge={user.charge} />
-    <ProfilePeriod period={user.period} />
-    <ProfileMail mail={user.mail} />
-    <ProfileResume resume={user.resume} />
+    <ProfileAvatar img={'https://i.ytimg.com/vi/tRd00QPjJdA/hqdefault.jpg'} />
+    <ProfileName name={'Alvarez Rodriguez, Maria Cristina'} />
+    <ProfileCharge charge={'FRENTE PARA LA VICTORIA - PJ'} />
+    <ProfilePeriod period={'Período: 10/12/2015 - 09/12/2019'} />
+    <ProfileMail mail={'malvarezr@hcdn.gob.ar'} />
+    <ProfileResume resume={'Hola, Proin iaculis cursus dolor sit amet dignissim. Suspendisse condimentum placerat nisi, in varius erat consequat ac. Praesent efficitur ultricies vulputate. Donec congue eu turpis a maximus. Proin ultrices tempor laoreet.Esperamos su aporte!'} />
   </StyledProfile>
 )
 
