@@ -1,10 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 // import fetch from 'isomorphic-unfetch'
-import ProjectBar from '../../elements/project-bar/component'
-import ProjectHeader from '../../components/project-header/component'
-import ProjectBody from '../../components/project-body/component'
-
 const result = {
   'id': { '$oid': '5ba111d5fc13ae13f600109a' },
   'author': {
@@ -27,35 +22,32 @@ const result = {
   'createdAt': '6/27/2018'
 }
 
-class ProjectContainer extends Component {
+export default class extends Component {
   state = {
-    project: result
+    project: result,
+    isAuthor: false,
+    isLoggedIn: true,
+    editionMode: false,
+    withComments: false
   }
-  /*
-    async componentDidMount () {
-      try {
-        const project = await (await fetch(`https://my.api.mockaroo.com/projects/${this.props.project}.json?key=${API_KEY}`)).json()
-        this.setState({ project })
-      } catch (error) {
-        console.error(error)
-      }
-    }
-  */
-  render() {
-    const { project } = this.state
-    if (!project) return null
+
+  switchComments = () => {
+    this.setState((prevState) => ({
+      withComments: !prevState.withComments
+    }), () => console.log(this.state.withComments))
+  }
+
+  switchEdition = () => {
+    this.setState((prevState) => ({
+      editionMode: !prevState.editionMode
+    }), () => console.log(this.state.editionMode))
+  }
+
+  render () {
     return (
       <div>
-        <ProjectBar />
-        <ProjectHeader project={project} />
-        <ProjectBody project={project} />
+        Articulado
       </div>
     )
   }
 }
-
-ProjectContainer.propTypes = {
-  project: PropTypes.string.isRequired
-}
-
-export default ProjectContainer
