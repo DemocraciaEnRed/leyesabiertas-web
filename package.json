@@ -22,13 +22,18 @@
     "babel-plugin-inline-dotenv": "^1.1.2",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "dotenv": "^6.0.0",
+    "get-selection-range": "^0.1.0",
+    "immutable": "^3.8.2",
     "isomorphic-unfetch": "^2.1.1",
     "jump.js": "^1.0.2",
     "next": "^6.1.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-icons-kit": "^1.1.13",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "slate": "^0.41.2",
+    "slate-react": "^0.18.10",
     "styled-components": "^3.4.5"
   },
   "devDependencies": {
