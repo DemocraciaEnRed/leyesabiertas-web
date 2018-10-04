@@ -7,6 +7,7 @@ const StyledEditorTitle = styled.h2`
   font-weight: bold;
   line-height: 1.42;
   color: #5c97bc;
+  margin-bottom: 2.6rem;
 `
 
 const EditorTitle = ({ children }) => (
