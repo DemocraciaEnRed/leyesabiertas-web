@@ -8,6 +8,7 @@ import LoggedUserBar from '../../components/logged-user-bar/component'
 import Button from '../../elements/navbar-button/component'
 import LoggedUser from '../../components/logged-user/component'
 import Notifications from '../../components/notifications-bar/component'
+import { AuthConsumer } from '../../pages/authcontext'
 
 const StyledNav = styled.nav`
   height:12rem;
@@ -17,39 +18,25 @@ const StyledNav = styled.nav`
   justify-content: center;
   border-bottom:1px solid #dae1e7;
 `
-class NavBar extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      user: 'logged'
-    }
-  }
+const NavBar = ({ children }) => (
 
-  render () {
-    const {
-      user
-    } = this.state
-    return (
-
-      <StyledNav>
-        <NavbarLogo />
-        {user !== 'logged' ? (
-          <UserBar>
-
-            <Button>Iniciar sesión</Button>
-            <Button primary>Registrarse</Button>
-          </UserBar>
-
-        ) : (
+  <StyledNav>
+    <NavbarLogo />
+    <AuthConsumer>
+      {({ isAuth }) => (
+        isAuth ? (
           <LoggedUserBar>
             <Notifications />
             <LoggedUser />
-          </LoggedUserBar>)
-        }
-
-      </StyledNav>
-    )
-  }
-}
+          </LoggedUserBar>
+        ) : (
+          <UserBar>
+            <Button>Iniciar sesión</Button>
+            <Button primary>Registrarse</Button>
+          </UserBar>)
+      )}
+    </AuthConsumer>
+  </StyledNav>
+)
 
 export default WithUserContext(NavBar)
