@@ -290,8 +290,8 @@ class ArticlesContainer extends Component {
       }}>
         <ProjectHeader project={project} />
         <ModeBar>
-          <ModeButton mode={'read-only'}>Vista lectura</ModeButton>
-          <ModeButton mode={'with-comments'}>Vista con comentarios</ModeButton>
+          <ModeButton withComments={false}>Vista lectura</ModeButton>
+          <ModeButton withComments >Vista con comentarios</ModeButton>
         </ModeBar>
         <Editor
           value={project.content.fields.articles}

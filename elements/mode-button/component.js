@@ -10,12 +10,17 @@ const StyledModeButton = styled.button`
   text-transform: uppercase;
   font-size: 1.4rem;
   color: #4a5d68;
+  border-bottom: solid 1px #dae1e7;
+  background-color: ${(props) => props.active ? '#f2f5f8' : 'white'};
+
 `
 
 const ModeButton = (props) => (
   <ArticlesContext.Consumer>
-    {({ switchComments }) => (
-      <StyledModeButton onClick={switchComments} {...props} />
+    {({ switchComments, withComments }) => (
+      <StyledModeButton
+        onClick={switchComments}
+        active={props.withComments === withComments} {...props} />
     )}
   </ArticlesContext.Consumer>
 )
