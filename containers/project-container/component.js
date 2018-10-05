@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import ProjectBar from '../../elements/project-bar/component'
 import ProjectHeader from '../../components/project-header/component'
 import ProjectBody from '../../components/project-body/component'
+import ProjectComments from '../../components/project-comments/component'
 
 const result = {
   'id': { '$oid': '5ba111d5fc13ae13f600109a' },
