@@ -42,6 +42,7 @@ const ProjectBody = ({ project }) => (
   <ProjectBodyContainer>
     <FundationContainer value={project.content.fields.fundation} />
     <ProjectLinkArticulate id={project._id} />
+    <ProjectLinkArticulate />
   </ProjectBodyContainer>
 )
 
