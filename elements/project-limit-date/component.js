@@ -7,7 +7,7 @@ const StyledProjectLimitDate = styled.div`
   flex-flow: column wrap;
 `
 const Span = styled.span`
-  color:#ef885d;
+  color:#5c97bc;
   font-size:1.6rem;
   font-family:var(--bold);
 `

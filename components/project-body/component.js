@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import CommentCard from '../../components/comment-card/component'
+import ProjectLinkArticulate from '../../components/project-link-articulate/component'
 
 const ProjectBodyContainer = styled.div`
   min-height: 383px;
@@ -10,7 +11,7 @@ const ProjectBodyContainer = styled.div`
   flex-direction:column;
   margin-right:auto;
   margin-left:auto;
-  padding:5% 23% 5% 5.7rem;
+  padding:5% 20% 5% 10%;
 
 `
 const P = styled.p`
@@ -50,7 +51,8 @@ Vape wayfarers locavore, blue bottle keytar mumblecore hell of post-ironic listi
 Bespoke tumeric sartorial heirloom blue bottle. Plaid tumeric pickled, vape selvage cloud bread kogi taiyaki vaporware. Farm-to-table paleo gochujang venmo shabby chic literally tumblr, cray offal tbh la croix wolf jianbing vexillologist godard. Chartreuse cold-pressed pabst, letterpress subway tile hashtag vaporware tilde jean shorts la croix PBR&B celiac gochujang tumeric deep v. Semiotics aesthetic hell of tacos marfa before they sold out, fashion axe banh mi iceland four loko pabst neutra XOXO biodiesel tumblr. Helvetica food truck banjo celiac, sartorial try-hard raw denim tacos yuccie.
 
 Meditation green juice subway tile franzen skateboard next level. Venmo edison bulb before they sold out waistcoat hexagon meh selvage shaman mlkshk. Af air plant next level, try-hard pitchfork activated charcoal banjo 3 wolf moon cornhole cred locavore cliche lomo squid flannel. Aesthetic chartreuse church-key vice kogi meggings. Schlitz coloring book mlkshk mumblecore live-edge scenester meggings knausgaard everyday carry.</P>
-    <CommentCard project={project} />
+    <ProjectLinkArticulate />
+
   </ProjectBodyContainer>
 )
 
