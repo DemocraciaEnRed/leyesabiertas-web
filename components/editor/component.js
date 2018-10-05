@@ -39,7 +39,6 @@ export default class extends Component {
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.withComments !== this.props.withComments) {
-      console.log('hola')
       this.forceUpdate()
     }
   }
@@ -79,7 +78,7 @@ export default class extends Component {
   fetchComments = (id) => async (e) => {
     e.preventDefault()
     try {
-      const comments = await( await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?ids=${this.state.commentsIds}`)).json()
+      const comments = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?ids=${this.state.commentsIds}`)).json()
       this.setState({
         comments: comments.results
       })
@@ -93,15 +92,12 @@ export default class extends Component {
       case 'title':
         return <TitleMark {...props} />
       case 'comment':
-        if (this.props.withComments) {
-          return <CommentMark
-            id={props.mark.toJSON().data['data-id']}
-            onMouseEnter={this.onCommentHoverIn}
-            onMouseLeave={this.onCommentHoverOut}
-            onClick={this.fetchComments}
-            {...props} />
-        }
-        break
+        return <CommentMark
+          id={props.mark.toJSON().data['data-id']}
+          onMouseEnter={this.onCommentHoverIn}
+          onMouseLeave={this.onCommentHoverOut}
+          onClick={this.fetchComments}
+          {...props} />
       default:
         return false
     }
