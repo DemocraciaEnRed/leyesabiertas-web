@@ -1,8 +1,67 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import CommentCard from '../../components/comment-card/component'
-import ProjectLinkArticulate from '../../components/project-link-articulate/component'
+import FundationContainer from '../fundation-container/component'
+import ProjectLinkArticulate from '../../components/project-link'
+
+const value = {
+  'object': 'value',
+  'document': {
+    'object': 'document',
+    'data': {
+
+    },
+    'nodes': [
+      {
+        'object': 'block',
+        'type': 'paragraph',
+        'data': {
+
+        },
+        'nodes': [
+          {
+            'object': 'text',
+            'leaves': [
+              {
+                'object': 'leaf',
+                'text': 'Por qué proponemos una Ley de Acceso a la Información Pública' ,
+                'marks': [
+                  {
+                    'object': 'mark',
+                    'type': 'title',
+                    'data': {
+
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        'object': 'block',
+        'type': 'paragraph',
+        'data': {
+
+        },
+        'nodes': [
+          {
+            'object': 'text',
+            'leaves': [
+              {
+                'object': 'leaf',
+                'text': 'La presente ley tiene por objeto garantizar el efectivo ejercicio del derecho de acceso a la zinformación pública, promover la participación ciudadana y la transparencia de la gestión pública, y se funda en los siguientes principios: Presunción de publicidad: toda la información en poder del Estado se presume pública, salvo las excepciones previstas por esta ley. Transparencia y máxima divulgación: toda la información en poder, custodia o bajo control del sujeto obligado debe ser accesible para todas las personas.',
+                'marks': [
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
 
 const ProjectBodyContainer = styled.div`
   min-height: 383px;
@@ -40,6 +99,7 @@ const BoldP = styled.p`
 
 const ProjectBody = ({ project }) => (
   <ProjectBodyContainer>
+<<<<<<< 6478d54fbaffb93dcee1d608b61f8b2797e2f22a
     <H2>Porque proponemos una Ley de Acceso a la información Pública</H2>
     <BoldP>ARTÍCULO 1 - </BoldP>
     <P>Kinfolk mlkshk pork belly normcore twee tattooed next level pinterest farm-to-table. Dreamcatcher intelligentsia kinfolk ramps swag next level disrupt, cred kale chips locavore XOXO before they sold out subway tile. Humblebrag lomo mixtape coloring book truffaut meditation, helvetica street art microdosing. Tattooed microdosing skateboard helvetica tumblr ennui.
@@ -53,6 +113,9 @@ Bespoke tumeric sartorial heirloom blue bottle. Plaid tumeric pickled, vape selv
 Meditation green juice subway tile franzen skateboard next level. Venmo edison bulb before they sold out waistcoat hexagon meh selvage shaman mlkshk. Af air plant next level, try-hard pitchfork activated charcoal banjo 3 wolf moon cornhole cred locavore cliche lomo squid flannel. Aesthetic chartreuse church-key vice kogi meggings. Schlitz coloring book mlkshk mumblecore live-edge scenester meggings knausgaard everyday carry.</P>
     <ProjectLinkArticulate />
 
+=======
+    <FundationContainer value={value} />
+>>>>>>> Agrega slate para ver los fundamentos del proyecto
   </ProjectBodyContainer>
 )
 
