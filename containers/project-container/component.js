@@ -49,6 +49,7 @@ class ProjectContainer extends Component {
         <ProjectBar />
         <ProjectHeader project={project} />
         <ProjectBody project={project} />
+        <ProjectComments />
       </div>
     )
   }

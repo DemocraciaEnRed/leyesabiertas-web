@@ -13,7 +13,7 @@ const Span = styled.span`
   font-size:4rem;
   padding-right:0.5rem;
   padding-left:1rem;
-  color: #ef885d;
+  color:#5c97bc;
   line-height:3.4rem;
   font-family:var(--bold);
   margin:0;
