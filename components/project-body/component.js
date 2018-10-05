@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import FundationContainer from '../fundation-container/component'
-import ProjectLinkArticulate from '../../components/project-link'
+import ProjectLinkArticulate from '../../components/project-link-articulate/component'
 
 const value = {
   'object': 'value',
