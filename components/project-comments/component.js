@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import CommentItem from '../../elements/comment-item/component'
 
 const StyledProjectComments = styled.div`
-  width:70%;
+  width:60%;
   margin-left:auto;
   margin-right:auto;
   border-top: solid 1px #dae1e7;
