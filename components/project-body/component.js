@@ -2,7 +2,66 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import FundationContainer from '../fundation-container/component'
-import ProjectLinkArticulate from '../../components/project-link-articulate/component'
+import ProjectLinkArticulate from '../../components/project-link'
+
+const value = {
+  'object': 'value',
+  'document': {
+    'object': 'document',
+    'data': {
+
+    },
+    'nodes': [
+      {
+        'object': 'block',
+        'type': 'paragraph',
+        'data': {
+
+        },
+        'nodes': [
+          {
+            'object': 'text',
+            'leaves': [
+              {
+                'object': 'leaf',
+                'text': 'Por qué proponemos una Ley de Acceso a la Información Pública' ,
+                'marks': [
+                  {
+                    'object': 'mark',
+                    'type': 'title',
+                    'data': {
+
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        'object': 'block',
+        'type': 'paragraph',
+        'data': {
+
+        },
+        'nodes': [
+          {
+            'object': 'text',
+            'leaves': [
+              {
+                'object': 'leaf',
+                'text': 'La presente ley tiene por objeto garantizar el efectivo ejercicio del derecho de acceso a la zinformación pública, promover la participación ciudadana y la transparencia de la gestión pública, y se funda en los siguientes principios: Presunción de publicidad: toda la información en poder del Estado se presume pública, salvo las excepciones previstas por esta ley. Transparencia y máxima divulgación: toda la información en poder, custodia o bajo control del sujeto obligado debe ser accesible para todas las personas.',
+                'marks': [
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
 
 const value = {
   'object': 'value',
