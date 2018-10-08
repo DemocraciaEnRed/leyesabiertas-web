@@ -7,7 +7,7 @@ import Card from '../../components/card/component'
 import TitleH2 from '../../elements/title-h2/component'
 import SubtitleH3 from '../../elements/subtitle-h3/component'
 import Button from '../../elements/button/component'
-const API_KEY = process.env.API_KEY
+const API_URL = process.env.API_URL
 
 const Grid = styled.div`
   width: 100%;
@@ -35,8 +35,11 @@ class Projects extends Component {
 
   async componentDidMount () {
     try {
-      const projects = await (await fetch(`api/v1/documents`)).json()
-      this.setState({ projects })
+      const projects = await (await fetch(`https://congreso-api.now.sh/api/v1/documents`)).json()
+      this.setState({
+        projects: projects.results
+      })
+      console.log(this.state.projects)
     } catch (error) {
       console.error(error)
     }

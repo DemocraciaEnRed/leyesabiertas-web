@@ -22,20 +22,20 @@ cursor: pointer;
 `
 
 const Card = ({ project }) => (
-  <Link href={{ pathname: '/articulado', query: { id: project.id['$oid'] } }}>
+  /* <Link href={{ pathname: '/articulado', query: { id: project.content.id['$oid'] } }}> */
     <CardContainer>
-      { project.img &&
-      <CardHeader img={project.img} />
+      { project.content.imageCover &&
+      <CardHeader img={project.content.imageCover} />
       }
       <CardContent tagTitle={project.tagTitle}
-        title={project.title}
+        title={project.content.title}
         avatarImg={project.author.avatarImg}
-        name={project.author.name}
-        party={project.author.party} />
+        name={project.author}
+        party={'partido justicialista'} />
       <CardSocial commentaries={project.commentaries}
         limitDate={project.limitDate} />
     </CardContainer>
-  </Link>
+ /* </Link> */
 )
 
 Card.propTypes = {
