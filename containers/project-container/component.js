@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-// import fetch from 'isomorphic-unfetch'
+import fetch from 'isomorphic-unfetch'
 import ProjectBar from '../../elements/project-bar/component'
 import ProjectHeader from '../../components/project-header/component'
 import ProjectBody from '../../components/project-body/component'
 import ProjectComments from '../../components/project-comments/component'
+
+const API_URL = process.env.API_URL
 
 const result = {
   'id': { '$oid': '5ba111d5fc13ae13f600109a' },
@@ -32,17 +34,17 @@ class ProjectContainer extends Component {
   state = {
     project: result
   }
-  /*
-    async componentDidMount () {
-      try {
-        const project = await (await fetch(`https://my.api.mockaroo.com/projects/${this.props.project}.json?key=${API_KEY}`)).json()
-        this.setState({ project })
-      } catch (error) {
-        console.error(error)
-      }
+
+  async componentDidMount () {
+    try {
+      const result = await (await fetch(`${API_URL}/api/v1/documents/`)).json()
+      this.setState({ project: result.results[0] })
+    } catch (error) {
+      console.error(error)
     }
-  */
-  render() {
+  }
+
+  render () {
     const { project } = this.state
     if (!project) return null
     return (
