@@ -80,7 +80,7 @@ export default class extends Component {
     try {
       const comments = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?ids=${this.state.commentsIds}`)).json()
       this.setState({
-        comments: comments.results
+        comments: comments
       })
     } catch (err) {
       console.error(err)
