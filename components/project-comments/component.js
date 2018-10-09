@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react'
+import fetch from 'isomorphic-unfetch'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import CommentItem from '../../elements/comment-item/component'
+
+const API_URL = process.env.API_URL
 
 const StyledProjectComments = styled.div`
   width:60%;
@@ -17,13 +20,27 @@ const StyledTitle = styled.div`
   color: #2c4c61;
   margin:3rem 0;
   `
-
-const ProjectComments = () => (
-  <StyledProjectComments>
-    <StyledTitle>Opiniones generales</StyledTitle>
-    <CommentItem />
-  </StyledProjectComments>
-
-)
+class ProjectComments extends Component {
+  state = {
+    comments: null
+  }
+  async componentDidMount () {
+    console.log(this.props.project._id)
+    try {
+      const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments`)).json()
+      console.log(results)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+  render () {
+    return (
+      <StyledProjectComments>
+        <StyledTitle>Opiniones generales</StyledTitle>
+        <CommentItem />
+      </StyledProjectComments>
+    )
+  }
+}
 
 export default ProjectComments
