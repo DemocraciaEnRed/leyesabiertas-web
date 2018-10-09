@@ -15,7 +15,8 @@ class UserProfile extends Component {
       <div>
         <NavBar />
         <SecondaryNavbar />
-        <UserProfileContainer userId={this.props.user} />
+        <UserProfileContainer userId={'5bb7b5999a5ac91dffa9e851'} />
+        {/* <UserProfileContainer userId={this.props.user} /> */}
         <Footer />
       </div>
     )

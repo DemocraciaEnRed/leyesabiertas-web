@@ -30,8 +30,7 @@ class Profile extends Component {
 
   async componentDidMount () {
     try {
-      // const user = await (await fetch(`${API_URL}/api/v1/users/${this.props.id}`)).json()
-      const user = await (await fetch(`https://congreso-api.now.sh/api/v1/users/5bb7b5999a5ac91dffa9e851`)).json()
+      const user = await (await fetch(`${API_URL}/api/v1/users/${this.props.userId}`)).json()
       this.setState({
         user: user
       })
@@ -58,7 +57,7 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  user: PropTypes.string.isRequired
+  userId: PropTypes.string.isRequired
 }
 
 export default Profile
