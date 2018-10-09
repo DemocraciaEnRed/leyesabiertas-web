@@ -109,7 +109,7 @@ export default class extends Component {
     if (!this.state.value) return null
     return (
       <StyledEditorWrapper>
-        { this.state.comments && this.state.comments.length > 0 &&
+        {this.props.withComments && this.state.comments && this.state.comments.length > 0 &&
           <CommentsGrid comments={this.state.comments} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
