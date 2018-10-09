@@ -25,19 +25,24 @@ class ProjectComments extends Component {
     comments: null
   }
   async componentDidMount () {
-    console.log(this.props.project._id)
     try {
-      const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments`)).json()
-      console.log(results)
+      const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`)).json()
+      this.setState({
+        comments: results
+      })
     } catch (err) {
       console.error(err)
     }
   }
   render () {
+    const { comments } = this.state
     return (
       <StyledProjectComments>
         <StyledTitle>Opiniones generales</StyledTitle>
-        <CommentItem />
+        { comments && comments.map((comment) => (
+          <CommentItem comment={comment} key={comment._id} />
+        ))}
+        
       </StyledProjectComments>
     )
   }
