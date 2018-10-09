@@ -6,8 +6,8 @@ import UserProfileContainer from '../containers/user-profile/component'
 import Footer from '../containers/footer/component'
 
 class UserProfile extends Component {
-  static getInitialProps ({ query: { user } }) {
-    return { user }
+  static getInitialProps ({ query: { userId } }) {
+    return { userId }
   }
 
   render () {
@@ -15,8 +15,7 @@ class UserProfile extends Component {
       <div>
         <NavBar />
         <SecondaryNavbar />
-        <UserProfileContainer userId={'5bb7b5999a5ac91dffa9e851'} />
-        {/* <UserProfileContainer userId={this.props.user} /> */}
+        <UserProfileContainer userId={this.props.userId} />
         <Footer />
       </div>
     )
@@ -24,7 +23,7 @@ class UserProfile extends Component {
 }
 
 UserProfile.propTypes = {
-  user: PropTypes.string.isRequired
+  userId: PropTypes.string.isRequired
 }
 
 export default UserProfile
