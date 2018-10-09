@@ -1,7 +1,6 @@
 import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet, injectGlobal } from 'styled-components'
-import { AuthProvider } from './authcontext'
 
 injectGlobal`
   @font-face {
@@ -96,7 +95,7 @@ injectGlobal`
 export default class MyDocument extends Document {
   static getInitialProps ({ renderPage }) {
     const sheet = new ServerStyleSheet()
-    const page = renderPage((App) => (props) => sheet.collectStyles(<App {...props} />))
+    const page = renderPage(App => props => sheet.collectStyles(<App {...props} />))
     const styleTags = sheet.getStyleElement()
     return { ...page, styleTags } // return styles collected
   }
@@ -111,10 +110,8 @@ export default class MyDocument extends Document {
           {this.props.styleTags}
         </Head>
         <body>
-          <AuthProvider>
-            <Main />
-            <NextScript />
-          </AuthProvider>
+          <Main />
+          <NextScript />
         </body>
       </html>
     )
