@@ -39,7 +39,6 @@ class Projects extends Component {
       this.setState({
         projects: projects.results
       })
-      console.log(this.state.projects)
     } catch (error) {
       console.error(error)
     }
