@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import UserAvatarLogged from '../../elements/user-avatar-logged/component'
 
-const CommentCardContainer = styled.div`
+const CommentFormContainer = styled.div`
   width: 300px;
   min-height: 305px;
   border-radius: 3px;
@@ -22,7 +22,7 @@ const CommentCardContainer = styled.div`
 
 `
 
-const CommentCardContent = styled.div`
+const CommentFormContent = styled.div`
   display:flex;
   min-height:210px;
   flex-direction:column;
@@ -34,7 +34,7 @@ const CommentCardContent = styled.div`
   background-color:#fff;
   padding-top:2rem;
 `
-const CommentCardHeader = styled.div`
+const CommentFormHeader = styled.div`
   height: 40px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -47,7 +47,7 @@ const CommentCardHeader = styled.div`
   box-sizing:border-box;
 `
 
-const CommentCardFooter = styled.div`
+const CommentFormFooter = styled.div`
   height: 5.5rem;
   font-size: 1.4rem;
   color: #5c97bc;
@@ -63,24 +63,24 @@ const CommentText = styled.p`
   color: #181818;
 `
 
-const CommentCard = ({ project }) => (
-  <CommentCardContainer>
-    <CommentCardHeader>Agregar comentario</CommentCardHeader>
-    <CommentCardContent>
+const CommentForm = ({ project }) => (
+  <CommentFormContainer>
+    <CommentFormHeader>Agregar comentario</CommentFormHeader>
+    <CommentFormContent>
       <UserAvatarLogged
         avatarImg={project.author.avatarImg}
         name={project.author.name} />
       <CommentText>Hola! Sugiero que cambien una palabra
 para que esto pueda entenderse mejor.
 El cambio sería en: Desagregación y cambiarla por Detalle, para que pueda leerse más rápido.</CommentText>
-    </CommentCardContent>
-    <CommentCardFooter>Enviar comentario </CommentCardFooter>
+    </CommentFormContent>
+    <CommentFormFooter>Enviar comentario </CommentCardFooter>
 
-  </CommentCardContainer>
+  </CommentFormContainer>
 )
 
-CommentCard.propTypes = {
+CommentForm.propTypes = {
   project: PropTypes.object.isRequired
 }
 
-export default CommentCard
+export default CommentForm
