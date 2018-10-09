@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import styled from 'styled-components'
 import { Editor, findRange } from 'slate-react'
 import { Value, KeyUtils, Range, Change, Mark } from 'slate'
+import CommentsGrid from '../comments-grid/component'
 import EditorTitle from '../../elements/editor-title/component'
 import TitleMark from '../../elements/title-mark/component'
 import CommentMark from '../../elements/comment-mark/component'
@@ -11,6 +12,7 @@ const StyledEditorWrapper = styled.div`
   width: 100%;
   padding: 0 100px;
   margin-top: 48px;
+  position: relative;
   .editor {
     max-width: 700px;
     span {
@@ -69,13 +71,13 @@ export default class extends Component {
     })
   }
 
-  onCommentHoverOut = (id) => (e) => {
+  onCommentHoverOut = () => (e) => {
     this.setState({
       commentsIds: []
     })
   }
 
-  fetchComments = (id) => async (e) => {
+  fetchComments = () => async (e) => {
     e.preventDefault()
     try {
       const comments = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?ids=${this.state.commentsIds}`)).json()
@@ -107,6 +109,9 @@ export default class extends Component {
     if (!this.state.value) return null
     return (
       <StyledEditorWrapper>
+        { this.state.comments && this.state.comments.length > 0 &&
+          <CommentsGrid comments={this.state.comments} />
+        }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
         <Editor
           className='editor'
