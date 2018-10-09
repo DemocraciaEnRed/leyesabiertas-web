@@ -1,7 +1,7 @@
 import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet, injectGlobal } from 'styled-components'
-import { AuthProvider } from './AuthContext'
+import { AuthProvider } from './authcontext'
 
 injectGlobal`
   @font-face {
