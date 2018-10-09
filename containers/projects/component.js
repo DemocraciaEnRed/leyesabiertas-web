@@ -35,7 +35,7 @@ class Projects extends Component {
 
   async componentDidMount () {
     try {
-      const projects = await (await fetch(`https://congreso-api.now.sh/api/v1/documents`)).json()
+      const projects = await (await fetch(`${API_URL}/api/v1/documents`)).json()
       this.setState({
         projects: projects.results
       })
@@ -47,7 +47,7 @@ class Projects extends Component {
 
   fetchMoreProjects = async () => {
     try {
-      const projects = await (await fetch(`https://congreso-api.now.sh/api/v1/documents&page=${this.state.page + 1}`)).json()
+      const projects = await (await fetch(`${API_URL}/api/v1/documents&page=${this.state.page + 1}`)).json()
       this.setState((prevState) => ({
         projects: [...prevState.projects].concat(projects),
         page: prevState.page + 1,
