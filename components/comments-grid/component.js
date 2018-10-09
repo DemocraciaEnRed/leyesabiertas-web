@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import CommentCard from '../../elements/comment-card'
+import CommentCard from '../comment-card/component'
 
 const StyledCommentsGrid = styled.div`
   position: absolute;
