@@ -25,13 +25,13 @@ const StyledButton = styled.button`
 `
 
 const styledButton = (props) => (
-  <Link href={`/articulado?id=${props.id}`}>
+  <Link href={`/articulado?id=${props._id}`}>
     <StyledButton>Ver artículos de la propuesta<ArrowRight /></StyledButton>
   </Link>
 )
 
 styledButton.propTypes = {
-  id: PropTypes.string.isRequired
+  _id: PropTypes.string.isRequired
 }
 
 export default styledButton
