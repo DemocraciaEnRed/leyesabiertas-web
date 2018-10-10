@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const FooterBar = styled.div`
-  width:60%;  
+  width:60%;
+  font-family:var(--regular);
   margin-left:auto;
   margin-right:auto;
   height: 2rem;
