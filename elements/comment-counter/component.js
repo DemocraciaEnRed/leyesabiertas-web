@@ -42,14 +42,16 @@ const CounterWrapper = styled.div`
 `
 
 const CommentCounter = (props) => (
-  <CounterWrapper>
+  <CounterWrapper top={props.top} left={props.left}>
     <span className='counter-span'>{props.count} aportes de usuarios</span>
     <span className='text-span'>click para abrir aportes</span>
   </CounterWrapper>
 )
 
 CommentCounter.propTypes = {
-  count: PropTypes.number.isRequired
+  count: PropTypes.number.isRequired,
+  top: PropTypes.number.isRequired,
+  left: PropTypes.number.isRequired
 }
 
 export default CommentCounter

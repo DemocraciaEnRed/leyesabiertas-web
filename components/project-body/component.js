@@ -40,7 +40,6 @@ const BoldP = styled.p`
 
 const ProjectBody = ({ project }) => (
   <ProjectBodyContainer>
-    {console.log(project._id)}
     <FundationContainer value={project.content.fields.fundation} />
     <ProjectLinkArticulate id={project._id} />
   </ProjectBodyContainer>
