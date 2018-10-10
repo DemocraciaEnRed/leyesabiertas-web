@@ -22,7 +22,7 @@ cursor: pointer;
 `
 
 const Card = ({ project }) => (
-  <Link href={{ pathname: '/proyecto', query: { id: project.id } }}>
+  <Link href={{ pathname: '/proyecto', query: { id: project._id } }}>
     <CardContainer>
       { project.content.imageCover &&
       <CardHeader img={project.content.imageCover} />
