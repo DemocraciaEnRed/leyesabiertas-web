@@ -46,7 +46,7 @@ const ProjectHeader = ({ project }) => (
 
       </TopBarWrapper>
 
-      <ProjectTitle>{project.title}</ProjectTitle>
+      <ProjectTitle>{project.content.title}</ProjectTitle>
 
     </ProjectHeaderWrapper>
   </ProjectHeaderContainer>
