@@ -39,7 +39,7 @@ const CardContent = ({ tagTitle, title, avatarImg, name, party }) => (
   <Wrapper>
     <TextWrapper>
       <TagTitle>{tagTitle}</TagTitle>
-      <Title>{title.length > 42 ? croppedTitle(title) : title} </Title>
+      <Title>{title} </Title>
     </TextWrapper>
     <UserAvatar avatarImg={avatarImg} name={name} party={party} />
   </Wrapper>
