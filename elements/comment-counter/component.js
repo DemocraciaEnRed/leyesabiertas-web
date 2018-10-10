@@ -14,42 +14,42 @@ const CounterWrapper = styled.div`
   border-radius: 5px;
   position: absolute;
   z-index: 100;
-  top: ${ props.top + 'px' };
-  left: ${ props.left + 'px' }
+  top: ${(props) => props.top + 'px'};
+  left: ${(props) => props.left + 'px'};
 
   &::after {
-    
+    content: '';
+    display: block;
+    position: absolute;
+    border-top: 5px solid;
+    border-top-color: #ffffff;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin-left: -5px;
+  }
+  > .counter-span {
+    font-size: 16px;
+    color: #ef885d;
+  }
+  > .text-span {
+    font-size: 12px;
+    color: #4a5d68;
   }
 `
 
-export default (props) => (
-  <div className='counter-wrapper'>
+const CommentCounter = (props) => (
+  <CounterWrapper>
     <span className='counter-span'>{props.count} aportes de usuarios</span>
     <span className='text-span'>click para abrir aportes</span>
-    <style jsx>{`
-
-      .counter-wrapper:after {
-        content: "";
-        display: block;
-        position: absolute;
-        border-top: 5px solid;
-        border-top-color: #ffffff;
-        border-right: 5px solid transparent;
-        border-left: 5px solid transparent;
-        bottom: -5px;
-        left: 50%;
-        width: 0;
-        height: 0;
-        margin-left: -5px;
-      }
-      .counter-span {;
-        font-size: 16px;
-        color: #ef885d;
-      }
-      .text-span {
-        font-size: 12px;
-        color: #4a5d68;
-      }
-    `}</style>
-  </div>
+  </CounterWrapper>
 )
+
+CommentCounter.propTypes = {
+  count: PropTypes.number.isRequired
+}
+
+export default CommentCounter

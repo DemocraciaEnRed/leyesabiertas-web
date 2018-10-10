@@ -6,6 +6,7 @@ import CommentsGrid from '../comments-grid/component'
 import EditorTitle from '../../elements/editor-title/component'
 import TitleMark from '../../elements/title-mark/component'
 import CommentMark from '../../elements/comment-mark/component'
+import CommentCounter from '../../elements/comment-counter/component'
 const API_URL = process.env.API_URL
 
 const StyledEditorWrapper = styled.div`
@@ -109,6 +110,12 @@ export default class extends Component {
     if (!this.state.value) return null
     return (
       <StyledEditorWrapper>
+        {this.props.withComments && this.state.commentsIds.length > 0 &&
+          <CommentCounter
+            count={this.state.commentsIds.length}
+            top={this.state.top}
+            left={this.state.left} />
+        }
         {this.props.withComments && this.state.comments && this.state.comments.length > 0 &&
           <CommentsGrid comments={this.state.comments} />
         }

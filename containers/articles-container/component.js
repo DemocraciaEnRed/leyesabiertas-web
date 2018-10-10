@@ -23,7 +23,7 @@ class ArticlesContainer extends Component {
       const result = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project}/`)).json()
       this.setState({
         project: result
-      })
+      }, () => console.log(this.state.project))
     } catch (err) {
       console.error(err)
     }
