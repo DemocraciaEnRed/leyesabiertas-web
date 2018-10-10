@@ -4,43 +4,43 @@ import { ServerStyleSheet, injectGlobal } from 'styled-components'
 
 injectGlobal`
   @font-face {
-    font-family: Inter-UI-Black;
-    src: url('/static/fonts/Inter_UI/Inter-UI-Black.woff');
+    font-family: Roboto-Black;
+    src: url('/static/fonts/Roboto/Roboto-Black.ttf');
   }
 
   @font-face {
-    font-family: Inter-UI-BlackItalic;
-    src: url('/static/fonts/Inter_UI/Inter-UI-BlackItalic.woff');
+    font-family: Roboto-BlackItalic;
+    src: url('/static/fonts/Roboto/Roboto-BlackItalic.ttf');
   }
 
   @font-face {
-    font-family: Inter-UI-Bold;
-    src: url('/static/fonts/Inter_UI/Inter-UI-Bold.woff');
+    font-family: Roboto-Bold;
+    src: url('/static/fonts/Roboto/Roboto-Bold.ttf');
   }
 
   @font-face {
-    font-family: Inter-UI-BoldItalic;
-    src: url('/static/fonts/Inter_UI/Inter-UI-BoldItalic.woff');
+    font-family: Roboto-BoldItalic;
+    src: url('/static/fonts/Roboto/Roboto-BoldItalic.ttf');
   }
 
   @font-face {
-    font-family: Inter-UI-Italic;
-    src: url('/static/fonts/Inter_UI/Inter-UI-Italic.woff');
+    font-family: Roboto-Italic;
+    src: url('/static/fonts/Roboto/Roboto-Italic.ttf');
   }
 
   @font-face {
-    font-family: Inter-UI-Medium;
-    src: url('/static/fonts/Inter_UI/Inter-UI-Medium.woff');
+    font-family: Roboto-Medium;
+    src: url('/static/fonts/Roboto/Roboto-Medium.ttf');
   }
 
   @font-face {
-    font-family: Inter-UI-MediumItalic;
-    src: url('/static/fonts/Inter_UI/Inter-UI-MediumItalic.woff');
+    font-family: Roboto-MediumItalic;
+    src: url('/static/fonts/Roboto/Roboto-MediumItalic.ttf');
   }
 
   @font-face {
-    font-family: Inter-UI-Regular;
-    src: url('/static/fonts/Inter_UI/Inter-UI-Regular.woff');
+    font-family: Roboto-Regular;
+    src: url('/static/fonts/Roboto/Roboto-Regular.ttf');
   }
 
   :root {
@@ -54,14 +54,14 @@ injectGlobal`
     --warning: #E86062;
 
     /* Fonts */
-    --regular: 'Inter-UI-Regular';
-    --black: 'Inter-UI-Black';
-    --black-italic: 'Inter-UI-BlackItalic';
-    --bold: 'Inter-UI-Bold';
-    --bold-italic: 'Inter-UI-BoldItalic';
-    --italic: 'Inter-UI-Italic';
-    --medium: 'Inter-UI-Medium';
-    --medium-italic: 'Inter-UI-MediumItalic';
+    --regular: 'Roboto-Regular';
+    --black: 'Roboto-Black';
+    --black-italic: 'Roboto-BlackItalic';
+    --bold: 'Roboto-Bold';
+    --bold-italic: 'Roboto-BoldItalic';
+    --italic: 'Roboto-Italic';
+    --medium: 'Roboto-Medium';
+    --medium-italic: 'Roboto-MediumItalic';
 
     /*background sizes */
     --lined: calc(width/22);
