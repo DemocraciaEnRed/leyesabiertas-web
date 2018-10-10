@@ -61,7 +61,7 @@ export default class extends Component {
   }
 
   onCommentHoverIn = (id) => (e) => {
-    const top = e.clientY - 80
+    const top = e.clientY - 125
     const left = e.clientX - 100
     this.setState((prevState) => {
       return {
