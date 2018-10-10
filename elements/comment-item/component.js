@@ -47,15 +47,15 @@ const Charge = styled.div`
 const TextWrapper = styled.div`
   margin-left:2rem;
 `
-const ProjectComments = () => (
+const ProjectComments = ({ comment }) => (
   <StyledCommentItem>
-
-    <UserAvatar avatarImg={'https://i.ytimg.com/vi/tRd00QPjJdA/hqdefault.jpg'} />
+    {console.log(comment)}
+    <UserAvatar avatarImg={comment.user.avatar} />
     <TextWrapper>
-      <Username>{'Marge Simpson'}</Username>
-      <Charge>{'abogada'}</Charge>
-      <Comment>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam neque ligula, egestas id nulla ac, eleifend sollicitudin ante.</Comment>
-      <Date>Hace {'3'} horas</Date>
+      <Username>{comment.user.fields.name}</Username>
+      <Charge>{comment.user.fields.occupation}</Charge>
+      <Comment>{comment.content}</Comment>
+      <Date>{`Hace ${comment.when}`}</Date>
     </TextWrapper>
   </StyledCommentItem>
 
