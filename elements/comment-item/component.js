@@ -57,7 +57,10 @@ const ProjectComments = ({ comment }) => (
       <Date>{`Hace ${comment.when}`}</Date>
     </TextWrapper>
   </StyledCommentItem>
-
 )
+
+ProjectComments.propTypes = {
+  comment: PropTypes.object.isRequired
+}
 
 export default ProjectComments
