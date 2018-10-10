@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import Link from 'next/link'
 import ArrowRight from '../../elements/arrow-right/component'
 
 const StyledButton = styled.button`
@@ -24,7 +25,9 @@ const StyledButton = styled.button`
 `
 
 const styledButton = (props) => (
-  <StyledButton>Ver artículos de la propuesta<ArrowRight /></StyledButton>
+  <Link href={`/articulado?id=${props.id['$oid']}`}>
+    <StyledButton>Ver artículos de la propuesta<ArrowRight /></StyledButton>
+  </Link>
 )
 
 styledButton.propTypes = {

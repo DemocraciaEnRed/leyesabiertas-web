@@ -22,7 +22,7 @@ cursor: pointer;
 `
 
 const Card = ({ project }) => (
-  /* <Link href={{ pathname: '/articulado', query: { id: project.content.id['$oid'] } }}> */
+  <Link href={{ pathname: '/proyecto', query: { id: project._id } }}>
     <CardContainer>
       { project.content.imageCover &&
       <CardHeader img={project.content.imageCover} />
@@ -35,7 +35,7 @@ const Card = ({ project }) => (
       <CardSocial commentaries={project.commentaries}
         limitDate={project.limitDate} />
     </CardContainer>
- /* </Link> */
+  </Link>
 )
 
 Card.propTypes = {
