@@ -16,13 +16,13 @@ const StyledNav = styled.nav`
 `
 
 const NavBar = ({ children }) => (
-  <StyledNav>
-    <NavbarLogo />
-    <UserBar>
-      <Button>Iniciar sesión</Button>
-      <Button primary>Registrarse</Button>
-    </UserBar>
-  </StyledNav>
+    <StyledNav>
+      <NavbarLogo />
+      <UserBar>
+        <Button>Iniciar sesión</Button>
+        <Button primary>Registrarse</Button>
+      </UserBar>
+    </StyledNav>
 )
 
 NavBar.propTypes = {
