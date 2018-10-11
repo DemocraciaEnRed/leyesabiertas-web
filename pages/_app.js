@@ -1,5 +1,6 @@
-import React, { Context } from 'react'
+import React from 'react'
 import App, { Container } from 'next/app'
+import UserContext from '../components/user-context/component'
 const json = import('../json/keycloak.json')
 let Keycloak
 
@@ -37,11 +38,14 @@ export default class MyApp extends App {
 
   render () {
     const { Component, pageProps } = this.props
+    const value = this.state
 
     return (
-      <Container>
-        <Component {...pageProps} />
-      </Container>
+      <UserContext.Provider value={value} >
+        <Container>
+          <Component {...pageProps} />
+        </Container>
+      </UserContext.Provider>
     )
   }
 }
