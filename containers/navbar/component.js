@@ -18,7 +18,6 @@ const StyledNav = styled.nav`
 
 const NavBar = (props) => (
   <StyledNav>
-    {console.log(props)}
     <NavbarLogo />
     <UserBar>
       <Button>Iniciar sesión</Button>
@@ -26,12 +25,5 @@ const NavBar = (props) => (
     </UserBar>
   </StyledNav>
 )
-
-NavBar.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired
-}
 
 export default WithUserContext(NavBar)
