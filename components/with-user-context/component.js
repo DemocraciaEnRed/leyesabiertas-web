@@ -1,12 +1,14 @@
 import React from 'react'
 import UserContext from '../user-context/component'
 
-export function withUserContext (Component) {
+const WithUserContext = (Component) => {
   return function WithUserContextComponent (props) {
     return (
       <UserContext.Consumer>
-        {(value) => <Component {...props} value={value} />}
+        {(value) => <Component {...props} authContext={value} />}
       </UserContext.Consumer>
     )
   }
 }
+
+export default WithUserContext

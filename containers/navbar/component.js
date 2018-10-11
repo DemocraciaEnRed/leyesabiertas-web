@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import WithUserContext from '../../components/with-user-context/component'
 import NavbarLogo from '../../elements/navbar-logo/component'
 import UserBar from '../../components/user-bar/component'
 import Button from '../../elements/navbar-button/component'
@@ -15,14 +16,15 @@ const StyledNav = styled.nav`
   border-bottom:1px solid #dae1e7;
 `
 
-const NavBar = ({ children }) => (
-    <StyledNav>
-      <NavbarLogo />
-      <UserBar>
-        <Button>Iniciar sesión</Button>
-        <Button primary>Registrarse</Button>
-      </UserBar>
-    </StyledNav>
+const NavBar = (props) => (
+  <StyledNav>
+    {console.log(props)}
+    <NavbarLogo />
+    <UserBar>
+      <Button>Iniciar sesión</Button>
+      <Button primary>Registrarse</Button>
+    </UserBar>
+  </StyledNav>
 )
 
 NavBar.propTypes = {
@@ -32,4 +34,4 @@ NavBar.propTypes = {
   ]).isRequired
 }
 
-export default NavBar
+export default WithUserContext(NavBar)
