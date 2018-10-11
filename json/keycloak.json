@@ -1,0 +1,10 @@
+{
+  "url": "https://keycloak.democraciaenred.org/auth",
+  "realm": "congreso",
+  "auth-server-url": "https://keycloak.democraciaenred.org/auth",
+  "ssl-required": "external",
+  "resource": "front-local",
+  "public-client": true,
+  "confidential-port": 0,
+  "clientId": "front-local"
+}
