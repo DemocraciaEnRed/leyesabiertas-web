@@ -10,7 +10,8 @@ const SocialBar = styled.div`
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-bottom:5rem;
+  margin-top:1rem;
+  margin-bottom:3rem;
 `
 
 SocialBar.propTypes = {
