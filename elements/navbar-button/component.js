@@ -16,7 +16,7 @@ const NavbarStyledButton = styled.button`
 `
 
 const NavbarButton = (props) => (
-  <NavbarStyledButton {...props} />
+  <NavbarStyledButton {...props} onClick={props.onClick} />
 )
 
 export default NavbarButton

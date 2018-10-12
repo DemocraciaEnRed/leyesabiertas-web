@@ -17,23 +17,27 @@ const StyledNav = styled.nav`
   justify-content: center;
   border-bottom:1px solid #dae1e7;
 `
-const NavBar = (props) => (
-  <StyledNav>
-    <NavbarLogo />
-    {props.authContext.autenticated
-      ? (
-        <LoggedUserBar>
-          <Notifications />
-          <LoggedUser />
-        </LoggedUserBar>
-      ) : (
-        <UserBar>
-          <Button>Iniciar sesión</Button>
-          <Button primary>Registrarse</Button>
-        </UserBar>
-      )}
-  </StyledNav>
-)
+
+const NavBar = (props) => {
+  if (!props.authContext) return null
+  return (
+    <StyledNav>
+      <NavbarLogo />
+      {props.authContext.authenticated
+        ? (
+          <LoggedUserBar>
+            <Notifications />
+            <LoggedUser />
+          </LoggedUserBar>
+        ) : (
+          <UserBar>
+            <Button onClick={props.authContext.login}>Iniciar sesión</Button>
+            <Button primary onClick={props.authContext.register}>Registrarse</Button>
+          </UserBar>
+        )}
+    </StyledNav>
+  )
+}
 
 NavBar.propTypes = {
   authContext: PropTypes.object.isRequired

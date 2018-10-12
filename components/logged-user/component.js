@@ -1,23 +1,45 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import WithUserContext from '../with-user-context/component'
 import UserAvatar from '../../elements/user-avatar/component'
 
 const StyledLoggedUser = styled.div`
-width: 200px;
-height:45px;
-display:flex;
-justify-content:space-between;
-background: #fff;
-box-sizing: border-box;
-cursor: pointer;
-
+  width: 200px;
+  height:45px;
+  display:flex;
+  justify-content:space-between;
+  background: #fff;
+  box-sizing: border-box;
+  cursor: pointer;
 `
 
-const LoggedUser = ({ }) => (
-  <StyledLoggedUser>
-    <UserAvatar name={'Matías Pellegrini'} avatarImg={'https://i.ytimg.com/vi/NPX6Oc9rgbo/maxresdefault.jpg'} party={'abogado'} />
-  </StyledLoggedUser>
-)
+class LoggedUser extends Component {
+  state = {
+    user: null
+  }
 
-export default LoggedUser
+  async componentDidMount () {
+    try {
+      console.log(this.props.authContext.keycloak)
+      const userInfo = await this.props.authContext.keycloak.loadUserInfo()
+      this.setState({
+        user: userInfo
+      })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  render () {
+    return (
+      <StyledLoggedUser>
+        { this.state.user && 
+          <UserAvatar name={this.state.user.name} avatarImg={'https://robohash.org/63.143.42.242.png'} party={'abogado'} />
+        }
+      </StyledLoggedUser>
+    )
+  }
+}
+
+export default WithUserContext(LoggedUser)
