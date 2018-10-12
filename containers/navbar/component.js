@@ -8,7 +8,6 @@ import LoggedUserBar from '../../components/logged-user-bar/component'
 import Button from '../../elements/navbar-button/component'
 import LoggedUser from '../../components/logged-user/component'
 import Notifications from '../../components/notifications-bar/component'
-import { AuthConsumer } from '../../pages/authcontext'
 
 const StyledNav = styled.nav`
   height:12rem;
@@ -18,25 +17,26 @@ const StyledNav = styled.nav`
   justify-content: center;
   border-bottom:1px solid #dae1e7;
 `
-const NavBar = ({ children }) => (
-
+const NavBar = (props) => (
   <StyledNav>
     <NavbarLogo />
-    <AuthConsumer>
-      {({ isAuth }) => (
-        isAuth ? (
-          <LoggedUserBar>
-            <Notifications />
-            <LoggedUser />
-          </LoggedUserBar>
-        ) : (
-          <UserBar>
-            <Button>Iniciar sesión</Button>
-            <Button primary>Registrarse</Button>
-          </UserBar>)
+    {props.authContext.autenticated
+      ? (
+        <LoggedUserBar>
+          <Notifications />
+          <LoggedUser />
+        </LoggedUserBar>
+      ) : (
+        <UserBar>
+          <Button>Iniciar sesión</Button>
+          <Button primary>Registrarse</Button>
+        </UserBar>
       )}
-    </AuthConsumer>
   </StyledNav>
 )
+
+NavBar.propTypes = {
+  authContext: PropTypes.object.isRequired
+}
 
 export default WithUserContext(NavBar)
