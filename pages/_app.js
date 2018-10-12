@@ -17,7 +17,8 @@ export default class MyApp extends App {
 
   state = {
     keycloak: null,
-    authenticated: false
+    authenticated: false,
+    login: null
   }
 
   async componentDidMount () {
@@ -26,7 +27,9 @@ export default class MyApp extends App {
     try {
       const authenticated = await keycloak.init({ onLoad: 'check-sso' })
       this.setState({
-        keycloak, authenticated
+        keycloak: keycloak,
+        authenticated: authenticated,
+        login: keycloak.login
       })
     } catch (err) {
       console.error(err)
