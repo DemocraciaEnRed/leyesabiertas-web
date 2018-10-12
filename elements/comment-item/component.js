@@ -49,7 +49,6 @@ const TextWrapper = styled.div`
 `
 const ProjectComments = ({ comment }) => (
   <StyledCommentItem>
-    {console.log(comment)}
     <UserAvatar avatarImg={comment.user.avatar} />
     <TextWrapper>
       <Username>{comment.user.fields.name}</Username>

@@ -34,7 +34,6 @@ class Profile extends Component {
       this.setState({
         user: user
       })
-      console.log({ user })
     } catch (error) {
       console.error(error)
     }
