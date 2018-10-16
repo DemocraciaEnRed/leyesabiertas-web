@@ -19,8 +19,6 @@
   },
   "homepage": "https://github.com/DemocraciaEnRed/congreso#readme",
   "dependencies": {
-    "babel-plugin-inline-dotenv": "^1.1.2",
-    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "dotenv": "^6.0.0",
     "dotenv-webpack": "^1.5.7",
     "get-selection-range": "^0.1.0",
