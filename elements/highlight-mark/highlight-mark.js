@@ -1,14 +1,14 @@
 import React from 'react'
+import styled from 'styled-components'
+
+const StyledHighlightMark = styled.span`
+  background-color: #e3effa;
+`
 
 const HighlightMark = (props) => (
-  <span className='highlight'>
+  <StyledHighlightMark>
     {props.children}
-    <style jsx>{`
-      .highlight {
-        background-color: #e3effa;
-      }
-    `}</style>
-  </span>
+  </StyledHighlightMark>
 )
 
 export default HighlightMark
