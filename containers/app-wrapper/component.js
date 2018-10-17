@@ -17,7 +17,8 @@ export default class extends Component {
   state = {
     keycloak: null,
     authenticated: false,
-    login: null
+    login: null,
+    register: null
   }
 
   async componentDidMount () {
@@ -38,7 +39,8 @@ export default class extends Component {
       this.setState({
         keycloak: keycloak,
         authenticated: authenticated,
-        login: keycloak.login
+        login: keycloak.login,
+        register: keycloak.register
       })
     } catch (err) {
       console.error(err)
