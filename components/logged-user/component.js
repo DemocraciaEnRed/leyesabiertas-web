@@ -21,7 +21,6 @@ class LoggedUser extends Component {
 
   async componentDidMount () {
     try {
-      console.log(this.props.authContext.keycloak)
       const userInfo = await this.props.authContext.keycloak.loadUserInfo()
       this.setState({
         user: userInfo

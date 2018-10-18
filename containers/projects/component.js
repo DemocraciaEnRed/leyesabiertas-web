@@ -38,7 +38,7 @@ class Projects extends Component {
       const projects = await (await fetch(`${API_URL}/api/v1/documents`)).json()
       this.setState({
         projects: projects.results
-      }, () => console.log(this.state.projects))
+      })
     } catch (error) {
       console.error(error)
     }

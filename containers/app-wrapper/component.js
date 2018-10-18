@@ -17,7 +17,8 @@ export default class extends Component {
   state = {
     keycloak: null,
     authenticated: false,
-    login: null
+    login: null,
+    isAuthor: null
   }
 
   async componentDidMount () {
@@ -35,9 +36,11 @@ export default class extends Component {
     const keycloak = await Keycloak(keycloakOptions)
     try {
       const authenticated = await keycloak.init({ onLoad: 'check-sso' })
+      const isAuthor = authenticated ? await keycloak.hasRealmRole('accountable') : false
       this.setState({
         keycloak: keycloak,
         authenticated: authenticated,
+        isAuthor: isAuthor,
         login: keycloak.login
       })
     } catch (err) {
