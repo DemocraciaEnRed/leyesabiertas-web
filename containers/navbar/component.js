@@ -26,7 +26,6 @@ const NavBar = (props) => {
       {props.authContext.authenticated
         ? (
           <LoggedUserBar>
-            <Notifications />
             <LoggedUser />
           </LoggedUserBar>
         ) : (

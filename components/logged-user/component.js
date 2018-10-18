@@ -5,10 +5,9 @@ import WithUserContext from '../with-user-context/component'
 import UserAvatar from '../../elements/user-avatar/component'
 
 const StyledLoggedUser = styled.div`
-  width: 200px;
   height:45px;
   display:flex;
-  justify-content:space-between;
+  justify-content:flex-end;
   background: #fff;
   box-sizing: border-box;
   cursor: pointer;
