@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import NavBar from '../containers/navbar/component'
 import { ArticlesContainer } from '../containers/articles-container/component'
 import Footer from '../containers/footer/component'
+import WithUserContext from '../components/with-user-context/component'
 
 class Proyecto extends Component {
   static getInitialProps ({ query: { id } }) {
@@ -24,4 +25,4 @@ Proyecto.propTypes = {
   id: PropTypes.string.isRequired
 }
 
-export default Proyecto
+export default WithUserContext(Proyecto)

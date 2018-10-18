@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, createRef } from 'react'
 import styled from 'styled-components'
-import { Editor, findRange } from 'slate-react'
+import { Editor, findDOMRange } from 'slate-react'
 import { Value, KeyUtils, Range, Change, Mark } from 'slate'
 import { getVisibleSelectionRect } from 'get-selection-range'
 import WithUserContext from '../with-user-context/component'
@@ -9,6 +9,7 @@ import EditorTitle from '../../elements/editor-title/component'
 import TitleMark from '../../elements/title-mark/component'
 import CommentMark from '../../elements/comment-mark/component'
 import CommentCounter from '../../elements/comment-counter/component'
+import HighlightMark from '../../elements/highlight-mark/component'
 import AddComment from '../../elements/add-comment/component'
 const API_URL = process.env.API_URL
 
@@ -28,13 +29,17 @@ const StyledEditorWrapper = styled.div`
 `
 
 class UserEditor extends Component {
-  state = {
-    value: null,
-    selection: null,
-    showAddComment: false,
-    top: null,
-    left: null,
-    commentsIds: []
+  constructor (props) {
+    super(props)
+    this.state = {
+      value: null,
+      selection: null,
+      showAddComment: false,
+      top: null,
+      left: null,
+      commentsIds: []
+    }
+    this.myEditor = createRef()
   }
 
   schema = {
@@ -59,38 +64,35 @@ class UserEditor extends Component {
     }
   }
 
-  componentDidUpdate () {
-    const rect = getVisibleSelectionRect()
-    if (!rect) { return }
-    if (rect.width === 0 && this.state.showToolbar) {
-      this.setState({ showAddComment: false })
-    }
-    if (rect && rect.width > 0 && !this.state.showToolbar) {
-      const containerBound = this.myEditor.current.getBoundingClientRect()
-      const {
-        left: containerBoundLeft,
-        top: containerBoundTop
-      } = containerBound
-      const left =
-        rect.left +
-        rect.width / 2 -
-        containerBoundLeft -
-        150 / 2
-      const top =
-        rect.top -
-        containerBoundTop -
-        30
+  onSelect = (e) => {
+    const selection = this.state.value.selection.toJSON()
+    if (selection.isFocused && (selection.anchor.offset !== selection.focus.offset) & !this.state.showAddComment) {
+      const s = findDOMRange(this.state.value.selection).getBoundingClientRect()
+      console.log(s)
       this.setState({
         showAddComment: true,
-        left: left,
-        top: top
+        commentsIds: [],
+        left: s.left,
+        top: s.top
       })
     }
   }
 
-  onChange = ({ value }) => {
+  handleHighlight = (e) => {
+    e.preventDefault()
+    const { value } = this.state
+    const change = value.change().toggleMark('highlight')
     this.setState({
-      value
+      showCommentForm: true,
+      comments: null,
+      selection: value.selection.toJSON()
+    })
+    this.handleChange(change)
+  }
+
+  onChange = async ({ value }) => {
+    this.setState({
+      value: value
     })
   }
 
@@ -99,6 +101,7 @@ class UserEditor extends Component {
     const left = e.clientX - 100
     this.setState((prevState) => {
       return {
+        showAddComment: false,
         commentsIds: prevState.commentsIds.concat(id),
         top: top,
         left: left
@@ -135,6 +138,8 @@ class UserEditor extends Component {
           onMouseLeave={this.onCommentHoverOut}
           onClick={this.fetchComments}
           {...props} />
+      case 'highlight':
+        return <HighlightMark {...props} />
       default:
         return false
     }
@@ -153,15 +158,20 @@ class UserEditor extends Component {
         {this.props.withComments && this.state.comments && this.state.comments.length > 0 &&
           <CommentsGrid comments={this.state.comments} />
         }
+        {this.state.showAddComment &&
+          <AddComment top={this.state.top} left={this.state.left} />
+        }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
-        <Editor
-          className='editor'
-          schema={this.schema}
-          value={this.state.value}
-          onChange={this.onChange}
-          spellCheck={false}
-          renderMark={this.renderMark}
-          readOnly />
+        <div ref={this.myEditor}>
+          <Editor
+            className='editor'
+            schema={this.schema}
+            value={this.state.value}
+            onChange={this.onChange}
+            spellCheck={false}
+            renderMark={this.renderMark}
+            onSelect={this.onSelect} />
+        </div>
       </StyledEditorWrapper>
     )
   }
