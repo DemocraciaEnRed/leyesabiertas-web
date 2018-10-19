@@ -8,6 +8,7 @@ import LoggedUserBar from '../../components/logged-user-bar/component'
 import Button from '../../elements/navbar-button/component'
 import LoggedUser from '../../components/logged-user/component'
 import Notifications from '../../components/notifications-bar/component'
+import UserMenu from '../../components/user-menu/component'
 
 const StyledNav = styled.nav`
   height:12rem;
@@ -27,6 +28,7 @@ const NavBar = (props) => {
         ? (
           <LoggedUserBar>
             <LoggedUser />
+            <UserMenu />
           </LoggedUserBar>
         ) : (
           <UserBar>
