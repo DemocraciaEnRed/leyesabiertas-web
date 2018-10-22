@@ -21,6 +21,7 @@ const Date = styled.div`
   color: #9b9b9b;
   padding-top:2rem;
   margin-top:auto;
+  margin-bottom:1.5rem;
 
 `
 const UserAvatar = styled.div`
@@ -46,6 +47,7 @@ const Charge = styled.div`
 
 const TextWrapper = styled.div`
   margin-left:2rem;
+  width:90%;
 `
 const ProjectComments = ({ comment }) => (
   <StyledCommentItem>

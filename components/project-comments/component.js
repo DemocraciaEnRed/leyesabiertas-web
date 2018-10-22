@@ -7,10 +7,19 @@ import CommentItem from '../../elements/comment-item/component'
 const API_URL = process.env.API_URL
 
 const StyledProjectComments = styled.div`
-  width:60%;
+  width: 90%;
+  padding: 0% 20% 5% 10%;
   margin-left:auto;
   margin-right:auto;
-  border-top: solid 1px #dae1e7;
+  :before{
+    display: inline-block;
+    margin: 0 20px 8px 0;
+    height: 1px;
+    content: " ";
+    text-shadow: none;
+    background-color: #dae1e7;
+    width: 100%;
+  }
   `
 const StyledTitle = styled.div`
   width: 136px;
