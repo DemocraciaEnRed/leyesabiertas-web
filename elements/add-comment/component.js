@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const StyledAddComment = styled.nav`
+const StyledAddComment = styled.button`
   position: absolute;
   top: ${(props) => props.top + 'px'};
   left: ${(props) => props.left + 'px'};
@@ -15,6 +15,8 @@ const StyledAddComment = styled.nav`
   border-radius: 10px;
   color: #FFF;
   z-index: 100;
+  cursor: pointer;
+  border: none;
   &::after {
     content: "";
     display: block;
@@ -32,7 +34,7 @@ const StyledAddComment = styled.nav`
 `
 
 const AddComment = (props) => (
-  <StyledAddComment {...props}>
+  <StyledAddComment onClick={props.onClick} {...props}>
     Agregar comentario
   </StyledAddComment>
 )

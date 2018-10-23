@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ArticlesContext } from '../../containers/articles-container/component'
+import { ArticlesContext } from '../../containers/user-project-container/component'
 
 const StyledModeButton = styled.button`
   border: none;
@@ -17,7 +17,7 @@ const StyledModeButton = styled.button`
 
 const ModeButton = (props) => (
   <ArticlesContext.Consumer>
-    {({ switchComments, withComments }) => (
+    {({ withComments, switchComments }) => (
       <StyledModeButton
         onClick={switchComments}
         active={props.withComments === withComments} {...props} />

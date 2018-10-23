@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { ArticlesContext } from '../../containers/articles-container/component'
+import { ArticlesContext } from '../../containers/user-project-container/component'
 
 const StyledCommentSpan = styled.span`
   background-color: white;
