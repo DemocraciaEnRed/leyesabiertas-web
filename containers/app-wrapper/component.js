@@ -18,9 +18,8 @@ export default class extends Component {
     keycloak: null,
     authenticated: false,
     login: null,
-    register: null,
-    logout: null
-  }
+    register: null
+    }
 
   async componentDidMount () {
     const keycloakOptions = {
@@ -41,9 +40,8 @@ export default class extends Component {
         keycloak: keycloak,
         authenticated: authenticated,
         login: keycloak.login,
-        register: keycloak.register,
-        logout: keycloak.logout
-      })
+        register: keycloak.register
+            })
     } catch (err) {
       console.error(err)
       this.setState({

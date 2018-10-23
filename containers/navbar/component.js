@@ -34,6 +34,7 @@ handleMenu = () => {
 }
 
 render () {
+  console.log(this.props.authContext)
   if (!this.props.authContext) return null
   return (
     <StyledNav>
@@ -41,8 +42,10 @@ render () {
       {this.props.authContext.authenticated
         ? (
           <LoggedUserBar>
-            <LoggedUser />
+            <LoggedUser onClick={this.handleMenu} />
+            {this.state.menu &&
             <UserMenu />
+            }
           </LoggedUserBar>
         ) : (
           <UserBar>
