@@ -77,7 +77,7 @@ const Usermenu = () => (
       <StyledA>Ayuda</StyledA>
     </Li>
     <Li>
-      <StyledA>Cerrar sesión</StyledA>
+      <StyledA onClick={this.props.authContext.logout}>Cerrar sesión</StyledA>
     </Li>
   </StyledUl>
 )

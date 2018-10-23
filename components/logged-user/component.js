@@ -32,8 +32,8 @@ class LoggedUser extends Component {
 
   render () {
     return (
-      <StyledLoggedUser>
-        { this.state.user && 
+      <StyledLoggedUser onClick={this.props.onClick}>
+        { this.state.user &&
           <UserAvatar name={this.state.user.name} avatarImg={'https://robohash.org/63.143.42.242.png'} party={'abogado'} />
         }
       </StyledLoggedUser>

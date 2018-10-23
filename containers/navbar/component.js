@@ -18,13 +18,27 @@ const StyledNav = styled.nav`
   justify-content: center;
   border-bottom:1px solid #dae1e7;
 `
+class NavBar extends Component {
+  constructor (props) {
+    super(props)
 
-const NavBar = (props) => {
-  if (!props.authContext) return null
+    this.state = {
+      menu: false
+    }
+  }
+
+handleMenu = () => {
+  this.setState({
+    menu: !this.state.menu
+  })
+}
+
+render () {
+  if (!this.props.authContext) return null
   return (
     <StyledNav>
       <NavbarLogo />
-      {props.authContext.authenticated
+      {this.props.authContext.authenticated
         ? (
           <LoggedUserBar>
             <LoggedUser />
@@ -32,12 +46,13 @@ const NavBar = (props) => {
           </LoggedUserBar>
         ) : (
           <UserBar>
-            <Button onClick={props.authContext.login}>Iniciar sesión</Button>
-            <Button primary onClick={props.authContext.register}>Registrarse</Button>
+            <Button onClick={this.props.authContext.login}>Iniciar sesión</Button>
+            <Button primary onClick={this.props.authContext.register}>Registrarse</Button>
           </UserBar>
         )}
     </StyledNav>
   )
+}
 }
 
 NavBar.propTypes = {
