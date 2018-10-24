@@ -34,7 +34,6 @@ handleMenu = () => {
 }
 
 render () {
-  console.log(this.props.authContext)
   if (!this.props.authContext) return null
   return (
     <StyledNav>
