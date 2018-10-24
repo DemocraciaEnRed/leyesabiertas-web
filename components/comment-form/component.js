@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import WithUserContext from '../../components/with-user-context/component'
 import UserAvatarLogged from '../../elements/user-avatar-logged/component'
 
 const CommentFormContainer = styled.div`
@@ -63,18 +64,18 @@ const CommentText = styled.p`
   color: #181818;
 `
 
-const CommentForm = ({ project }) => (
+const CommentForm = (props) => (
   <CommentFormContainer>
     <CommentFormHeader>Agregar comentario</CommentFormHeader>
     <CommentFormContent>
       <UserAvatarLogged
-        avatarImg={project.author.avatarImg}
-        name={project.author.name} />
+        avatarImg={'https://robohash.org/63.143.42.242.png'}
+        name={props.authContext.userInfo.name} />
       <CommentText>Hola! Sugiero que cambien una palabra
 para que esto pueda entenderse mejor.
 El cambio sería en: Desagregación y cambiarla por Detalle, para que pueda leerse más rápido.</CommentText>
     </CommentFormContent>
-    <CommentFormFooter>Enviar comentario </CommentCardFooter>
+    <CommentFormFooter>Enviar comentario </CommentFormFooter>
 
   </CommentFormContainer>
 )
@@ -83,4 +84,4 @@ CommentForm.propTypes = {
   project: PropTypes.object.isRequired
 }
 
-export default CommentForm
+export default WithUserContext(CommentForm)

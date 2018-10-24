@@ -1,27 +1,29 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import NavBar from '../containers/navbar/component'
-import ProjectContainer from '../containers/project-container/component'
-import Footer from '../containers/footer/component'
+
+import GeneralContainer from '../containers/general-container/component'
 
 class Proyecto extends Component {
-  static getInitialProps ({ query: { id } }) {
-    return { id }
+  static getInitialProps ({ pathname, query }) {
+    return {
+      id: query.id,
+      path: pathname
+    }
   }
 
   render () {
+    const { path, id } = this.props
     return (
-      <div>
-        <NavBar />
-        <ProjectContainer project={this.props.id} />
-        <Footer />
-      </div>
+      <Fragment>
+        <GeneralContainer project={id} path={path} />
+      </Fragment>
     )
   }
 }
 
 Proyecto.propTypes = {
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired
 }
 
 export default Proyecto

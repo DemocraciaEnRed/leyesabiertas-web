@@ -1,27 +1,29 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import NavBar from '../containers/navbar/component'
-import { ArticlesContainer } from '../containers/articles-container/component'
-import Footer from '../containers/footer/component'
 
-class Proyecto extends Component {
-  static getInitialProps ({ query: { id } }) {
-    return { id }
+import GeneralContainer from '../containers/general-container/component'
+
+class Articulado extends Component {
+  static getInitialProps ({ pathname, query }) {
+    return {
+      id: query.id,
+      path: pathname
+    }
   }
 
   render () {
+    const { path, id } = this.props
     return (
       <Fragment>
-        <NavBar />
-        <ArticlesContainer project={this.props.id} />
-        <Footer />
+        <GeneralContainer project={id} path={path} />
       </Fragment>
     )
   }
 }
 
-Proyecto.propTypes = {
-  id: PropTypes.string.isRequired
+Articulado.propTypes = {
+  id: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired
 }
 
-export default Proyecto
+export default Articulado
