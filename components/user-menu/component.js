@@ -2,7 +2,6 @@ import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
 
-
 const StyledUl = styled.ul`
   width: 200px;
   height: 154px;
@@ -67,7 +66,7 @@ const StyledA = styled.a`
 
 `
 
-const Usermenu = () => (
+const Usermenu = (logout) => (
 
   <StyledUl>
     <Li>
@@ -77,7 +76,7 @@ const Usermenu = () => (
       <StyledA>Ayuda</StyledA>
     </Li>
     <Li>
-      <StyledA >Cerrar sesión</StyledA>
+      <StyledA onClick={logout.logout}>Cerrar sesión</StyledA>
     </Li>
   </StyledUl>
 )
