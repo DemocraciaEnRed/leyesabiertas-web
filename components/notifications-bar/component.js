@@ -10,8 +10,8 @@ const StyledNotifications = styled.div`
 `
 
 const Notification = styled.div`
-  width: 21px;
-  height: 25px;
+  width: 20px;
+  height: 24px;
   background-image: url(${'/static/assets/notification.svg'});
   background-size: cover;
   background-position: center;
@@ -19,6 +19,7 @@ const Notification = styled.div`
   cursor: pointer;
 `
 const NotificationsCircle = styled.div`
+  margin-top:3px;
   width: 20px;
   height: 20px;
   border-radius:50%;
@@ -31,7 +32,9 @@ const NotificationsCircle = styled.div`
 const Notifications = ({ notifications }) => (
   <StyledNotifications>
     <Notification />
-    <NotificationsCircle>{'5'}</NotificationsCircle>
+    { notifications && notifications > 0 (
+      <NotificationsCircle>{'5'}</NotificationsCircle>
+    ) }
   </StyledNotifications>
 )
 

@@ -38,7 +38,9 @@ export default class extends Component {
       this.setState({
         keycloak: keycloak,
         authenticated: authenticated,
-        login: keycloak.login
+        login: keycloak.login,
+        register: keycloak.register,
+        logout: keycloak.logout
       })
     } catch (err) {
       console.error(err)
