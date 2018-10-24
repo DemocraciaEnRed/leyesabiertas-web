@@ -27,7 +27,6 @@ class ProjectContainer extends Component {
     if (!project) return null
     return (
       <div>
-        <ProjectBar />
         <ProjectHeader project={project.document} />
         <ProjectBody project={project.document} />
         <ProjectComments project={project.document} />

@@ -41,7 +41,9 @@ export default class extends Component {
         keycloak: keycloak,
         authenticated: authenticated,
         isAuthor: isAuthor,
-        login: keycloak.login
+        login: keycloak.login,
+        register: keycloak.register,
+        logout: keycloak.logout
       })
     } catch (err) {
       console.error(err)

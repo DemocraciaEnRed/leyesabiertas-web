@@ -5,10 +5,9 @@ import WithUserContext from '../with-user-context/component'
 import UserAvatar from '../../elements/user-avatar/component'
 
 const StyledLoggedUser = styled.div`
-  width: 200px;
   height:45px;
   display:flex;
-  justify-content:space-between;
+  justify-content:flex-end;
   background: #fff;
   box-sizing: border-box;
   cursor: pointer;
@@ -32,8 +31,8 @@ class LoggedUser extends Component {
 
   render () {
     return (
-      <StyledLoggedUser>
-        { this.state.user && 
+      <StyledLoggedUser onClick={this.props.onClick}>
+        { this.state.user &&
           <UserAvatar name={this.state.user.name} avatarImg={'https://robohash.org/63.143.42.242.png'} party={'abogado'} />
         }
       </StyledLoggedUser>

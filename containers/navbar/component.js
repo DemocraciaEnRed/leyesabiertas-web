@@ -8,6 +8,7 @@ import LoggedUserBar from '../../components/logged-user-bar/component'
 import Button from '../../elements/navbar-button/component'
 import LoggedUser from '../../components/logged-user/component'
 import Notifications from '../../components/notifications-bar/component'
+import UserMenu from '../../components/user-menu/component'
 
 const StyledNav = styled.nav`
   height:12rem;
@@ -17,26 +18,43 @@ const StyledNav = styled.nav`
   justify-content: center;
   border-bottom:1px solid #dae1e7;
 `
+class NavBar extends Component {
+  constructor (props) {
+    super(props)
 
-const NavBar = (props) => {
-  if (!props.authContext) return null
+    this.state = {
+      menu: false
+    }
+  }
+
+handleMenu = () => {
+  this.setState({
+    menu: !this.state.menu
+  })
+}
+
+render () {
+  if (!this.props.authContext) return null
   return (
     <StyledNav>
       <NavbarLogo />
-      {props.authContext.authenticated
+      {this.props.authContext.authenticated
         ? (
           <LoggedUserBar>
-            <Notifications />
-            <LoggedUser />
+            <LoggedUser onClick={this.handleMenu} />
+            {this.state.menu &&
+              <UserMenu logout={this.props.authContext.logout} />
+            }
           </LoggedUserBar>
         ) : (
           <UserBar>
-            <Button onClick={props.authContext.login}>Iniciar sesión</Button>
-            <Button primary onClick={props.authContext.register}>Registrarse</Button>
+            <Button onClick={this.props.authContext.login}>Iniciar sesión</Button>
+            <Button primary onClick={this.props.authContext.register}>Registrarse</Button>
           </UserBar>
         )}
     </StyledNav>
   )
+}
 }
 
 NavBar.propTypes = {
