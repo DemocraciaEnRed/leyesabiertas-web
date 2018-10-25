@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import WithUserContext from '../../components/with-user-context/component'
@@ -16,8 +16,7 @@ const CommentFormContainer = styled.div`
   justify-content:space-between;
   box-sizing: border-box;
   cursor: pointer;
-  z-index:2;
-  position: relative;
+
   left: 102%;
   bottom:900px;
 
@@ -59,29 +58,49 @@ const CommentFormFooter = styled.div`
   box-sizing:border-box;
   padding-left:20px;
 `
-const CommentText = styled.p`
+const CommentText = styled.textarea`
   font-size:1.4rem;
   color: #181818;
+  width:100%;
+  height:15rem;
+  outline-width: 0;
+
+
 `
+class CommentForm extends Component {
+  constructor (props) {
+    super(props)
+    this.state = { value: '' }
 
-const CommentForm = (props) => (
-  <CommentFormContainer>
-    <CommentFormHeader>Agregar comentario</CommentFormHeader>
-    <CommentFormContent>
-      <UserAvatarLogged
-        avatarImg={'https://robohash.org/63.143.42.242.png'}
-        name={props.authContext.userInfo.name} />
-      <CommentText>Hola! Sugiero que cambien una palabra
-para que esto pueda entenderse mejor.
-El cambio sería en: Desagregación y cambiarla por Detalle, para que pueda leerse más rápido.</CommentText>
-    </CommentFormContent>
-    <CommentFormFooter>Enviar comentario </CommentFormFooter>
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
 
-  </CommentFormContainer>
-)
+  handleChange (event) {
+    this.setState({ value: event.target.value })
+  }
 
-CommentForm.propTypes = {
-  project: PropTypes.object.isRequired
+  handleSubmit (event) {
+    console.log('Envio comentario ' + this.state.value)
+    event.preventDefault()
+  }
+
+  render () {
+    return (
+
+      <CommentFormContainer onSubmit={this.handleSubmit}>
+        <CommentFormHeader>Agregar comentario</CommentFormHeader>
+        <CommentFormContent>
+          <UserAvatarLogged
+            avatarImg={'https://robohash.org/63.143.42.242.png'}
+            name={'sarasa'} />
+          <CommentText type='text' value={this.state.value} onChange={this.handleChange} />
+        </CommentFormContent>
+        <CommentFormFooter type='submit' value='Submit'>Enviar comentario </CommentFormFooter>
+
+      </CommentFormContainer>
+    )
+  }
 }
 
 export default WithUserContext(CommentForm)

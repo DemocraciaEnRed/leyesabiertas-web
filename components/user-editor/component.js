@@ -41,7 +41,7 @@ class UserEditor extends Component {
       value: null,
       selection: null,
       showAddComment: false,
-      showCommentForm: false,
+      showCommentForm: true,
       top: null,
       left: null,
       commentsIds: []
@@ -103,7 +103,7 @@ class UserEditor extends Component {
 
   handleHighlight = (e) => {
     e.preventDefault()
-    const { value } = this.state 
+    const { value } = this.state
     const change = value.change().toggleMark('highlight')
     this.setState({
       showCommentForm: true,
