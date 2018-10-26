@@ -38,7 +38,7 @@ const content = {
 
 const StyledStaticInfo = styled.div`
   position: relative;
-  height: 1200px;
+  min-height: 1600px;
   display: flex;
   justify-content: center;
 `
