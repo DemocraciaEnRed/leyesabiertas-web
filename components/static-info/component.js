@@ -4,6 +4,10 @@ import StaticInfoHeader from '../../elements/static-info-header/component'
 import StaticInfoWrapper from '../../elements/static-info-wrapper/component'
 import StaticInfoNav from '../../elements/static-info-nav/component'
 import StaticInfoButton from '../../elements/static-info-button/component'
+import ComoParticipar from '../como-participar/component'
+import FAQ from '../faq/component'
+import SobreLaPlataforma from '../sobre-la-plataforma/component'
+import TerminosYCondiciones from '../terminos-y-condiciones/component'
 
 const buttons = [
   {
@@ -24,6 +28,13 @@ const buttons = [
   }
 ]
 
+const content = {
+  'como-participar': <ComoParticipar />,
+  'sobre-la-plataforma': <SobreLaPlataforma />,
+  'faq': <FAQ />,
+  'terminos-y-condiciones': <TerminosYCondiciones />
+}
+
 const StyledStaticInfo = styled.div`
   position: relative;
   height: 1200px;
@@ -35,7 +46,7 @@ const StaticInfo = (props) => (
   <StyledStaticInfo>
     <StaticInfoHeader img={'/static/assets/header-background.jpg'} />
     <StaticInfoWrapper>
-      {props.section}
+      {content[props.section]}
       <StaticInfoNav>
         {buttons.map((button, i) => (
           <StaticInfoButton
