@@ -29,7 +29,7 @@ class Info extends Component {
   changeSection = (section) => {
     this.setState({
       section: section
-    }, () => console.log(this.state.section))
+    })
   }
 
   render () {
@@ -38,7 +38,7 @@ class Info extends Component {
         <NavBar />
         <StaticInfo
           section={this.state.section}
-          changeSecton={this.changeSection} />
+          changeSection={this.changeSection} />
         <Footer />
       </div>
     )
