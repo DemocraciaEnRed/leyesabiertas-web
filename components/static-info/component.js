@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import StaticInfoHeader from '../../elements/static-info-header/component'
 import StaticInfoWrapper from '../../elements/static-info-wrapper/component'
@@ -60,5 +61,10 @@ const StaticInfo = (props) => (
     </StaticInfoWrapper>
   </StyledStaticInfo>
 )
+
+StaticInfo.propTypes = {
+  section: PropTypes.string.isRequired,
+  changeSection: PropTypes.func.isRequired
+}
 
 export default StaticInfo
