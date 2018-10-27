@@ -25,6 +25,7 @@ const StyledEditorWrapper = styled.div`
       font-size: 1.8rem;
       line-height: 1.89;
       color: #203340;
+      padding: 6.5px 0px;
     }
   }
 `
@@ -119,15 +120,18 @@ class UserEditor extends Component {
     return false
   }
 
+  updateMousePosition = (e) => {
+    this.setState({
+      top: e.pageY - 740,
+      left: e.pageX - 100
+    })
+  }
+
   onCommentHoverIn = (id) => (e) => {
-    const top = e.clientY - 200
-    const left = e.clientX - 100
     this.setState((prevState) => {
       return {
         showAddComment: false,
-        commentsIds: prevState.commentsIds.concat(id),
-        top: top,
-        left: left
+        commentsIds: prevState.commentsIds.concat(id)
       }
     })
   }
@@ -215,7 +219,7 @@ class UserEditor extends Component {
             left={this.state.left} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
-        <div ref={this.myEditor}>
+        <div ref={this.myEditor} onMouseMove={this.updateMousePosition}>
           <Editor
             className='editor'
             schema={this.schema}

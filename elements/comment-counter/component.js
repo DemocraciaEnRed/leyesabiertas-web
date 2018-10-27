@@ -14,8 +14,6 @@ const CounterWrapper = styled.div`
   border-radius: 5px;
   position: absolute;
   z-index: 100;
-  top: ${(props) => props.top + 'px'};
-  left: ${(props) => props.left + 'px'};
 
   &::after {
     content: '';
@@ -42,16 +40,19 @@ const CounterWrapper = styled.div`
 `
 
 const CommentCounter = (props) => (
-  <CounterWrapper top={props.top} left={props.left}>
+  <CounterWrapper style={{
+    top: props.top + 'px',
+    left: props.left + 'px'
+  }}>
     <span className='counter-span'>{props.count} aportes de usuarios</span>
     <span className='text-span'>click para abrir aportes</span>
   </CounterWrapper>
 )
 
 CommentCounter.propTypes = {
-  count: PropTypes.number.isRequired,
-  top: PropTypes.number.isRequired,
-  left: PropTypes.number.isRequired
+  count: PropTypes.number,
+  top: PropTypes.number,
+  left: PropTypes.number
 }
 
 export default CommentCounter
