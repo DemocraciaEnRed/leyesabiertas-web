@@ -1,0 +1,169 @@
+{
+  "object": "value",
+  "document": {
+    "object": "document",
+    "nodes": [
+      {
+        "object": "block",
+        "type": "title",
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "object": "leaf",
+                "text": "ART\u00cdCULO 1\u00b0 \u2014 ",
+                "marks": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "object": "leaf",
+                "text": "Objeto. ",
+                "marks": [
+
+                ]
+              },
+              {
+                "object": "leaf",
+                "text": "La presente ley tiene por objeto garantizar el efectivo ejercicio del derecho de acceso a la zinformaci\u00f3n p\u00fablica, promover la participaci\u00f3n ciudadana y la transparencia de la gesti\u00f3n p\u00fablica, y se funda en los siguientes principios: Presunci\u00f3n de publicidad: toda la informaci\u00f3n en poder del Estado se presume p\u00fablica, salvo las excepciones previstas por esta ley. Transparencia y m\u00e1xima divulgaci\u00f3n: toda la informaci\u00f3n en poder, custodia o bajo control del sujeto obligado debe ser accesible para todas las personas.",
+                "marks": [
+                  {
+                    "object": "mark",
+                    "type": "comment",
+                    "data": {
+                      "data-id": "5bb7bf9c9a5ac91dffa9e8d3"
+                    }
+                  }
+                ]
+              },
+              {
+                "object": "leaf",
+                "text": " El acceso a la informaci\u00f3n p\u00fablica s\u00f3lo puede ser limitado cuando concurra alguna de las excepciones previstas en esta ley, de acuerdo con las necesidades de la sociedad democr\u00e1tica y republicana, proporcionales al inter\u00e9s que las justifican. ",
+                "marks": [
+                  {
+                    "object": "mark",
+                    "type": "comment",
+                    "data": {
+                      "data-id": "5bb7bf9c9a5ac91dffa9e8d4"
+                    }
+                  },
+                  {
+                    "object": "mark",
+                    "type": "comment",
+                    "data": {
+                      "data-id": "5bb7bf9c9a5ac91dffa9e8d5"
+                    }
+                  }
+                ]
+              },
+              {
+                "object": "leaf",
+                "text": "Informalismo: las reglas de procedimiento para acceder a la informaci\u00f3n deben facilitar el ejercicio del derecho y su inobservancia no podr\u00e1 constituir un obst\u00e1culo para ello.",
+                "marks": [
+                  {
+                    "object": "mark",
+                    "type": "comment",
+                    "data": {
+                      "data-id": "5bb7bf9c9a5ac91dffa9e8d6"
+                    }
+                  },
+                  {
+                    "object": "mark",
+                    "type": "comment",
+                    "data": {
+                      "data-id": "5bb7bf9c9a5ac91dffa9e8d7"
+                    }
+                  },
+                  {
+                    "object": "mark",
+                    "type": "comment",
+                    "data": {
+                      "data-id": "5bb7bf9c9a5ac91dffa9e8d8"
+                    }
+                  }
+                ]
+              },
+              {
+                "object": "leaf",
+                "text": " Los sujetos obligados no pueden fundar el rechazo de la solicitud de informaci\u00f3n en el incumplimiento de requisitos formales o de reglas de procedimiento.",
+                "marks": [
+                  {
+                    "object": "mark",
+                    "type": "comment",
+                    "data": {
+                      "data-id": "5bb7bf9c9a5ac91dffa9e8d9"
+                    }
+                  },
+                  {
+                    "object": "mark",
+                    "type": "comment",
+                    "data": {
+                      "data-id": "5bb7bf9c9a5ac91dffa9e8da"
+                    }
+                  }
+                ]
+              },
+              {
+                "object": "leaf",
+                "text": " M\u00e1ximo acceso: la informaci\u00f3n debe publicarse de forma completa, con el mayor nivel de desagregaci\u00f3n posible y por la mayor cantidad de medios disponibles. Apertura: la informaci\u00f3n debe ser accesible en formatos electr\u00f3nicos abiertos, que faciliten su procesamiento por medios autom\u00e1ticos que permitan su reutilizaci\u00f3n o su redistribuci\u00f3n por parte de terceros.",
+                "marks": [
+                  {
+                    "object": "mark",
+                    "type": "comment",
+                    "data": {
+                      "data-id": "5bb7bf9c9a5ac91dffa9e8db"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "title",
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "object": "leaf",
+                "text": "ART\u00cdCULO 2\u00b0 \u2014 ",
+                "marks": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "object": "leaf",
+                "text": "Objeto. La presente ley tiene por objeto garantizar el efectivo ejercicio del derecho de acceso a la zinformaci\u00f3n p\u00fablica, promover la participaci\u00f3n ciudadana y la transparencia de la gesti\u00f3n p\u00fablica, y se funda en los siguientes principios: Presunci\u00f3n de publicidad: toda la informaci\u00f3n en poder del Estado se presume p\u00fablica, salvo las excepciones previstas por esta ley. Transparencia y m\u00e1xima divulgaci\u00f3n: toda la informaci\u00f3n en poder, custodia o bajo control del sujeto obligado debe ser accesible para todas las personas. El acceso a la informaci\u00f3n p\u00fablica s\u00f3lo puede ser limitado cuando concurra alguna de las excepciones previstas en esta ley, de acuerdo con las necesidades de la sociedad democr\u00e1tica y republicana, proporcionales al inter\u00e9s que las justifican. Informalismo: las reglas de procedimiento para acceder a la informaci\u00f3n deben facilitar el ejercicio del derecho y su inobservancia no podr\u00e1 constituir un obst\u00e1culo para ello. Los sujetos obligados no pueden fundar el rechazo de la solicitud de informaci\u00f3n en el incumplimiento de requisitos formales o de reglas de procedimiento. M\u00e1ximo acceso: la informaci\u00f3n debe publicarse de forma completa, con el mayor nivel de desagregaci\u00f3n posible y por la mayor cantidad de medios disponibles. Apertura: la informaci\u00f3n debe ser accesible en formatos electr\u00f3nicos abiertos, que faciliten su procesamiento por medios autom\u00e1ticos que permitan su reutilizaci\u00f3n o su redistribuci\u00f3n por parte de terceros.",
+                "marks": [
+
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
