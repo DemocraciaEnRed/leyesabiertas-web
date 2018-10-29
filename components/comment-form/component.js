@@ -111,6 +111,7 @@ class CommentForm extends Component {
   }
 
   render () {
+    console.log(this.state.top)
     return (
       <CommentFormContainer onSubmit={this.handleSubmit}>
         <CommentFormHeader>Agregar comentario</CommentFormHeader>
