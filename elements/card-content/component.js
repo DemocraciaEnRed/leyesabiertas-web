@@ -38,7 +38,9 @@ const croppedTitle = (title) => title.slice(0, 42).concat('...')
 const CardContent = ({ tagTitle, title, avatarImg, name, party }) => (
   <Wrapper>
     <TextWrapper>
-      <TagTitle>{tagTitle}</TagTitle>
+      { tagTitle &&
+        <TagTitle>{tagTitle}</TagTitle>
+      }
       <Title>{title} </Title>
     </TextWrapper>
     <UserAvatar avatarImg={avatarImg} name={name} party={party} />
@@ -47,7 +49,7 @@ const CardContent = ({ tagTitle, title, avatarImg, name, party }) => (
 
 CardContent.propTypes = {
   title: PropTypes.string.isRequired,
-  tagTitle: PropTypes.string.isRequired,
+  tagTitle: PropTypes.string,
   avatarImg: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   party: PropTypes.string.isRequired
