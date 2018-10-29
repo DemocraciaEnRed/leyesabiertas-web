@@ -23,26 +23,11 @@ class GeneralContainer extends Component {
     }
   }
 
-  renderProjectContainer = (isAuthor) => {
-    switch (isAuthor) {
-      case true:
-        return <AuthorProjectContainer project={this.state.project} section={this.props.path} />
-        break
-      case false:
-        return <UserProjectContainer project={this.state.project} section={this.props.path} />
-        break
-      default:
-        return null
-    }
-  }
-
   render () {
     return (
       <Fragment>
         <NavBar />
-        <UserContext.Consumer>
-          {({ isAuthor }) => this.renderProjectContainer(isAuthor)}
-        </UserContext.Consumer>
+          <UserProjectContainer project={this.state.project} section={this.props.path} />
         <Footer />
       </Fragment>
     )
