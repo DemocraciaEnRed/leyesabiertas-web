@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import NavBar from '../containers/navbar/component'
 import SecondaryNavbar from '../containers/secondary-navbar/component'
@@ -25,14 +25,18 @@ const Title = styled.h1`
   color: #5c97bc;
 `
 
+const log = (value) => console.log(value.toJSON())
+
 export default () => (
-  <div>
+  <Fragment>
     <NavBar />
     <SecondaryNavbar />
     <Container>
       <Title>Artículos de la Propuesta</Title>
-      <ProjectText initialValue={example} />
+      <ProjectText
+        onChange={log}
+        initialValue={example} />
     </Container>
     <Footer />
-  </div>
+  </Fragment>
 )
