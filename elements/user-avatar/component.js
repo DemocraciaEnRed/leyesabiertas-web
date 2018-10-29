@@ -57,7 +57,7 @@ const UserAvatar = ({ avatarImg, name, party }) => (
 
 UserAvatar.propTypes = {
   name: PropTypes.string.isRequired,
-  avatarImg: PropTypes.string.isRequired,
+  avatarImg: PropTypes.string,
   party: PropTypes.string
 }
 

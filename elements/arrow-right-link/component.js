@@ -17,7 +17,7 @@ const StyledP = styled.p`
   width:11rem;
   cursor:pointer;
 `
-const ArrowRightlink = ({ children }) => (
+const ArrowRightlink = () => (
   <Link href={'/'}>
     <StyledArrowLink>
       <StyledP>Conocé más</StyledP>
@@ -27,12 +27,5 @@ const ArrowRightlink = ({ children }) => (
   </Link>
 
 )
-
-ArrowRightlink.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired
-}
 
 export default ArrowRightlink
