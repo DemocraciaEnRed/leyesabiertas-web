@@ -27,7 +27,7 @@ const Card = ({ project }) => (
       { project.content.imageCover &&
       <CardHeader img={project.content.imageCover} />
       }
-      <CardContent tagTitle={project.tagTitle}
+      <CardContent
         title={project.content.title}
         avatarImg={project.author.avatarImg}
         name={project.author}
