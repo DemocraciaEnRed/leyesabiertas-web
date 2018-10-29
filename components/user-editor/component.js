@@ -226,9 +226,9 @@ class UserEditor extends Component {
           <UserContext.Consumer>
             {({ isAuthor }) => {
               let plugins = []
-              if (true) plugins.push(ProjectTextEdit())
+              if (isAuthor) plugins.push(ProjectTextEdit())
               return <Editor
-                plugins={this.plugins}
+                plugins={plugins}
                 className='editor'
                 schema={this.schema}
                 value={this.state.value}
