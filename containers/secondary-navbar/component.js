@@ -40,7 +40,7 @@ const SecondaryNavbar = ({ children }) => (
     <StyledSecondaryNavbarTitle />
     <LinkBar>
       {links.map((li, i) => (
-        <a onClick={scroll(li.value)}>{li.name}</a>
+        <a key={li.value} onClick={scroll(li.value)}>{li.name}</a>
       ))}
     </LinkBar>
   </SecondaryBar>
