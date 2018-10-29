@@ -12,6 +12,8 @@ import CommentCounter from '../../elements/comment-counter/component'
 import HighlightMark from '../../elements/highlight-mark/component'
 import AddComment from '../../elements/add-comment/component'
 import CommentForm from '../../components/comment-form/component'
+import ProjectTextEdit from '../../components/project-text-edit'
+
 const API_URL = process.env.API_URL
 
 const StyledEditorWrapper = styled.div`
@@ -198,6 +200,10 @@ class UserEditor extends Component {
         return false
     }
   }
+  
+  plugins = [
+    ProjectTextEdit()
+  ]
 
   render () {
     if (!this.state.value) return null
@@ -221,6 +227,7 @@ class UserEditor extends Component {
         <EditorTitle>Artículos de la propuesta</EditorTitle>
         <div ref={this.myEditor} onMouseMove={this.updateMousePosition}>
           <Editor
+            plugins={this.plugins}
             className='editor'
             schema={this.schema}
             value={this.state.value}
