@@ -186,6 +186,16 @@ class UserEditor extends Component {
         {this.props.withComments && this.state.comments && this.state.comments.length > 0 &&
           <CommentsGrid comments={this.state.comments} />
         }
+        {this.state.showAddComment &&
+          <AddComment
+            onClick={this.handleHighlight}
+            top={this.state.top}
+            left={this.state.left} />
+        }
+        {this.state.showCommentForm &&
+        <CommentForm id={this.props.id} top={10}
+          left={this.state.left} />
+        }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
         <div ref={this.myEditor}>
           <Editor

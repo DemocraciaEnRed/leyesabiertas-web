@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import fetch from 'isomorphic-unfetch'
 import WithUserContext from '../../components/with-user-context/component'
 import UserAvatarLogged from '../../elements/user-avatar-logged/component'
 
-const CommentFormContainer = styled.div`
+const CommentFormContainer = styled.form`
   width: 300px;
   min-height: 305px;
   border-radius: 3px;
@@ -16,10 +17,10 @@ const CommentFormContainer = styled.div`
   justify-content:space-between;
   box-sizing: border-box;
   cursor: pointer;
-
-  left: 102%;
-  bottom:900px;
-
+  z-index:2;
+  position: absolute;
+  left: 70%;
+  top:${(props) => props.top};
 `
 
 const CommentFormContent = styled.div`
@@ -47,30 +48,39 @@ const CommentFormHeader = styled.div`
   box-sizing:border-box;
 `
 
-const CommentFormFooter = styled.div`
+const CommentFormFooter = styled.button`
   height: 5.5rem;
-  font-size: 1.4rem;
+  border:none;
+  font-size: 1.6rem;
   color: #5c97bc;
   border-top: 1px solid #dae1e7;
   font-size:1.3em;
   display:flex;
   align-items:center;
+  justify-content:flex-end;
   box-sizing:border-box;
   padding-left:20px;
+  padding-right:20px;
+  opacity: 0.5;
+  cursor:pointer;
+  :focus {outline:0;}
+
 `
 const CommentText = styled.textarea`
   font-size:1.4rem;
   color: #181818;
   width:100%;
-  height:15rem;
-  outline-width: 0;
-
-
+  min-height:130px;
+  resize:none;
+  border-style: none; 
+  border-color: Transparent; 
 `
 class CommentForm extends Component {
   constructor (props) {
     super(props)
-    this.state = { value: '' }
+    this.state = {
+      value: ''
+    }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -81,22 +91,37 @@ class CommentForm extends Component {
   }
 
   handleSubmit (event) {
-    console.log('Envio comentario ' + this.state.value)
     event.preventDefault()
+    console.log('Envia comentario ' + this.state.value)
+    fetch(`/api/v1/documents/5bb7bab09a5ac91dffa9e884/comments`, {
+      method: 'POST',
+      body: {
+        'field': 'articles',
+        'content': this.state.value
+      }
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log('paso post')
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   render () {
     return (
-
       <CommentFormContainer onSubmit={this.handleSubmit}>
         <CommentFormHeader>Agregar comentario</CommentFormHeader>
         <CommentFormContent>
           <UserAvatarLogged
             avatarImg={'https://robohash.org/63.143.42.242.png'}
-            name={'sarasa'} />
-          <CommentText type='text' value={this.state.value} onChange={this.handleChange} />
+            /*        name={props.authContext.userInfo.name} /> */
+            name={'Nombre'} />
+          <CommentText placeholder='Agregue su comentario aquí' value={this.state.value} onChange={this.handleChange} />
         </CommentFormContent>
-        <CommentFormFooter type='submit' value='Submit'>Enviar comentario </CommentFormFooter>
+        <CommentFormFooter onClick={this.handleSubmit}>Enviar comentario </CommentFormFooter>
 
       </CommentFormContainer>
     )
