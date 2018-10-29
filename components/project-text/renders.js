@@ -33,11 +33,11 @@ const nodes = {
 }
 
 const marks = {
-  bold: styled.strong``,
+  bold: styled.strong`font-weight: bold`,
 
-  italic: styled.em``,
+  italic: styled.em`font-style: italic`,
 
-  underlined: styled.u``,
+  underlined: styled.u`font-decoration: underline`,
 
   comment: styled.span`` // don't render anything for now
 }

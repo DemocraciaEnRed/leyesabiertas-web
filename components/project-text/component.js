@@ -2,19 +2,24 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Value } from 'slate'
 import { Editor } from 'slate-react'
+import ProjectTextEdit from '../project-text-edit'
 import { renderNode, renderMark } from './renders'
 
 class ProjectText extends React.Component {
   static propTypes = {
-    readOnly: PropTypes.bool,
+    editEnabled: PropTypes.bool,
     initialValue: PropTypes.object.isRequired,
     onChange: PropTypes.func
   }
 
   static defaultProps = {
-    readOnly: true,
+    editEnabled: false,
     initialValue: { document: {} }
   }
+
+  plugins = [
+    ProjectTextEdit()
+  ]
 
   state = {
     value: Value.fromJSON(this.props.initialValue)
@@ -26,12 +31,13 @@ class ProjectText extends React.Component {
   }
 
   render () {
-    const { readOnly } = this.props
+    const { editEnabled } = this.props
     const { value } = this.state
 
     return (
       <Editor
-        readOnly={readOnly}
+        plugins={this.plugins}
+        readOnly={editEnabled !== true}
         spellCheck={false}
         onChange={this.handleChange}
         renderNode={renderNode}

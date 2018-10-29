@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
+// import dynamic from 'next/dynamic'
 import NavBar from '../containers/navbar/component'
 import SecondaryNavbar from '../containers/secondary-navbar/component'
-import Footer from '../containers/footer/component'
 import ProjectText from '../components/project-text/component'
+import Footer from '../containers/footer/component'
 import example from './example.json'
 
 const Container = styled.div`
@@ -34,6 +35,9 @@ export default () => (
     <Container>
       <Title>Artículos de la Propuesta</Title>
       <ProjectText
+        // SUPER IMPORTANT
+        // On server-side, always render the editor as readOnly=true
+        editEnabled={typeof window !== 'undefined'}
         onChange={log}
         initialValue={example} />
     </Container>
