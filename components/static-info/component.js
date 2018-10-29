@@ -37,15 +37,14 @@ const content = {
 }
 
 const StyledStaticInfo = styled.div`
-  position: relative;
-  min-height: 1600px;
   display: flex;
   justify-content: center;
+  background-image: url('/static/assets/header-background.jpg');
+  background-repeat: no-repeat;
 `
 
 const StaticInfo = (props) => (
   <StyledStaticInfo>
-    <StaticInfoHeader img={'/static/assets/header-background.jpg'} />
     <StaticInfoWrapper>
       {content[props.section]}
       <StaticInfoNav>
