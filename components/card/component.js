@@ -39,18 +39,7 @@ const Card = ({ project }) => (
 )
 
 Card.propTypes = {
-  project: PropTypes.shape({
-    img: PropTypes.string,
-    commentaries: PropTypes.number.isRequired,
-    limitDate: PropTypes.string,
-    title: PropTypes.string.isRequired,
-    tagTitle: PropTypes.string.isRequired,
-    author: PropTypes.shape({
-      avatarImg: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      party: PropTypes.string.isRequired
-    }).isRequired
-  }).isRequired
+  project: PropTypes.object.isRequired
 }
 
 export default Card

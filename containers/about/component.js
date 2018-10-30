@@ -18,7 +18,7 @@ const StyledAbout = styled.div`
   }
 `
 
-const About = ({ children }) => (
+const About = () => (
   <StyledAbout id='about'>
     <AboutImg img={'https://www.ncn.com.ar/wp-content/uploads/2017/12/diputados-prevision1.jpg'} />
     <AboutText>
@@ -28,12 +28,5 @@ const About = ({ children }) => (
     </AboutText>
   </StyledAbout>
 )
-
-About.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired
-}
 
 export default About

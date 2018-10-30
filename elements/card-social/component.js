@@ -52,7 +52,7 @@ const Social = ({ commentaries, limitDate }) => (
 )
 
 Social.propTypes = {
-  commentaries: PropTypes.number.isRequired,
+  commentaries: PropTypes.number,
   limitDate: PropTypes.string
 }
 

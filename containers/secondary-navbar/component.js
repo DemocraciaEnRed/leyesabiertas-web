@@ -35,7 +35,7 @@ const scroll = (target) => (e) => {
   jump(target)
 }
 
-const SecondaryNavbar = ({ children }) => (
+const SecondaryNavbar = () => (
   <SecondaryBar>
     <StyledSecondaryNavbarTitle />
     <LinkBar>
@@ -45,12 +45,5 @@ const SecondaryNavbar = ({ children }) => (
     </LinkBar>
   </SecondaryBar>
 )
-
-SecondaryNavbar.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired
-}
 
 export default SecondaryNavbar

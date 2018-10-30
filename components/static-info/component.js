@@ -62,7 +62,7 @@ const StaticInfo = (props) => (
 )
 
 StaticInfo.propTypes = {
-  section: PropTypes.string.isRequired,
+  section: PropTypes.string,
   changeSection: PropTypes.func.isRequired
 }
 
