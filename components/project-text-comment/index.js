@@ -4,7 +4,7 @@ import React, { Fragment } from 'react'
 import CommentCounter from '../../elements/comment-counter/component'
 import CommentMark from '../../elements/comment-mark/component'
 
-export default () => {
+export default (options) => {
   return {
     renderMark (props, editor, next) {
       const { children, mark, attributes } = props
@@ -13,9 +13,9 @@ export default () => {
         case 'comment':
           return <CommentMark
             id={props.mark.toJSON().data['data-id']}
-            onMouseEnter={(e) => console.log(e)}
-            onMouseLeave={(e) => console.log(e)}
-            onClick={(e) => console.log(e)}
+            onMouseEnter={options.onMouseEnter}
+            onMouseLeave={options.onMouseLeave}
+            onClick={options.onClick}
             {...props} />
         default:
           return next()
@@ -28,10 +28,13 @@ export default () => {
 
       return (
         <Fragment>
-          <CommentCounter
-            count={5}
-            top={0}
-            left={0} />
+          {
+            options.count > 0 &&
+              <CommentCounter
+                count={options.count}
+                top={options.top}
+                left={options.left} />
+          }
           {children}
         </Fragment>
       )

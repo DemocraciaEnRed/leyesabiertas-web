@@ -198,16 +198,19 @@ class UserEditor extends Component {
 
   render () {
     if (!this.state.value) return null
-    let plugins = [ProjectTextComment()]
+    
+    
+    let plugins = [ProjectTextComment({
+      onMouseEnter: this.onCommentHoverIn,
+      onMouseLeave: this.onCommentHoverOut,
+      onClick: this.fetchComments,
+      count: this.state.commentsIds.length,
+      top: this.state.top,
+      left: this.state.left,
+    })]
     if (this.props.authContext.isAuthor) plugins.push(ProjectTextEdit())
     return (
       <StyledEditorWrapper>
-        {this.props.withComments && this.state.commentsIds.length > 0 && !this.state.showAddComment &&
-          <CommentCounter
-            count={this.state.commentsIds.length}
-            top={this.state.top}
-            left={this.state.left} />
-        }
         {this.props.withComments && this.state.comments && this.state.comments.length > 0 &&
           <CommentsGrid comments={this.state.comments} />
         }
@@ -218,7 +221,7 @@ class UserEditor extends Component {
             left={this.state.left} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
-        <div ref={this.myEditor}>    
+        <div ref={this.myEditor} onMouseMove={this.updateMousePosition}>
           <Editor
             plugins={plugins}
             className='editor'
