@@ -35,6 +35,7 @@ flex-direction:column;
 justify-content:space-between;
 `
 const Arrow = styled.i`
+  display: ${(props) => props.isArrow ? 'inline' : 'none !important'};
   margin:5px 0px 0px 15px;
   border: solid #4a5d68;
   border-width: 0 2px 2px 0;
@@ -44,14 +45,14 @@ const Arrow = styled.i`
   -webkit-transform: rotate(45deg);
 `
 
-const UserAvatar = ({ avatarImg, name, party }) => (
+const UserAvatar = ({ avatarImg, name, party, isArrow }) => (
   <Wrapper>
     <Avatar avatarImg={avatarImg} />
     <TextWrapper>
       <Name>{name} </Name>
       <Party>{party}</Party>
     </TextWrapper>
-    <Arrow />
+    <Arrow isArrow={isArrow} />
   </Wrapper>
 )
 
