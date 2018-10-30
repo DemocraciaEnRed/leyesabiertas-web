@@ -50,7 +50,7 @@ const CardContent = ({ tagTitle, title, avatarImg, name, party }) => (
 CardContent.propTypes = {
   title: PropTypes.string.isRequired,
   tagTitle: PropTypes.string,
-  avatarImg: PropTypes.string.isRequired,
+  avatarImg: PropTypes.string,
   name: PropTypes.string.isRequired,
   party: PropTypes.string.isRequired
 }
