@@ -20,7 +20,7 @@ const CommentFormContainer = styled.form`
   z-index:2;
   position: absolute;
   left: 70%;
-  top:${(props) => props.top};
+  top: ${this.props.top + 'px'};
 `
 
 const CommentFormContent = styled.div`
@@ -120,7 +120,10 @@ class CommentForm extends Component {
             avatarImg={'https://robohash.org/63.143.42.242.png'}
             /*        name={props.authContext.userInfo.name} /> */
             name={'Nombre'} />
-          <CommentText placeholder='Agregue su comentario aquí' value={this.state.value} onChange={this.handleChange} />
+          <CommentText
+            placeholder='Agregue su comentario aquí'
+            value={this.state.value}
+            onChange={this.handleChange} />
         </CommentFormContent>
         <CommentFormFooter onClick={this.handleSubmit}>Enviar comentario </CommentFormFooter>
 
