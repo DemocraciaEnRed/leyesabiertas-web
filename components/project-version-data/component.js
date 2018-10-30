@@ -27,7 +27,7 @@ const ProjectVersionData = ({ version, createdAt }) => (
 
 ProjectVersionData.propTypes = {
   version: PropTypes.number.isRequired,
-  createdAt: PropTypes.string.isRequired
+  createdAt: PropTypes.string
 }
 
 export default ProjectVersionData
