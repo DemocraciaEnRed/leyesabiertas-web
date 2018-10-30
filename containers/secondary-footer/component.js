@@ -16,13 +16,13 @@ const FooterWrapper = styled.footer`
   margin-top:10rem;
 `
 
-const Footer = ({ children }) => (
+const Footer = () => (
   <FooterWrapper>
     <FooterBar>
-      <Link to='/'><a>Proyectos</a></Link>
-      <Link to='/'><a>La Propuesta</a></Link>
-      <Link to='/'><a>Preguntas Frecuentes</a></Link>
-      <Link to='/'><a>Términos y condiciones</a></Link>
+      <Link href='/'><a>Proyectos</a></Link>
+      <Link href='/'><a>La Propuesta</a></Link>
+      <Link href='/'><a>Preguntas Frecuentes</a></Link>
+      <Link href='/'><a>Términos y condiciones</a></Link>
     </FooterBar>
     <SocialBar>
       <SocialIcon
@@ -33,12 +33,5 @@ const Footer = ({ children }) => (
     </SocialBar>
   </FooterWrapper>
 )
-
-Footer.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired
-}
 
 export default Footer
