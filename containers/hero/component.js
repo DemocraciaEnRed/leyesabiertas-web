@@ -16,18 +16,11 @@ const StyledHero = styled.div`
   }
 `
 
-const Hero = ({ children }) => (
+const Hero = () => (
   <StyledHero>
     <HeroTitle>La ciudadanía y los diputados conectados para co-crear mejores leyes</HeroTitle>
     <HeroSubtitle>¡Participe haciendo comentarios y sugerencias en las propuestas de ley!</HeroSubtitle>
   </StyledHero>
 )
-
-Hero.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired
-}
 
 export default Hero

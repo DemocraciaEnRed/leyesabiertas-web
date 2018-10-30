@@ -2,6 +2,7 @@ import React from 'react'
 import StaticInfoTitle from '../../elements/static-info-title/component'
 import StaticInfoBold from '../../elements/static-info-bold/component'
 import StaticInfoP from '../../elements/static-info-p/component'
+import StaticInfoList from '../../elements/static-info-list/component'
 
 export default () => (
   <section>
@@ -56,7 +57,8 @@ export default () => (
     </StaticInfoP>
     <StaticInfoP>
     Las siguientes actividades se encuentran vedadas, sin perjuicio de las prohibiciones generales expuestas anteriormente:
-    <ul>
+    </StaticInfoP>
+    <StaticInfoList>
       <li>Hostigar, acosar, amenazar a otros Usuarios.</li>
       <li>Infringir los derechos a la intimidad de otros Usuarios.</li>
       <li>Solicitar información personal identificable de otros Usuarios con el propósito de hostigar, atacar, explotar o violar la intimidad de los mismos;</li>
@@ -66,7 +68,8 @@ export default () => (
       <li>Promover, defender o mostrar pornografía, obscenidad, vulgaridad, blasfemia, odio, fanatismo, racismo y/o violencia.</li>
       <li>Vulnerar los derechos establecidos en la Ley N° 25.326 de Protección de Datos Personales.</li>
       <li>Infringir mediante toda publicación cualquier ley, norma, reglamento u otra disposición legal</li>
-    </ul>
+    </StaticInfoList>
+    <StaticInfoP>
     En caso de sufrir alguna de estas situaciones, comunicarse inmediatamente con la administración de la Plataforma través de XXXXXXXX@hcdn.gob.ar.
     </StaticInfoP>
   </section>
