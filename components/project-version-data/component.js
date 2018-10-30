@@ -13,18 +13,20 @@ const StyledProjectVersionData = styled.div`
   padding-left:3.5rem;
   padding-right:auto;
 `
+const formatDate = (createdAt) => {
+  return (createdAt.substring(0, 10).split('-').reverse().join('/'))
+}
 
 const ProjectVersionData = ({ version, createdAt }) => (
   <StyledProjectVersionData>
     <ProjectVersion version={version} />
-    <ProjectCreationDate createdAt={createdAt} />
+    <ProjectCreationDate createdAt={formatDate(createdAt)} />
   </StyledProjectVersionData>
 )
 
 ProjectVersionData.propTypes = {
   version: PropTypes.number.isRequired,
-  createdAt: PropTypes.string.isRequired
+  createdAt: PropTypes.string
 }
 
 export default ProjectVersionData
-
