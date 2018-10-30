@@ -10,7 +10,7 @@ const StyledCreationDate = styled.span`
 
 const ProjectCreationDate = ({ createdAt }) => (
   <StyledCreationDate>
-    Fecha creación: { createdAt }
+    Fecha creación  { createdAt }
   </StyledCreationDate>
 )
 

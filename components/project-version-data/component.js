@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ProjectVersion from '../../elements/project-version/component'
 import ProjectCreationDate from '../../elements/project-creation-date/component'
+import { format } from 'util';
 
 const StyledProjectVersionData = styled.div`
   display: flex;
@@ -13,11 +14,14 @@ const StyledProjectVersionData = styled.div`
   padding-left:3.5rem;
   padding-right:auto;
 `
+const formatDate = (createdAt) => {
+  return (createdAt.substring(0, 10).split('-').reverse().join('/'))
+}
 
 const ProjectVersionData = ({ version, createdAt }) => (
   <StyledProjectVersionData>
     <ProjectVersion version={version} />
-    <ProjectCreationDate createdAt={createdAt} />
+    <ProjectCreationDate createdAt={formatDate(createdAt)} />
   </StyledProjectVersionData>
 )
 
@@ -27,4 +31,3 @@ ProjectVersionData.propTypes = {
 }
 
 export default ProjectVersionData
-
