@@ -17,7 +17,6 @@ const CommentMark = (props) => (
         data-id={props.id}
         onMouseEnter={withComments ? props.onMouseEnter(props.id) : undefined}
         onMouseLeave={withComments ? props.onMouseLeave(props.id) : undefined}
-        onClick={withComments ? props.onClick(props.id) : undefined}
         withComments={withComments}>
         {props.children}
       </StyledCommentSpan>

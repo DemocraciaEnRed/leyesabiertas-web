@@ -146,7 +146,8 @@ class UserEditor extends Component {
     })
   }
 
-  fetchComments = () => async (e) => {
+  fetchComments = async (e) => {
+    console.log('fetch comments')
     e.preventDefault()
     try {
       const comments = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?ids=${this.state.commentsIds}`)).json()
@@ -195,11 +196,8 @@ class UserEditor extends Component {
         return next()
     }
   }
+  plugins = () => {
 
-  render () {
-    if (!this.state.value) return null
-    
-    
     let plugins = [ProjectTextComment({
       onMouseEnter: this.onCommentHoverIn,
       onMouseLeave: this.onCommentHoverOut,
@@ -209,21 +207,23 @@ class UserEditor extends Component {
       left: this.state.left,
     })]
     if (this.props.authContext.isAuthor) plugins.push(ProjectTextEdit())
+    return plugins
+  }
+
+  render () {
+    if (!this.state.value) return null
+    
+    
+
     return (
       <StyledEditorWrapper>
         {this.props.withComments && this.state.comments && this.state.comments.length > 0 &&
           <CommentsGrid comments={this.state.comments} />
         }
-        {this.state.showAddComment &&
-          <AddComment
-            onClick={this.handleHighlight}
-            top={this.state.top}
-            left={this.state.left} />
-        }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
         <div ref={this.myEditor} onMouseMove={this.updateMousePosition}>
           <Editor
-            plugins={plugins}
+            plugins={this.plugins()}
             className='editor'
             schema={this.schema}
             value={this.state.value}

@@ -15,7 +15,6 @@ export default (options) => {
             id={props.mark.toJSON().data['data-id']}
             onMouseEnter={options.onMouseEnter}
             onMouseLeave={options.onMouseLeave}
-            onClick={options.onClick}
             {...props} />
         default:
           return next()
@@ -35,7 +34,9 @@ export default (options) => {
                 top={options.top}
                 left={options.left} />
           }
-          {children}
+          <div onClick={options.onClick}>
+            {children}
+          </div>
         </Fragment>
       )
     }
