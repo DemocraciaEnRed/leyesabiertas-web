@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import NavBar from '../navbar/component'
 import Footer from '../footer/component'
 import UserContext from '../../components/user-context/component'
-import AuthorProjectContainer from '../author-project-container/component'
 import UserProjectContainer from '../user-project-container/component'
 
 const API_URL = process.env.API_URL

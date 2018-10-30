@@ -13,6 +13,7 @@ import HighlightMark from '../../elements/highlight-mark/component'
 import AddComment from '../../elements/add-comment/component'
 import CommentForm from '../../components/comment-form/component'
 import ProjectTextEdit from '../../components/project-text-edit'
+import ProjectTextComment from '../../components/project-text-comment'
 import UserContext from '../../components/user-context/component'
 
 const API_URL = process.env.API_URL
@@ -184,26 +185,21 @@ class UserEditor extends Component {
     this.handleChange(change)
   }
 
-  renderMark = (props) => {
+  renderMark = (props, editor, next) => {
     switch (props.mark.type) {
       case 'title':
         return <TitleMark {...props} />
-      case 'comment':
-        return <CommentMark
-          id={props.mark.toJSON().data['data-id']}
-          onMouseEnter={this.onCommentHoverIn}
-          onMouseLeave={this.onCommentHoverOut}
-          onClick={this.fetchComments}
-          {...props} />
       case 'highlight':
         return <HighlightMark {...props} />
       default:
-        return false
+        return next()
     }
   }
 
   render () {
     if (!this.state.value) return null
+    let plugins = [ProjectTextComment()]
+    if (this.props.authContext.isAuthor) plugins.push(ProjectTextEdit())
     return (
       <StyledEditorWrapper>
         {this.props.withComments && this.state.commentsIds.length > 0 && !this.state.showAddComment &&
@@ -222,23 +218,16 @@ class UserEditor extends Component {
             left={this.state.left} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
-        <div ref={this.myEditor} onMouseMove={this.updateMousePosition}>
-          <UserContext.Consumer>
-            {({ isAuthor }) => {
-              let plugins = []
-              if (isAuthor) plugins.push(ProjectTextEdit())
-              return <Editor
-                plugins={plugins}
-                className='editor'
-                schema={this.schema}
-                value={this.state.value}
-                onChange={this.onChange}
-                spellCheck={false}
-                renderMark={this.renderMark}
-                onSelect={this.onSelect} />}
-            }
-          </UserContext.Consumer>
-          
+        <div ref={this.myEditor}>    
+          <Editor
+            plugins={plugins}
+            className='editor'
+            schema={this.schema}
+            value={this.state.value}
+            onChange={this.onChange}
+            spellCheck={false}
+            renderMark={this.renderMark}
+            onSelect={this.onSelect} />
         </div>
       </StyledEditorWrapper>
     )
