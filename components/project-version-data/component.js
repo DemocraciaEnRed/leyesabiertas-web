@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ProjectVersion from '../../elements/project-version/component'
 import ProjectCreationDate from '../../elements/project-creation-date/component'
-import { format } from 'util';
 
 const StyledProjectVersionData = styled.div`
   display: flex;
