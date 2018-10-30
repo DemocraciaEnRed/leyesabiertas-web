@@ -59,8 +59,7 @@ const UserAvatar = ({ avatarImg, name, party, isArrow }) => (
 UserAvatar.propTypes = {
   name: PropTypes.string.isRequired,
   avatarImg: PropTypes.string,
-  party: PropTypes.string,
-  isArrow: PropTypes.boolean
+  party: PropTypes.string
 }
 
 export default UserAvatar
