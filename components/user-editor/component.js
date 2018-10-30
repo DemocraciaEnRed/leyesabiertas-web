@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Editor, findDOMRange } from 'slate-react'
 import { Value, KeyUtils, Range, Change, Mark } from 'slate'
 import { getVisibleSelectionRect } from 'get-selection-range'
+import fetch from 'isomorphic-unfetch'
 import WithUserContext from '../with-user-context/component'
 import CommentsGrid from '../comments-grid/component'
 import EditorTitle from '../../elements/editor-title/component'
@@ -41,7 +42,7 @@ class UserEditor extends Component {
       value: null,
       selection: null,
       showAddComment: false,
-      showCommentForm: false,
+      showCommentForm: true,
       top: null,
       left: null,
       commentsIds: []
@@ -103,7 +104,7 @@ class UserEditor extends Component {
 
   handleHighlight = (e) => {
     e.preventDefault()
-    const { value } = this.state 
+    const { value } = this.state
     const change = value.change().toggleMark('highlight')
     this.setState({
       showCommentForm: true,
@@ -185,6 +186,16 @@ class UserEditor extends Component {
       <StyledEditorWrapper>
         {this.props.withComments && this.state.comments && this.state.comments.length > 0 &&
           <CommentsGrid comments={this.state.comments} />
+        }
+        {this.state.showAddComment &&
+          <AddComment
+            onClick={this.handleHighlight}
+            top={this.state.top}
+            left={this.state.left} />
+        }
+        {this.state.showCommentForm &&
+        <CommentForm id={this.props.id} top={10}
+          left={this.state.left} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
         <div ref={this.myEditor}>

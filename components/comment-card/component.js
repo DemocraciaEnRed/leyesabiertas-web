@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import UserAvatar from '../../elements/user-avatar/component'
 import Icon from 'react-icons-kit'
 import { thumbsUp } from 'react-icons-kit/feather/thumbsUp'
+import UserAvatar from '../../elements/user-avatar/component'
 
 const StyledCommentCard = styled.div`
   width: 300px;
@@ -21,22 +21,42 @@ const StyledCommentCard = styled.div`
 `
 const StyledIconWrapper = styled.div`
   margin-top: 11px;
-  color: #5c97bc;
+  color: ${(props) => props.liked ? '#ef885d' : '#5c97bc'};
   cursor: pointer;
 `
 
-const commentCard = ({ comment }) => (
-  <StyledCommentCard>
-    <UserAvatar
-      avatarImg={comment.user.avatar}
-      name={comment.user.fields.name}
-      party={comment.user.fields.occupation} />
-    <p>{comment.content}</p>
-    <StyledIconWrapper>
-      <Icon icon={thumbsUp} />
-    </StyledIconWrapper>
-  </StyledCommentCard>
-)
+class commentCard extends Component {
+  constructor (props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+    this.state = {
+      liked: true
+    }
+  }
+
+  handleClick () {
+    this.setState((prevState) => {
+      return {
+        liked: !prevState.liked
+      }
+    })
+  }
+
+  render () {
+    return (
+      <StyledCommentCard>
+        <UserAvatar
+          avatarImg={this.props.comment.user.avatar}
+          name={this.props.comment.user.fields.name}
+          party={this.props.comment.user.fields.occupation} />
+        <p>{this.props.comment.content}</p>
+        <StyledIconWrapper liked={this.state.liked} >
+          <Icon icon={thumbsUp} onClick={this.handleClick} />
+        </StyledIconWrapper>
+      </StyledCommentCard>
+    )
+  }
+}
 
 commentCard.propTypes = {
   comment: PropTypes.object.isRequired

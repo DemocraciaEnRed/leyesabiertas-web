@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import fetch from 'isomorphic-unfetch'
 import WithUserContext from '../../components/with-user-context/component'
 import UserAvatarLogged from '../../elements/user-avatar-logged/component'
 
-const CommentFormContainer = styled.div`
+const CommentFormContainer = styled.form`
   width: 300px;
   min-height: 305px;
   border-radius: 3px;
@@ -17,10 +18,9 @@ const CommentFormContainer = styled.div`
   box-sizing: border-box;
   cursor: pointer;
   z-index:2;
-  position: relative;
-  left: 102%;
-  bottom:900px;
-
+  position: absolute;
+  left: 70%;
+  top: ${this.props.top + 'px'};
 `
 
 const CommentFormContent = styled.div`
@@ -48,40 +48,88 @@ const CommentFormHeader = styled.div`
   box-sizing:border-box;
 `
 
-const CommentFormFooter = styled.div`
+const CommentFormFooter = styled.button`
   height: 5.5rem;
-  font-size: 1.4rem;
+  border:none;
+  font-size: 1.6rem;
   color: #5c97bc;
   border-top: 1px solid #dae1e7;
   font-size:1.3em;
   display:flex;
   align-items:center;
+  justify-content:flex-end;
   box-sizing:border-box;
   padding-left:20px;
+  padding-right:20px;
+  opacity: 0.5;
+  cursor:pointer;
+  :focus {outline:0;}
+
 `
-const CommentText = styled.p`
+const CommentText = styled.textarea`
   font-size:1.4rem;
   color: #181818;
+  width:100%;
+  min-height:130px;
+  resize:none;
+  border-style: none; 
+  border-color: Transparent; 
 `
+class CommentForm extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      value: ''
+    }
 
-const CommentForm = (props) => (
-  <CommentFormContainer>
-    <CommentFormHeader>Agregar comentario</CommentFormHeader>
-    <CommentFormContent>
-      <UserAvatarLogged
-        avatarImg={'https://robohash.org/63.143.42.242.png'}
-        name={props.authContext.userInfo.name} />
-      <CommentText>Hola! Sugiero que cambien una palabra
-para que esto pueda entenderse mejor.
-El cambio sería en: Desagregación y cambiarla por Detalle, para que pueda leerse más rápido.</CommentText>
-    </CommentFormContent>
-    <CommentFormFooter>Enviar comentario </CommentFormFooter>
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
 
-  </CommentFormContainer>
-)
+  handleChange (event) {
+    this.setState({ value: event.target.value })
+  }
 
-CommentForm.propTypes = {
-  project: PropTypes.object.isRequired
+  handleSubmit (event) {
+    event.preventDefault()
+    console.log('Envia comentario ' + this.state.value)
+    fetch(`/api/v1/documents/5bb7bab09a5ac91dffa9e884/comments`, {
+      method: 'POST',
+      body: {
+        'field': 'articles',
+        'content': this.state.value
+      }
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log('paso post')
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  render () {
+    console.log(this.state.top)
+    return (
+      <CommentFormContainer onSubmit={this.handleSubmit}>
+        <CommentFormHeader>Agregar comentario</CommentFormHeader>
+        <CommentFormContent>
+          <UserAvatarLogged
+            avatarImg={'https://robohash.org/63.143.42.242.png'}
+            /*        name={props.authContext.userInfo.name} /> */
+            name={'Nombre'} />
+          <CommentText
+            placeholder='Agregue su comentario aquí'
+            value={this.state.value}
+            onChange={this.handleChange} />
+        </CommentFormContent>
+        <CommentFormFooter onClick={this.handleSubmit}>Enviar comentario </CommentFormFooter>
+
+      </CommentFormContainer>
+    )
+  }
 }
 
 export default WithUserContext(CommentForm)
