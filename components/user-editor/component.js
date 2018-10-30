@@ -119,38 +119,13 @@ class UserEditor extends Component {
     })
   }
 
-  onKeyDown = (e) => {
-    e.preventDefault()
-    return false
-  }
 
-  updateMousePosition = (e) => {
-    this.setState({
-      top: e.pageY - 740,
-      left: e.pageX - 100
-    })
-  }
 
-  onCommentHoverIn = (id) => (e) => {
-    this.setState((prevState) => {
-      return {
-        showAddComment: false,
-        commentsIds: prevState.commentsIds.concat(id)
-      }
-    })
-  }
 
-  onCommentHoverOut = () => (e) => {
-    this.setState({
-      commentsIds: []
-    })
-  }
 
-  fetchComments = async (e) => {
-    console.log('fetch comments')
-    e.preventDefault()
+  fetchComments = async (ids) => {
     try {
-      const comments = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?ids=${this.state.commentsIds}`)).json()
+      const comments = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?ids=${ids}`)).json()
       this.setState({
         comments: comments
       })
@@ -198,14 +173,10 @@ class UserEditor extends Component {
   }
   plugins = () => {
 
-    let plugins = [ProjectTextComment({
-      onMouseEnter: this.onCommentHoverIn,
-      onMouseLeave: this.onCommentHoverOut,
+    let plugins = []
+    if (this.props.withComments) plugins.push(ProjectTextComment({
       onClick: this.fetchComments,
-      count: this.state.commentsIds.length,
-      top: this.state.top,
-      left: this.state.left,
-    })]
+    }))
     if (this.props.authContext.isAuthor) plugins.push(ProjectTextEdit())
     return plugins
   }
@@ -221,7 +192,7 @@ class UserEditor extends Component {
           <CommentsGrid comments={this.state.comments} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
-        <div ref={this.myEditor} onMouseMove={this.updateMousePosition}>
+        <div ref={this.myEditor}>
           <Editor
             plugins={this.plugins()}
             className='editor'
