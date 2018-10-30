@@ -171,19 +171,14 @@ class UserEditor extends Component {
         return next()
     }
   }
-  plugins = () => {
-
+  
+  render () {
+    if (!this.state.value) return null
     let plugins = []
     if (this.props.withComments) plugins.push(ProjectTextComment({
       onClick: this.fetchComments,
     }))
     if (this.props.authContext.isAuthor) plugins.push(ProjectTextEdit())
-    return plugins
-  }
-
-  render () {
-    if (!this.state.value) return null
-    
     
 
     return (
@@ -194,7 +189,7 @@ class UserEditor extends Component {
         <EditorTitle>Artículos de la propuesta</EditorTitle>
         <div ref={this.myEditor}>
           <Editor
-            plugins={this.plugins()}
+            plugins={plugins}
             className='editor'
             schema={this.schema}
             value={this.state.value}
