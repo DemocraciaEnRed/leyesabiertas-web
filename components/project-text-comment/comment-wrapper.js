@@ -13,7 +13,7 @@ export default class CommentCounterWrapper extends Component {
     }
   
     handeOnClick = (e) => {
-      if (this.state.ids > 0) this.props.onClick(this.state.ids)
+      if (this.state.ids.length > 0) this.props.onClick(this.state.ids)
     }
   
     updateMousePosition = (e) => {
