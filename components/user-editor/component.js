@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Editor, findDOMRange } from 'slate-react'
 import { Value, KeyUtils, Range, Change, Mark } from 'slate'
@@ -8,14 +8,10 @@ import WithUserContext from '../with-user-context/component'
 import CommentsGrid from '../comments-grid/component'
 import EditorTitle from '../../elements/editor-title/component'
 import TitleMark from '../../elements/title-mark/component'
-import CommentMark from '../../elements/comment-mark/component'
-import CommentCounter from '../../elements/comment-counter/component'
 import HighlightMark from '../../elements/highlight-mark/component'
-import AddComment from '../../elements/add-comment/component'
-import CommentForm from '../../components/comment-form/component'
 import ProjectTextEdit from '../../components/project-text-edit'
 import ProjectTextComment from '../../components/project-text-comment'
-import UserContext from '../../components/user-context/component'
+import ProjectTextCreateComment from '../../components/project-text-create-comment'
 
 const API_URL = process.env.API_URL
 
@@ -41,13 +37,8 @@ class UserEditor extends Component {
     this.state = {
       value: null,
       selection: null,
-      showAddComment: false,
-      showCommentForm: true,
-      top: null,
-      left: null,
       commentsIds: []
     }
-    this.myEditor = createRef()
   }
 
   schema = {
@@ -72,57 +63,12 @@ class UserEditor extends Component {
     }
   }
 
-  onSelect = (e) => {
-    if (!this.props.authContext.authenticated) return false
-    const rect = getVisibleSelectionRect()
-    if (!rect) return false
-    if (rect.width === 0 && this.state.showAddComment) {
-      this.setState({ showAddComment: false })
-    }
-    if (rect && rect.width > 0 && !this.state.showToolbar) {
-      const containerBound = this.myEditor.current.getBoundingClientRect()
-      const {
-        left: containerBoundLeft,
-        top: containerBoundTop
-      } = containerBound
-      const left =
-        rect.left +
-        rect.width / 2 -
-        containerBoundLeft -
-        150 / 2
-      const top =
-        rect.top -
-        containerBoundTop -
-        30
-      this.setState({
-        showAddComment: true,
-        left: left,
-        top: top
-      })
-    }
-  }
-
-  handleHighlight = (e) => {
-    e.preventDefault()
-    const { value } = this.state
-    const change = value.change().toggleMark('highlight')
-    this.setState({
-      showCommentForm: true,
-      comments: null,
-      selection: value.selection.toJSON(),
-      value: value
-    })
-  }
 
   onChange = async ({ value }) => {
     this.setState({
       value: value
     })
   }
-
-
-
-
 
   fetchComments = async (ids) => {
     try {
@@ -135,32 +81,6 @@ class UserEditor extends Component {
     }
   }
 
-  showForm = (e) => {
-    e.preventDefault()
-    this.setState({
-      showCommentForm: true
-    })
-  }
-
-  setCommentId = (id) => {
-    this.setState({
-      showCommentForm: false
-    })
-    const { value, selection } = this.state
-    const range = Range.fromJSON(selection).toJSON()
-    const mark = Mark.create({
-      data: {
-        'data-id': id
-      },
-      'type': 'comment'
-    })
-    const change = value
-      .change()
-      .select(range)
-      .toggleMark({ type: 'highlight' })
-      .addMark(mark)
-    this.handleChange(change)
-  }
 
   renderMark = (props, editor, next) => {
     switch (props.mark.type) {
@@ -172,30 +92,24 @@ class UserEditor extends Component {
         return next()
     }
   }
+
+  resetEditor = () => {
+    this.setState({
+      value: Value.fromJSON(this.props.value)
+    })
+  }
   
   render () {
     if (!this.state.value) return null
     let plugins = []
-    if (this.props.withComments) plugins.push(ProjectTextComment({
-      onClick: this.fetchComments,
-    }))
+    if (this.props.authContext.autenticated) plugins.push(ProjectTextCreateComment({ reset: this.resetEditor }))
+    if (this.props.withComments) plugins.push(ProjectTextComment({ onClick: this.fetchComments }))
     if (this.props.authContext.isAuthor) plugins.push(ProjectTextEdit())
-    
 
     return (
       <StyledEditorWrapper>
         {this.props.withComments && this.state.comments && this.state.comments.length > 0 &&
           <CommentsGrid comments={this.state.comments} />
-        }
-        {this.state.showAddComment &&
-          <AddComment
-            onClick={this.handleHighlight}
-            top={this.state.top}
-            left={this.state.left} />
-        }
-        {this.state.showCommentForm &&
-        <CommentForm id={this.props.id} top={10}
-          left={this.state.left} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
         <div ref={this.myEditor}>
@@ -206,8 +120,7 @@ class UserEditor extends Component {
             value={this.state.value}
             onChange={this.onChange}
             spellCheck={false}
-            renderMark={this.renderMark}
-            onSelect={this.onSelect} />
+            renderMark={this.renderMark} />
         </div>
       </StyledEditorWrapper>
     )
