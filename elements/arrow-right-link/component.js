@@ -18,9 +18,9 @@ const StyledP = styled.p`
   cursor:pointer;
 `
 const ArrowRightlink = () => (
-  <Link href={'/'}>
+  <Link href={'/info?section=sobre-la-plataforma'}>
     <StyledArrowLink>
-      <StyledP>Conocé más</StyledP>
+      <StyledP>Conozca más</StyledP>
       <ArrowRight />
     </StyledArrowLink>
 
