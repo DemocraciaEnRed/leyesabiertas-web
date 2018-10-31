@@ -20,6 +20,7 @@ const StyledCommentCard = styled.div`
   }
 `
 const StyledIconWrapper = styled.div`
+  display:none;
   margin-top: 11px;
   color: ${(props) => props.liked ? '#ef885d' : '#5c97bc'};
   cursor: pointer;

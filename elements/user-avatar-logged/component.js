@@ -41,7 +41,7 @@ const UserAvatar = ({ avatarImg, name, charge }) => (
     <Avatar avatarImg={avatarImg} />
     <TextWrapper>
       <Name>{name} </Name>
-      <Charge>abogado</Charge>
+      <Charge></Charge>
     </TextWrapper>
   </Wrapper>
 )
