@@ -3,7 +3,9 @@ import fetch from 'isomorphic-unfetch'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import CommentItem from '../../elements/comment-item/component'
+import FundationCommentForm from '../fundation-comment-form/component'
 import FundationAlertLogin from '../fundation-alert-login/component'
+import WithUserContext from '../with-user-context/component'
 
 const API_URL = process.env.API_URL
 
@@ -35,6 +37,8 @@ class ProjectComments extends Component {
     comments: null
   }
   async componentDidMount () {
+    console.log(this.props.authContext.register)
+    console.log(this.props.authContext.authenticated)
     try {
       const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`)).json()
       this.setState({
@@ -45,6 +49,7 @@ class ProjectComments extends Component {
     }
   }
   render () {
+    const { authContext } = this.props
     const { comments } = this.state
     return (
       <StyledProjectComments>
@@ -52,10 +57,14 @@ class ProjectComments extends Component {
         { comments && comments.map((comment) => (
           <CommentItem comment={comment} key={comment._id} />
         ))}
-        <FundationAlertLogin />
+        {authContext.authenticated
+          ? <FundationCommentForm />
+          : <FundationAlertLogin />
+        }
+        
       </StyledProjectComments>
     )
   }
 }
 
-export default ProjectComments
+export default WithUserContext(ProjectComments)
