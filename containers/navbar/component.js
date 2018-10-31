@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import WithUserContext from '../../components/with-user-context/component'
+import BetaLabel from '../../elements/beta-label/component'
 import NavbarLogo from '../../elements/navbar-logo/component'
 import UserBar from '../../components/user-bar/component'
 import LoggedUserBar from '../../components/logged-user-bar/component'
@@ -37,6 +38,7 @@ render () {
   if (!this.props.authContext) return null
   return (
     <StyledNav>
+      <BetaLabel>Versión beta</BetaLabel>
       <NavbarLogo />
       {this.props.authContext.authenticated
         ? (
