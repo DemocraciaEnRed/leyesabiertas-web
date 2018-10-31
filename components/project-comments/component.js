@@ -3,7 +3,7 @@ import fetch from 'isomorphic-unfetch'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import CommentItem from '../../elements/comment-item/component'
-import FundationCommentForm from '../fundation-comment-form/component'
+import FundationAlertLogin from '../fundation-alert-login/component'
 
 const API_URL = process.env.API_URL
 
@@ -52,7 +52,7 @@ class ProjectComments extends Component {
         { comments && comments.map((comment) => (
           <CommentItem comment={comment} key={comment._id} />
         ))}
-        <FundationCommentForm />
+        <FundationAlertLogin />
       </StyledProjectComments>
     )
   }
