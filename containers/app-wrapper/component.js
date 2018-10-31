@@ -37,10 +37,12 @@ export default class extends Component {
     try {
       const authenticated = await keycloak.init({ onLoad: 'check-sso' })
       const isAuthor = authenticated ? await keycloak.hasRealmRole('accountable') : false
+      const profile = authenticated && await keycloak.loadUserInfo()
       this.setState({
         keycloak: keycloak,
         authenticated: authenticated,
         isAuthor: isAuthor,
+        profile: profile,
         login: keycloak.login,
         register: keycloak.register,
         logout: keycloak.logout

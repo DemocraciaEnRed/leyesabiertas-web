@@ -13,31 +13,14 @@ const StyledLoggedUser = styled.div`
   cursor: pointer;
 `
 
-class LoggedUser extends Component {
-  state = {
-    user: null
-  }
-
-  async componentDidMount () {
-    try {
-      const userInfo = await this.props.authContext.keycloak.loadUserInfo()
-      this.setState({
-        user: userInfo
-      })
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
-  render () {
-    return (
-      <StyledLoggedUser onClick={this.props.onClick}>
-        { this.state.user &&
-          <UserAvatar isArrow name={this.state.user.name} avatarImg={'https://robohash.org/63.143.42.242.png'} party={'abogado'} />
-        }
-      </StyledLoggedUser>
-    )
-  }
-}
+const LoggedUser = (props) => (
+  <StyledLoggedUser onClick={props.onClick}>
+    <UserAvatar
+      isArrow
+      name={props.authContext.profile.name}
+      avatarImg={'https://robohash.org/63.143.42.242.png'}
+      party={'abogado'} />
+  </StyledLoggedUser>
+)
 
 export default WithUserContext(LoggedUser)
