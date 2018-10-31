@@ -18,8 +18,8 @@ const LoggedUser = (props) => (
     <UserAvatar
       isArrow
       name={props.authContext.profile.name}
-      avatarImg={'https://robohash.org/63.143.42.242.png'}
-      party={'abogado'} />
+      avatarImg={'/static/assets/userdefault.png'}
+      party={''} />
   </StyledLoggedUser>
 )
 
