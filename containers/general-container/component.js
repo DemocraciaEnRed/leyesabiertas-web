@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 import NavBar from '../navbar/component'
 import Footer from '../footer/component'
 import UserContext from '../../components/user-context/component'
+import SecondaryNavbar from '../../containers/secondary-navbar/component'
 import UserProjectContainer from '../user-project-container/component'
+import SecondaryFooter from '../../containers/secondary-footer/component'
 
 const API_URL = process.env.API_URL
 
@@ -26,7 +28,9 @@ class GeneralContainer extends Component {
     return (
       <Fragment>
         <NavBar />
-          <UserProjectContainer project={this.state.project} section={this.props.path} />
+        <SecondaryNavbar />
+        <UserProjectContainer project={this.state.project} section={this.props.path} />
+        <SecondaryFooter />
         <Footer />
       </Fragment>
     )

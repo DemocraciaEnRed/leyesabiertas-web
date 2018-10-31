@@ -7,6 +7,7 @@ const StyledImg = styled.div`
   width: 500px;
   background-color: #5c97bc;
   background-image:  url('${(props) => props.img}');
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;  
   box-sizing: border-box;

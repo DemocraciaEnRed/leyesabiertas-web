@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import WithUserContext from '../../components/with-user-context/component'
@@ -39,7 +40,9 @@ const Participate = (props) => {
           <ParticipateP text={'Comparta y siga resultados para que más ciudadanos se involucren.'} />
         </ParticipateItem>
       </ParticipateContainer>
-      <Button primary onClick={props.authContext.register}>Registrate y participá</Button>
+      <Link href='/info?section=como-participar'>
+        <Button primary>Conozca más</Button>
+      </Link>
     </StyledParticipateSection>
   )
 }

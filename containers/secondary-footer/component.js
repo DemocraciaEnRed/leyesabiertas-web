@@ -19,10 +19,10 @@ const FooterWrapper = styled.footer`
 const Footer = () => (
   <FooterWrapper>
     <FooterBar>
-      <Link href='/'><a>Proyectos</a></Link>
-      <Link href='/'><a>La Propuesta</a></Link>
-      <Link href='/'><a>Preguntas Frecuentes</a></Link>
-      <Link href='/'><a>Términos y condiciones</a></Link>
+      <Link href='/#projects'><a>Proyectos</a></Link>
+      <Link href='/info?section=sobre-la-plataforma'><a>La Propuesta</a></Link>
+      <Link href='/info?section=faq'><a>Preguntas Frecuentes</a></Link>
+      <Link href='/info?section=terminos-y-condiciones'><a>Términos y condiciones</a></Link>
     </FooterBar>
     <SocialBar>
       <SocialIcon

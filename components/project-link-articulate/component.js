@@ -20,8 +20,7 @@ const StyledButton = styled.button`
   flex-wrap:nowrap;
   align-items:center;
   justify-content:space-around;
-
-  
+  border: none;
 `
 
 const styledButton = (props) => (
