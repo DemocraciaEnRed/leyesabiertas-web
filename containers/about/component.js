@@ -20,10 +20,11 @@ const StyledAbout = styled.div`
 
 const About = () => (
   <StyledAbout id='about'>
-    <AboutImg img={'https://www.ncn.com.ar/wp-content/uploads/2017/12/diputados-prevision1.jpg'} />
+    <AboutImg img={'/static/assets/diputados-asset.jpg'} />
     <AboutText>
       <AboutH2>Acerca de la propuesta</AboutH2>
-      <AboutP>Co-legis es una plataforma de creación colaborativa de normas. En esta, los diputados asumen un compromiso con la ciudadanía de ponerse a disposición para incorporar puntos de vista y comentarios que se hagan en proyectos de ley a ser presentado en la cámara.</AboutP>
+      <AboutP>Elaboración colaborativa de propuestas de ley es una plataforma de co-creación de leyes. En esta, los diputados asumen el compromiso con la ciudadanía de ponerse a disposición para debatir puntos de vista y comentarios que se hagan en sus propuestas de ley antes de ser presentadas en la cámara. 
+      </AboutP>
       <ArrowRightLink />
     </AboutText>
   </StyledAbout>
