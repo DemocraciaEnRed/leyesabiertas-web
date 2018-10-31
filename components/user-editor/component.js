@@ -112,8 +112,11 @@ class UserEditor extends Component {
     if (!this.state.value) return null
     let plugins = []
     if (this.props.withComments) plugins.push(ProjectTextComment({ onClick: this.fetchComments }))
-    if (this.props.isAuthor) plugins.push(ProjectTextEdit())
-    if (this.props.authContext.authenticated) plugins.push(ProjectTextCreateComment({ reset: this.resetEditor }))
+    if (this.props.isAuthor) {
+      plugins.push(ProjectTextEdit())
+    } else if (this.props.authContext.authenticated) {
+      plugins.push(ProjectTextCreateComment({ reset: this.resetEditor }))
+    }
     return (
       <StyledEditorWrapper>
         {this.props.withComments && this.state.comments && this.state.comments.length > 0 &&
