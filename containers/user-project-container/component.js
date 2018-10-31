@@ -48,6 +48,7 @@ export default class extends Component {
             </ModeBar>
             <UserEditor
               value={project.document.content.fields.articles}
+              isAuthor={project.document.isAuthor}
               withComments={withComments}
               id={project.document._id} />
           </Fragment>

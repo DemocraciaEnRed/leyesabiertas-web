@@ -64,10 +64,19 @@ class UserEditor extends Component {
   }
 
 
-  onChange = async ({ value }) => {
-    this.setState({
-      value: value
-    })
+  onChange = async (change) => {
+    if (this.props.isAuthor) {
+      return this.setState({
+        value: change.value
+      })
+    }
+
+    const changesTypes = change.operations.map(o => o.type).filter(o => o !== 'add_mark').count()
+    if (changesTypes === 0) {
+      this.setState({
+        value: change.value
+      })
+    }
   }
 
   fetchComments = async (ids) => {
@@ -103,7 +112,7 @@ class UserEditor extends Component {
     if (!this.state.value) return null
     let plugins = []
     if (this.props.withComments) plugins.push(ProjectTextComment({ onClick: this.fetchComments }))
-    if (this.props.authContext.isAuthor) plugins.push(ProjectTextEdit())
+    if (this.props.isAuthor) plugins.push(ProjectTextEdit())
     if (this.props.authContext.authenticated) plugins.push(ProjectTextCreateComment({ reset: this.resetEditor }))
     return (
       <StyledEditorWrapper>

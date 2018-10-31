@@ -14,11 +14,10 @@ export default class AddCommentWrapper extends Component {
       showCommentForm: false
     }
     this.editor = createRef()
-    this.highlight = null
   }
 
   handleClick = () => {
-    this.props.editor.toggleMark('highlight')
+    this.props.editor.addMark('highlight')
     this.setState({ showCommentForm: true })
   }
 
