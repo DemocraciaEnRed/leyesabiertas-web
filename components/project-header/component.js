@@ -21,7 +21,8 @@ const ProjectHeaderContainer = styled.div`
 `
 const TopBarWrapper = styled.div`
   display: flex;
-  width:80%;
+  width:74%;
+  height:60px;
   flex-direction:row;
   justify-content:space-between;
   `
