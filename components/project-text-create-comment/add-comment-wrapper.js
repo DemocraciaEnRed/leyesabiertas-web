@@ -70,6 +70,7 @@ export default class AddCommentWrapper extends Component {
         {
           this.state.showCommentForm &&
             <CommentForm
+              editor={this.props.editor}
               id={this.props.id}
               top={this.state.top} />
         }

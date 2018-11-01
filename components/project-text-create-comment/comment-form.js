@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import fetch from 'isomorphic-unfetch'
+import { Mark } from 'slate'
 import WithUserContext from '../../components/with-user-context/component'
 import UserAvatarLogged from '../../elements/user-avatar-logged/component'
 
@@ -103,12 +104,29 @@ class CommentForm extends Component {
     })
       .then((res) => {
         if (res.status === 200) {
-          console.log('paso post')
+          this.setCommentId(this.props.id)
         }
       })
       .catch((err) => {
         console.log(err)
       })
+  }
+
+  setCommentId = (id) => {
+    this.setState({
+      showCommentForm: false
+    })
+    const mark = Mark.create({
+      data: {
+        'data-id': id
+      },
+      'type': 'comment'
+    })
+    const value = this.props.editor
+      .select(this.range)
+      .toggleMark({ type: 'highlight' })
+      .addMark(mark)
+      .value
   }
 
   render () {
