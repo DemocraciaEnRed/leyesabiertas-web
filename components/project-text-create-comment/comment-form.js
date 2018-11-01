@@ -86,14 +86,15 @@ class CommentForm extends Component {
   }
 
   handleChange (event) {
-    this.props.editor.addMark('highlight')
     this.setState({ value: event.target.value })
   }
 
-  handleSubmit (event) {
+  handleSubmit = (event) => {
     event.preventDefault()
-    console.log('Envia comentario ' + this.state.value)
-    fetch(`/api/v1/documents/5bb7bab09a5ac91dffa9e884/comments`, {
+    fetch(`/api/v1/documents/${this.props.id}/articles/comments`, {
+      headers: {
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`
+      },
       method: 'POST',
       body: {
         'field': 'articles',

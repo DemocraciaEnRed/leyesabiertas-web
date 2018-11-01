@@ -2,6 +2,7 @@ import React, { Component, Fragment, createRef } from 'react'
 import AddComment from './add-comment'
 import CommentForm from './comment-form'
 import { getVisibleSelectionRect } from 'get-selection-range'
+import { Range } from 'slate'
 import { thumbsUp } from 'react-icons-kit/feather/thumbsUp';
 
 export default class AddCommentWrapper extends Component {
@@ -14,10 +15,12 @@ export default class AddCommentWrapper extends Component {
       showCommentForm: false
     }
     this.editor = createRef()
+    this.range = null
   }
 
   handleClick = () => {
-    this.props.editor.addMark('highlight')
+    this.props.editor.toggleMark('highlight')
+    this.range = Range.fromJSON(this.props.editor.value.selection).toJSON()
     this.setState({ showCommentForm: true })
   }
 
@@ -25,8 +28,10 @@ export default class AddCommentWrapper extends Component {
     const rect = getVisibleSelectionRect()
     if (!rect) return false
     if (rect.width === 0 && this.state.showAddComment) {
-      this.props.reset()
-      this.setState({ showAddComment: false, showCommentForm: false })
+      this.setState(({ showAddComment, showCommentForm }) => {
+        if (showCommentForm) this.props.editor.select(this.range).toggleMark('highlight').deselect()
+        return { showAddComment: false, showCommentForm: false }
+      })
     }
     if (rect && rect.width > 0 && !this.state.showToolbar) {
       const containerBound = this.editor.current.getBoundingClientRect()
@@ -65,6 +70,7 @@ export default class AddCommentWrapper extends Component {
         {
           this.state.showCommentForm &&
             <CommentForm
+              id={this.props.id}
               top={this.state.top} />
         }
 
