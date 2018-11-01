@@ -71,15 +71,12 @@ class UserEditor extends Component {
     }
 
     const changesTypes = change.operations
-      .map(o => {
-        console.log(o.type)
-        return o.type
-      })
+      .map(o => o.type)
       .filter(o => o !== 'add_mark')
       .filter(o => o !== 'remove_mark')
       .filter(o => o !== 'set_selection')
       .count()
-      console.log(changesTypes)
+
     if (changesTypes === 0) {
       this.setState({
         value: change.value
