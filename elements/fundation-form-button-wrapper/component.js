@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 const FundationFormButtonWrapper = styled.div`
-  padding: 23px 240px;
+  padding: 23px 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 `
 
 export default FundationFormButtonWrapper

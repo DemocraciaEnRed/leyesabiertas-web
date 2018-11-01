@@ -1,14 +1,16 @@
 import React from 'react'
+import WithUserContext from '../with-user-context/component'
 import FundationFormAlert from '../../elements/fundation-form-alert/component'
 import CommentIcon from '../../elements/comment-icon/component'
 
-const FundationAlertLogin = ({ registerUrl }) => (
+const FundationAlertLogin = (props) => (
   <FundationFormAlert>
     <CommentIcon />
     <p>
-      Para agregar aportes debe estár registrado. Puede crear su cuenta haciendo <a href={registerUrl}>click aquí </a>
+      Para agregar aportes debe estár registrado. Puede crear su cuenta haciendo <a>click aquí </a>
     </p>
   </FundationFormAlert>
 )
 
-export default FundationAlertLogin
+export default WithUserContext(FundationAlertLogin)
+

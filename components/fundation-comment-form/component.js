@@ -4,7 +4,7 @@ import FundationFormTitle from '../../elements/fundation-form-title/component'
 import FundationFormLabel from '../../elements/fundation-form-label/component'
 import FundationFormTextarea from '../../elements/fundation-form-textarea/component'
 import FundationFormButtonWrapper from '../../elements/fundation-form-button-wrapper/component'
-import Button from '../../elements/button/component'
+import SubmitInput from '../../elements/submit-input/component'
 
 export default class extends Component {
   state = {
@@ -17,9 +17,14 @@ export default class extends Component {
     })
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault()
+    this.props.handleSubmit(this.state.comment)
+  }
+
   render () {
     return (
-      <FundationForm>
+      <FundationForm onSubmit={this.handleSubmit}>
         <FundationFormTitle>
           Complete el formulario para enviar su opinión
         </FundationFormTitle>
@@ -30,8 +35,7 @@ export default class extends Component {
             onChange={this.handleChange} />
         </FundationFormLabel>
         <FundationFormButtonWrapper>
-          <Button withBorder>Cancelar</Button>
-          <Button primary>Agregar opinión</Button>
+          <SubmitInput type='submit' value='Enviar opinión' />
         </FundationFormButtonWrapper>
       </FundationForm>
     )
