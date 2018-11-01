@@ -38,7 +38,7 @@ render () {
   if (!this.props.authContext) return null
   return (
     <StyledNav>
-      <BetaLabel>Versión beta</BetaLabel>
+      <BetaLabel />
       <NavbarLogo />
       {this.props.authContext.authenticated
         ? (

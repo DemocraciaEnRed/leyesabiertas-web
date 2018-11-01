@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import React from 'react'
 
-const BetaLabel = styled.span`
+const Label = styled.span`
   width: 95px;
   height: 20px;
   border-radius: 4px;
@@ -13,5 +14,17 @@ const BetaLabel = styled.span`
   align-self: flex-end;
   margin-bottom: 8px;
 `
+
+const BetaLabelContainer = styled.div`
+  width:33%;
+  display:flex;
+  align-items:flex-end;
+  `
+
+const BetaLabel = () => (
+  <BetaLabelContainer>
+    <Label>Versión beta</Label>
+  </BetaLabelContainer>
+)
 
 export default BetaLabel
