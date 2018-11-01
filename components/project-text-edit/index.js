@@ -1,10 +1,10 @@
 /* eslint react/prop-types: 0 */
 
 import React, { Fragment } from 'react'
-import Toolbar from './toolbar'
 import { renderMark, renderNode } from './renders'
+import EditModeWrapper from './edit-mode-wrapper'
 
-export default () => ({
+export default ({ selectedCommentsIds }) => ({
   renderNode,
   renderMark,
   renderEditor: (props, editor, next) => {
@@ -13,10 +13,11 @@ export default () => ({
     const children = next()
 
     return (
-      <Fragment>
-        <Toolbar editor={editor} />
+      <EditModeWrapper
+        editor={editor}
+        selectedCommentsIds={selectedCommentsIds}>
         {children}
-      </Fragment>
+      </EditModeWrapper>
     )
   }
 })

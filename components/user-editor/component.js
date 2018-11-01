@@ -36,7 +36,8 @@ class UserEditor extends Component {
     this.state = {
       value: null,
       selection: null,
-      commentsIds: []
+      commentsIds: [],
+      selectedCommentsIds: []
     }
   }
 
@@ -105,19 +106,33 @@ class UserEditor extends Component {
     }
   }
 
+  toggleSelectedComment = (id) => {
+    console.log('toggleSelectedComment', id)
+    this.setState(({ selectedCommentsIds }) => {
+      if (selectedCommentsIds.includes(id)) {
+        const _ids = ids.concat([id])
+      } else {
+        const _ids = ids.filter(_id => _id !== id)
+      }
+      return { selectedCommentsIds: _ids }
+    })
+  }
+
   render () {
     if (!this.state.value) return null
     let plugins = []
     if (this.props.withComments) plugins.push(ProjectTextComment({ onClick: this.fetchComments }))
     if (this.props.isAuthor) {
-      plugins.push(ProjectTextEdit())
+      plugins.push(ProjectTextEdit({selectedCommentsIds: this.state.selectedCommentsIds}))
     } else if (this.props.authContext.authenticated) {
       plugins.push(ProjectTextCreateComment({ id: this.props.id }))
     }
     return (
       <StyledEditorWrapper>
         {this.props.withComments && this.state.comments && this.state.comments.length > 0 &&
-          <CommentsGrid comments={this.state.comments} />
+          <CommentsGrid
+            comments={this.state.comments}
+            toggleSelectedComment={this.toggleSelectedComment} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
         <div ref={this.myEditor}>
