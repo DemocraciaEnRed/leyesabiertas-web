@@ -44,7 +44,7 @@ class ArticlesContainer extends Component {
   render () {
     const {
       project,
-      isAuthor,
+      // isAuthor,
       isLoggedIn,
       editionMode,
       withComments
@@ -53,7 +53,7 @@ class ArticlesContainer extends Component {
     return (
       <ArticlesContext.Provider value={{
         project: project.document,
-        isAuthor: isAuthor,
+        isAuthor: project.isAuthor,
         isLoggedIn: isLoggedIn,
         editionMode: editionMode,
         withComments: withComments,
@@ -66,7 +66,7 @@ class ArticlesContainer extends Component {
           <ModeButton withComments >Vista con comentarios</ModeButton>
         </ModeBar>
         <Editor
-          value={project.document.content.fields.articles}
+          value={project.document.currentVersion.content.articles}
           withComments={withComments}
           id={project.document._id} />
       </ArticlesContext.Provider>

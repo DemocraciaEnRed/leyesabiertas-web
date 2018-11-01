@@ -3,7 +3,7 @@ import fetch from 'isomorphic-unfetch'
 import PropTypes from 'prop-types'
 import NavBar from '../navbar/component'
 import Footer from '../footer/component'
-import UserContext from '../../components/user-context/component'
+import WithUserContext from '../../components/with-user-context/component'
 import SecondaryNavbar from '../../containers/secondary-navbar/component'
 import UserProjectContainer from '../user-project-container/component'
 import SecondaryFooter from '../../containers/secondary-footer/component'
@@ -17,7 +17,18 @@ class GeneralContainer extends Component {
 
   async componentDidMount () {
     try {
-      const project = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project}/`)).json()
+      let project = null
+      if (this.props.authContext.keycloak.authenticated) {
+        project = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project}/`, {
+          method: 'get',
+          headers: {
+            'Authorization': 'Bearer ' + this.props.authContext.keycloak.token
+          }
+        }
+        )).json()
+      } else {
+        project = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project}/`)).json()
+      }
       this.setState({ project })
     } catch (err) {
       console.error(err)
@@ -39,7 +50,8 @@ class GeneralContainer extends Component {
 
 GeneralContainer.propTypes = {
   project: PropTypes.string.isRequired,
+  // authContext: PropTypes.object,
   path: PropTypes.string.isRequired
 }
 
-export default GeneralContainer
+export default WithUserContext(GeneralContainer)

@@ -27,20 +27,20 @@ const TopBarWrapper = styled.div`
   `
 
 const ProjectHeader = ({ project }) => (
-  <ProjectHeaderContainer img={project.content.imageCover}>
+  <ProjectHeaderContainer img={project.currentVersion.content.imageCover}>
     <ProjectHeaderWrapper>
       <TopBarWrapper>
         <UserAvatar
           avatarImg={project.author.avatar}
-          name={project.author.fields.name}
+          name={project.author.fullname}
           party={project.author.fields.party} />
         <ProjectVersionData
-          version={project.version}
-          createdAt={project.createdAt} />
+          version={project.currentVersion.version}
+          createdAt={project.currentVersion.createdAt} />
         <ProjectLimitDate
-          limitDate={project.limitDate} />
+          limitDate={project.currentVersion.content.closingDate} />
       </TopBarWrapper>
-      <ProjectTitle>{project.content.title}</ProjectTitle>
+      <ProjectTitle>{project.currentVersion.content.title}</ProjectTitle>
     </ProjectHeaderWrapper>
   </ProjectHeaderContainer>
 )

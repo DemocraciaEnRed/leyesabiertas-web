@@ -48,8 +48,8 @@ class commentCard extends Component {
       <StyledCommentCard>
         <UserAvatar
           avatarImg={this.props.comment.user.avatar}
-          name={this.props.comment.user.fields.name}
-          party={this.props.comment.user.fields.occupation} />
+          name={this.props.comment.user.fullname}
+          party={this.props.comment.user.fields.occupation || ''} />
         <p>{this.props.comment.content}</p>
         <StyledIconWrapper liked={this.state.liked} >
           <Icon icon={thumbsUp} onClick={this.handleClick} />

@@ -24,16 +24,16 @@ cursor: pointer;
 const Card = ({ project }) => (
   <Link href={{ pathname: '/proyecto', query: { id: project._id } }}>
     <CardContainer>
-      { project.content.imageCover &&
-      <CardHeader img={project.content.imageCover} />
+      { project.currentVersion.content.imageCover &&
+      <CardHeader img={project.currentVersion.content.imageCover} />
       }
       <CardContent
-        title={project.content.title}
-        avatarImg={project.author.avatarImg}
-        name={project.author}
-        party={'partido justicialista'} />
-      <CardSocial commentaries={project.commentaries}
-        limitDate={project.limitDate} />
+        title={project.currentVersion.content.title}
+        avatarImg={project.author.avatar}
+        name={project.author.fullname}
+        party={'partido de los apasionados'} />
+      <CardSocial commentaries={'39'}
+        limitDate={project.currentVersion.content.limitDate} />
     </CardContainer>
   </Link>
 )

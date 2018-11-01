@@ -47,7 +47,7 @@ export default class extends Component {
               <ModeButton withComments >Vista con comentarios</ModeButton>
             </ModeBar>
             <UserEditor
-              value={project.document.content.fields.articles}
+              value={project.document.currentVersion.content.articles}
               isAuthor={project.isAuthor}
               withComments={withComments}
               id={project.document._id} />
