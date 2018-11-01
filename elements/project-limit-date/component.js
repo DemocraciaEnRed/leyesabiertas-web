@@ -17,10 +17,14 @@ const StyledDate = styled.p`
   margin-top: 0.4rem;
 `
 
+const formatDate = (createdAt) => {
+  return (createdAt.substring(0, 10).split('-').reverse().join('/'))
+}
+
 const ProjectLimitDate = ({ limitDate }) => (
   <StyledProjectLimitDate>
     <Span>Comentarios habilitados hasta</Span>
-    <StyledDate>{limitDate}</StyledDate>
+    <StyledDate>{formatDate(limitDate)}</StyledDate>
   </StyledProjectLimitDate>
 )
 
