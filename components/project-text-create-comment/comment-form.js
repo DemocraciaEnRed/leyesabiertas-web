@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { consolidateStreamedStyles } from 'styled-components'
 import fetch from 'isomorphic-unfetch'
 import { Mark } from 'slate'
 import WithUserContext from '../../components/with-user-context/component'
@@ -92,6 +92,7 @@ class CommentForm extends Component {
   }
 
   handleSubmit = (event) => {
+    console.log('Saving comment on DB...')
     event.preventDefault()
     fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments`, {
       headers: {
@@ -104,23 +105,25 @@ class CommentForm extends Component {
         content: this.state.value
       })
     })
+      .then((res) => res.json())
       .then((res) => {
-        if (res.status === 200) {
-          this.setCommentId(this.props.id)
-        }
+        console.log(res)
+        console.log('Saved on DB...')
+        this.setCommentId(res)
       })
       .catch((err) => {
         console.log(err)
       })
   }
 
-  setCommentId = (id) => {
+  setCommentId = (savedComment) => {
+    console.log(`Adding ID ${savedComment._id} to mark...`)
     this.setState({
       showCommentForm: false
     })
     const mark = Mark.create({
       data: {
-        'data-id': id
+        'data-id': savedComment._id
       },
       'type': 'comment'
     })
@@ -129,7 +132,26 @@ class CommentForm extends Component {
       .toggleMark({ type: 'highlight' })
       .addMark(mark)
       .value
-    console.log('mandar value', value)
+
+    console.log('Updating document', value)
+    fetch(`${API_URL}/api/v1/documents/${this.props.id}/update/articles`, {
+      headers: {
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT',
+      body: JSON.stringify(value)
+    }).then((res) => {
+      if (!res.ok) {
+        throw new Error('Error!')
+      }
+      window.alert('Exito! Comentario agregado al articulo')
+      console.log('Yay')
+      // location.reload();
+    }).catch((err) => {
+      window.alert('Error al guardar tu comentario, intentá mas tarde')
+      console.log(err)
+    })
   }
 
   render () {
@@ -145,7 +167,7 @@ class CommentForm extends Component {
             value={this.state.value}
             onChange={this.handleChange} />
         </CommentFormContent>
-        <CommentFormFooter onClick={this.handleSubmit}>Enviar comentario </CommentFormFooter>
+        <CommentFormFooter onClick={this.handleSubmit}>Enviar comentario</CommentFormFooter>
 
       </CommentFormContainer>
     )
