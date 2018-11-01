@@ -8,7 +8,6 @@ import WithUserContext from '../with-user-context/component'
 import CommentsGrid from '../comments-grid/component'
 import EditorTitle from '../../elements/editor-title/component'
 import TitleMark from '../../elements/title-mark/component'
-import HighlightMark from '../../elements/highlight-mark/component'
 import ProjectTextEdit from '../../components/project-text-edit'
 import ProjectTextComment from '../../components/project-text-comment'
 import ProjectTextCreateComment from '../../components/project-text-create-comment'
@@ -71,7 +70,16 @@ class UserEditor extends Component {
       })
     }
 
-    const changesTypes = change.operations.map(o => o.type).filter(o => o !== 'add_mark').count()
+    const changesTypes = change.operations
+      .map(o => {
+        console.log(o.type)
+        return o.type
+      })
+      .filter(o => o !== 'add_mark')
+      .filter(o => o !== 'remove_mark')
+      .filter(o => o !== 'set_selection')
+      .count()
+      console.log(changesTypes)
     if (changesTypes === 0) {
       this.setState({
         value: change.value
@@ -95,19 +103,11 @@ class UserEditor extends Component {
     switch (props.mark.type) {
       case 'title':
         return <TitleMark {...props} />
-      case 'highlight':
-        return <HighlightMark {...props} />
       default:
         return next()
     }
   }
 
-  resetEditor = () => {
-    this.setState({
-      value: Value.fromJSON(this.props.value)
-    })
-  }
-  
   render () {
     if (!this.state.value) return null
     let plugins = []
@@ -115,7 +115,7 @@ class UserEditor extends Component {
     if (this.props.isAuthor) {
       plugins.push(ProjectTextEdit())
     } else if (this.props.authContext.authenticated) {
-      plugins.push(ProjectTextCreateComment({ reset: this.resetEditor }))
+      plugins.push(ProjectTextCreateComment({ id: this.props.id }))
     }
     return (
       <StyledEditorWrapper>
