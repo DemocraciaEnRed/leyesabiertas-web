@@ -15,12 +15,15 @@ import ProjectTextCreateComment from '../../components/project-text-create-comme
 const API_URL = process.env.API_URL
 
 const StyledEditorWrapper = styled.div`
-  width: 100%;
-  padding: 0 100px;
+  width: 90%;
+  padding: 0 8%;
   margin-top: 48px;
   position: relative;
   .editor {
-    max-width: 700px;
+    max-width: 74%;
+    @media (max-width: 1024px) {
+    max-width:60%;
+  }
     span {
       font-size: 1.8rem;
       line-height: 1.89;
