@@ -37,8 +37,6 @@ class ProjectComments extends Component {
     comments: null
   }
   async componentDidMount () {
-    console.log(this.props.authContext.register)
-    console.log(this.props.authContext.authenticated)
     try {
       const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`)).json()
       this.setState({
@@ -59,7 +57,7 @@ class ProjectComments extends Component {
         ))}
         {authContext.authenticated
           ? <FundationCommentForm />
-          : <FundationAlertLogin />
+          : <FundationAlertLogin registerUrl={authContext.keycloak.createRegisterUrl()}/>
         }
         
       </StyledProjectComments>
