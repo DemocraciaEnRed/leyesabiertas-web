@@ -39,9 +39,10 @@ class ProjectComments extends Component {
   }
 
   state = {
-    comments: null
+    comments: null,
+    status: null
   }
-  
+
   async componentDidMount () {
     try {
       const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`)).json()
@@ -55,26 +56,57 @@ class ProjectComments extends Component {
 
   handleSubmit = async (comment) => {
     try {
-      const newComment = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments`, {
+      const newComment = await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments`, {
         'method': 'POST',
         'headers': {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + this.props.authContext.keycloak.token,
+          'Authorization': 'Bearer ' + this.props.authContext.keycloak.token
         },
         'body': JSON.stringify({
           'field': 'fundation',
           'content': comment
         })
-      })).json()
-      window.location.reload()
+      })
+      if (!newComment.ok) {
+        this.setSuccessFalse()
+      } else {
+        this.fetchComments()
+      }
+    } catch (err) {
+      console.error(err)
+      this.setSuccessFalse()
+    }
+  }
+
+  fetchComments = async () => {
+    try {
+      const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`)).json()
+      this.setState({
+        comments: results,
+        status: 'success'
+      }, this.turnOffStatus())
     } catch (err) {
       console.error(err)
     }
   }
 
+  setSuccessFalse = () => {
+    this.setState({
+      status: 'error'
+    }, this.turnOffStatus())
+  }
+
+  turnOffStatus = () => {
+    setTimeout(() => {
+      this.setState({
+        status: null
+      })
+    }, 3000)
+  }
+
   render () {
     const { authContext } = this.props
-    const { comments } = this.state
+    const { comments, status } = this.state
     return (
       <StyledProjectComments>
         <StyledTitle>Opiniones generales</StyledTitle>
@@ -82,7 +114,9 @@ class ProjectComments extends Component {
           <CommentItem comment={comment} key={comment._id} />
         ))}
         {authContext.authenticated
-          ? <FundationCommentForm handleSubmit={this.handleSubmit} />
+          ? <FundationCommentForm
+            handleSubmit={this.handleSubmit}
+            status={status} />
           : <FundationAlertLogin />
         }
       </StyledProjectComments>
