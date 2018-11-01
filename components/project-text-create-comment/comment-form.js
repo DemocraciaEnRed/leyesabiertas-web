@@ -92,15 +92,15 @@ class CommentForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    fetch(`/api/v1/documents/${this.props.id}/articles/comments`, {
+    fetch(`/api/v1/documents/${this.props.id}/comments`, {
       headers: {
         Authorization: `Bearer ${this.props.authContext.keycloak.token}`
       },
       method: 'POST',
-      body: {
+      body: JSON.stringify({
         'field': 'articles',
         'content': this.state.value
-      }
+      })
     })
       .then((res) => {
         if (res.status === 200) {
@@ -127,6 +127,7 @@ class CommentForm extends Component {
       .toggleMark({ type: 'highlight' })
       .addMark(mark)
       .value
+    console.log('mandar value', value)
   }
 
   render () {
