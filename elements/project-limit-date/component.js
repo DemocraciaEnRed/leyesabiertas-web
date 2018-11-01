@@ -7,7 +7,7 @@ const StyledProjectLimitDate = styled.div`
   flex-flow: column wrap;
 `
 const Span = styled.span`
-  color:#ef885d;
+  color:#4a5d68;
   font-size:1.6rem;
   font-family:var(--bold);
 `
@@ -23,7 +23,7 @@ const formatDate = (createdAt) => {
 
 const ProjectLimitDate = ({ limitDate }) => (
   <StyledProjectLimitDate>
-    <Span>Comentarios habilitados hasta</Span>
+    <Span>Aportes hasta</Span>
     <StyledDate>{formatDate(limitDate)}</StyledDate>
   </StyledProjectLimitDate>
 )

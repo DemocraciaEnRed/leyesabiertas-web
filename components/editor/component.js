@@ -14,7 +14,7 @@ import AddComment from '../../elements/add-comment/component'
 const API_URL = process.env.API_URL
 
 const StyledEditorWrapper = styled.div`
-  width: 100%;
+  width: 50%;
   padding: 0 100px;
   margin-top: 48px;
   position: relative;

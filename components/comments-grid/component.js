@@ -6,7 +6,7 @@ import CommentCard from '../comment-card/component'
 const StyledCommentsGrid = styled.div`
   position: absolute;
   top: 20px;
-  right: 100px;
+  right: -4%;
   display: flex;
   flex-direction: column;
   width: 300px;

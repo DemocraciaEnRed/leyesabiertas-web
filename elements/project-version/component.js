@@ -6,7 +6,7 @@ const StyledProjectVersion = styled.span`
   font-size: 1.6rem;
   font-family: var(--bold);
   line-height: 1.25;
-  color: #5c97bc;
+  color: #4a5d68;
 `
 
 const ProjectVersion = ({ version }) => (

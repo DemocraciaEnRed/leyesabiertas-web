@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const ProjectHeaderWrapper = styled.div`
   width: 90%;
   min-height: 215px;
-  padding: 3.4rem 3rem 1.5rem 10%;
+  padding: 3.4rem 3% 1.5rem 3%;
   background-color: var(--white);
   display: flex;
   flex-wrap: wrap;
