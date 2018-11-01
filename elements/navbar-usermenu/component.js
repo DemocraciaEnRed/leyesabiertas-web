@@ -9,6 +9,7 @@ text-align:left;
 margin-bottom:2rem;
 `
 const Avatar = styled.div`
+  margin-top:-10px; /* ONLY FOR ALPHA VERSION */
   width: 40px;
   height: 40px;
   border-radius:50%;
@@ -34,6 +35,15 @@ display:flex;
 flex-direction:column;
 justify-content:space-between;
 `
+const Arrow = styled.i`
+  margin:5px 0px 0px 15px;
+  border: solid #4a5d68;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 4px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+`
 
 const UserAvatar = ({ avatarImg, name, party }) => (
   <Wrapper>
@@ -42,6 +52,7 @@ const UserAvatar = ({ avatarImg, name, party }) => (
       <Name>{name} </Name>
       <Party>{party}</Party>
     </TextWrapper>
+    <Arrow />
   </Wrapper>
 )
 

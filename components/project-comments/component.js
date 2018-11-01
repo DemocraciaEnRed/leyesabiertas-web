@@ -1,8 +1,11 @@
 import React, { Component, Fragment } from 'react'
-import fetch from 'isomorphic-unfetch'
 import PropTypes from 'prop-types'
+import fetch from 'isomorphic-unfetch'
 import styled from 'styled-components'
 import CommentItem from '../../elements/comment-item/component'
+import FundationCommentForm from '../fundation-comment-form/component'
+import FundationAlertLogin from '../fundation-alert-login/component'
+import WithUserContext from '../with-user-context/component'
 
 const API_URL = process.env.API_URL
 
@@ -30,9 +33,15 @@ const StyledTitle = styled.div`
   margin:3rem 0;
   `
 class ProjectComments extends Component {
+  static propTypes = {
+    project: PropTypes.object.isRequired,
+    authContext: PropTypes.object.isRequired
+  }
+
   state = {
     comments: null
   }
+  
   async componentDidMount () {
     try {
       const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`)).json()
@@ -43,7 +52,28 @@ class ProjectComments extends Component {
       console.error(err)
     }
   }
+
+  handleSubmit = async (comment) => {
+    try {
+      const newComment = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments`, {
+        'method': 'POST',
+        'headers': {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.props.authContext.keycloak.token,
+        },
+        'body': JSON.stringify({
+          'field': 'fundation',
+          'content': comment
+        })
+      })).json()
+      window.location.reload()
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   render () {
+    const { authContext } = this.props
     const { comments } = this.state
     return (
       <StyledProjectComments>
@@ -51,10 +81,13 @@ class ProjectComments extends Component {
         { comments && comments.map((comment) => (
           <CommentItem comment={comment} key={comment._id} />
         ))}
-        
+        {authContext.authenticated
+          ? <FundationCommentForm handleSubmit={this.handleSubmit} />
+          : <FundationAlertLogin />
+        }
       </StyledProjectComments>
     )
   }
 }
 
-export default ProjectComments
+export default WithUserContext(ProjectComments)

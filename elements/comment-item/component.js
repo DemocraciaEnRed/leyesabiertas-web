@@ -51,10 +51,10 @@ const TextWrapper = styled.div`
 `
 const ProjectComments = ({ comment }) => (
   <StyledCommentItem>
-    <UserAvatar avatarImg={comment.user.avatar} />
+    <UserAvatar avatarImg={comment.user.avatar || '/static/assets/userdefault.png'} />
     <TextWrapper>
-      <Username>{comment.user.fields.name}</Username>
-      <Charge>{comment.user.fields.occupation}</Charge>
+      <Username>{comment.user.fullname}</Username>
+      <Charge>{''}</Charge>
       <Comment>{comment.content}</Comment>
       <Date>{`Hace ${comment.when}`}</Date>
     </TextWrapper>

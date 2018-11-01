@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import WithUserContext from '../with-user-context/component'
-import UserAvatar from '../../elements/user-avatar/component'
+import NavbarUsermenu from '../../elements/navbar-usermenu/component'
 
 const StyledLoggedUser = styled.div`
   height:45px;
@@ -15,8 +15,7 @@ const StyledLoggedUser = styled.div`
 
 const LoggedUser = (props) => (
   <StyledLoggedUser onClick={props.onClick}>
-    <UserAvatar
-      isArrow
+    <NavbarUsermenu
       name={props.authContext.profile.name}
       avatarImg={'/static/assets/userdefault.png'}
       party={''} />

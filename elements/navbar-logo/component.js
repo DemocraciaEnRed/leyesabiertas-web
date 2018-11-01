@@ -4,7 +4,6 @@ import Link from 'next/link'
 
 const StyledLogo = styled.div`
 width:33%;
-margin-left:33%;
 display:flex;
 justify-content:center;
 `
