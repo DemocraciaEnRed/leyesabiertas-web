@@ -109,7 +109,7 @@ class CommentForm extends Component {
       .then((res) => {
         console.log(res)
         console.log('Saved on DB...')
-         this.setCommentId(res)
+        this.setCommentId(res)
       })
       .catch((err) => {
         console.log(err)
@@ -132,6 +132,7 @@ class CommentForm extends Component {
       .toggleMark({ type: 'highlight' })
       .addMark(mark)
       .value
+
     console.log('Updating document', value)
     fetch(`${API_URL}/api/v1/documents/${this.props.id}/update/articles`, {
       headers: {
@@ -141,11 +142,14 @@ class CommentForm extends Component {
       method: 'PUT',
       body: JSON.stringify(value)
     }).then((res) => {
-      window.alert('Success!!!')
+      if (!res.ok) {
+        throw new Error('Error!')
+      }
+      window.alert('Exito! Comentario agregado al articulo')
       console.log('Yay')
       // location.reload();
     }).catch((err) => {
-      window.alert('Error!!!')
+      window.alert('Error al guardar tu comentario, intentá mas tarde')
       console.log(err)
     })
   }
