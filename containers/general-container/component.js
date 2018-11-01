@@ -18,7 +18,7 @@ class GeneralContainer extends Component {
   async componentDidMount () {
     try {
       let project = null
-      if (this.props.authContext.keycloak.authenticated) {
+      if (this.props.authContext.authenticated) {
         project = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project}/`, {
           method: 'get',
           headers: {
