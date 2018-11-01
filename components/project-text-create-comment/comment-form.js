@@ -5,6 +5,7 @@ import fetch from 'isomorphic-unfetch'
 import { Mark } from 'slate'
 import WithUserContext from '../../components/with-user-context/component'
 import UserAvatarLogged from '../../elements/user-avatar-logged/component'
+const API_URL = process.env.API_URL
 
 const CommentFormContainer = styled.form`
   width: 300px;
@@ -92,14 +93,15 @@ class CommentForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    fetch(`/api/v1/documents/${this.props.id}/comments`, {
+    fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments`, {
       headers: {
-        Authorization: `Bearer ${this.props.authContext.keycloak.token}`
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
+        'Content-Type': 'application/json'
       },
       method: 'POST',
       body: JSON.stringify({
-        'field': 'articles',
-        'content': this.state.value
+        field: 'articles',
+        content: this.state.value
       })
     })
       .then((res) => {
