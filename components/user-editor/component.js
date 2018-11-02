@@ -39,8 +39,7 @@ class UserEditor extends Component {
     this.state = {
       value: null,
       selection: null,
-      commentsIds: [],
-      selectedCommentsIds: []
+      commentsIds: []
     }
   }
 
@@ -75,17 +74,19 @@ class UserEditor extends Component {
     }
 
     const changesTypes = change.operations
+      // .map(o => {
+      //   console.log(o.type)
+      //   return o
+      // })
       .map(o => o.type)
       .filter(o => o !== 'add_mark')
       .filter(o => o !== 'remove_mark')
       .filter(o => o !== 'set_selection')
       .count()
 
-    if (changesTypes === 0) {
-      this.setState({
-        value: change.value
-      })
-    }
+    this.setState({
+      value: changesTypes === 0 ? change.value : this.state.value
+    })
   }
 
   fetchComments = async (ids) => {
@@ -99,7 +100,6 @@ class UserEditor extends Component {
     }
   }
 
-
   renderMark = (props, editor, next) => {
     switch (props.mark.type) {
       case 'title':
@@ -109,33 +109,19 @@ class UserEditor extends Component {
     }
   }
 
-  toggleSelectedComment = (id) => {
-    console.log('toggleSelectedComment', id)
-    this.setState(({ selectedCommentsIds }) => {
-      if (selectedCommentsIds.includes(id)) {
-        const _ids = ids.concat([id])
-      } else {
-        const _ids = ids.filter(_id => _id !== id)
-      }
-      return { selectedCommentsIds: _ids }
-    })
-  }
-
   render () {
     if (!this.state.value) return null
     let plugins = []
     if (this.props.withComments) plugins.push(ProjectTextComment({ onClick: this.fetchComments }))
     if (this.props.isAuthor) {
-      plugins.push(ProjectTextEdit({selectedCommentsIds: this.state.selectedCommentsIds}))
+      plugins.push(ProjectTextEdit({ id: this.props.id }))
     } else if (this.props.authContext.authenticated) {
       plugins.push(ProjectTextCreateComment({ id: this.props.id }))
     }
     return (
       <StyledEditorWrapper>
         {this.props.withComments && this.state.comments && this.state.comments.length > 0 &&
-          <CommentsGrid
-            comments={this.state.comments}
-            toggleSelectedComment={this.toggleSelectedComment} />
+          <CommentsGrid comments={this.state.comments}/>
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
         <div ref={this.myEditor}>

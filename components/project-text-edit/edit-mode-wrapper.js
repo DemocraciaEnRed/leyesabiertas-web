@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import styled from 'styled-components'
 import Toolbar from './toolbar'
+import { ArticlesContext } from '../../containers/user-project-container/component'	
+import WithUserContext from '../with-user-context/component'
 
 const API_URL = process.env.API_URL
 
@@ -16,30 +18,28 @@ const StyledButton = styled.button`
   float: right;
 `
 
-export default class AddCommentWrapper extends Component {
+class AddCommentWrapper extends Component {
   constructor (props) {
     super(props)
     this.state = {}
   }
 
-  saveValue = async () => {
-    const value = this.props.editor.value.toJson()
-    console.log('guardar', this.props.selectedCommentsIds, value, )
+  saveValue = (ids) => async () => {
+    const value = this.props.editor.value.toJSON()
     try {
-      const newComment = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/update/articles`, {
+      const saveRequest = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/update/articles`, {
         'method': 'PUT',
         'headers': {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + this.props.authContext.keycloak.token,
         },
         'body': JSON.stringify({
-          contributions: comments,
+          contributions: ids,
           content: {
             articles: value
           }
        })
       })).json()
-      console.log('articulos guardados')
     } catch (err) {
       console.error(err)
     }
@@ -50,10 +50,17 @@ export default class AddCommentWrapper extends Component {
       <Fragment>
         <Toolbar editor={this.props.editor} />
         {this.props.children}
-        <StyledButton onClick={this.saveValue}>
-          Guardar cambios
-        </StyledButton>
+        <ArticlesContext.Consumer>
+          {
+            ({ selectedCommentsIds }) => 
+              <StyledButton onClick={this.saveValue(selectedCommentsIds)}>
+                Guardar cambios
+              </StyledButton>
+          }
+        </ArticlesContext.Consumer>
       </Fragment>
     )
   }
 }
+
+export default WithUserContext(AddCommentWrapper)

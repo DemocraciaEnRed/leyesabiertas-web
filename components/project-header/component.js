@@ -33,8 +33,7 @@ const ProjectHeader = ({ project }) => (
       <TopBarWrapper>
         <UserAvatar
           avatarImg={project.author.avatar}
-          name={project.author.fullname}
-          party={project.author.fields.party} />
+          name={project.author.fullname} />
         <ProjectVersionData
           version={project.currentVersion.version}
           createdAt={project.currentVersion.createdAt} />

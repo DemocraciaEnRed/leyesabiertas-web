@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Icon from 'react-icons-kit'
-import { thumbsUp } from 'react-icons-kit/feather/thumbsUp'
+import { thumbsUp, star } from 'react-icons-kit/feather'
 import UserAvatar from '../../elements/user-avatar/component'
+import { ArticlesContext } from '../../containers/user-project-container/component'	
 
 const StyledCommentCard = styled.div`
   width: 300px;
@@ -19,8 +20,14 @@ const StyledCommentCard = styled.div`
     color: #181818;
   }
 `
-const StyledIconWrapper = styled.div`
+const StyledLikeWrapper = styled.div`
   display:none;
+  margin-top: 11px;
+  color: ${(props) => props.liked ? '#ef885d' : '#5c97bc'};
+  cursor: pointer;
+`
+
+const StyledIconWrapper = styled.div`
   margin-top: 11px;
   color: ${(props) => props.liked ? '#ef885d' : '#5c97bc'};
   cursor: pointer;
@@ -48,12 +55,19 @@ class commentCard extends Component {
       <StyledCommentCard>
         <UserAvatar
           avatarImg={this.props.comment.user.avatar}
-          name={this.props.comment.user.fullname}
-          party={this.props.comment.user.fields.occupation || ''} />
+          name={this.props.comment.user.fullname} />
         <p>{this.props.comment.content}</p>
-        <StyledIconWrapper liked={this.state.liked} >
+        <StyledLikeWrapper liked={this.state.liked} >
           <Icon icon={thumbsUp} onClick={this.handleClick} />
-        </StyledIconWrapper>
+        </StyledLikeWrapper>
+        <ArticlesContext.Consumer>
+          {
+            ({ isAuthor, toggleSelectedComment }) => isAuthor &&
+            <StyledIconWrapper>
+              <Icon icon={star} onClick={toggleSelectedComment(this.props.comment._id)} />
+            </StyledIconWrapper>
+          }
+        </ArticlesContext.Consumer>
       </StyledCommentCard>
     )
   }

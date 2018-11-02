@@ -8,18 +8,33 @@ import UserEditor from '../../components/user-editor/component'
 
 const ArticlesContext = createContext({
   withComments: false,
-  switchComments: null
+  switchComments: null,
+  selectedCommentsIds: [],
+  isAuthor: false
 })
 
 export default class extends Component {
   state = {
-    withComments: false
+    withComments: false,
+    selectedCommentsIds: []
   }
 
   switchComments = () => {
     this.setState((prevState) => ({
       withComments: !prevState.withComments
     }))
+  }
+
+  toggleSelectedComment = (id) => () => {
+    this.setState(({ selectedCommentsIds }) => {
+      let _ids
+      if (selectedCommentsIds.includes(id)) {
+        _ids = selectedCommentsIds.filter(_id => _id !== id)
+      } else {
+        _ids = selectedCommentsIds.concat([id])
+      }
+      return { selectedCommentsIds: _ids }
+    })
   }
 
   render () {
@@ -31,7 +46,10 @@ export default class extends Component {
         <ArticlesContext.Provider value={{
           project: project.document,
           withComments: withComments,
-          switchComments: this.switchComments
+          switchComments: this.switchComments,
+          isAuthor: project.isAuthor,
+          toggleSelectedComment: this.toggleSelectedComment,
+          selectedCommentsIds: this.state.selectedCommentsIds
         }}>
           <ProjectHeader project={project.document} section={section} />
           {this.props.section === '/proyecto' &&
