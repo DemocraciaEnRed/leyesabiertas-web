@@ -6,6 +6,7 @@ import UserAvatar from '../../elements/user-avatar/component'
 import ProjectVersionData from '../../components/project-version-data/component'
 import ProjectTitle from '../../elements/project-title/component'
 import ProjectLimitDate from '../../elements/project-limit-date/component'
+import ProjectEditMode from '../../elements/project-edit-mode/component'
 
 const ProjectHeaderContainer = styled.div`
   height: 383px;
@@ -21,7 +22,7 @@ const ProjectHeaderContainer = styled.div`
 `
 const TopBarWrapper = styled.div`
   display: flex;
-  width:74%;
+  width:80%;
   height:60px;
   flex-direction:row;
   justify-content:space-between;
@@ -39,6 +40,7 @@ const ProjectHeader = ({ project }) => (
           createdAt={project.currentVersion.createdAt} />
         <ProjectLimitDate
           limitDate={project.currentVersion.content.closingDate} />
+        {/* <ProjectEditMode /> */}
       </TopBarWrapper>
       <ProjectTitle>{project.currentVersion.content.title}</ProjectTitle>
     </ProjectHeaderWrapper>
