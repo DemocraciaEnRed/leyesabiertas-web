@@ -6,6 +6,8 @@ import ProfileName from '../../elements/profile-name/component'
 import ProfileLabel from '../../elements/profile-label/component'
 import ProfileInput from '../../elements/profile-input/component'
 import ProfileSelect from '../../elements/profile-select/component'
+import ProfileButtonWrapper from '../../elements/profile-button-wrapper/component'
+import SubmitInput from '../../elements/submit-input/component'
 
 const genderOptions = [
   { 'name': 'Masculino', 'value': 'masculino' },
@@ -66,13 +68,18 @@ export default class Profile extends Component {
           }
         </ProfileLabel>
         <ProfileLabel htmlFor='province'>
-          Province
+          Provincia
           <ProfileInput type='text' name='province' value={this.state.province} readOnly disabled />
         </ProfileLabel>
         <ProfileLabel htmlFor='occupation'>
           Ocupación
           <ProfileInput type='text' name='occupation' value={this.state.occupation} readOnly disabled />
         </ProfileLabel>
+        {isOwner &&
+          <ProfileButtonWrapper>
+            <SubmitInput type='submit' value='Guardar cambios' />
+          </ProfileButtonWrapper>
+        }
       </ProfileForm>
     )
   }
