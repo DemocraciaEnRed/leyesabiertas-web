@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import styled from 'styled-components'
-import Toolbar from './toolbar'
-import { ArticlesContext } from '../../containers/user-project-container/component'	
+import { ArticlesContext } from '../../containers/user-project-container/component'
 import WithUserContext from '../with-user-context/component'
+import Toolbar from './toolbar'
 
 const API_URL = process.env.API_URL
 
@@ -31,16 +31,18 @@ class AddCommentWrapper extends Component {
         'method': 'PUT',
         'headers': {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + this.props.authContext.keycloak.token,
+          'Authorization': 'Bearer ' + this.props.authContext.keycloak.token
         },
         'body': JSON.stringify({
           contributions: ids,
           content: {
             articles: value
           }
-       })
+        })
       })).json()
+      window.alert('Articulos editados!')
     } catch (err) {
+      window.alert('Error!')
       console.error(err)
     }
   }
@@ -52,7 +54,7 @@ class AddCommentWrapper extends Component {
         {this.props.children}
         <ArticlesContext.Consumer>
           {
-            ({ selectedCommentsIds }) => 
+            ({ selectedCommentsIds }) =>
               <StyledButton onClick={this.saveValue(selectedCommentsIds)}>
                 Guardar cambios
               </StyledButton>
