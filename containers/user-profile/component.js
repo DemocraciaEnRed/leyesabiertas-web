@@ -31,8 +31,22 @@ class UserProfile extends Component {
     }
   }
 
-  updateProfile = (newProfile) => {
-    console.log(newProfile)
+  updateProfile = async (newProfile) => {
+    const { authContext } = this.props
+    if (!authContext.authenticated || !this.state.isOwner) return false
+    try {
+      const updatedUser = await (await fetch(`${API_URL}/api/v1/users`, {
+        'method': 'PUT',
+        'headers': {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + authContext.keycloak.token
+        },
+        'body': JSON.stringify(newProfile)
+      })).json()
+      console.log(updatedUser)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   render () {
@@ -40,7 +54,7 @@ class UserProfile extends Component {
     return (
       <Fragment>
         {user &&
-          <Profile user={user} isOwner={isOwner} />
+          <Profile user={user} isOwner={isOwner} onSubmit={this.updateProfile} />
         }
       </Fragment>
     )

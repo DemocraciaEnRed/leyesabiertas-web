@@ -23,7 +23,7 @@ const ProfileSelect = (props) => (
 )
 
 ProfileSelect.propTypes = {
-  options: PropTypes.object.isRequired
+  options: PropTypes.array.isRequired
 }
 
 export default ProfileSelect

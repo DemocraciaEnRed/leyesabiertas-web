@@ -18,7 +18,8 @@ const genderOptions = [
 export default class Profile extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
-    isOwner: PropTypes.bool.isRequired
+    isOwner: PropTypes.bool.isRequired,
+    onSubmit: PropTypes.func.isRequired
   }
 
   state = {
@@ -39,45 +40,97 @@ export default class Profile extends Component {
       'names': user.names,
       'username': user.username,
       'avatar': user.avatar,
-      'occupation': user.occupation,
-      'gender': user.gender,
-      'age': user.age,
-      'province': user.province
+      'occupation': user.fields.occupation,
+      'gender': user.fields.gender,
+      'age': user.fields.age,
+      'province': user.fields.province
     })
+  }
+
+  handleChange = (e) => {
+    const target = e.target
+    const value = target.value
+    const name = target.name
+    this.setState({
+      [name]: value
+    })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const newData = {
+      'avatar': this.state.avatar || '',
+      'fields': {
+        'occupation': this.state.occupation || '',
+        'gender': this.state.gender || '',
+        'age': this.state.age || '',
+        'province': this.state.province || ''
+      }
+    }
+    this.props.onSubmit(newData)
   }
 
   render () {
     const { user, isOwner } = this.props
     return (
-      <ProfileForm>
+      <ProfileForm onSubmit={this.handleSubmit}>
         <ProfileAvatar img={this.state.avatar} />
-        <ProfileName type='text' value={`${user.surnames}, ${user.names}`} readOnly />
+        <ProfileName
+          type='text'
+          value={`${user.surnames}, ${user.names}`}
+          readOnly />
         <ProfileLabel htmlFor='username'>
           Nombre de usuario
-          <ProfileInput type='text' name='username' value={this.state.username} readOnly disabled />
+          <ProfileInput
+            type='text'
+            name='username'
+            value={this.state.username}
+            onChange={this.handleChange}
+            readOnly disabled />
         </ProfileLabel>
+        {console.log(isOwner)}
         <ProfileLabel htmlFor='age'>
           Edad
-          <ProfileInput type='text' name='age' value={this.state.age} readOnly disabled />
+          <ProfileInput type='text'
+            name='age'
+            value={this.state.age}
+            onChange={this.handleChange}
+            readOnly={!isOwner}
+            disabled={!isOwner} />
         </ProfileLabel>
         <ProfileLabel htmlFor='gender'>
           Género
+          {console.log(isOwner)}
           {isOwner
-            ? <ProfileSelect name='gender' value={this.state.gender} options={genderOptions} />
+            ? <ProfileSelect name='gender' value={this.state.gender} options={genderOptions} onChange={this.handleChange} />
             : <ProfileInput type='text' name='gender' value={this.state.gender} readOnly disabled />
           }
         </ProfileLabel>
         <ProfileLabel htmlFor='province'>
           Provincia
-          <ProfileInput type='text' name='province' value={this.state.province} readOnly disabled />
+          <ProfileInput
+            type='text'
+            name='province'
+            value={this.state.province}
+            readOnly={!isOwner}
+            disabled={!isOwner}
+            onChange={this.handleChange} />
         </ProfileLabel>
         <ProfileLabel htmlFor='occupation'>
           Ocupación
-          <ProfileInput type='text' name='occupation' value={this.state.occupation} readOnly disabled />
+          <ProfileInput
+            type='text'
+            name='occupation'
+            value={this.state.occupation}
+            readOnly={!isOwner}
+            disabled={!isOwner}
+            onChange={this.handleChange} />
         </ProfileLabel>
         {isOwner &&
           <ProfileButtonWrapper>
-            <SubmitInput type='submit' value='Guardar cambios' />
+            <SubmitInput
+              type='submit'
+              value='Guardar cambios' />
           </ProfileButtonWrapper>
         }
       </ProfileForm>
