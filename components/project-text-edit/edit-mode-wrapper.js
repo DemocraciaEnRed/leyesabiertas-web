@@ -27,7 +27,7 @@ class AddCommentWrapper extends Component {
   saveValue = (ids) => async () => {
     const value = this.props.editor.value.toJSON()
     try {
-      const saveRequest = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/update/articles`, {
+      const saveRequest = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}`, {
         'method': 'PUT',
         'headers': {
           'Content-Type': 'application/json',
