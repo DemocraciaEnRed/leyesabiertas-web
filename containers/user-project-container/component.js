@@ -10,13 +10,15 @@ const ArticlesContext = createContext({
   withComments: false,
   switchComments: null,
   selectedCommentsIds: [],
-  isAuthor: false
+  isAuthor: false,
+  editMode: false
 })
 
 export default class extends Component {
   state = {
     withComments: false,
-    selectedCommentsIds: []
+    selectedCommentsIds: [],
+    editMode: false
   }
 
   switchComments = () => {
@@ -37,9 +39,13 @@ export default class extends Component {
     })
   }
 
+  toggleEditMode = () => this.setState(({ editMode }) => ({ editMode: !editMode }))
+
   render () {
     const { project, section } = this.props
     const { withComments} = this.state
+    // const { isAuthor } = project
+    const isAuthor = true
     if (!project) return null
     return (
       <div className='user-container'>
@@ -47,8 +53,10 @@ export default class extends Component {
           project: project.document,
           withComments: withComments,
           switchComments: this.switchComments,
-          isAuthor: project.isAuthor,
+          isAuthor: isAuthor,
+          editMode: this.state.editMode,
           toggleSelectedComment: this.toggleSelectedComment,
+          toggleEditMode: this.toggleEditMode,
           selectedCommentsIds: this.state.selectedCommentsIds
         }}>
           <ProjectHeader project={project.document} section={section} />
@@ -66,7 +74,7 @@ export default class extends Component {
             </ModeBar>
             <UserEditor
               value={project.document.currentVersion.content.articles}
-              isAuthor={project.isAuthor}
+              isAuthor={isAuthor}
               withComments={withComments}
               id={project.document._id} />
           </Fragment>
