@@ -6,8 +6,7 @@ const NODE_ENV = process.env.NODE_ENV
 const REALM = process.env.REALM
 const AUTH_SERVER_URL = process.env.AUTH_SERVER_URL
 const SSL_REQUIRED = process.env.SSL_REQUIRED
-const RESOURCE_DEV = process.env.RESOURCE_DEV
-const RESOURCE_TEST = process.env.RESOURCE_TEST
+const RESOURCE = process.env.RESOURCE
 const PUBLIC_CLIENT = process.env.PUBLIC_CLIENT
 const CONFIDENTIAL_PORT = process.env.CONFIDENTIAL_PORT
 
@@ -27,10 +26,10 @@ export default class extends Component {
       'realm': REALM,
       'auth-server-url': AUTH_SERVER_URL,
       'ssl-required': SSL_REQUIRED,
-      'resource': NODE_ENV === 'development' ? RESOURCE_DEV : RESOURCE_TEST,
+      'resource': NODE_ENV === 'development' ? RESOURCE : RESOURCE,
       'public-client': PUBLIC_CLIENT,
       'confidential-port': CONFIDENTIAL_PORT,
-      'clientId': NODE_ENV === 'development' ? RESOURCE_DEV : RESOURCE_TEST
+      'clientId': NODE_ENV === 'development' ? RESOURCE : RESOURCE
     }
     Keycloak = require('keycloak-js')
     const keycloak = await Keycloak(keycloakOptions)
