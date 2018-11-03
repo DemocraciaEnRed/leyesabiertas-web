@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -15,11 +16,13 @@ const Avatar = styled.div`
   background-image: url('${(props) => props.avatarImg}');
   background-size: cover;
   background-position: center;
+  cursor: pointer;
 `
 const Name = styled.div`
 color: #2d4b5e;
 font-size: 1.4rem;
 font-family:var(--bold);
+cursor: pointer;
 `
 const Party = styled.div`
 font-size:1.2rem;
@@ -35,11 +38,15 @@ flex-direction:column;
 justify-content:space-between;
 `
 
-const UserAvatar = ({ avatarImg, name, party }) => (
+const UserAvatar = ({ authorId, avatarImg, name, party }) => (
   <Wrapper>
-    <Avatar avatarImg={avatarImg} />
+    <Link href={{ pathname: '/userprofile', query: { id: authorId } }}>
+      <Avatar avatarImg={avatarImg} />
+    </Link>
     <TextWrapper>
-      <Name>{name} </Name>
+      <Link href={{ pathname: '/userprofile', query: { id: authorId } }}>
+        <Name>{name}</Name>
+      </Link>
       <Party>{party}</Party>
     </TextWrapper>
   </Wrapper>
