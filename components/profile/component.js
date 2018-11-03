@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import ProfileForm from '../../elements/profile-form/component'
 import ProfileAvatar from '../../elements/profile-avatar/component'
 import ProfileName from '../../elements/profile-name/component'
+import ProfileResume from '../../elements/profile-resume/component'
+import ProfileCharge from '../../elements/profile-charge/component'
+import ProfileMail from '../../elements/profile-mail/component'
 import ProfileLabel from '../../elements/profile-label/component'
 import ProfileInput from '../../elements/profile-input/component'
 import ProfileSelect from '../../elements/profile-select/component'
@@ -30,6 +33,7 @@ export default class Profile extends Component {
     'occupation': '',
     'gender': '',
     'age': '',
+    'party': '',
     'province': ''
   }
 
@@ -40,13 +44,13 @@ export default class Profile extends Component {
       'names': user.names,
       'username': user.username,
       'avatar': user.avatar,
-      'occupation': user.fields.occupation,
-      'gender': user.fields.gender,
-      'age': user.fields.age,
-      'province': user.fields.province
+      'occupation': user.fields && user.fields.occupation ? user.fields.occupation : '',
+      'gender': user.fields && user.fields.gender ? user.fields.gender : '',
+      'party': user.fields && user.fields.party ? user.fields.party : '',
+      'age': user.fields && user.fields.age ? user.fields.age : '',
+      'province': user.fields && user.fields.province ? user.fields.province : ''
     })
   }
-
   handleChange = (e) => {
     const target = e.target
     const value = target.value
@@ -64,7 +68,8 @@ export default class Profile extends Component {
         'occupation': this.state.occupation || '',
         'gender': this.state.gender || '',
         'age': this.state.age || '',
-        'province': this.state.province || ''
+        'province': this.state.province || '',
+        'party': this.state.party || ''
       }
     }
     this.props.onSubmit(newData)
@@ -79,15 +84,18 @@ export default class Profile extends Component {
           type='text'
           value={`${user.surnames}, ${user.names}`}
           readOnly />
-        <ProfileLabel htmlFor='username'>
+        {/* <ProfileMail mail={'malvarezr@hcdn.gob.ar'} /> */}
+        { isOwner
+          ? <ProfileLabel htmlFor='username'>
           Nombre de usuario
-          <ProfileInput
-            type='text'
-            name='username'
-            value={this.state.username}
-            onChange={this.handleChange}
-            readOnly disabled />
-        </ProfileLabel>
+            <ProfileInput
+              type='text'
+              name='username'
+              value={this.state.username}
+              onChange={this.handleChange}
+              readOnly disabled />
+          </ProfileLabel> : null
+        }
         {console.log(isOwner)}
         <ProfileLabel htmlFor='age'>
           Edad
@@ -122,6 +130,16 @@ export default class Profile extends Component {
             type='text'
             name='occupation'
             value={this.state.occupation}
+            readOnly={!isOwner}
+            disabled={!isOwner}
+            onChange={this.handleChange} />
+        </ProfileLabel>
+        <ProfileLabel htmlFor='party'>
+          Partido
+          <ProfileInput
+            type='text'
+            name='party'
+            value={this.state.party}
             readOnly={!isOwner}
             disabled={!isOwner}
             onChange={this.handleChange} />

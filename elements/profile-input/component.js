@@ -13,6 +13,7 @@ const ProfileInput = styled.input`
   &:read-only,
   &:disabled {
     cursor: not-allowed;
+    background-color: #f7f7f7
   }
 `
 

@@ -19,9 +19,22 @@ class UserProfile extends Component {
   async componentDidMount () {
     const { authContext } = this.props
     try {
-      const user = await (await fetch(`${API_URL}/api/v1/users/${this.props.userId}`)).json()
-      let isOwner = false
-      if (authContext.authenticated && authContext.keycloak) isOwner = user.keycloak === authContext.keycloak.userInfo.sub
+      let user = null
+      let isOwner = null
+      if (this.props.userId) {
+        user = await (await fetch(`${API_URL}/api/v1/users/${this.props.userId}`)).json()
+        isOwner = false
+        // console.log(authContext.keycloak.userInfo.sub)
+        // if (authContext.authenticated && authContext.keycloak) isOwner = user.keycloak === authContext.keycloak.userInfo.sub
+      } else {
+        user = await (await fetch(`${API_URL}/api/v1/users/me`, {
+          'headers': {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authContext.keycloak.token
+          }
+        })).json()
+        isOwner = true
+      }
       this.setState({
         user,
         isOwner
@@ -43,8 +56,10 @@ class UserProfile extends Component {
         },
         'body': JSON.stringify(newProfile)
       })).json()
+      window.alert('¡Perfil actualizado!')
       console.log(updatedUser)
     } catch (error) {
+      window.alert('Ocurrio un error')
       console.error(error)
     }
   }
