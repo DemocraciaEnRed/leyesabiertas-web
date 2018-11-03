@@ -32,7 +32,7 @@ const Card = ({ project }) => (
         title={project.currentVersion.content.title}
         avatarImg={project.author.avatar}
         name={project.author.fullname}
-        party={'partido de los apasionados'} />
+        party={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
       <CardSocial commentaries={'39'}
         limitDate={project.currentVersion.content.limitDate} />
     </CardContainer>
