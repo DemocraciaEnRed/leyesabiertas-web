@@ -1,20 +1,17 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const StyledProfileName = styled.div`
-  font-size: 4rem;
-  color: #2c4c61;
-  font-family:var(--bold);
+const ProfileName = styled.input`
+  font-size: 4.0rem;
+  font-family: var(--bold);
+  line-height: 1.63rem;
+  text-align: center;
+  color: #203340;
+  border: none;
+  margin-bottom: 30px;
+  &:read-only,
+  &:disabled {
+    cursor: not-allowed;
+  }
 `
-const ProfileName = ({ name }) => (
-  <StyledProfileName>
-    {name}
-  </StyledProfileName>
-)
-
-ProfileName.propTypes = {
-  name: PropTypes.string
-}
 
 export default ProfileName

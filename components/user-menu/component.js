@@ -1,9 +1,10 @@
 import React from 'react'
+import Link from 'next/link'
 import styled from 'styled-components'
 
 const StyledUl = styled.ul`
   width: 200px;
-  height: 104px; /* 154px */
+  height: 154px; /* 154px */
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
   border: solid 1px #e9e9e9;
   background-color: #f6f6f6;
@@ -68,9 +69,11 @@ const StyledA = styled.a`
 const Usermenu = (logout) => (
 
   <StyledUl>
-    { /* <Li>
-      <StyledA>Mi perfil</StyledA>
-   </Li> */ }
+    <Li>
+      <Link href={{ pathname: '/userprofile'}}>
+        <StyledA>Mi perfil</StyledA>
+      </Link>
+    </Li>
     <Li>
       <StyledA>Ayuda</StyledA>
     </Li>

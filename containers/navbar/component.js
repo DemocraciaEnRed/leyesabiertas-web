@@ -45,7 +45,7 @@ render () {
           <LoggedUserBar>
             <LoggedUser onClick={this.handleMenu} />
             {this.state.menu &&
-              <UserMenu logout={this.props.authContext.logout} />
+              <UserMenu logout={this.props.authContext.logout}/>
             }
           </LoggedUserBar>
         ) : (

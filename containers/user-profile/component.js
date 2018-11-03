@@ -1,62 +1,79 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import fetch from 'isomorphic-unfetch'
-import ProfileAvatar from '../../elements/profile-avatar/component'
-import ProfileCharge from '../../elements/profile-charge/component'
-import ProfileName from '../../elements/profile-name/component'
-import ProfileMail from '../../elements/profile-mail/component'
-import ProfilePeriod from '../../elements/profile-period/component'
-import ProfileResume from '../../elements/profile-resume/component'
+import WithUserContext from '../../components/with-user-context/component'
+import Profile from '../../components/profile/component'
 
 const API_URL = process.env.API_URL
 
-const StyledProfile = styled.div`
-  width:59%;
-  margin-left:auto;
-  margin-right:auto;
-  margin-top:8rem;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  @media (max-width:800px) {
-    width:90%;
+class UserProfile extends Component {
+  static propTypes = {
+    userId: PropTypes.string.isRequired
   }
-`
-class Profile extends Component {
+
   state = {
-    user: null
+    user: null,
+    isOwner: false
   }
 
   async componentDidMount () {
+    const { authContext } = this.props
     try {
-      const user = await (await fetch(`${API_URL}/api/v1/users/${this.props.userId}`)).json()
+      let user = null
+      let isOwner = null
+      if (this.props.userId) {
+        user = await (await fetch(`${API_URL}/api/v1/users/${this.props.userId}`)).json()
+        isOwner = false
+        // console.log(authContext.keycloak.userInfo.sub)
+        if (authContext.authenticated && authContext.keycloak) isOwner = user.keycloak === authContext.keycloak.userInfo.sub
+      } else {
+        user = await (await fetch(`${API_URL}/api/v1/users/me`, {
+          'headers': {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authContext.keycloak.token
+          }
+        })).json()
+        isOwner = true
+      }
       this.setState({
-        user: user
+        user,
+        isOwner
       })
     } catch (error) {
       console.error(error)
     }
   }
 
+  updateProfile = async (newProfile) => {
+    const { authContext } = this.props
+    if (!authContext.authenticated || !this.state.isOwner) return false
+    try {
+      const updatedUser = await (await fetch(`${API_URL}/api/v1/users`, {
+        'method': 'PUT',
+        'headers': {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + authContext.keycloak.token
+        },
+        'body': JSON.stringify(newProfile)
+      })).json()
+      window.alert('¡Perfil actualizado!')
+      console.log(updatedUser)
+    } catch (error) {
+      window.alert('Ocurrio un error')
+      console.error(error)
+    }
+  }
+
   render () {
-    const { user } = this.state
-    if (!user) return null
+    const { user, isOwner } = this.state
     return (
-      <StyledProfile>
-        <ProfileAvatar img={user.avatar} />
-        <ProfileName name={user.fields.name} />
-        <ProfileCharge charge={user.fields.occupation} />
-        <ProfilePeriod period={'Período: 10/12/2015 - 09/12/2019'} />
-        <ProfileMail mail={'malvarezr@hcdn.gob.ar'} />
-        <ProfileResume resume={'Hola, Proin iaculis cursus dolor sit amet dignissim. Suspendisse condimentum placerat nisi, in varius erat consequat ac. Praesent efficitur ultricies vulputate. Donec congue eu turpis a maximus. Proin ultrices tempor laoreet.Esperamos su aporte!'} />
-      </StyledProfile>
+      <Fragment>
+        {user &&
+          <Profile user={user} isOwner={isOwner} onSubmit={this.updateProfile} />
+        }
+      </Fragment>
     )
   }
 }
 
-Profile.propTypes = {
-  userId: PropTypes.string.isRequired
-}
-
-export default Profile
+export default WithUserContext(UserProfile)
