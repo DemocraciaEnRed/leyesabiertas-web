@@ -25,7 +25,7 @@ class UserProfile extends Component {
         user = await (await fetch(`${API_URL}/api/v1/users/${this.props.userId}`)).json()
         isOwner = false
         // console.log(authContext.keycloak.userInfo.sub)
-        // if (authContext.authenticated && authContext.keycloak) isOwner = user.keycloak === authContext.keycloak.userInfo.sub
+        if (authContext.authenticated && authContext.keycloak) isOwner = user.keycloak === authContext.keycloak.userInfo.sub
       } else {
         user = await (await fetch(`${API_URL}/api/v1/users/me`, {
           'headers': {
