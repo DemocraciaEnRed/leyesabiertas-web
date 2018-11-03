@@ -75,6 +75,7 @@ export default class extends Component {
             <UserEditor
               value={project.document.currentVersion.content.articles}
               isAuthor={isAuthor}
+              editMode={this.state.editMode}
               withComments={withComments}
               id={project.document._id} />
           </Fragment>

@@ -20,7 +20,7 @@ const Span = styled.span`
 `
 const StyledIconWrapper = styled.div`
   margin-left: 30px;
-  color: ${({ active }) => active ? '#5c97bc' : '#ef885d' };
+  color: ${ ({ active }) => active ? '#ef885d' : '#5c97bc' };
   cursor: pointer;
 `
 
@@ -31,7 +31,7 @@ const ProjectEditMode = () => (
         <StyledProjectEditMode>
           <Span>Modo edición</Span>
           <StyledIconWrapper active={editMode}>
-            <Icon size={50} icon={editMode ? toggleLeft : toggleRight} onClick={toggleEditMode} />
+            <Icon size={50} icon={ editMode ? toggleRight : toggleLeft } onClick={toggleEditMode} />
           </StyledIconWrapper>
         </StyledProjectEditMode>
     }

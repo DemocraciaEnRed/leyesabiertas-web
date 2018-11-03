@@ -3,20 +3,9 @@ import styled from 'styled-components'
 import { ArticlesContext } from '../../containers/user-project-container/component'
 import WithUserContext from '../with-user-context/component'
 import Toolbar from './toolbar'
+import BottomBar from './bottom-bar'
 
 const API_URL = process.env.API_URL
-
-const StyledButton = styled.button`
-  background-color: #5c97bc;
-  border-radius: 21px;
-  width: 180px;
-  height: 42px;
-  border: none;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  float: right;
-`
 
 class AddCommentWrapper extends Component {
   constructor (props) {
@@ -49,18 +38,19 @@ class AddCommentWrapper extends Component {
 
   render () {
     return (
-      <Fragment>
-        <Toolbar editor={this.props.editor} />
-        {this.props.children}
-        <ArticlesContext.Consumer>
-          {
-            ({ selectedCommentsIds }) =>
-              <StyledButton onClick={this.saveValue(selectedCommentsIds)}>
-                Guardar cambios
-              </StyledButton>
+      <ArticlesContext.Consumer>
+        {
+          ({ editMode, selectedCommentsIds }) =>
+            <Fragment>
+              { editMode && <Toolbar editor={this.props.editor} /> }
+              {this.props.children}
+              {
+                editMode && 
+                  <BottomBar onClick={this.saveValue(selectedCommentsIds)} selectedCommentsCount={4} />
+              }
+            </Fragment>
           }
         </ArticlesContext.Consumer>
-      </Fragment>
     )
   }
 }
