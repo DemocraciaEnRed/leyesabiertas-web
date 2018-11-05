@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const StyledUl = styled.ul`
   width: 200px;
-  height: 154px; /* 154px */
+  height: 104px; /* 154px */
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
   border: solid 1px #e9e9e9;
   background-color: #f6f6f6;
@@ -70,13 +70,13 @@ const Usermenu = (logout) => (
 
   <StyledUl>
     <Li>
-      <Link href={{ pathname: '/userprofile'}}>
+      <Link href={{ pathname: '/userprofile' }}>
         <StyledA>Mi perfil</StyledA>
       </Link>
     </Li>
-    <Li>
+    {/* <Li>
       <StyledA>Ayuda</StyledA>
-    </Li>
+    </Li> */}
     <Li>
       <StyledA onClick={logout.logout}>Cerrar sesión</StyledA>
     </Li>
