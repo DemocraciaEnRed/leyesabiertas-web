@@ -86,26 +86,43 @@ const Label = styled.div`
   margin-bottom:5px;
 `
 
-const ProjectEditMode = () => (
+class ProjectEditMode extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = { isEditOn: true }
 
-  <ArticlesContext>
-    {
-      ({ isAuthor, editMode, toggleEditMode }) => isAuthor &&
-      <Wrapper>
-        <Label>Modo edición</Label>
+    this.handleClick = this.handleClick.bind(this)
+  }
 
-        <div>
-          <ToggleItem>
-            <StyledCheck type='checkbox' />
-            <ItemOn onClick={toggleEditMode}>{ editMode ? 'Activado' : 'Desactivado' }</ItemOn>
-            <ItemOff>Desactivado</ItemOff>
-          </ToggleItem>
-        </div>
+  handleClick () {
+    this.setState((state) => ({
+      isEditOn: !state.isEditOn
+    }))
+  }
 
-      </Wrapper>
+  render () {
+    return (
 
-    }
-  </ArticlesContext>
-)
+      <ArticlesContext>
+        {
+          ({ isAuthor }) => isAuthor &&
+          <Wrapper>
+            <Label>Modo edición</Label>
+
+            <div>
+              <ToggleItem>
+                <StyledCheck type='checkbox' />
+                <ItemOn onClick={this.handleClick}>{ this.isEditOn ? 'Activado' : 'Desactivado' }</ItemOn>
+                <ItemOff>Desactivado</ItemOff>
+              </ToggleItem>
+            </div>
+
+          </Wrapper>
+
+        }
+      </ArticlesContext>
+    )
+  }
+}
 
 export default ProjectEditMode
