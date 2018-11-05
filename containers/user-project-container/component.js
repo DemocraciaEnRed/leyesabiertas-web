@@ -44,8 +44,8 @@ export default class extends Component {
   render () {
     const { project, section } = this.props
     const { withComments} = this.state
-    const { isAuthor } = project
     if (!project) return null
+    const { isAuthor } = project
     return (
       <div className='user-container'>
         <ArticlesContext.Provider value={{
