@@ -4,7 +4,7 @@ import React, { Fragment } from 'react'
 import { renderMark, renderNode } from './renders'
 import EditModeWrapper from './edit-mode-wrapper'
 
-export default ({ id, selectedCommentsIds }) => ({
+export default ({ id, selectedCommentsIds, field }) => ({
   renderNode,
   renderMark,
   renderEditor: (props, editor, next) => {
@@ -15,6 +15,7 @@ export default ({ id, selectedCommentsIds }) => ({
     return (
       <EditModeWrapper
         editor={editor}
+        field={field}
         selectedCommentsIds={selectedCommentsIds}
         id={id}>
         {children}

@@ -114,7 +114,7 @@ class UserEditor extends Component {
     let plugins = []
     if (this.props.withComments) plugins.push(ProjectTextComment({ onClick: this.fetchComments }))
     if (this.props.isAuthor) {
-      plugins.push(ProjectTextEdit({ id: this.props.id }))
+      plugins.push(ProjectTextEdit({ id: this.props.id, field: 'articles' }))
     } else if (this.props.authContext.authenticated) {
       plugins.push(ProjectTextCreateComment({ id: this.props.id }))
     }

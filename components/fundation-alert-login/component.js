@@ -7,7 +7,7 @@ const FundationAlertLogin = (props) => (
   <FundationFormAlert>
     <CommentIcon />
     <p>
-      Para agregar aportes debe estár registrado. Puede crear su cuenta haciendo <a>click aquí </a>
+      Para comentar debe estar registrado. Puede crear su cuenta haciendo <a>click aquí </a>
     </p>
   </FundationFormAlert>
 )
