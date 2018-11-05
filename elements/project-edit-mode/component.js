@@ -1,39 +1,107 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { toggleRight, toggleLeft } from 'react-icons-kit/feather'
-import Icon from 'react-icons-kit'
-import { ArticlesContext } from '../../containers/user-project-container/component'	
+import { ArticlesContext } from '../../containers/user-project-container/component'
 
-
-const StyledProjectEditMode = styled.div`
+const Wrapper = styled.div`
+  display:flex;
+  flex-direction:column;
+  width:200px;
+  height:57px;
+`
+const ToggleItem = styled.div`
+  font-size:12px;
+  position: relative;
+  width: 195px;
+  height: 30px;
+  border-radius: 100px;
+  background-color: #f2f5f8;
+  overflow: hidden;
+  box-shadow: inset 0 0 2px 1px rgba(0,0,0,.05);
+`
+const StyledCheck = styled.input`
+  position: relative;
   display: flex;
-  align-items: center;
-  border-left: 1px solid #e9e9e9;
-  padding-left: 3.5rem;
-  padding-bottom: 20px;
-`
-const Span = styled.span`
-  color:#4a5d68;
-  font-size:1.6rem;
-  font-family:var(--bold);
-`
-const StyledIconWrapper = styled.div`
-  margin-left: 30px;
-  color: ${ ({ active }) => active ? '#ef885d' : '#5c97bc' };
+  justify-content:center;
   cursor: pointer;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 6;
+  :checked ~  b {
+    box-shadow: inset 0 0 0 20px #ef885d;
+  }
+
+  :checked ~ b {
+    right: 2px;
+    left: 82px;
+    transition: .35s cubic-bezier(0.785, 0.135, 0.150, 0.860);
+    transition-property: left, right;
+    transition-delay: .05s, 0s;
+  }
+`
+
+const ItemOn = styled.b`
+  position: absolute;
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  padding-top:6px;
+  width:110px; /*ancho del toggle superior*/
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  right: 2px;
+  background-color: #a0705d;
+  border-radius: 36px;
+  z-index: 1;
+  transition: .35s cubic-bezier(0.785, 0.135, 0.150, 0.860);
+  transition-property: left, right;
+  transition-delay: 0s, .05s;
+  box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  `
+const ItemOff = styled.span` 
+  position: absolute;
+  color:#8797a1;
+  display:flex;
+  justify-content:flex-start;
+  padding-top:8px;
+  padding-left:10px;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transition: .35s cubic-bezier(0.785, 0.135, 0.150, 0.860);
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,.05);
+  border-radius: 40px;
+`
+const Label = styled.div`
+  width: 103px;
+  height: 19px;
+  font-size: 16px;
+  font-family: var(--bold);
+  color: #4a5d68;
+  margin-bottom:5px;
 `
 
 const ProjectEditMode = () => (
   <ArticlesContext.Consumer>
     {
       ({ isAuthor, editMode, toggleEditMode }) => isAuthor &&
-        <StyledProjectEditMode>
-          <Span>Modo edición</Span>
-          <StyledIconWrapper active={editMode}>
-            <Icon size={50} icon={ editMode ? toggleRight : toggleLeft } onClick={toggleEditMode} />
-          </StyledIconWrapper>
-        </StyledProjectEditMode>
+        <Wrapper>
+            <Label>Modo edición</Label>
+
+            <div>
+              <ToggleItem>
+                <StyledCheck type='checkbox' />
+                <ItemOn onClick={toggleEditMode}>{ editMode ? 'Activado' : 'Desactivado' }</ItemOn>
+                <ItemOff>Desactivado</ItemOff>
+              </ToggleItem>
+            </div>
+
+          </Wrapper>
     }
   </ArticlesContext.Consumer>
 )
