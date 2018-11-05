@@ -13,7 +13,7 @@ class AddCommentWrapper extends Component {
     this.state = {}
   }
 
-  saveValue = (ids) => async () => {
+  saveValue = async (ids) => {
     const value = this.props.editor.value.toJSON()
     try {
       const saveRequest = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}`, {
@@ -46,7 +46,7 @@ class AddCommentWrapper extends Component {
               {this.props.children}
               {
                 editMode && 
-                  <BottomBar onClick={this.saveValue(selectedCommentsIds)} selectedCommentsCount={4} />
+                  <BottomBar onClick={this.saveValue} selectedCommentsIds={selectedCommentsIds} />
               }
             </Fragment>
           }

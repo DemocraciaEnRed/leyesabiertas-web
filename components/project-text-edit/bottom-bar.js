@@ -34,7 +34,18 @@ const StyledButton = styled.button`
 `
 
 const SelectedComents = styled.p`
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a5d68
+  display: flex;
+  align-items: center;
+`
 
+const Count = styled.span`
+  margin-right: 10px;
+  font-size: 28px;
+  font-weight: 900;
+  color: #ef885d;
 `
 
 export default class Toolbar extends Component {
@@ -42,14 +53,18 @@ export default class Toolbar extends Component {
     editor: PropTypes.any
   }
 
+  handleOnClick = () => {
+    this.props.onClick(this.props.selectedCommentsIds)
+  }
+
   render () {
     return (
       <Container>
         <div>
           <SelectedComents>
-            {this.props.selectedCommentsCount} comentarios marcados como aportes
+            <Count>{this.props.selectedCommentsIds.length}</Count> comentarios marcados como aportes
           </SelectedComents>
-          <StyledButton onClick={this.props.onClick}>
+          <StyledButton onClick={this.props.handleOnClick}>
             Guardar cambios
           </StyledButton>
         </div>
