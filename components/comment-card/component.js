@@ -23,14 +23,21 @@ const StyledCommentCard = styled.div`
 const StyledLikeWrapper = styled.div`
   display:none;
   margin-top: 11px;
-  color: ${(props) => props.liked ? '#ef885d' : '#5c97bc'};
+  color: ${({liked}) => liked ? '#ef885d' : '#5c97bc'};
   cursor: pointer;
 `
 
 const StyledIconWrapper = styled.div`
   margin-top: 11px;
-  color: ${(props) => props.liked ? '#ef885d' : '#5c97bc'};
+  color: ${({ active }) => active ? '#ef885d' : '#5c97bc'};
   cursor: pointer;
+  display: flex;
+  align-items: center;
+`
+
+const SelectCommentText = styled.span`
+  margin-left: 5px;
+  font-size: 14px;
 `
 
 class commentCard extends Component {
@@ -62,9 +69,18 @@ class commentCard extends Component {
         </StyledLikeWrapper>
         <ArticlesContext.Consumer>
           {
-            ({ isAuthor, toggleSelectedComment }) => isAuthor &&
-            <StyledIconWrapper>
-              <Icon icon={star} onClick={toggleSelectedComment(this.props.comment._id)} />
+            ({ toggleSelectedComment, editMode, selectedCommentsIds }) => editMode &&
+            <StyledIconWrapper
+              active={selectedCommentsIds.includes(this.props.comment._id)}
+              onClick={toggleSelectedComment(this.props.comment._id)}>
+              <Icon icon={star} />
+              <SelectCommentText>
+              {
+                selectedCommentsIds.includes(this.props.comment._id)
+                ? "Marcado como un aporte"
+                : "Marcar como un aporte"
+              }
+              </SelectCommentText>
             </StyledIconWrapper>
           }
         </ArticlesContext.Consumer>

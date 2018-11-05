@@ -42,7 +42,7 @@ const ProjectHeader = ({ project }) => (
           createdAt={project.currentVersion.createdAt} />
         <ProjectLimitDate
           limitDate={project.currentVersion.content.closingDate} />
-        {/* <ProjectEditMode /> */}
+        <ProjectEditMode />
       </TopBarWrapper>
       <ProjectTitle>{project.currentVersion.content.title}</ProjectTitle>
     </ProjectHeaderWrapper>

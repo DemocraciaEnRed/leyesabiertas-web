@@ -67,7 +67,7 @@ class UserEditor extends Component {
 
 
   onChange = async (change) => {
-    if (this.props.isAuthor) {
+    if (this.props.isAuthor && this.props.editMode) {
       return this.setState({
         value: change.value
       })
