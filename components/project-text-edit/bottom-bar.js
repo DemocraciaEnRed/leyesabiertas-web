@@ -54,7 +54,7 @@ export default class Toolbar extends Component {
   }
 
   handleOnClick = () => {
-    this.props.onClick(this.props.selectedCommentsIds)
+    this.props.onClick(this.props.selectedCommentsIds, this.props.field)
   }
 
   render () {
@@ -62,9 +62,12 @@ export default class Toolbar extends Component {
       <Container>
         <div>
           <SelectedComents>
-            <Count>{this.props.selectedCommentsIds.length}</Count> comentarios marcados como aportes
+            {
+              this.props.selectedCommentsIds.length > 0 &&
+                <><Count>{this.props.selectedCommentsIds.length}</Count> comentarios marcados como aportes</>
+            }
           </SelectedComents>
-          <StyledButton onClick={this.props.handleOnClick}>
+          <StyledButton onClick={this.handleOnClick}>
             Guardar cambios
           </StyledButton>
         </div>

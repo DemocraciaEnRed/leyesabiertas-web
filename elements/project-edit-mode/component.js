@@ -25,7 +25,7 @@ const StyledIconWrapper = styled.div`
 `
 
 const ProjectEditMode = () => (
-  <ArticlesContext>
+  <ArticlesContext.Consumer>
     {
       ({ isAuthor, editMode, toggleEditMode }) => isAuthor &&
         <StyledProjectEditMode>
@@ -35,7 +35,7 @@ const ProjectEditMode = () => (
           </StyledIconWrapper>
         </StyledProjectEditMode>
     }
-  </ArticlesContext>
+  </ArticlesContext.Consumer>
 )
 
 export default ProjectEditMode

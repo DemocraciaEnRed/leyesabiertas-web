@@ -1,10 +1,9 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Editor, findRange } from 'slate-react'
-import { Value, KeyUtils, Range, Change, Mark } from 'slate'
-import EditorTitle from '../../elements/editor-title/component'
-import TitleMark from '../../elements/title-mark/component'
-import CommentMark from '../../elements/comment-mark/component'
+import { Editor } from 'slate-react'
+import { Value } from 'slate'
+import ProjectTextEdit from '../../components/project-text-edit'
+
 const API_URL = process.env.API_URL
 
 const StyledEditorWrapper = styled.div`
@@ -49,25 +48,38 @@ export default class extends Component {
    }
  }
 
-  renderMark = (props) => {
+  renderMark = (props, editor, next) => {
     switch (props.mark.type) {
       case 'title':
         return <H2 {...props} />
       default:
-        return false
+        return next()
+    }
+  }
+
+  onChange = async (change) => {
+    if (this.props.isAuthor && this.props.editMode) {
+      return this.setState({
+        value: change.value
+      })
     }
   }
 
   render () {
     if (!this.state.value) return null
+    let plugins = []
+    if (this.props.isAuthor) {
+      plugins.push(ProjectTextEdit({ id: this.props.id, field: 'fundation' }))
+    }
     return (
       <StyledEditorWrapper>
         <Editor
+          plugins={plugins}
+          onChange={this.onChange}
           className='editor'
           value={this.state.value}
           spellCheck={false}
-          renderMark={this.renderMark}
-          readOnly />
+          renderMark={this.renderMark} />
       </StyledEditorWrapper>
     )
   }

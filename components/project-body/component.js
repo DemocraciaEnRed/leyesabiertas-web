@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import FundationContainer from '../fundation-container/component'
 import ProjectLinkArticulate from '../../components/project-link-articulate/component'
+import { ArticlesContext } from '../../containers/user-project-container/component'	
 
 const ProjectBodyContainer = styled.div`
   min-height: 383px;
@@ -40,7 +41,16 @@ const BoldP = styled.p`
 
 const ProjectBody = ({ project }) => (
   <ProjectBodyContainer>
-    <FundationContainer value={project.currentVersion.content.fundation} />
+    <ArticlesContext.Consumer>
+      {
+        ({ isAuthor, editMode }) =>
+          <FundationContainer
+            isAuthor={isAuthor}
+            editMode={editMode}
+            id={project._id}
+            value={project.currentVersion.content.fundation} />
+      }
+    </ArticlesContext.Consumer>
     <ProjectLinkArticulate id={project._id} />
   </ProjectBodyContainer>
 )

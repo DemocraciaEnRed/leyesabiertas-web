@@ -53,11 +53,11 @@ export const renderNode = (props) => {
   return <Node {...attributes}>{children}</Node>
 }
 
-export const renderMark = (props) => {
+export const renderMark = (props, editor, next) => {
   const { children, mark, attributes } = props
 
   if (!marks.hasOwnProperty(mark.type)) {
-    throw new Error(`Couldn't render mark of type ${mark.type}.`, props)
+    return next()
   }
 
   const Mark = marks[mark.type]
