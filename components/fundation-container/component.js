@@ -68,9 +68,7 @@ export default class extends Component {
   render () {
     if (!this.state.value) return null
     let plugins = []
-    if (this.props.isAuthor) {
-      plugins.push(ProjectTextEdit({ id: this.props.id, field: 'fundation' }))
-    }
+    plugins.push(ProjectTextEdit({ id: this.props.id, field: 'fundation', isAuthor: this.props.isAuthor }))
     return (
       <StyledEditorWrapper>
         <Editor
