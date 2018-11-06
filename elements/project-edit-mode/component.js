@@ -92,11 +92,10 @@ const ProjectEditMode = () => (
       ({ isAuthor, editMode, toggleEditMode }) => isAuthor &&
         <Wrapper>
             <Label>Modo edición</Label>
-
             <div>
-              <ToggleItem>
+              <ToggleItem onClick={toggleEditMode}>
                 <StyledCheck type='checkbox' />
-                <ItemOn onClick={toggleEditMode}>{ editMode ? 'Activado' : 'Desactivado' }</ItemOn>
+                <ItemOn>{ editMode ? 'Activado' : 'Desactivado' }</ItemOn>
                 <ItemOff>Desactivado</ItemOff>
               </ToggleItem>
             </div>
