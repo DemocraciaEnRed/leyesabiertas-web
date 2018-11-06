@@ -79,14 +79,15 @@ class commentCard extends Component {
                 {(isAuthor &&
 
                 <StyledIconWrapper
-                  active={selectedCommentsIds.includes(this.props.comment._id)}
-                  onClick={toggleSelectedComment(this.props.comment._id)}>
+                  active={''}
+                  onClick={''}>
                   <StyledCheckbox type='checkbox' />
-                  <SelectCommentText active={selectedCommentsIds.includes(this.props.comment._id)}>
-                    {
+                  <SelectCommentText active={''}>
+                    { /*
                       selectedCommentsIds.includes(this.props.comment._id)
                         ? 'Marcado como resuelto'
                         : 'Marcar como resuelto'
+                        */
                     }
                   </SelectCommentText>
                 </StyledIconWrapper>
