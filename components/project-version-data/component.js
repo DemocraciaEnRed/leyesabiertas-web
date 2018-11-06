@@ -7,12 +7,8 @@ import ProjectCreationDate from '../../elements/project-creation-date/component'
 const StyledProjectVersionData = styled.div`
   display: flex;
   flex-flow: column wrap;
-  border-left:1px solid #e9e9e9;
-  border-right:1px solid #e9e9e9;
   width:241px;
   height:50px;
-  padding-left:3.5rem;
-  padding-right:auto;
 `
 const formatDate = (createdAt) => {
   return (createdAt.substring(0, 10).split('-').reverse().join('/'))

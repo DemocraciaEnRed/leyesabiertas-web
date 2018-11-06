@@ -22,11 +22,17 @@ const ProjectHeaderContainer = styled.div`
 `
 const TopBarWrapper = styled.div`
   display: flex;
-  width:80%;
-  max-width:760px;
   height:60px;
   flex-direction:row;
   justify-content:space-between;
+  & > div {
+    padding: 0 30px;
+    border-right: 1px solid #e9e9e9;
+    height: 50px;
+  }
+  & > div:last-child {
+    border-right: none;
+  }
   `
 
 const ProjectHeader = ({ project }) => (

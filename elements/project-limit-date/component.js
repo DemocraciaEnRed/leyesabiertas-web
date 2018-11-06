@@ -2,10 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const StyledProjectLimitDate = styled.div`
-  display: flex;
-  flex-flow: column wrap;
-`
 const Span = styled.span`
   color:#4a5d68;
   font-size:1.6rem;
@@ -22,10 +18,10 @@ const formatDate = (createdAt) => {
 }
 
 const ProjectLimitDate = ({ limitDate }) => (
-  <StyledProjectLimitDate>
+  <div>
     <Span>Aportes hasta</Span>
     <StyledDate>{formatDate(limitDate)}</StyledDate>
-  </StyledProjectLimitDate>
+  </div>
 )
 
 ProjectLimitDate.propTypes = {
