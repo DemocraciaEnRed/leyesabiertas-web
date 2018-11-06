@@ -27,6 +27,7 @@ export default class extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.props.handleSubmit(this.state.comment)
+    this.setState({ comment: '' })
   }
 
   render () {
