@@ -89,11 +89,12 @@ class UserEditor extends Component {
     })
   }
 
-  fetchComments = async (ids) => {
+  fetchComments = async (ids, top) => {
     try {
       const comments = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?ids=${ids}`)).json()
       this.setState({
-        comments: comments
+        comments: comments,
+        top
       })
     } catch (err) {
       console.error(err)
@@ -111,7 +112,9 @@ class UserEditor extends Component {
     return (
       <StyledEditorWrapper>
         {this.props.withComments && this.state.comments && this.state.comments.length > 0 &&
-          <CommentsGrid comments={this.state.comments}/>
+          <CommentsGrid
+            comments={this.state.comments}
+            top={this.state.top} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
         <div ref={this.myEditor}>

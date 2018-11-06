@@ -13,8 +13,8 @@ const StyledCommentsGrid = styled.div`
   z-index: 1;
 `
 
-const CommentsGrid = ({ comments }) => (
-  <StyledCommentsGrid>
+const CommentsGrid = ({ comments, top }) => (
+  <StyledCommentsGrid style={{ top }}>
     {comments.map((comment) => (
       <CommentCard key={comment._id} comment={comment} />
     ))}
