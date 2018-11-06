@@ -7,7 +7,7 @@ import ProjectComments from '../../components/project-comments/component'
 import UserEditor from '../../components/user-editor/component'
 
 const ArticlesContext = createContext({
-  withComments: false,
+  withComments: true,
   switchComments: null,
   selectedCommentsIds: [],
   isAuthor: false,
@@ -16,7 +16,7 @@ const ArticlesContext = createContext({
 
 export default class extends Component {
   state = {
-    withComments: false,
+    withComments: true,
     selectedCommentsIds: [],
     editMode: false
   }
