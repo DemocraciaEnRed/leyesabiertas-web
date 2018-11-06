@@ -15,19 +15,30 @@ class GeneralContainer extends Component {
     project: null
   }
 
-  async componentDidMount () {
+  componentDidMount () {
+    if (!this.props.authContext.keycloak) return
+    this.fetchDocument(this.props.project, this.props.authContext.keycloak.token)
+  }
+
+  componentWillUpdate (props) {
+    if (!props.authContext.keycloak) return
+    if (props === this.props) return
+    this.fetchDocument(props.project, props.authContext.keycloak.token)
+  }
+
+  fetchDocument = async (id, token) => {
     try {
       let project = null
-      if (this.props.authContext.authenticated) {
-        project = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project}/`, {
+      if (token) {
+        project = await (await fetch(`${API_URL}/api/v1/documents/${id}/`, {
           method: 'get',
           headers: {
-            'Authorization': 'Bearer ' + this.props.authContext.keycloak.token
+            'Authorization': 'Bearer ' + token
           }
         }
         )).json()
       } else {
-        project = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project}/`)).json()
+        project = await (await fetch(`${API_URL}/api/v1/documents/${id}/`)).json()
       }
       this.setState({ project })
     } catch (err) {
