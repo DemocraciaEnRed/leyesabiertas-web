@@ -48,15 +48,6 @@ export default class extends Component {
    }
  }
 
-  renderMark = (props, editor, next) => {
-    switch (props.mark.type) {
-      case 'title':
-        return <H2 {...props} />
-      default:
-        return next()
-    }
-  }
-
   onChange = async (change) => {
     if (this.props.isAuthor && this.props.editMode) {
       return this.setState({
@@ -76,8 +67,7 @@ export default class extends Component {
           onChange={this.onChange}
           className='editor'
           value={this.state.value}
-          spellCheck={false}
-          renderMark={this.renderMark} />
+          spellCheck={false} />
       </StyledEditorWrapper>
     )
   }

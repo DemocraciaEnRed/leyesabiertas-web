@@ -100,15 +100,6 @@ class UserEditor extends Component {
     }
   }
 
-  renderMark = (props, editor, next) => {
-    switch (props.mark.type) {
-      case 'title':
-        return <TitleMark {...props} />
-      default:
-        return next()
-    }
-  }
-
   render () {
     if (!this.state.value) return null
     let plugins = []
@@ -130,8 +121,7 @@ class UserEditor extends Component {
             schema={this.schema}
             value={this.state.value}
             onChange={this.onChange}
-            spellCheck={false}
-            renderMark={this.renderMark} />
+            spellCheck={false} />
         </div>
       </StyledEditorWrapper>
     )
