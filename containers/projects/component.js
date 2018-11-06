@@ -44,19 +44,6 @@ class Projects extends Component {
     }
   }
 
-  fetchMoreProjects = async () => {
-    try {
-      const projects = await (await fetch(`${API_URL}/api/v1/documents&page=${this.state.page + 1}`)).json()
-      this.setState((prevState) => ({
-        projects: [...prevState.projects].concat(projects),
-        page: prevState.page + 1,
-        noMore: projects.length < 6 || prevState.page === 2
-      }))
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
   render () {
     const {
       projects,
@@ -73,13 +60,6 @@ class Projects extends Component {
                 <Card project={p} key={i} />
               ))}
             </Grid>
-            {!noMore &&
-              <Button
-                primary center
-                onClick={this.fetchMoreProjects}>
-                  Ver más propuestas
-              </Button>
-            }
           </Fragment>
         }
       </Section>
