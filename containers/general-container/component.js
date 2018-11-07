@@ -51,7 +51,7 @@ class GeneralContainer extends Component {
       <Fragment>
         <NavBar />
         <SecondaryNavbar />
-        <UserProjectContainer project={this.state.project} section={this.props.path} />
+        <UserProjectContainer project={this.state.project} section={this.props.path} fetchDocument={this.fetchDocument} />
         <SecondaryFooter />
         <Footer />
       </Fragment>

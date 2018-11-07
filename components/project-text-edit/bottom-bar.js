@@ -50,11 +50,16 @@ const Count = styled.span`
 
 export default class Toolbar extends Component {
   static propTypes = {
-    editor: PropTypes.any
+    editor: PropTypes.any,
+    onClick: PropTypes.func,
+    newYoutubeId: PropTypes.string,
+    editedYoutubeId: PropTypes.boolean,
+    setEditedYoutubeId: PropTypes.func,
+    fetchDocument: PropTypes.func
   }
 
   handleOnClick = () => {
-    this.props.onClick(this.props.selectedCommentsIds, this.props.field)
+    this.props.onClick(this.props.selectedCommentsIds, this.props.field, this.props.newYoutubeId, this.props.editedYoutubeId, this.props.setEditedYoutubeId, this.props.fetchDocument)
   }
 
   render () {
