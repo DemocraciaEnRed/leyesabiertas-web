@@ -22,7 +22,7 @@ const Footer = () => (
       <Link href='/info?section=sobre-la-plataforma'><a>Acerca de</a></Link>
       <Link href='/info?section=contacto'><a>Contacto</a></Link>
       <Link href='/info?section=faq'><a>Preguntas Frecuentes</a></Link>
-      <Link href='/info?section=terminos-y-condiciones'><a>Términos y condiciones</a></Link>
+      <Link href='/terminos-y-condiciones'><a>Términos y condiciones</a></Link>
     </FooterBar>
     <SocialBar>
       <SocialIcon

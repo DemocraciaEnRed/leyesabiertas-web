@@ -9,7 +9,6 @@ import FAQ from '../faq/component'
 import SobreLaPlataforma from '../sobre-la-plataforma/component'
 import SobreElSitio from '../sobre-el-sitio/component'
 import Contacto from '../contacto/component'
-import TerminosYCondiciones from '../terminos-y-condiciones/component'
 
 const buttons = [
   {
@@ -31,10 +30,6 @@ const buttons = [
   {
     'name': 'Contacto',
     'value': 'contacto'
-  },
-  {
-    'name': 'Términos y condiciones',
-    'value': 'terminos-y-condiciones'
   }
 ]
 
@@ -43,8 +38,7 @@ const content = {
   'sobre-la-plataforma': <SobreLaPlataforma />,
   'faq': <FAQ />,
   'sobre-el-sitio': <SobreElSitio />,
-  'contacto': <Contacto />,
-  'terminos-y-condiciones': <TerminosYCondiciones />
+  'contacto': <Contacto />
 }
 
 const StyledStaticInfo = styled.div`
