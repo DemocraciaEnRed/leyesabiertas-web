@@ -49,8 +49,11 @@ class commentCard extends Component {
   constructor (props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
+    this.handleResolved = this.handleResolved.bind(this)
+
     this.state = {
-      liked: true
+      liked: true,
+      resolved: false
     }
   }
 
@@ -58,6 +61,14 @@ class commentCard extends Component {
     this.setState((prevState) => {
       return {
         liked: !prevState.liked
+      }
+    })
+  }
+
+  handleResolved () {
+    this.setState((prevState) => {
+      return {
+        resolved: !prevState.resolved
       }
     })
   }
@@ -79,15 +90,14 @@ class commentCard extends Component {
                 {(isAuthor &&
 
                 <StyledIconWrapper
-                  active={''}
-                  onClick={''}>
-                  <StyledCheckbox type='checkbox' />
-                  <SelectCommentText active={''}>
-                    { /*
-                      selectedCommentsIds.includes(this.props.comment._id)
+                  active={this.state.resolved}>
+                  <StyledCheckbox type='checkbox' onClick={this.handleResolved} />
+                  <SelectCommentText active={this.state.resolved}>
+                    {
+                      this.state.resolved
                         ? 'Marcado como resuelto'
                         : 'Marcar como resuelto'
-                        */
+
                     }
                   </SelectCommentText>
                 </StyledIconWrapper>
