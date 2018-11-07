@@ -19,7 +19,7 @@ const formatDate = (createdAt) => {
 
 const ProjectLimitDate = ({ limitDate }) => (
   <div>
-    <Span>Aportes hasta</Span>
+    <Span>Comentarios habilitados hasta el</Span>
     <StyledDate>{formatDate(limitDate)}</StyledDate>
   </div>
 )
