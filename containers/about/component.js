@@ -23,8 +23,7 @@ const About = () => (
     <AboutImg img={'/static/assets/diputados-asset.jpg'} />
     <AboutText>
       <AboutH2>Acerca de la propuesta</AboutH2>
-      <AboutP>Elaboración colaborativa de propuestas de ley es una plataforma de co-creación de leyes. En esta, los diputados asumen el compromiso con la ciudadanía de ponerse a disposición para debatir puntos de vista y comentarios que se hagan en sus propuestas de ley antes de ser presentadas en la cámara. 
-      </AboutP>
+      <AboutP>El Portal de Co-creación legislativa es una plataforma de elaboración colaborativa de normas, donde las y los diputados abren a debate sus iniciativas para incorporar puntos de vista ciudadanos.</AboutP>
       <ArrowRightLink />
     </AboutText>
   </StyledAbout>

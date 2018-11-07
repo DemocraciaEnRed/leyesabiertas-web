@@ -25,11 +25,11 @@ const Participate = (props) => {
   if (!props.authContext) return null
   return (
     <StyledParticipateSection id='participate'>
-      <ParticipateTitle>Cómo puedo participar</ParticipateTitle>
+      <ParticipateTitle>¿Cómo participar?</ParticipateTitle>
       <ParticipateContainer>
         <ParticipateItem>
           <ParticipateTextbox number={'1'} action={'Infórmese'} />
-          <ParticipateP text={'Ingrese y lea las propuestas de ley que los diputados están creando.'} />
+          <ParticipateP text={'Ingrese y lea las propuestas de ley abiertas a la co-creación.'} />
         </ParticipateItem>
         <ParticipateItem>
           <ParticipateTextbox number={'2'} action={'Participe'} />
@@ -37,7 +37,7 @@ const Participate = (props) => {
         </ParticipateItem>
         <ParticipateItem>
           <ParticipateTextbox number={'3'} action={'Involúcrese'} />
-          <ParticipateP text={'Comparta y siga resultados para que más ciudadanos se involucren.'} />
+          <ParticipateP text={'Comparta para que más ciudadanos se involucren y siga la evolución de las propuestas.'} />
         </ParticipateItem>
       </ParticipateContainer>
       <Link href='/info?section=como-participar'>
