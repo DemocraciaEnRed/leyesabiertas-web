@@ -29,13 +29,13 @@ export default () => (
         ¿Cómo funciona?
       </StaticInfoBold>
       <StaticInfoP>
-        Los Diputados subirán propuestas de ley próximas a ser presentadas como proyecto de ley en la Cámara de Diputados, para que puedan ser revisadas, y se puedan hacer comentarios y sugerencias. 
+      Los Diputados suben propuestas de ley para que puedan ser enriquecidas: se pueden hacer aportes, comentarios y sugerencias 
       </StaticInfoP>
       <StaticInfoBold>
         ¿Qué es una propuesta?
       </StaticInfoBold>
       <StaticInfoP>
-      Denominamos propuesta de ley al estado anterior al proyecto de ley que será presentado para debate en la Cámara. 
+        Una propuesta de ley es al estado anterior al proyecto de ley que será presentado para debate en la Cámara. 
       </StaticInfoP>
       <StaticInfoP>
         Los diputados y su equipo leerán los aportes realizados por la ciudadanía en la propuesta y a partir de esto realizarán los cambios que consideren necesarios.
@@ -43,10 +43,12 @@ export default () => (
       <StaticInfoBold>
         ¿Qué entendemos por aporte?
       </StaticInfoBold>
-      <StaticInfoP>La ciudadanía puede realizar aportes puntuales seleccionando una parte específica del texto y haciendo un comentario particular. También puede hacer comentarios generales, en los que podrá dar su opinión o postura general sobre el proyecto.</StaticInfoP>
-      <StaticInfoP>Los cambios que los diputados realicen en la propuesta de ley darán lugar a nuevas versiones que mencionarán como colaboradores  a los usuarios cuyos aportes fueron incorporados.</StaticInfoP>
-      <StaticInfoP>Aquí se puede ver o descargar un manual de usuario que explica las funcionalidades básicas de la Plataforma de Elaboracion Colaborativa de Propuestas de Ley.
-      MANUAL DE USUARIO</StaticInfoP>
+      <StaticInfoP>A través de esta plataforma, la ciudadanía puede hacer comentarios generales, para dar su opinión o postura general sobre la propuesta de ley. Además, puede realizar aportes puntuales seleccionando una parte específica del texto y haciendo un aporte particular. 
+      </StaticInfoP>
+      <StaticInfoP>
+        Los diputados y su equipo analizarán los aportes. En la medida en se realicen cambios a la propuesta original se generarán nuevas versiones de la propuesta. Así, las y los usuarios cuyos aportes fueran incorporados, serán colaboradores en la redacción de la propuesta.
+      </StaticInfoP>
+      <StaticInfoP>Para más detalles sobre las funcionalidades básicas de esta plataforma descargue/consulte el MANUAL DE USUARIO</StaticInfoP>
 
     </ComoParticiparWrapper>
   </section>
