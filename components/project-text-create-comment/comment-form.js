@@ -5,6 +5,7 @@ import fetch from 'isomorphic-unfetch'
 import { Mark } from 'slate'
 import WithUserContext from '../../components/with-user-context/component'
 import UserAvatarLogged from '../../elements/user-avatar-logged/component'
+
 const API_URL = process.env.API_URL
 
 const CommentFormContainer = styled.form`
@@ -92,7 +93,6 @@ class CommentForm extends Component {
   }
 
   handleSubmit = (event) => {
-    console.log('Saving comment on DB...')
     event.preventDefault()
     fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments`, {
       headers: {
@@ -102,56 +102,22 @@ class CommentForm extends Component {
       method: 'POST',
       body: JSON.stringify({
         field: 'articles',
-        content: this.state.value
+        content: this.state.value,
+        decoration: this.props.decoration
       })
     })
       .then((res) => res.json())
       .then((res) => {
         console.log(res)
-        console.log('Saved on DB...')
-        this.setCommentId(res)
+        console.log('comentario guardado...')
+        let decoration = this.props.decoration
+        decoration.mark.data.preview = false
+        const decorations = this.props.editor.value.decorations.push(decoration)
+        this.props.editor.setDecorations([decoration])
       })
       .catch((err) => {
         console.log(err)
       })
-  }
-
-  setCommentId = (savedComment) => {
-    console.log(`Adding ID ${savedComment._id} to mark...`)
-    this.setState({
-      showCommentForm: false
-    })
-    const mark = Mark.create({
-      data: {
-        'data-id': savedComment._id
-      },
-      'type': 'comment'
-    })
-    const value = this.props.editor
-      .select(this.range)
-      .toggleMark({ type: 'highlight' })
-      .addMark(mark)
-      .value
-
-    console.log('Updating document', value)
-    fetch(`${API_URL}/api/v1/documents/${this.props.id}/update/articles`, {
-      headers: {
-        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
-        'Content-Type': 'application/json'
-      },
-      method: 'PUT',
-      body: JSON.stringify(value)
-    }).then((res) => {
-      if (!res.ok) {
-        throw new Error('Error!')
-      }
-      window.alert('Exito! Comentario agregado al articulo')
-      console.log('Yay')
-      // location.reload();
-    }).catch((err) => {
-      window.alert('Error al guardar tu comentario, intentá mas tarde')
-      console.log(err)
-    })
   }
 
   render () {
