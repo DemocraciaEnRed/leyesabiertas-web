@@ -12,8 +12,6 @@ import ProjectTextEdit from '../../components/project-text-edit'
 import ProjectTextComment from '../../components/project-text-comment'
 import ProjectTextCreateComment from '../../components/project-text-create-comment'
 
-const API_URL = process.env.API_URL
-
 const StyledEditorWrapper = styled.div`
   width: 90%;
   padding: 0 8%;
@@ -65,7 +63,6 @@ class UserEditor extends Component {
     }
   }
 
-
   onChange = async (change) => {
     if (this.props.isAuthor && this.props.editMode) {
       return this.setState({
@@ -89,31 +86,27 @@ class UserEditor extends Component {
     })
   }
 
-  fetchComments = async (ids, top) => {
-    try {
-      const comments = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?ids=${ids}`)).json()
-      this.setState({
-        comments: comments,
-        top
-      })
-    } catch (err) {
-      console.error(err)
-    }
+  showComments = async (ids, top) => {
+    this.setState({
+      activeComments: ids,
+      top
+    })
   }
 
   render () {
     if (!this.state.value) return null
     let plugins = []
-    if (this.props.withComments) plugins.push(ProjectTextComment({ onClick: this.fetchComments }))
+    if (this.props.withComments) plugins.push(ProjectTextComment({ onClick: this.showComments }))
     plugins.push(ProjectTextEdit({ id: this.props.id, field: 'articles', isAuthor: this.props.isAuthor }))
     if (this.props.authContext.authenticated && !this.props.editMode) {
       plugins.push(ProjectTextCreateComment({ id: this.props.id }))
     }
     return (
       <StyledEditorWrapper>
-        {this.props.withComments && this.state.comments && this.state.comments.length > 0 &&
+        {this.props.withComments &&
           <CommentsGrid
-            comments={this.state.comments}
+            id={this.props.id}
+            activeComments={this.state.activeComments}
             top={this.state.top} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
