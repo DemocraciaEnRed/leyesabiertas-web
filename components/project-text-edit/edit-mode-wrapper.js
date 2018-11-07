@@ -15,6 +15,7 @@ class AddCommentWrapper extends Component {
 
   saveValue = async (ids, field) => {
     const value = this.props.editor.value.toJSON()
+    const decorations = this.props.editor.value.decorations.toJSON()
     try {
       const saveRequest = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}`, {
         'method': 'PUT',
@@ -24,6 +25,7 @@ class AddCommentWrapper extends Component {
         },
         'body': JSON.stringify({
           contributions: ids,
+          decorations: decorations,
           content: {
             [field]: value
           }
