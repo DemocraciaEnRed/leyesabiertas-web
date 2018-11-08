@@ -18,7 +18,7 @@ export default class CommentMark extends Component {
   }
 
   render () {
-    const id = this.props.mark.toJSON().data['data-id']
+    const id = this.props.mark.toJSON().data['id']
     return (
       <CommentCounterContext.Consumer>
         {

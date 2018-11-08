@@ -15,9 +15,11 @@ class AddCommentWrapper extends Component {
 
   saveValue = async (ids, field, newYoutubeId, editedYoutubeId, setEditedYoutubeId, fetchDocument) => {
     const value = this.props.editor.value.toJSON()
+    const decorations = this.props.editor.value.decorations.toJSON()
     try {
       let payload = {
         contributions: ids,
+        decorations: decorations,
         content: {
           [field]: value
         }

@@ -41,8 +41,10 @@ class UserEditor extends Component {
     this.state = {
       value: null,
       selection: null,
-      commentsIds: []
+      commentsIds: [],
+      comments: []
     }
+    this.editor = null
   }
 
   schema = {
@@ -53,20 +55,14 @@ class UserEditor extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.withComments !== this.props.withComments) {
-      this.forceUpdate()
-    }
-  }
-
   componentDidMount () {
     if (this.props.value) {
       this.setState({
         value: Value.fromJSON(this.props.value)
       })
     }
+    this.fetchComments()
   }
-
 
   onChange = async (change) => {
     if (this.props.isAuthor && this.props.editMode) {
@@ -81,8 +77,7 @@ class UserEditor extends Component {
       //   return o
       // })
       .map(o => o.type)
-      .filter(o => o !== 'add_mark')
-      .filter(o => o !== 'remove_mark')
+      .filter(o => o !== 'set_value')
       .filter(o => o !== 'set_selection')
       .count()
 
@@ -91,30 +86,41 @@ class UserEditor extends Component {
     })
   }
 
-  fetchComments = async (ids, top) => {
+  showComments = async (ids, top) => {
+    this.setState({
+      activeComments: ids,
+      top
+    })
+  }
+
+  fetchComments = async () => {
     try {
-      const comments = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?ids=${ids}`)).json()
-      this.setState({
-        comments: comments,
-        top
-      })
+      const comments = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?field=articles`)).json()
+      const decorations = comments.map(c => c.decoration).filter(d => d)
+
+      this.editor.setDecorations(decorations)
+      this.setState({ comments })
     } catch (err) {
       console.error(err)
     }
   }
 
+  editorLoad = (editor) => { this.editor = editor }
+
   render () {
     if (!this.state.value) return null
     let plugins = []
-    if (this.props.withComments) plugins.push(ProjectTextComment({ onClick: this.fetchComments }))
+    if (this.props.withComments) plugins.push(ProjectTextComment({ onClick: this.showComments }))
     plugins.push(ProjectTextEdit({ id: this.props.id, field: 'articles', isAuthor: this.props.isAuthor }))
     if (this.props.authContext.authenticated && !this.props.editMode) {
       plugins.push(ProjectTextCreateComment({ id: this.props.id }))
     }
     return (
       <StyledEditorWrapper>
-        {this.props.withComments && this.state.comments && this.state.comments.length > 0 &&
+        {this.props.withComments &&
           <CommentsGrid
+            id={this.props.id}
+            activeComments={this.state.activeComments}
             comments={this.state.comments}
             top={this.state.top} />
         }
@@ -123,6 +129,7 @@ class UserEditor extends Component {
         <div ref={this.myEditor}>
           <Editor
             plugins={plugins}
+            ref={this.editorLoad}
             className='editor'
             schema={this.schema}
             value={this.state.value}

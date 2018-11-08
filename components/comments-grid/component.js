@@ -1,5 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import CommentCard from '../comment-card/component'
 
@@ -13,16 +12,16 @@ const StyledCommentsGrid = styled.div`
   z-index: 1;
 `
 
-const CommentsGrid = ({ comments, top }) => (
-  <StyledCommentsGrid style={{ top }}>
-    {comments.map((comment) => (
-      <CommentCard key={comment._id} comment={comment} />
-    ))}
-  </StyledCommentsGrid>
-)
+const CommentsGrid = ({ activeComments = [], top, comments }) => {
+  const displayComments = comments
+    .filter(comment => activeComments.includes(comment._id))
+    .map((comment) => <CommentCard key={comment._id} comment={comment} />)
 
-CommentsGrid.propTypes = {
-  comments: PropTypes.array.isRequired
+  return (
+    <StyledCommentsGrid style={{ top }}>
+      { displayComments }
+    </StyledCommentsGrid>
+  )
 }
 
 export default CommentsGrid
