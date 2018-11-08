@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Icon from 'react-icons-kit'
 import { thumbsUp, star } from 'react-icons-kit/feather'
 import UserAvatar from '../../elements/user-avatar/component'
-import { ArticlesContext } from '../../containers/user-project-container/component'	
+import { ArticlesContext } from '../../containers/user-project-container/component'
 
 const StyledCommentCard = styled.div`
   width: 300px;
@@ -23,7 +23,7 @@ const StyledCommentCard = styled.div`
 const StyledLikeWrapper = styled.div`
   display:none;
   margin-top: 11px;
-  color: ${({liked}) => liked ? '#ef885d' : '#5c97bc'};
+  color: ${({ liked }) => liked ? '#ef885d' : '#5c97bc'};
   cursor: pointer;
 `
 
@@ -36,16 +36,24 @@ const StyledIconWrapper = styled.div`
 `
 
 const SelectCommentText = styled.span`
+  color: ${({ active }) => active ? '#ef885d' : '#4a5d68'};
   margin-left: 5px;
   font-size: 14px;
+`
+const StyledCheckbox = styled.input`
+  margin-left:2px;
+  margin-right:2px;
 `
 
 class commentCard extends Component {
   constructor (props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
+    this.handleResolved = this.handleResolved.bind(this)
+
     this.state = {
-      liked: true
+      liked: true,
+      resolved: false
     }
   }
 
@@ -53,6 +61,14 @@ class commentCard extends Component {
     this.setState((prevState) => {
       return {
         liked: !prevState.liked
+      }
+    })
+  }
+
+  handleResolved () {
+    this.setState((prevState) => {
+      return {
+        resolved: !prevState.resolved
       }
     })
   }
@@ -69,19 +85,40 @@ class commentCard extends Component {
         </StyledLikeWrapper>
         <ArticlesContext.Consumer>
           {
-            ({ toggleSelectedComment, editMode, selectedCommentsIds }) => editMode &&
-            <StyledIconWrapper
-              active={selectedCommentsIds.includes(this.props.comment._id)}
-              onClick={toggleSelectedComment(this.props.comment._id)}>
-              <Icon icon={star} />
-              <SelectCommentText>
-              {
-                selectedCommentsIds.includes(this.props.comment._id)
-                ? "Marcado como un aporte"
-                : "Marcar como un aporte"
-              }
-              </SelectCommentText>
-            </StyledIconWrapper>
+            ({ isAuthor, toggleSelectedComment, editMode, selectedCommentsIds }) =>
+              <Fragment>
+                {(isAuthor &&
+
+                <StyledIconWrapper
+                  active={this.state.resolved}>
+                  <StyledCheckbox type='checkbox' onClick={this.handleResolved} />
+                  <SelectCommentText active={this.state.resolved}>
+                    {
+                      this.state.resolved
+                        ? 'Marcado como resuelto'
+                        : 'Marcar como resuelto'
+
+                    }
+                  </SelectCommentText>
+                </StyledIconWrapper>
+                )}
+
+                { (editMode &&
+
+                <StyledIconWrapper
+                  active={selectedCommentsIds.includes(this.props.comment._id)}
+                  onClick={toggleSelectedComment(this.props.comment._id)}>
+                  <Icon icon={star} />
+                  <SelectCommentText active={selectedCommentsIds.includes(this.props.comment._id)}>
+                    {
+                      selectedCommentsIds.includes(this.props.comment._id)
+                        ? 'Marcado como un aporte'
+                        : 'Marcar como un aporte'
+                    }
+                  </SelectCommentText>
+                </StyledIconWrapper>
+                )}
+              </Fragment>
           }
         </ArticlesContext.Consumer>
       </StyledCommentCard>
