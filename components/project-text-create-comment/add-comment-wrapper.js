@@ -2,8 +2,7 @@ import React, { Component, Fragment, createRef } from 'react'
 import AddComment from './add-comment'
 import CommentForm from './comment-form'
 import { getVisibleSelectionRect } from 'get-selection-range'
-import { Range } from 'slate'
-import { thumbsUp } from 'react-icons-kit/feather/thumbsUp';
+import ToolsWrapper from './tools-wrapper'
 
 export default class AddCommentWrapper extends Component {
   constructor (props) {
@@ -15,24 +14,30 @@ export default class AddCommentWrapper extends Component {
       showCommentForm: false
     }
     this.editor = createRef()
-    this.range = null
+    this.decoration = null
   }
 
-  handleClick = () => {
-    this.props.editor.toggleMark('highlight')
-    this.range = Range.fromJSON(this.props.editor.value.selection).toJSON()
+  handleClickAdd = () => {
     this.setState({ showCommentForm: true })
+    let decoration = {
+      focus: this.props.editor.value.selection.focus.toJSON(),
+      anchor: this.props.editor.value.selection.anchor.toJSON(),
+      mark: {
+        type: 'comment',
+        data: {
+          preview: true
+        }
+      }
+    }
+    const decorations = this.props.editor.value.decorations.push(decoration)
+    this.props.editor.setDecorations(decorations)
+    decoration.mark.data = {}
+    this.decoration = decoration
   }
 
   onSelect = () => {
     const rect = getVisibleSelectionRect()
-    if (!rect) return false
-    if (rect.width === 0 && this.state.showAddComment) {
-      this.setState(({ showAddComment, showCommentForm }) => {
-        if (showCommentForm) this.props.editor.select(this.range).toggleMark('highlight').deselect()
-        return { showAddComment: false, showCommentForm: false }
-      })
-    }
+
     if (rect && rect.width > 0 && !this.state.showToolbar) {
       const containerBound = this.editor.current.getBoundingClientRect()
       const {
@@ -56,25 +61,32 @@ export default class AddCommentWrapper extends Component {
     }
   }
 
+  clearTools = () => {
+    const decorations = this.props.editor.value.decorations.filter(d => !d.mark.data.get('preview'))
+    this.props.editor.setDecorations(decorations)
+    this.setState({ showAddComment: false, showCommentForm: false })
+  }
+
   render () {
     return (
       <Fragment>
-        {
-          this.state.showAddComment &&
-            <AddComment
-              top={this.state.top}
-              left={this.state.left}
-              onClick={this.handleClick} />
-        }
-
-        {
-          this.state.showCommentForm &&
-            <CommentForm
-              editor={this.props.editor}
-              id={this.props.id}
-              top={this.state.top} />
-        }
-
+        <ToolsWrapper clearTools={this.clearTools}>
+          {
+            this.state.showAddComment &&
+              <AddComment
+                top={this.state.top}
+                left={this.state.left}
+                onClick={this.handleClickAdd} />
+          }
+          {
+            this.state.showCommentForm &&
+              <CommentForm
+                decoration={this.decoration}
+                editor={this.props.editor}
+                id={this.props.id}
+                top={this.state.top} />
+          }
+        </ToolsWrapper>
         <div
           onSelect={this.onSelect}
           ref={this.editor}>
