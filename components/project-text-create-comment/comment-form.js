@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled, { consolidateStreamedStyles } from 'styled-components'
 import fetch from 'isomorphic-unfetch'
@@ -9,6 +9,23 @@ import UserAvatarLogged from '../../elements/user-avatar-logged/component'
 const API_URL = process.env.API_URL
 
 const CommentFormContainer = styled.form`
+  width: 300px;
+  min-height: 305px;
+  border-radius: 3px;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+  border: solid 1px #dae1e7;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  box-sizing: border-box;
+  cursor: pointer;
+  z-index:2;
+  position: absolute;
+  left: 70%;
+`
+
+const CommentStatus = styled.form`
   width: 300px;
   min-height: 305px;
   border-radius: 3px;
@@ -81,7 +98,8 @@ class CommentForm extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      value: ''
+      value: '',
+      status: false
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -114,6 +132,12 @@ class CommentForm extends Component {
         decoration.mark.data.preview = false
         const decorations = this.props.editor.value.decorations.push(decoration)
         this.props.editor.setDecorations(decorations)
+        console.log('Saved on DB...')
+        this.setCommentId(res)
+        this.setState({
+          value: '',
+          status: true
+        })
       })
       .catch((err) => {
         console.log(err)
@@ -122,20 +146,25 @@ class CommentForm extends Component {
 
   render () {
     return (
-      <CommentFormContainer onSubmit={this.handleSubmit} style={{ top: this.props.top }}>
-        <CommentFormHeader>Agregar comentario</CommentFormHeader>
-        <CommentFormContent>
-          <UserAvatarLogged
-            avatarImg={'/static/assets/userdefault.png'}
-            name={this.props.authContext.profile.name} />
-          <CommentText
-            placeholder='Agregue su comentario aquí'
-            value={this.state.value}
-            onChange={this.handleChange} />
-        </CommentFormContent>
-        <CommentFormFooter onClick={this.handleSubmit}>Enviar comentario</CommentFormFooter>
-
-      </CommentFormContainer>
+      <Fragment>
+        {!this.state.status
+          ? <CommentFormContainer onSubmit={this.handleSubmit} style={{ top: this.props.top }}>
+            <CommentFormHeader>Agregar comentario</CommentFormHeader>
+            <CommentFormContent>
+              <UserAvatarLogged
+                avatarImg={'/static/assets/userdefault.png'}
+                name={this.props.authContext.profile.name} />
+              <CommentText
+                placeholder='Agregue su comentario aquí'
+                value={this.state.value}
+                onChange={this.handleChange} />
+            </CommentFormContent>
+            <CommentFormFooter onClick={this.handleSubmit}>Enviar comentario</CommentFormFooter>
+          </CommentFormContainer>
+          
+          : <CommentStatus>Envio comentario</CommentStatus>
+        }
+      </Fragment>
     )
   }
 }
