@@ -7,6 +7,7 @@ import ProjectVersionData from '../../components/project-version-data/component'
 import ProjectTitle from '../../elements/project-title/component'
 import ProjectLimitDate from '../../elements/project-limit-date/component'
 import ProjectEditMode from '../../elements/project-edit-mode/component'
+import ProjectBreadcrumb from '../project-breadcrumb/component'
 
 const ProjectHeaderContainer = styled.div`
   height: 383px;
@@ -16,7 +17,7 @@ const ProjectHeaderContainer = styled.div`
   background-size: cover;
   background-position: center;
   display: flex;
-  flex-wrap: no-wrap;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: flex-end;
 `
@@ -35,8 +36,12 @@ const TopBarWrapper = styled.div`
   }
   `
 
-const ProjectHeader = ({ project }) => (
+const ProjectHeader = ({ project, section }) => (
   <ProjectHeaderContainer img={project.currentVersion.content.imageCover}>
+    <ProjectBreadcrumb
+      title={project.currentVersion.content.title}
+      id={project._id}
+      section={section} />
     <ProjectHeaderWrapper>
       <TopBarWrapper>
         <UserAvatar
@@ -57,7 +62,8 @@ const ProjectHeader = ({ project }) => (
 )
 
 ProjectHeader.propTypes = {
-  project: PropTypes.object.isRequired
+  project: PropTypes.object.isRequired,
+  section: PropTypes.string.isRequired
 }
 
 export default ProjectHeader
