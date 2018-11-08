@@ -10,13 +10,13 @@ const StyledDiv = styled.div`
 
 export default () => (
   <section>
-    <StaticInfoTitle>Sobre la plataforma</StaticInfoTitle>
+    <StaticInfoTitle>Acerca de</StaticInfoTitle>
     <StyledDiv>
       <StaticInfoBold>
         ¿Qué es?
       </StaticInfoBold>
       <StaticInfoP>
-      El Portal de Co-creación legislativa es una plataforma de elaboración colaborativa de normas donde los diputados asumen el compromiso con la ciudadanía de abrir el debate para incorporar puntos de vista en sus propuestas. El objetivo de la plataforma es enriquecer las propuestas de ley con aportes de la ciudadanía.
+        <strong><u>El Portal de Co-creación legislativa</u></strong> es una <strong>plataforma de elaboración colaborativa de normas</strong> donde los diputados asumen el compromiso con la ciudadanía de <strong>abrir el debate para incorporar puntos de vista en sus propuestas</strong>. El objetivo de la plataforma es <strong>enriquecer las propuestas de ley</strong> con aportes de la ciudadanía.
       </StaticInfoP>
     </StyledDiv>
     <StyledDiv>
@@ -24,10 +24,10 @@ export default () => (
         ¿Por qué participar?
       </StaticInfoBold>
       <StaticInfoP>
-      Según la Constitución la redacción y discusión de la ley debe darse en el ámbito del Congreso. 
+      Según la Constitución <strong>la redacción y discusión de la ley debe darse en el ámbito del Congreso</strong>.
       </StaticInfoP>
       <StaticInfoP>
-      Esta es una herramienta que brinda a la ciudadanía la oportunidad de co-crear leyes en conjunto con las y los legisladores.      
+        Esta es una herramienta que brinda a la ciudadanía la oportunidad de co-crear leyes en conjunto con las y los legisladores.      
       </StaticInfoP>
     </StyledDiv>
     <StyledDiv>
@@ -35,7 +35,7 @@ export default () => (
         ¿Qué es la co-creación de propuestas de ley?
       </StaticInfoBold>
       <StaticInfoP>
-      La co-creación de propuestas de ley rompe con la forma tradicional de legislar donde un equipo de políticos, profesionales y técnicos elaboran los proyectos de ley. Co-crear supone abrir ese proceso y crear un espacio en el que se encuentran legisladores con la ciudadanía, la academia, las organizaciones de la sociedad civil y personas especializadas en las temáticas que se están discutiendo.
+        <strong>La co-creación de propuestas de ley rompe con la forma tradicional de legislar</strong> donde un equipo de políticos, profesionales y técnicos elaboran los proyectos de ley. <strong>Co-crear supone abrir ese proceso y crear un espacio en el que se encuentran legisladores con la ciudadanía</strong>, la academia, las organizaciones de la sociedad civil y personas especializadas en las temáticas que se están discutiendo.
       </StaticInfoP>
     </StyledDiv>
   </section>

@@ -46,7 +46,7 @@ export default () => (
       Descripción
         </StaticInfoBold>
         <StaticInfoP>
-        El presente documento describe los Términos y Condiciones aplicables al uso de la Plataforma de Elaboración Colaborativa de Propuestas de Ley de diputadas/os nacionales (en adelante, la “Plataforma”) de la Honorable Cámara de Diputados de la Nación Argentina. (en adelante, la “HCDN”).
+        El presente documento describe los Términos y Condiciones aplicables al uso de la Plataforma de Elaboración Colaborativa de Propuestas de Ley de diputadas/os nacionales (en adelante, la <em>“Plataforma”</em>) de la Honorable Cámara de Diputados de la Nación Argentina. (en adelante, la <em>“HCDN”</em>).
         </StaticInfoP>
         <StaticInfoP>
         Cualquier persona (en adelante el “Usuario”) que desee usar la plataforma, deberá leer, entender y aceptar todas las condiciones generales establecidas por los presentes Términos y Condiciones de Uso, la Política de Privacidad junto con las demás políticas y principios.
@@ -56,13 +56,13 @@ export default () => (
       Acerca de este sitio
           </StaticInfoBold>
           <StaticInfoP>
-        La Plataforma es una plataforma web promovida por la Honorable Cámara de Diputados de la Nación a través de su Programa de Modernización (en adelante “Modernización”) a fin de incrementar la participación ciudadana en la redacción y creación de proyectos de ley y generar espacios de colaboración entre el Estado, la sociedad civil, el sector privado y la ciudadanía en general, a la hora de diseñar y producir valor público.
+        La <em>Plataforma</em> es una plataforma web promovida por la Honorable Cámara de Diputados de la Nación a través de su Programa de Modernización (en adelante “Modernización”) a fin de incrementar la participación ciudadana en la redacción y creación de proyectos de ley y generar espacios de colaboración entre el Estado, la sociedad civil, el sector privado y la ciudadanía en general, a la hora de diseñar y producir valor público.
           </StaticInfoP>
           <StaticInfoP>
         La Plataforma es un desarrollo basado en <a href='http://democracyos.org/' target='_blank'>DemocracyOS</a>, una plataforma online de código abierto, diseñada para informar, debatir y votar propuestas públicas hacia la construcción de una democracia adaptada al siglo XXI. DemocracyOS es desarrollada por la Fundación <a href='https://democraciaenred.org/' target='_blank'>Democracia en Red</a>.
           </StaticInfoP>
           <StaticInfoP>
-            <u>Registro </u>
+            <u><em>Registro</em></u>
           </StaticInfoP>
           <StaticInfoP>
         El ingreso a la Plataforma no requiere registro online previo, el mismo será requerido si el Usuario desea publicar comentarios, sugerir modificaciones o dar apoyo a comentarios o sugerencias. En ese caso, el Usuario deberá completar un formulario y brindar un correo electrónico o registrarse con su cuenta de Facebook.
@@ -74,13 +74,13 @@ export default () => (
         La Plataforma se reserva el derecho de realizar validaciones en relación a la información brindada por el Usuario al momento de la inscripción. En caso de que la información brindada no pueda validarse, la administración de la Plataforma se reserva el derecho de no dar de alta ese Usuario.
           </StaticInfoP>
           <StaticInfoP>
-            <u>Usuarios</u>
+            <u><em>Usuarios</em></u>
           </StaticInfoP>
           <StaticInfoP>
         La Plataforma está destinada únicamente a personas mayores de 16 años cumplidos, de modo que cualquier registro de uso o acceso al Sitio Web por cualquier menor de esa edad no está autorizado. Al registrarse, el Usuario declara y garantiza ser mayor de 16 años.
           </StaticInfoP>
           <StaticInfoP>El Usuario debe registrarse usando su nombre. Las cuentas de “bots” u otros registros automáticos no están permitidas. La privacidad de la contraseña de la cuenta del Usuario es de su exclusiva responsabilidad. Ante cualquier ingreso indebido en su cuenta, el Usuario deberá informarlo inmediatamente a través de XXXXXXXX@hcdn.gob.ar.​</StaticInfoP>
-          <StaticInfoP>El Usuario será exclusivamente responsable de hacer cumplir estas disposiciones y  ante todo incumplimiento, sin perjuicio de las medidas que pudiera tomar la administración de la Plataforma. La HCDN se reserva el derecho de rechazar cualquier solicitud de inscripción o de cancelar un registro previamente aceptado.
+          <StaticInfoP>El Usuario será exclusivamente responsable de hacer cumplir estas disposiciones y  ante todo incumplimiento, sin perjuicio de las medidas que pudiera tomar la administración de la Plataforma. La <em>HCDN</em> se reserva el derecho de rechazar cualquier solicitud de inscripción o de cancelar un registro previamente aceptado.
           </StaticInfoP>
         </div>
         <div id='usuarios'>
@@ -88,16 +88,16 @@ export default () => (
     Usuarios, obligaciones y condiciones de uso
           </StaticInfoBold>
           <StaticInfoP>
-        El usuario es responsable del contenido que suba, publique o muestre en la Plataforma, garantizando que el mismo no infringe estos Términos y Condiciones, ni los derechos de terceros, ni viola ninguna ley, reglamento u otra normativa. Los Usuarios de la Plataforma aceptarán que el material y/o contenido que suban y/o publiquen podría ser utilizado por otros usuarios de la Plataforma y/o por terceras personas ajenas, y que la HCDN no será responsable en ningún caso por tales utilizaciones.
+        El usuario es responsable del contenido que suba, publique o muestre en la Plataforma, garantizando que el mismo no infringe estos Términos y Condiciones, ni los derechos de terceros, ni viola ninguna ley, reglamento u otra normativa. Los Usuarios de la Plataforma aceptarán que el material y/o contenido que suban y/o publiquen podría ser utilizado por otros usuarios de la Plataforma y/o por terceras personas ajenas, y que la <em>HCDN</em> no será responsable en ningún caso por tales utilizaciones.
           </StaticInfoP>
           <StaticInfoP>
         El usuario debe usar la Plataforma en forma correcta y lícita. En caso contrario, la administración de la Plataforma podrá retirar el contenido y/o suspender la cuenta de quienes incurran en actitudes contrarias a estos términos y condiciones y/o de la política de privacidad, ofensivas, ilegales, violatorias de derechos de terceros, contrarias a la moral y/o amenazas para la seguridad de otros usuarios.
           </StaticInfoP>
           <StaticInfoP>
-        En relación a los aportes, colaboraciones, comentarios y votaciones que las/os usuarias/os realicen en las iniciativas propuestas para la consulta, las mismas no son de carácter vinculante, obligatorio y/o impositivo sobre las acciones de la HCDN.
+        En relación a los aportes, colaboraciones, comentarios y votaciones que las/os usuarias/os realicen en las iniciativas propuestas para la consulta, las mismas no son de carácter vinculante, obligatorio y/o impositivo sobre las acciones de la <em>HCDN</em>.
           </StaticInfoP>
           <StaticInfoP>
-            <u>Actividades prohibidas</u>
+            <u><em>Actividades prohibidas</em></u>
           </StaticInfoP>
           <StaticInfoP>
         Las siguientes actividades se encuentran vedadas, sin perjuicio de las prohibiciones generales expuestas anteriormente:
@@ -117,7 +117,7 @@ export default () => (
         En caso de sufrir alguna de estas situaciones, comunicarse inmediatamente con la administración de la Plataforma través de XXXXXXXX@hcdn.gob.ar.
           </StaticInfoP>
           <StaticInfoP>
-            <u>Moderación de las iniciativas</u>
+            <u><em>Moderación de las iniciativas</em></u>
           </StaticInfoP>
           <StaticInfoP>
         Cada iniciativa/propuesta publicada en la Plataforma tendrá un/a moderador/a responsable de hacer cumplir estos Términos y Condiciones de uso.
@@ -133,7 +133,7 @@ export default () => (
             <li>Quitar el acceso a quien no cumpliera, de alguna forma, con estos Términos y Condiciones de uso.</li>
           </StaticInfoList>
           <StaticInfoP>
-            <u>Ley aplicable y jurisdicción del Sitio Web</u>
+            <u><em>Ley aplicable y jurisdicción del Sitio Web</em></u>
           </StaticInfoP>
           <StaticInfoP>
         Los Términos y Condiciones aquí presentados se rigen por las leyes de la República Argentina y se someten a los Tribunales Nacionales en lo Contencioso Administrativo con asiento en la Ciudad de Buenos Aires.
@@ -180,7 +180,7 @@ export default () => (
         Los Usuarios se comprometen a notificar de inmediato al correo XXXXXXXX@hcdn.gob.ar, cualquier uso no autorizado de su cuenta o cualquier otra situación que pudiera ir contra la seguridad del sitio, como así también de casos de cyberbullyng, cyberstalking, cybergrooming y/o cualquier otra situación de hostigamiento, discriminación o acoso.
           </StaticInfoP>
           <StaticInfoP>
-            <u>Información proporcionada por las/os usuarias/os</u>
+            <u><em>Información proporcionada por las/os usuarias/os</em></u>
           </StaticInfoP>
           <StaticInfoP>
         El uso efectivo de la Plataforma requiere que los usuarios se registren. En ese caso, se les solicitará información personal directa, como nombre y apellido, documento, dirección de correo electrónico y la que nos proporcione indirectamente, tal como cookies (información sobre preferencias del usuario cuando visita una página web), tipo de navegador, página de referencia, avance a través del sitio, dominio ISP, conexiones y sistemas de información. Toda la información de cookies será almacenada en formatos que no permitan identificar a su titular. En el caso de no estar registrado el Usuario, estos datos serán almacenados en forma anónima.
@@ -201,7 +201,7 @@ export default () => (
         El Usuario puede ejercer los derechos que como titular de datos personales le asisten (acceso, rectificación, cancelación, oposición, información o revocación). Para tal efecto, puede enviar una comunicación a XXXXXXXX@hcdn.gob.ar.
           </StaticInfoP>
           <StaticInfoP>
-            <u>Información obtenida a partir del uso de la plataforma</u>
+            <u><em>Información obtenida a partir del uso de la plataforma</em></u>
           </StaticInfoP>
           <StaticInfoP>
         La Plataforma puede recopilar información sobre la forma en que los usuarios navegan la plataforma. Entre la información obtenida de esta forma, se incluye el tipo de navegador utilizado, la preferencias de lenguaje y los comentarios que ha realizado.
@@ -213,7 +213,7 @@ export default () => (
         Asimismo, garantiza la debida protección de los datos personales almacenados en esta plataforma web así como también el acceso a la información registrada en el mismo, de conformidad a lo establecido en el artículo 43, párrafo tercero de la Constitución Nacional y la Ley N° 25.326 de Protección de los Datos Personales.
           </StaticInfoP>
           <StaticInfoP>
-            <u>Modificaciones a la presente política de privacidad</u>
+            <u><em>Modificaciones a la presente política de privacidad</em></u>
           </StaticInfoP>
           <StaticInfoP>
         Con motivo de la mejora continua de procesos, se realizarán modificaciones y correcciones a esta Política de Privacidad. Se sugiere verificar estos Términos y Condiciones regularmente para consultar los cambios que puedan haber existido.

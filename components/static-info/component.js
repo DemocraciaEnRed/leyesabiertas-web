@@ -12,12 +12,12 @@ import Contacto from '../contacto/component'
 
 const buttons = [
   {
-    'name': 'Cómo participar',
-    'value': 'como-participar'
+    'name': 'Acerca de',
+    'value': 'acerca-de'
   },
   {
-    'name': 'Sobre la plataforma',
-    'value': 'sobre-la-plataforma'
+    'name': 'Cómo participar',
+    'value': 'como-participar'
   },
   {
     'name': 'Preguntas frecuentes',
@@ -35,7 +35,7 @@ const buttons = [
 
 const content = {
   'como-participar': <ComoParticipar />,
-  'sobre-la-plataforma': <SobreLaPlataforma />,
+  'acerca-de': <SobreLaPlataforma />,
   'faq': <FAQ />,
   'sobre-el-sitio': <SobreElSitio />,
   'contacto': <Contacto />

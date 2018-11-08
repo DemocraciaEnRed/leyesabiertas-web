@@ -22,8 +22,8 @@ const About = () => (
   <StyledAbout id='about'>
     <AboutImg img={'/static/assets/diputados-asset.jpg'} />
     <AboutText>
-      <AboutH2>Acerca de la propuesta</AboutH2>
-      <AboutP>El Portal de Co-creación legislativa es una plataforma de elaboración colaborativa de normas, donde las y los diputados abren a debate sus iniciativas para incorporar puntos de vista ciudadanos.</AboutP>
+      <AboutH2>Acerca de</AboutH2>
+      <AboutP>¿Qué es? El <strong><u>Portal de Co-creación legislativa</u></strong> es una plataforma de elaboración colaborativa de normas, donde las y los diputados abren a debate sus iniciativas para incorporar puntos de vista ciudadanos.</AboutP>
       <ArrowRightLink />
     </AboutText>
   </StyledAbout>
