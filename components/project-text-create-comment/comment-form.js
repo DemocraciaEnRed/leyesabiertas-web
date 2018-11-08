@@ -32,7 +32,7 @@ const CommentStatus = styled.form`
   width: 300px;
   height: 122px;
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
-  border: solid 1px ${(props) => props.error ? '#ea5f5f' : '#b8e986'};
+  border: solid 1px ${(props) => props.color ? '#ea5f5f' : '#b8e986'};
   background-color: #ffffff;
   display:flex;
   justify-content:space-between;
@@ -98,7 +98,7 @@ const CommentText = styled.textarea`
 
 const IconDiv = styled.div`
   width: 50px;
-  background-color: ${(error) => error ? '#ea5f5f' : '#b8e986'};
+  background-color: ${(props) => props.color ? '#ea5f5f' : '#b8e986'};
   color: #fff;
   display:flex;
   justify-content:center;
@@ -192,9 +192,11 @@ class CommentForm extends Component {
             <CommentFormFooter onClick={this.handleSubmit}>Enviar comentario</CommentFormFooter>
           </CommentFormContainer>
 
-          : <CommentStatus style={{ top: this.props.top }} color={{ error: this.state.error }}>
-            {!this.state.error ? <IconDiv><Icon icon={checkCircleO} /></IconDiv>
-              : <IconDiv error><Icon icon={timesCircleO} /></IconDiv> }
+          : <CommentStatus style={{ top: this.props.top }} color={this.state.error}>
+            <IconDiv color={this.state.error}>
+              {!this.state.error ? <Icon icon={checkCircleO} /> : <Icon icon={timesCircleO} /> }
+            </IconDiv>
+
             <TextDiv>
               <TextTitle>{!this.state.error ? 'Gracias por tu aporte' : 'Ha ocurrido un error'}</TextTitle>
               <Text>{!this.state.error ? 'Su comentario ha sido enviado al diputado y sus asesores.' : 'Lo sentimos. Por favor intente nuevamente más tarde.' }</Text>
