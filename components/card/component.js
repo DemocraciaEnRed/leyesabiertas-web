@@ -27,7 +27,6 @@ const Card = ({ project }) => (
       { project.currentVersion.content.imageCover &&
       <CardHeader img={project.currentVersion.content.imageCover} />
       }
-      {console.log(project.author)}
       <CardContent
         title={project.currentVersion.content.title}
         avatarImg={project.author.avatar}
