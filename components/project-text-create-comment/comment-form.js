@@ -113,7 +113,7 @@ class CommentForm extends Component {
         let decoration = this.props.decoration
         decoration.mark.data.preview = false
         const decorations = this.props.editor.value.decorations.push(decoration)
-        this.props.editor.setDecorations([decoration])
+        this.props.editor.setDecorations(decorations)
       })
       .catch((err) => {
         console.log(err)

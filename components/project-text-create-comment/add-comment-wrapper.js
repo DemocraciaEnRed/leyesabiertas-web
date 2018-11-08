@@ -19,7 +19,7 @@ export default class AddCommentWrapper extends Component {
 
   handleClickAdd = () => {
     this.setState({ showCommentForm: true })
-    const decoration = {
+    let decoration = {
       focus: this.props.editor.value.selection.focus.toJSON(),
       anchor: this.props.editor.value.selection.anchor.toJSON(),
       mark: {
@@ -30,7 +30,8 @@ export default class AddCommentWrapper extends Component {
       }
     }
     const decorations = this.props.editor.value.decorations.push(decoration)
-    this.props.editor.setDecorations([decoration])
+    this.props.editor.setDecorations(decorations)
+    decoration.mark.data = {}
     this.decoration = decoration
   }
 

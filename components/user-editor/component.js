@@ -75,8 +75,7 @@ class UserEditor extends Component {
       //   return o
       // })
       .map(o => o.type)
-      .filter(o => o !== 'add_mark')
-      .filter(o => o !== 'remove_mark')
+      .filter(o => o !== 'set_value')
       .filter(o => o !== 'set_selection')
       .count()
 
