@@ -17,6 +17,17 @@ class UserProfile extends Component {
   }
 
   async componentDidMount () {
+    if (!this.props.authContext.keycloak) return
+    this.fetchUser()
+  }
+
+  async componentWillUpdate (props) {
+    if (!props.authContext.keycloak) return
+    if (props === this.props) return
+    this.fetchUser()
+  }
+
+  fetchUser = async () => {
     const { authContext } = this.props
     try {
       let user = null
@@ -58,6 +69,10 @@ class UserProfile extends Component {
       })).json()
       window.alert('¡Perfil actualizado!')
       console.log(updatedUser)
+      this.fetchUser()
+      this.setState({
+        user: updatedUser
+      })
     } catch (error) {
       window.alert('Ocurrio un error')
       console.error(error)
