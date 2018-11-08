@@ -18,7 +18,9 @@ export default class extends Component {
   state = {
     withComments: true,
     selectedCommentsIds: [],
-    editMode: false
+    editMode: false,
+    newYoutubeId: null,
+    editedYoutubeId: false
   }
 
   switchComments = () => {
@@ -31,7 +33,7 @@ export default class extends Component {
     this.setState(({ selectedCommentsIds }) => {
       let _ids
       if (selectedCommentsIds.includes(id)) {
-        _ids = selectedCommentsIds.filter(_id => _id !== id)
+        _ids = selectedCommentsIds.filter((_id) => _id !== id)
       } else {
         _ids = selectedCommentsIds.concat([id])
       }
@@ -40,10 +42,12 @@ export default class extends Component {
   }
 
   toggleEditMode = () => this.setState(({ editMode }) => ({ editMode: !editMode }))
+  setYoutubeId = (theId) => this.setState({ newYoutubeId: theId }, () => { this.setEditedYoutubeId(true) /* console.log(this.state.newYoutubeId) */ })
+  setEditedYoutubeId = (value) => this.setState({ editedYoutubeId: value }, () => { /* console.log(this.state.editedYoutubeId) */ })
 
   render () {
-    const { project, section } = this.props
-    const { withComments} = this.state
+    const { project, section, fetchDocument } = this.props
+    const { withComments } = this.state
     if (!project) return null
     const { isAuthor } = project
     return (
@@ -56,7 +60,12 @@ export default class extends Component {
           editMode: this.state.editMode,
           toggleSelectedComment: this.toggleSelectedComment,
           toggleEditMode: this.toggleEditMode,
-          selectedCommentsIds: this.state.selectedCommentsIds
+          selectedCommentsIds: this.state.selectedCommentsIds,
+          setYoutubeId: this.setYoutubeId,
+          newYoutubeId: this.state.newYoutubeId,
+          setEditedYoutubeId: this.setEditedYoutubeId,
+          editedYoutubeId: this.state.editedYoutubeId,
+          fetchDocument: fetchDocument
         }}>
           <ProjectHeader project={project.document} section={section} />
           {this.props.section === '/proyecto' &&
