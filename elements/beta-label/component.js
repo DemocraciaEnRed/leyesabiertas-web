@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import React from 'react'
+import Link from 'next/link'
 
 const Label = styled.span`
   width: 95px;
@@ -23,7 +24,11 @@ const BetaLabelContainer = styled.div`
 
 const BetaLabel = () => (
   <BetaLabelContainer>
-    <Label>Versión beta</Label>
+    <Link href='/info?section=sobre-el-sitio'>
+      <a>
+        <Label>Versión beta</Label>
+      </a>
+    </Link>
   </BetaLabelContainer>
 )
 

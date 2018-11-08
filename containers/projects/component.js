@@ -52,7 +52,7 @@ class Projects extends Component {
     return (
       <Section id='projects'>
         <TitleH2>Propuestas de ley abiertas para lo co-creación.</TitleH2>
-        <SubtitleH3>Estas son las propuestas disponibles para leer, comentar y hacer aportes . ¡Ayude a mejorarlos!</SubtitleH3>
+        <SubtitleH3>Estas son las propuestas disponibles para leer, comentar y hacer aportes . ¡Ayude a mejorarlas!</SubtitleH3>
         { projects &&
           <Fragment>
             <Grid>

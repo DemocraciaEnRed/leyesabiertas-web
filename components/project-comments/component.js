@@ -30,8 +30,14 @@ const StyledTitle = styled.div`
   font-size: 14px;
   font-family:var(--bold);
   color: #2c4c61;
-  margin:3rem 0;
+  margin:2rem 0;
   `
+const StyledSubtitle = styled.div`;
+  height: 16px;
+  font-size: 14px;
+  color: #9b9b9b;
+  margin:2rem 0;
+`
 class ProjectComments extends Component {
   static propTypes = {
     project: PropTypes.object.isRequired,
@@ -109,7 +115,8 @@ class ProjectComments extends Component {
     const { comments, status } = this.state
     return (
       <StyledProjectComments>
-        <StyledTitle>Opiniones generales</StyledTitle>
+        <StyledTitle>Comentarios</StyledTitle>
+        <StyledSubtitle>Espacio abierto para comentarios generales.</StyledSubtitle>
         { comments && comments.map((comment) => (
           <CommentItem comment={comment} key={comment._id} />
         ))}

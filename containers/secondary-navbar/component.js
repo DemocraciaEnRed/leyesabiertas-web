@@ -18,7 +18,7 @@ const SecondaryBar = styled.div`
 
 const links = [
   {
-    name: 'Proyectos',
+    name: 'Propuestas',
     value: '#projects'
   },
   {
@@ -26,7 +26,7 @@ const links = [
     value: '#participate'
   },
   {
-    name: 'La propuesta',
+    name: 'Acerca de',
     value: '#about'
   }
 ]

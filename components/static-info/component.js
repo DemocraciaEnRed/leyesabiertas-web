@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import StaticInfoHeader from '../../elements/static-info-header/component'
 import StaticInfoWrapper from '../../elements/static-info-wrapper/component'
 import StaticInfoNav from '../../elements/static-info-nav/component'
 import StaticInfoButton from '../../elements/static-info-button/component'
 import ComoParticipar from '../como-participar/component'
 import FAQ from '../faq/component'
 import SobreLaPlataforma from '../sobre-la-plataforma/component'
-import TerminosYCondiciones from '../terminos-y-condiciones/component'
+import SobreElSitio from '../sobre-el-sitio/component'
+import Contacto from '../contacto/component'
 
 const buttons = [
   {
@@ -24,8 +24,12 @@ const buttons = [
     'value': 'faq'
   },
   {
-    'name': 'Términos y condiciones',
-    'value': 'terminos-y-condiciones'
+    'name': 'Sobre el sitio',
+    'value': 'sobre-el-sitio'
+  },
+  {
+    'name': 'Contacto',
+    'value': 'contacto'
   }
 ]
 
@@ -33,7 +37,8 @@ const content = {
   'como-participar': <ComoParticipar />,
   'sobre-la-plataforma': <SobreLaPlataforma />,
   'faq': <FAQ />,
-  'terminos-y-condiciones': <TerminosYCondiciones />
+  'sobre-el-sitio': <SobreElSitio />,
+  'contacto': <Contacto />
 }
 
 const StyledStaticInfo = styled.div`
