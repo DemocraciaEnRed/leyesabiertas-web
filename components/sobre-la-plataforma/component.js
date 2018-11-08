@@ -10,7 +10,7 @@ const StyledDiv = styled.div`
 
 export default () => (
   <section>
-    <StaticInfoTitle>Sobre la plataforma</StaticInfoTitle>
+    <StaticInfoTitle>Acerca de</StaticInfoTitle>
     <StyledDiv>
       <StaticInfoBold>
         ¿Qué es?

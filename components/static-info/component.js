@@ -16,8 +16,8 @@ const buttons = [
     'value': 'como-participar'
   },
   {
-    'name': 'Sobre la plataforma',
-    'value': 'sobre-la-plataforma'
+    'name': 'Acerca de',
+    'value': 'acerca-de'
   },
   {
     'name': 'Preguntas frecuentes',
@@ -35,7 +35,7 @@ const buttons = [
 
 const content = {
   'como-participar': <ComoParticipar />,
-  'sobre-la-plataforma': <SobreLaPlataforma />,
+  'acerca-de': <SobreLaPlataforma />,
   'faq': <FAQ />,
   'sobre-el-sitio': <SobreElSitio />,
   'contacto': <Contacto />
