@@ -42,6 +42,7 @@ class UserEditor extends Component {
       commentsIds: [],
       comments: []
     }
+    this.editor = null
   }
 
   schema = {
@@ -49,12 +50,6 @@ class UserEditor extends Component {
       comment: {
         isAtomic: true
       }
-    }
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.withComments !== this.props.withComments) {
-      this.forceUpdate()
     }
   }
 
@@ -100,17 +95,16 @@ class UserEditor extends Component {
   fetchComments = async () => {
     try {
       const comments = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?field=articles`)).json()
-      // const value = this.state.value
-      // const decorations = this.state.comments.map(c => c.decoration)
+      const decorations = comments.map(c => c.decoration).filter(d => d)
 
-      // console.log(decorations)
-      // value.setDecorations(decorations)
-
+      this.editor.setDecorations(decorations)
       this.setState({ comments })
     } catch (err) {
       console.error(err)
     }
   }
+
+  editorLoad = (editor) => { this.editor = editor }
 
   render () {
     if (!this.state.value) return null
@@ -133,6 +127,7 @@ class UserEditor extends Component {
         <div ref={this.myEditor}>
           <Editor
             plugins={plugins}
+            ref={this.editorLoad}
             className='editor'
             schema={this.schema}
             value={this.state.value}

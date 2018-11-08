@@ -16,7 +16,7 @@ const CommentsGrid = ({ activeComments = [], top, comments }) => {
   const displayComments = comments
     .filter(comment => activeComments.includes(comment._id))
     .map((comment) => <CommentCard key={comment._id} comment={comment} />)
-  console.log(activeComments, comments, displayComments)
+
   return (
     <StyledCommentsGrid style={{ top }}>
       { displayComments }
