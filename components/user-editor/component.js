@@ -11,6 +11,7 @@ import TitleMark from '../../elements/title-mark/component'
 import ProjectTextEdit from '../../components/project-text-edit'
 import ProjectTextComment from '../../components/project-text-comment'
 import ProjectTextCreateComment from '../../components/project-text-create-comment'
+import Subtitle from '../../elements/editor-subtitle/component'
 
 const API_URL = process.env.API_URL
 
@@ -20,6 +21,7 @@ const StyledEditorWrapper = styled.div`
   margin-top: 48px;
   position: relative;
   .editor {
+    margin-top:4rem;
     max-width: 74%;
     @media (max-width: 1024px) {
     max-width:60%;
@@ -117,6 +119,7 @@ class UserEditor extends Component {
             top={this.state.top} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
+        <Subtitle>Puede comentar haciendo selección sobre el fragmento de texto deseado.</Subtitle>
         <div ref={this.myEditor}>
           <Editor
             plugins={plugins}
