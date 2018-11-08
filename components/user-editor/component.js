@@ -12,6 +12,8 @@ import ProjectTextEdit from '../../components/project-text-edit'
 import ProjectTextComment from '../../components/project-text-comment'
 import ProjectTextCreateComment from '../../components/project-text-create-comment'
 
+const API_URL = process.env.API_URL
+
 const StyledEditorWrapper = styled.div`
   width: 90%;
   padding: 0 8%;
@@ -37,7 +39,8 @@ class UserEditor extends Component {
     this.state = {
       value: null,
       selection: null,
-      commentsIds: []
+      commentsIds: [],
+      comments: []
     }
   }
 
@@ -61,6 +64,7 @@ class UserEditor extends Component {
         value: Value.fromJSON(this.props.value)
       })
     }
+    this.fetchComments()
   }
 
   onChange = async (change) => {
@@ -93,6 +97,21 @@ class UserEditor extends Component {
     })
   }
 
+  fetchComments = async () => {
+    try {
+      const comments = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?field=articles`)).json()
+      // const value = this.state.value
+      // const decorations = this.state.comments.map(c => c.decoration)
+
+      // console.log(decorations)
+      // value.setDecorations(decorations)
+
+      this.setState({ comments })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   render () {
     if (!this.state.value) return null
     let plugins = []
@@ -107,6 +126,7 @@ class UserEditor extends Component {
           <CommentsGrid
             id={this.props.id}
             activeComments={this.state.activeComments}
+            comments={this.state.comments}
             top={this.state.top} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
