@@ -34,7 +34,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   &:disabled {
     background-color: #dae1e7;
-    cursosr: not-allowed;
+    cursor: not-allowed;
   }
 `
 
