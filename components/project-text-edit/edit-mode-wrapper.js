@@ -36,7 +36,8 @@ class AddCommentWrapper extends Component {
       const saveRequest = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}`, {
         'method': 'PUT',
         'headers': {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.props.authContext.keycloak.token
         },
         'body': JSON.stringify(payload)
       })).json()
