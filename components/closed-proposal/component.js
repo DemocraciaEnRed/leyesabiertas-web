@@ -18,7 +18,7 @@ const ClosedProposalData = styled.div`
   }
 `
 
-export default () => (
+export default ({ contributors, contributions }) => (
   <ClosedProposalWrapper>
     <ClosedProposalTitle>Los aportes para esta propuesta ya han sido cerrados</ClosedProposalTitle>
     <ClosedProposalMessage>Agradecemos a cada uno de los ciudadanos que compartieron sus aportes y comentarios a esta propuesta de ley. <br/> A continuación podrá ver los detalles y el resumen de la  co-creación de esta propuesta de ley.</ClosedProposalMessage>
@@ -27,7 +27,7 @@ export default () => (
         <ActivityIcon img={'/static/assets/citizen-icon.svg'} />
         <DashboardBarTextContainer>
           <BarTitle>Cantidad de aportes</BarTitle>
-          <BarActivitySubtitle number={3}>
+          <BarActivitySubtitle number={contributions}>
             aportes incluídos
           </BarActivitySubtitle>
         </DashboardBarTextContainer>
@@ -36,7 +36,7 @@ export default () => (
         <ActivityIcon img={'/static/assets/comment-smiley-icon.svg'} />
         <DashboardBarTextContainer>
           <BarTitle>Total de aportantes</BarTitle>
-          <BarActivitySubtitle number={250}>
+          <BarActivitySubtitle number={contributors}>
             aportantes
           </BarActivitySubtitle>
         </DashboardBarTextContainer>
