@@ -31,6 +31,11 @@ const StyledButton = styled.button`
   font-size: 16px;
   font-weight: 600;
   float: right;
+  cursor: pointer;
+  &:disabled {
+    background-color: #dae1e7;
+    cursor: not-allowed;
+  }
 `
 
 const SelectedComents = styled.p`
@@ -55,7 +60,8 @@ export default class Toolbar extends Component {
     newYoutubeId: PropTypes.string,
     editedYoutubeId: PropTypes.boolean,
     setEditedYoutubeId: PropTypes.func,
-    fetchDocument: PropTypes.func
+    fetchDocument: PropTypes.func,
+    buttonIsDisabled: PropTypes.boolean
   }
 
   handleOnClick = () => {
@@ -72,7 +78,7 @@ export default class Toolbar extends Component {
                 <><Count>{this.props.selectedCommentsIds.length}</Count> comentarios marcados como aportes</>
             }
           </SelectedComents>
-          <StyledButton onClick={this.handleOnClick}>
+          <StyledButton onClick={this.handleOnClick} disabled={this.props.buttonIsDisabled}>
             Guardar cambios
           </StyledButton>
         </div>
