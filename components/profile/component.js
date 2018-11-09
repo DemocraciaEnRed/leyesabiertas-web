@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import FileBase64 from 'react-file-base64'
+import Jimp from 'jimp'
 import ProfileForm from '../../elements/profile-form/component'
 import ProfileAvatar from '../../elements/profile-avatar/component'
 import ProfileName from '../../elements/profile-name/component'
@@ -26,10 +28,10 @@ const ButtonLink = styled.a`
 `
 
 const genderOptions = [
-  { 'name': 'Masculino', 'value': 'masculino' },
-  { 'name': 'Femenino', 'value': 'femenino' },
-  { 'name': 'Otro', 'value': 'otro' },
-  { 'name': 'Prefiero no especificar', 'value': 'no especifica' }
+  { 'name': 'Masculino', 'value': 'Masculino' },
+  { 'name': 'Femenino', 'value': 'Femenino' },
+  { 'name': 'Otro', 'value': 'Otro' },
+  { 'name': 'Prefiero no especificar', 'value': 'Prefiero no especificar' }
 ]
 
 export default class Profile extends Component {
@@ -40,44 +42,57 @@ export default class Profile extends Component {
   }
 
   state = {
-    surnames: '',
-    names: '',
-    username: '',
-    avatar: '',
+    avatar: null,
     occupation: '',
     gender: '',
-    age: '',
     party: '',
+    birthday: '',
     province: '',
     editMode: false,
-    arrayData: []
+    files: []
   }
 
   componentDidMount () {
     const { user } = this.props
-    let arrayData = []
-    if (user.fields && user.fields.occupation) arrayData.push(user.fields.occupation)
-    if (user.fields && user.fields.party) arrayData.push(user.fields.party)
-    if (user.fields && user.fields.province) arrayData.push(user.fields.province)
+    // let arrayData = []
+    // if (user.fields && user.fields.occupation) arrayData.push(user.fields.occupation)
+    // if (user.fields && user.fields.party) arrayData.push(user.fields.party)
+    // if (user.fields && user.fields.province) arrayData.push(user.fields.province)
     // if(user.fields && user.fields.) arrayData.push(user.fields.occupation)
     // if(user.fields && user.fields.occupation) arrayData.push(user.fields.occupation)
     this.setState({
-      'surnames': user.surnames,
-      'names': user.names,
-      'username': user.username,
-      'avatar': user.avatar,
-      'occupation': user.fields && user.fields.occupation ? user.fields.occupation : '',
-      'gender': user.fields && user.fields.gender ? user.fields.gender : '',
-      'party': user.fields && user.fields.party ? user.fields.party : '',
-      'age': user.fields && user.fields.age ? user.fields.age : '',
-      'province': user.fields && user.fields.province ? user.fields.province : '',
-      'arrayData': arrayData
+      occupation: user.fields && user.fields.occupation ? user.fields.occupation : '',
+      gender: user.fields && user.fields.gender ? user.fields.gender : '',
+      party: user.fields && user.fields.party ? user.fields.party : '',
+      birthday: user.fields && user.fields.birthday ? user.fields.birthday : '',
+      province: user.fields && user.fields.province ? user.fields.province : ''
     })
   }
 
+  // Callback~
+  getFiles = async (files) => {
+    console.log(files.base64.split('base64,')[1])
+    Jimp.read(Buffer.from(files.base64.split('base64,')[1], 'base64'))
+      .then(async (image) => {
+        let optimizedImage = await image.cover(250, 250).quality(90).getBase64Async(Jimp.MIME_JPEG)
+        this.setState({ avatar: optimizedImage })
+      }).catch((err) => {
+        console.log(err)
+      })
+    this.setState({ files: files })
+  }
+
+  // get derivedState
   toggleEdit = () => {
+    const { user } = this.props
+
     this.setState({
-      editMode: !this.state.editMode
+      editMode: !this.state.editMode,
+      occupation: user.fields && user.fields.occupation ? user.fields.occupation : '',
+      gender: user.fields && user.fields.gender ? user.fields.gender : '',
+      party: user.fields && user.fields.party ? user.fields.party : '',
+      birthday: user.fields && user.fields.birthday ? user.fields.birthday : '',
+      province: user.fields && user.fields.province ? user.fields.province : ''
     })
   }
 
@@ -90,17 +105,24 @@ export default class Profile extends Component {
     })
   }
 
+  // isEmpty = (field) => {
+  // if(field == '' || field === null) return null,
+  // }
+
   handleSubmit = (e) => {
     e.preventDefault()
     const newData = {
-      'avatar': this.state.avatar || '',
-      'fields': {
-        'occupation': this.state.occupation || '',
-        'gender': this.state.gender || '',
-        'age': this.state.age || '',
-        'province': this.state.province || '',
-        'party': this.state.party || ''
+      // 'avatar': this.state.avatar || '',
+      fields: {
+        occupation: this.state.occupation || '',
+        gender: this.state.gender || '',
+        birthday: this.state.birthday || '',
+        province: this.state.province || '',
+        party: this.state.party || ''
       }
+    }
+    if (this.state.avatar) {
+      newData.avatar = this.state.avatar
     }
     this.props.onSubmit(newData)
     this.setState({
@@ -112,23 +134,30 @@ export default class Profile extends Component {
     const { user, isOwner, isLoading } = this.props
     return (
       <ProfileForm onSubmit={this.handleSubmit}>
-        <ProfileAvatar img={this.state.avatar} />
+        <ProfileAvatar img={user.avatar} />
         <ProfileName>{`${user.surnames}, ${user.names}`}</ProfileName>
-        <ProfileMail mail={this.state.arrayData.join(' - ')} />
+        <ProfileMail mail={user.arrayData.join(' - ')} />
         { isOwner && !this.state.editMode ? <ButtonLink onClick={this.toggleEdit}>Editar perfil</ButtonLink> : null }
         { isLoading ? <p>...</p> : null}
         {
           this.state.editMode
             ? <div>
-              <ProfileLabel htmlFor='age'>
-
-          Edad
+              <ProfileLabel htmlFor='avatar'>
+          Imagen de perfil
+                <FileBase64
+                  multiple={false}
+                  onDone={this.getFiles}
+                  style={{ marginTop: '10px' }} />
+              </ProfileLabel>
+              <ProfileLabel htmlFor='birthday'>
+          Fecha de Nacimiento
                 <ProfileInput type='text'
-                  name='age'
-                  value={this.state.age}
+                  name='birthday'
+                  value={this.state.birthday}
                   onChange={this.handleChange}
                   readOnly={!isOwner}
-                  disabled={!isOwner} />
+                  disabled={!isOwner}
+                  placeholder='30/02/1900' />
               </ProfileLabel>
               <ProfileLabel htmlFor='gender'>
           Género
@@ -139,7 +168,7 @@ export default class Profile extends Component {
                 }
               </ProfileLabel>
               <ProfileLabel htmlFor='province'>
-          Provincia
+          Provincia / Localidad
                 <ProfileInput
                   type='text'
                   name='province'
