@@ -14,7 +14,7 @@ import ProjectBreadcrumb from '../project-breadcrumb/component'
 import ClosedProposal from '../closed-proposal/component'
 
 const ProjectHeaderContainer = styled.div`
-  height: 383px;
+  min-height: 383px;
   width:100%;
   background-color: #a4cee8;
   background-image: url('${(props) => props.img}');

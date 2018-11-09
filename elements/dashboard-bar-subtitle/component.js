@@ -26,22 +26,18 @@ const ItemStyle = styled.p`
   margin:0;
 
 `
-const BarActivitySubtitle = ({ number, itemStyle }) => (
+const BarActivitySubtitle = ({ number, children }) => (
   <StyledBarSubtitle>
     <Span>{number}</Span>
     <ItemStyle>
-      {itemStyle === 'projects' ? 'con más actividad'
-        : (itemStyle === 'commentaries'
-          ? (number === 1 ? 'nuevo comentario' : 'nuevos comentarios')
-          : (number === 1 ? 'persona activa' : 'personas activas'))
-      }
+      {children}
     </ItemStyle>
   </StyledBarSubtitle>
 )
 
 BarActivitySubtitle.propTypes = {
   number: PropTypes.number.isRequired,
-  itemStyle: PropTypes.string.isRequired
+  children: PropTypes.node
 }
 
 export default BarActivitySubtitle
