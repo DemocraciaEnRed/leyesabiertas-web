@@ -33,7 +33,7 @@ class UserProfile extends Component {
     if (user.fields && user.fields.occupation) arrayData.push(user.fields.occupation)
     if (user.fields && user.fields.party) arrayData.push(user.fields.party)
     if (user.fields && user.fields.province) arrayData.push(user.fields.province)
-    if (user.fields && user.fields.gender) arrayData.push('Genero: ' + user.fields.gender)
+    if (user.fields && user.fields.gender) arrayData.push('Género: ' + user.fields.gender)
     if (user.fields && user.fields.birthday) arrayData.push('Fecha de Nacimiento: ' + user.fields.birthday)
     // if(user.fields && user.fields.) arrayData.push(user.fields.occupation)
     // if(user.fields && user.fields.occupation) arrayData.push(user.fields.occupation)
