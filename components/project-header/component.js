@@ -11,6 +11,7 @@ import ProjectEditMode from '../../elements/project-edit-mode/component'
 import ProjectHeaderLink from '../../elements/project-header-link/component'
 import ClosingDate from '../../elements/closing-date/component'
 import ProjectBreadcrumb from '../project-breadcrumb/component'
+import ClosedProposal from '../closed-proposal/component'
 
 const ProjectHeaderContainer = styled.div`
   height: 383px;
@@ -62,6 +63,7 @@ const ProjectHeader = ({ project, section }) => (
         }
         <ProjectEditMode />
       </TopBarWrapper>
+      <ClosedProposal />
       { section === '/articulado'
         ? <Link href={{ pathname: '/proyecto', query: { id: project._id } }}>
           <ProjectHeaderLink>
