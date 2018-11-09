@@ -105,6 +105,18 @@ class UserEditor extends Component {
     }
   }
 
+  removeComment = (id) => {
+    console.log(this.editor.value.decorations.toJSON())
+    const decorations = this.editor.value.decorations.toJSON().filter(d => d.mark.data.id !== id)
+    console.log(decorations)
+    this.editor.setDecorations(decorations)
+
+    this.setState((prevState) => {
+      const ids = prevState.activeComments.filter(_id => _id !== id)
+      return { activeComments: ids }
+    })
+  }
+
   editorLoad = (editor) => { this.editor = editor }
 
   render () {
@@ -122,6 +134,7 @@ class UserEditor extends Component {
             id={this.props.id}
             activeComments={this.state.activeComments}
             comments={this.state.comments}
+            removeComment={this.removeComment}
             top={this.state.top} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>

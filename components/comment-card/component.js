@@ -2,9 +2,12 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Icon from 'react-icons-kit'
-import { thumbsUp, star } from 'react-icons-kit/feather'
+import WithUserContext from '../../components/with-user-context/component'
+import { thumbsUp, star, square, checkSquare } from 'react-icons-kit/feather'
 import UserAvatar from '../../elements/user-avatar/component'
 import { ArticlesContext } from '../../containers/user-project-container/component'
+
+const { API_URL } = process.env
 
 const StyledCommentCard = styled.div`
   width: 300px;
@@ -21,7 +24,6 @@ const StyledCommentCard = styled.div`
   }
 `
 const StyledLikeWrapper = styled.div`
-  display:none;
   margin-top: 11px;
   color: ${({ liked }) => liked ? '#ef885d' : '#5c97bc'};
   cursor: pointer;
@@ -36,7 +38,7 @@ const StyledIconWrapper = styled.div`
 `
 
 const SelectCommentText = styled.span`
-  color: ${({ active }) => active ? '#ef885d' : '#4a5d68'};
+  color: ${({ active }) => active ? '#ef885d' : '#5c97bc'};
   margin-left: 5px;
   font-size: 14px;
 `
@@ -48,16 +50,14 @@ const StyledCheckbox = styled.input`
 class commentCard extends Component {
   constructor (props) {
     super(props)
-    this.handleClick = this.handleClick.bind(this)
-    this.handleResolved = this.handleResolved.bind(this)
 
     this.state = {
-      liked: true,
+      liked: false,
       resolved: false
     }
   }
 
-  handleClick () {
+  handleLike = () => {
     this.setState((prevState) => {
       return {
         liked: !prevState.liked
@@ -65,12 +65,24 @@ class commentCard extends Component {
     })
   }
 
-  handleResolved () {
-    this.setState((prevState) => {
-      return {
-        resolved: !prevState.resolved
-      }
+  handleResolved = (projectId) => () => {
+    this.setState({ resolved: true })
+    fetch(`${API_URL}/api/v1/documents/${projectId}/comments/${this.props.comment._id}/resolve`, {
+      headers: {
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
+        'Content-Type': 'application/json'
+      },
+      method: 'POST'
     })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res)
+        console.log('comentario resuelto...')
+        this.props.removeComment(this.props.comment._id)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   render () {
@@ -81,25 +93,34 @@ class commentCard extends Component {
           name={this.props.comment.user.fullname} />
         <p>{this.props.comment.content}</p>
         <StyledLikeWrapper liked={this.state.liked} >
-          <Icon icon={thumbsUp} onClick={this.handleClick} />
+          <Icon icon={thumbsUp} onClick={this.handleLike} />
         </StyledLikeWrapper>
         <ArticlesContext.Consumer>
           {
-            ({ isAuthor, toggleSelectedComment, editMode, selectedCommentsIds }) =>
+            ({ isAuthor, toggleSelectedComment, editMode, selectedCommentsIds, project }) =>
               <Fragment>
                 {(isAuthor &&
 
                 <StyledIconWrapper
-                  active={this.state.resolved}>
-                  <StyledCheckbox type='checkbox' onClick={this.handleResolved} />
-                  <SelectCommentText active={this.state.resolved}>
+                  active={this.state.resolved}
+                  onClick={this.handleResolved(project._id)}>
                     {
                       this.state.resolved
-                        ? 'Marcado como resuelto'
-                        : 'Marcar como resuelto'
-
+                        ?
+                          <>
+                            <Icon icon={checkSquare} />
+                            <SelectCommentText active={this.state.resolved}>
+                              Marcado como resuelto
+                            </SelectCommentText>
+                          </>
+                        :
+                          <>
+                            <Icon icon={square} />
+                            <SelectCommentText active={this.state.resolved}>
+                              Marcar como resuelto
+                            </SelectCommentText>
+                          </>
                     }
-                  </SelectCommentText>
                 </StyledIconWrapper>
                 )}
 
@@ -130,4 +151,4 @@ commentCard.propTypes = {
   comment: PropTypes.object.isRequired
 }
 
-export default commentCard
+export default WithUserContext(commentCard)
