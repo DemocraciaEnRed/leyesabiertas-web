@@ -9,8 +9,8 @@ import ProjectTitle from '../../elements/project-title/component'
 import ProjectLimitDate from '../../elements/project-limit-date/component'
 import ProjectEditMode from '../../elements/project-edit-mode/component'
 import ProjectHeaderLink from '../../elements/project-header-link/component'
+import ClosingDate from '../../elements/closing-date/component'
 import ProjectBreadcrumb from '../project-breadcrumb/component'
-
 
 const ProjectHeaderContainer = styled.div`
   height: 383px;
@@ -55,8 +55,11 @@ const ProjectHeader = ({ project, section }) => (
         <ProjectVersionData
           version={project.currentVersion.version}
           createdAt={project.currentVersion.createdAt} />
-        <ProjectLimitDate
-          limitDate={project.currentVersion.content.closingDate} />
+        {!project.closed
+          ? <ProjectLimitDate
+            limitDate={project.currentVersion.content.closingDate} />
+          : <ClosingDate date={project.currentVersion.content.closingDate} />
+        }
         <ProjectEditMode />
       </TopBarWrapper>
       { section === '/articulado'

@@ -133,7 +133,7 @@ class ProjectComments extends Component {
             key={comment._id}
             project={project._id} />
         ))}
-        {project.closed &&
+        {!project.closed &&
           <FundationCommentForm
             authenticated={authContext.authenticated}
             handleSubmit={this.handleSubmit}
