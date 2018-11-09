@@ -5,7 +5,8 @@ import WithUserContext from '../with-user-context/component'
 import NavbarUsermenu from '../../elements/navbar-usermenu/component'
 
 const StyledLoggedUser = styled.div`
-  height:45px;
+  // height:45px;
+  height:25px;
   display:flex;
   justify-content:flex-end;
   background: #fff;

@@ -29,7 +29,7 @@ text-transform:uppercase;
 `
 const TextWrapper = styled.div`
 height:35px;
-margin-top:3px;
+margin-top:5px;
 padding-left:10px;
 display:flex;
 flex-direction:column;
@@ -47,7 +47,7 @@ const Arrow = styled.i`
 
 const UserAvatar = ({ avatarImg, name, party }) => (
   <Wrapper>
-    <Avatar avatarImg={avatarImg} />
+    {/* <Avatar avatarImg={avatarImg} /> */}
     <TextWrapper>
       <Name>{name} </Name>
       <Party>{party}</Party>

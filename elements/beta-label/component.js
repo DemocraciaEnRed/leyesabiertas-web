@@ -14,6 +14,8 @@ const Label = styled.span`
   text-transform: uppercase;
   align-self: flex-end;
   margin-bottom: 8px;
+  position: relative;
+  bottom: 7px
 `
 
 const BetaLabelContainer = styled.div`

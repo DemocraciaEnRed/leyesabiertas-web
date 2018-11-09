@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const ProfileName = styled.input`
+const ProfileName = styled.p`
   font-size: 4.0rem;
   font-family: var(--bold);
   line-height: 1.63rem;
@@ -8,10 +8,7 @@ const ProfileName = styled.input`
   color: #203340;
   border: none;
   margin-bottom: 30px;
-  &:read-only,
-  &:disabled {
-    cursor: not-allowed;
-  }
+  margin-top: 10px;
 `
 
 export default ProfileName

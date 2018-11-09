@@ -23,7 +23,7 @@ class UserProfile extends Component {
 }
 
 UserProfile.propTypes = {
-  id: PropTypes.string.isRequired
+  id: PropTypes.string
 }
 
 export default UserProfile

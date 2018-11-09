@@ -8,7 +8,7 @@ const API_URL = process.env.API_URL
 
 class UserProfile extends Component {
   static propTypes = {
-    userId: PropTypes.string.isRequired
+    userId: PropTypes.string
   }
 
   state = {
@@ -17,6 +17,46 @@ class UserProfile extends Component {
   }
 
   async componentDidMount () {
+    if (!this.props.authContext.keycloak) return
+    // this.fetchUser(this.props.authContext.keycloak.token)
+    this.fetchUser(this.props.authContext.authenticated, this.props.authContext.keycloak.token)
+  }
+
+  async componentWillUpdate (props) {
+    if (!props.authContext.keycloak) return
+    if (props === this.props) return
+    this.fetchUser(props.authContext.authenticated, props.authContext.keycloak.token)
+  }
+
+  setUser = (user, isOwner) => {
+    let arrayData = []
+    if (user.fields && user.fields.occupation) arrayData.push(user.fields.occupation)
+    if (user.fields && user.fields.party) arrayData.push(user.fields.party)
+    if (user.fields && user.fields.province) arrayData.push(user.fields.province)
+    if (user.fields && user.fields.gender) arrayData.push('Género: ' + user.fields.gender)
+    if (user.fields && user.fields.birthday) arrayData.push('Fecha de Nacimiento: ' + user.fields.birthday)
+    // if(user.fields && user.fields.) arrayData.push(user.fields.occupation)
+    // if(user.fields && user.fields.occupation) arrayData.push(user.fields.occupation)
+    this.setState({
+      'user': {
+        'surnames': user.surnames,
+        'names': user.names,
+        'username': user.username,
+        'avatar': user.avatar,
+        'occupation': user.fields && user.fields.occupation ? user.fields.occupation : '',
+        'gender': user.fields && user.fields.gender ? user.fields.gender : '',
+        'party': user.fields && user.fields.party ? user.fields.party : '',
+        'birthday': user.fields && user.fields.birthday ? user.fields.birthday : '',
+        'province': user.fields && user.fields.province ? user.fields.province : '',
+        'roles': user.roles,
+        'fields': user.fields,
+        'arrayData': arrayData
+      },
+      isOwner: isOwner
+    })
+  }
+
+  fetchUser = async (authenticated, token) => {
     const { authContext } = this.props
     try {
       let user = null
@@ -24,21 +64,21 @@ class UserProfile extends Component {
       if (this.props.userId) {
         user = await (await fetch(`${API_URL}/api/v1/users/${this.props.userId}`)).json()
         isOwner = false
-        // console.log(authContext.keycloak.userInfo.sub)
-        if (authContext.authenticated && authContext.keycloak) isOwner = user.keycloak === authContext.keycloak.userInfo.sub
+        console.log(this.props.authContext.keycloak.userInfo.sub)
+        console.log(user.keycloak)
+        console.log((user.keycloak == this.props.authContext.keycloak.userInfo.sub))
+        console.log(authenticated)
+        if (authenticated) isOwner = (user.keycloak == this.props.authContext.keycloak.userInfo.sub)
       } else {
         user = await (await fetch(`${API_URL}/api/v1/users/me`, {
           'headers': {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + authContext.keycloak.token
+            'Authorization': 'Bearer ' + token
           }
         })).json()
         isOwner = true
       }
-      this.setState({
-        user,
-        isOwner
-      })
+      this.setUser(user, isOwner)
     } catch (error) {
       console.error(error)
     }
@@ -57,7 +97,7 @@ class UserProfile extends Component {
         'body': JSON.stringify(newProfile)
       })).json()
       window.alert('¡Perfil actualizado!')
-      console.log(updatedUser)
+      this.fetchUser(this.props.authContext.authenticated, this.props.authContext.keycloak.token)
     } catch (error) {
       window.alert('Ocurrio un error')
       console.error(error)
