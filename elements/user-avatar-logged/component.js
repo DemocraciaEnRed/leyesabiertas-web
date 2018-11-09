@@ -13,7 +13,7 @@ const Avatar = styled.div`
   width: 30px;
   height: 30px;
   border-radius:50%;
-  background-image: url('${(props) => props.avatarImg}');
+  background-image: url('${(props) => props.avatarImg ? props.avatarImg : '/static/assets/userdefault.png'}');
   background-size: cover;
   background-position: center;
 `
