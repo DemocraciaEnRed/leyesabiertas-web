@@ -27,6 +27,9 @@ const StyledLikeWrapper = styled.div`
   margin-top: 11px;
   color: ${({ liked }) => liked ? '#ef885d' : '#5c97bc'};
   cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
 `
 
 const StyledIconWrapper = styled.div`
@@ -57,12 +60,28 @@ class commentCard extends Component {
     }
   }
 
-  handleLike = () => {
+  componentDidMount ( ) {
+    this.setState({ liked: this.props.comment.isLiked })
+  }
+
+  handleLike = (projectId) => () => {
     this.setState((prevState) => {
       return {
         liked: !prevState.liked
       }
     })
+    this.setState({ resolved: true })
+    fetch(`${API_URL}/api/v1/documents/${projectId}/comments/${this.props.comment._id}/like`, {
+      headers: {
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
+        'Content-Type': 'application/json'
+        
+      },
+      method: 'POST'
+    })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   handleResolved = (projectId) => () => {
@@ -76,8 +95,6 @@ class commentCard extends Component {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res)
-        console.log('comentario resuelto...')
         this.props.removeComment(this.props.comment._id)
       })
       .catch((err) => {
@@ -92,13 +109,14 @@ class commentCard extends Component {
           avatarImg={this.props.comment.user.avatar}
           name={this.props.comment.user.fullname} />
         <p>{this.props.comment.content}</p>
-        <StyledLikeWrapper liked={this.state.liked} >
-          <Icon icon={thumbsUp} onClick={this.handleLike} />
-        </StyledLikeWrapper>
         <ArticlesContext.Consumer>
           {
             ({ isAuthor, toggleSelectedComment, editMode, selectedCommentsIds, project }) =>
               <Fragment>
+                <StyledLikeWrapper liked={this.state.liked} onClick={this.handleLike(project._id)}>
+                  <Icon icon={thumbsUp} style={{ marginRight: '5px' }} /> { this.props.comment.likes }
+                </StyledLikeWrapper>
+
                 {(isAuthor &&
 
                 <StyledIconWrapper
@@ -124,7 +142,7 @@ class commentCard extends Component {
                 </StyledIconWrapper>
                 )}
 
-                { (editMode &&
+                {(editMode &&
 
                 <StyledIconWrapper
                   active={selectedCommentsIds.includes(this.props.comment._id)}

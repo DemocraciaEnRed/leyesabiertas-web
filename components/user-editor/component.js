@@ -95,7 +95,13 @@ class UserEditor extends Component {
 
   fetchComments = async () => {
     try {
-      const comments = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?field=articles`)).json()
+      const comments = await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?field=articles`, {
+        headers: {
+          Authorization: `Bearer ${this.props.authContext.keycloak.token}`
+        }
+      })
+      .then(docs => docs.json())
+
       const decorations = comments.map(c => c.decoration).filter(d => d)
 
       this.editor.setDecorations(decorations)
