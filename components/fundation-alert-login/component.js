@@ -7,7 +7,7 @@ const FundationAlertLogin = (props) => (
   <FundationFormAlert>
     <CommentIcon />
     <p>
-      Para comentar debe estar registrado. Puede crear su cuenta haciendo <a>click aquí </a>
+      Para comentar debe estar registrado. Puede crear su cuenta haciendo <a href={props.authContext.keycloak.createRegisterUrl()}>click aquí </a>
     </p>
   </FundationFormAlert>
 )
