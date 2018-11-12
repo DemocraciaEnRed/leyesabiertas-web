@@ -15,6 +15,13 @@ export default class AddCommentWrapper extends Component {
     }
     this.editor = createRef()
     this.decoration = null
+    this.handleClose = this.handleClose.bind(this)
+  }
+
+  handleClose (e) {
+    e.preventDefault()
+    this.setState({ showCommentForm: false
+    })
   }
 
   handleClickAdd = () => {
@@ -83,7 +90,8 @@ export default class AddCommentWrapper extends Component {
                 decoration={this.decoration}
                 editor={this.props.editor}
                 id={this.props.id}
-                top={this.state.top} />
+                top={this.state.top} 
+                onClick={this.handleClose} />
           }
         </ToolsWrapper>
         <div

@@ -8,6 +8,7 @@ import { checkCircleO } from 'react-icons-kit/fa/checkCircleO'
 import { timesCircleO } from 'react-icons-kit/fa/timesCircleO'
 import UserAvatarLogged from '../../elements/user-avatar-logged/component'
 import WithUserContext from '../../components/with-user-context/component'
+import {ic_clear} from 'react-icons-kit/md/ic_clear'
 
 const API_URL = process.env.API_URL
 
@@ -107,6 +108,7 @@ const IconDiv = styled.div`
 const TextTitle = styled.div`
   color: #2c4c61;
   font-size:1.4rem;
+  margin-top:1rem;
   margin-bottom:1.6rem;
   font-family:var(--bold);
 `
@@ -114,12 +116,21 @@ const TextDiv = styled.div`
   display:flex;
   flex-direction:column;
   padding-left:1rem;
-  justify-content:center;
+  justify-content:flex-start;
+  padding: 10px 10px 0px 10px;
 
 `
 const Text = styled.div`
   color: #181818;
   font-size:1.4rem;
+`
+const Close = styled.button`
+  height: 15px;
+  width: 20px;
+  margin-left: auto;
+  color: #181818;
+  border: none;
+  font-size: 20px;
 `
 
 class CommentForm extends Component {
@@ -198,6 +209,7 @@ class CommentForm extends Component {
             </IconDiv>
 
             <TextDiv>
+              <Close onClick={this.props.handleClose}>&times;</Close>
               <TextTitle>{!this.state.error ? 'Gracias por tu aporte' : 'Ha ocurrido un error'}</TextTitle>
               <Text>{!this.state.error ? 'Su comentario ha sido enviado al diputado y sus asesores.' : 'Lo sentimos. Por favor intente nuevamente más tarde.' }</Text>
             </TextDiv>
