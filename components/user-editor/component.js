@@ -112,9 +112,7 @@ class UserEditor extends Component {
   }
 
   removeComment = (id) => {
-    console.log(this.editor.value.decorations.toJSON())
     const decorations = this.editor.value.decorations.toJSON().filter(d => d.mark.data.id !== id)
-    console.log(decorations)
     this.editor.setDecorations(decorations)
 
     this.setState((prevState) => {
@@ -130,7 +128,7 @@ class UserEditor extends Component {
     let plugins = []
     if (this.props.withComments) plugins.push(ProjectTextComment({ onClick: this.showComments }))
     plugins.push(ProjectTextEdit({ id: this.props.id, field: 'articles', isAuthor: this.props.isAuthor }))
-    if (this.props.authContext.authenticated && !this.props.editMode) {
+    if (this.props.authContext.authenticated && !this.props.editMode && !this.props.isClosed) {
       plugins.push(ProjectTextCreateComment({ id: this.props.id }))
     }
     return (
@@ -144,7 +142,7 @@ class UserEditor extends Component {
             top={this.state.top} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
-        { this.props.authContext.authenticated &&
+        { this.props.authContext.authenticated && !this.props.isClosed &&
           <Subtitle>Puede comentar haciendo selección sobre el fragmento de texto deseado.</Subtitle>
         }
         <div ref={this.myEditor}>
