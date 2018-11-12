@@ -117,7 +117,7 @@ const TextDiv = styled.div`
   flex-direction:column;
   padding-left:1rem;
   justify-content:flex-start;
-  padding: 10px 10px 0px 10px;
+  padding: 5px 5px 0px 10px;
 
 `
 const Text = styled.div`
@@ -125,7 +125,7 @@ const Text = styled.div`
   font-size:1.4rem;
 `
 const Close = styled.button`
-  height: 15px;
+  height: 20px;
   width: 20px;
   margin-left: auto;
   color: #181818;
