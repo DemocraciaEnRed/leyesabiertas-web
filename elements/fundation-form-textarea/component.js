@@ -7,6 +7,9 @@ const FundationFormTextarea = styled.textarea`
   border: solid 1px #dae1e7;
   background-color: #ffffff;
   resize: none;
+  font-size: 1.6rem;
+  padding: 1rem;
+  line-height: 1.57rem;
 `
 
 export default FundationFormTextarea
