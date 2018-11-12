@@ -5,8 +5,7 @@ import WithUserContext from '../with-user-context/component'
 import NavbarUsermenu from '../../elements/navbar-usermenu/component'
 
 const StyledLoggedUser = styled.div`
-  // height:45px;
-  height:25px;
+  height:35px;
   display:flex;
   justify-content:flex-end;
   background: #fff;
@@ -14,12 +13,30 @@ const StyledLoggedUser = styled.div`
   cursor: pointer;
 `
 
+const subtituloUsuario = (props) => {
+  if (props.authContext.isAuthor) {
+    if (props.authContext.user.fields) {
+      if (props.authContext.user.fields.party !== null || props.authContext.user.fields.party !== '') {
+        return props.authContext.user.fields.party
+      }
+    }
+    return 'Mi bloque político'
+  } else {
+    if (props.authContext.user.fields) {
+      if (props.authContext.user.fields.occupation !== null || props.authContext.user.fields.occupation !== '') {
+        return props.authContext.user.fields.occupation
+      }
+    }
+    return 'Mi ocupación'
+  }
+}
+
 const LoggedUser = (props) => (
   <StyledLoggedUser onClick={props.onClick}>
     <NavbarUsermenu
-      name={props.authContext.profile.name}
-      avatarImg={'/static/assets/userdefault.png'}
-      party={''} />
+      name={props.authContext.user.fullname}
+      avatarImg={props.authContext.user.avatar}
+      party={subtituloUsuario(props)} />
   </StyledLoggedUser>
 )
 

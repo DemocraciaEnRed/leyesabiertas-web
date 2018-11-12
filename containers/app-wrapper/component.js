@@ -20,6 +20,15 @@ export default class extends Component {
     isAuthor: null
   }
 
+  async fetchMe (token) {
+    return (await fetch(`${API_URL}/api/v1/users/me`, {
+      'headers': {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    })).json()
+  }
+
   async componentDidMount () {
     const keycloakOptions = {
       'url': AUTH_SERVER_URL,
@@ -37,11 +46,13 @@ export default class extends Component {
       const authenticated = await keycloak.init({ onLoad: 'check-sso' })
       const isAuthor = authenticated ? await keycloak.hasRealmRole('accountable') : false
       const profile = authenticated && await keycloak.loadUserInfo()
+      const user = authenticated ? await this.fetchMe(keycloak.token) : null
       this.setState({
         keycloak: keycloak,
         authenticated: authenticated,
         isAuthor: isAuthor,
         profile: profile,
+        user: user,
         login: keycloak.login,
         register: keycloak.register,
         logout: keycloak.logout

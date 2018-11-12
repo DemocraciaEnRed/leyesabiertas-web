@@ -43,9 +43,9 @@ render () {
       {this.props.authContext.authenticated
         ? (
           <LoggedUserBar>
-            <LoggedUser onClick={this.handleMenu} />
+            <LoggedUser onClick={this.handleMenu} user={this.props.authContext.user} />
             {this.state.menu &&
-              <UserMenu logout={this.props.authContext.logout}/>
+              <UserMenu logout={this.props.authContext.logout} />
             }
           </LoggedUserBar>
         ) : (
