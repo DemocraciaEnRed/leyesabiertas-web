@@ -29,6 +29,7 @@ const Card = ({ project }) => (
       }
       <CardContent
         title={project.currentVersion.content.title}
+        authorId={project.author._id}
         avatarImg={project.author.avatar}
         name={project.author.fullname}
         party={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
