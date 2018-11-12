@@ -131,6 +131,7 @@ const Close = styled.button`
   color: #181818;
   border: none;
   font-size: 20px;
+  cursor:pointer;
 `
 
 class CommentForm extends Component {
