@@ -1,14 +1,21 @@
 import React, { Component, Fragment } from 'react'
 import fetch from 'isomorphic-unfetch'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import NavBar from '../navbar/component'
 import Footer from '../footer/component'
 import WithUserContext from '../../components/with-user-context/component'
 import SecondaryNavbar from '../../containers/secondary-navbar/component'
 import UserProjectContainer from '../user-project-container/component'
-import SecondaryFooter from '../../containers/secondary-footer/component'
 
 const API_URL = process.env.API_URL
+
+const Wrapper = styled.div`
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:100vh;
+`
 
 class GeneralContainer extends Component {
   state = {
@@ -48,13 +55,14 @@ class GeneralContainer extends Component {
 
   render () {
     return (
-      <Fragment>
-        <NavBar />
-        <SecondaryNavbar />
+      <Wrapper>
+        <div>
+          <NavBar />
+          <SecondaryNavbar />
+        </div>
         <UserProjectContainer project={this.state.project} section={this.props.path} fetchDocument={this.fetchDocument} />
-        <SecondaryFooter />
         <Footer />
-      </Fragment>
+      </Wrapper>
     )
   }
 }
