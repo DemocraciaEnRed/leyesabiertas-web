@@ -51,8 +51,7 @@ export default class AddCommentWrapper extends Component {
         150 / 2
       const top =
         rect.top -
-        containerBoundTop -
-        10
+        containerBoundTop + 70
       this.setState({
         showAddComment: true,
         left: left,
