@@ -85,7 +85,8 @@ export default class extends Component {
               isAuthor={isAuthor}
               editMode={this.state.editMode}
               withComments={withComments}
-              id={project.document._id} />
+              id={project.document._id}
+              isClosed={project.document.closed} />
           </Fragment>
           }
         </ArticlesContext.Provider>

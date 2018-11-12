@@ -144,7 +144,7 @@ class UserEditor extends Component {
             top={this.state.top} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
-        { this.props.authContext.authenticated &&
+        { this.props.authContext.authenticated && !this.props.isClosed &&
           <Subtitle>Puede comentar haciendo selección sobre el fragmento de texto deseado.</Subtitle>
         }
         <div ref={this.myEditor}>
