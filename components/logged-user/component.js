@@ -14,12 +14,30 @@ const StyledLoggedUser = styled.div`
   cursor: pointer;
 `
 
+const subtituloUsuario = (props) => {
+  if (props.authContext.isAuthor) {
+    if (props.authContext.user.fields) {
+      if (props.authContext.user.fields.party !== null || props.authContext.user.fields.party !== '') {
+        return props.authContext.user.fields.party
+      }
+    }
+    return 'Mi bloque político'
+  } else {
+    if (props.authContext.user.fields) {
+      if (props.authContext.user.fields.occupation !== null || props.authContext.user.fields.occupation !== '') {
+        return props.authContext.user.fields.occupation
+      }
+    }
+    return 'Mi ocupación'
+  }
+}
+
 const LoggedUser = (props) => (
   <StyledLoggedUser onClick={props.onClick}>
     <NavbarUsermenu
       name={props.authContext.user.fullname}
       avatarImg={props.authContext.user.avatar}
-      party={props.authContext.user.fields.party} />
+      party={subtituloUsuario(props)} />
   </StyledLoggedUser>
 )
 
