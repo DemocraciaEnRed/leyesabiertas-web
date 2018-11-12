@@ -91,7 +91,7 @@ export default class AddCommentWrapper extends Component {
                 editor={this.props.editor}
                 id={this.props.id}
                 top={this.state.top} 
-                onClick={this.handleClose} />
+                handleClose={this.handleClose} />
           }
         </ToolsWrapper>
         <div
