@@ -9,7 +9,7 @@ text-align:left;
 margin-bottom:2rem;
 `
 const Avatar = styled.div`
-  margin-top:-10px; /* ONLY FOR ALPHA VERSION */
+  margin-top:-5px; /* ONLY FOR ALPHA VERSION */
   width: 40px;
   height: 40px;
   border-radius:50%;
@@ -29,7 +29,7 @@ text-transform:uppercase;
 `
 const TextWrapper = styled.div`
 height:35px;
-margin-top:5px;
+margin-top:0px;
 padding-left:10px;
 display:flex;
 flex-direction:column;
