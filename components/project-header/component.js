@@ -64,9 +64,9 @@ const ProjectHeader = ({ project, section }) => (
         <ProjectEditMode />
       </TopBarWrapper>
       { project.closed &&
-      <ClosedProposal
-        contributors={250}
-        contributions={project.currentVersion.contributions.length} />
+        <ClosedProposal
+          contributors={project.currentVersion.contributors}
+          contributions={project.currentVersion.contributions.length} />
       }
       { section === '/articulado'
         ? <Link href={{ pathname: '/proyecto', query: { id: project._id } }}>

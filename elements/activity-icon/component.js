@@ -10,15 +10,12 @@ const StyledIcon = styled.div`
   background-repeat:no-repeat;
 `
 
-const ActivityIcon = ({ img, link, size }) => (
-  <a href={link}>
-    <StyledIcon img={img} size={size} />
-  </a>
+const ActivityIcon = ({ img, size }) => (
+  <StyledIcon img={img} size={size} />
 )
 
 ActivityIcon.propTypes = {
   img: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
   size: PropTypes.string
 }
 
