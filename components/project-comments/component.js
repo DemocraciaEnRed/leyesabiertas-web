@@ -51,7 +51,12 @@ class ProjectComments extends Component {
 
   async componentDidMount () {
     try {
-      const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`)).json()
+      const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`, {
+        'headers': {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.props.authContext.keycloak.token
+        }
+      })).json()
       this.setState({
         comments: results
       })
@@ -86,7 +91,12 @@ class ProjectComments extends Component {
 
   fetchComments = async () => {
     try {
-      const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`)).json()
+      const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`,{
+        'headers': {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.props.authContext.keycloak.token
+        }
+      }).json()
       this.setState({
         comments: results,
         status: 'success'

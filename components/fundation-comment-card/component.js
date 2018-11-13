@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -49,17 +49,31 @@ const TextWrapper = styled.div`
   margin-left:2rem;
   width:90%;
 `
-const FundationCommentCard = ({ comment }) => (
-  <StyledCommentItem>
-    <UserAvatar avatarImg={comment.user.avatar || '/static/assets/userdefault.png'} />
-    <TextWrapper>
-      <Username>{comment.user.fullname}</Username>
-      <Charge>{''}</Charge>
-      <Comment>{comment.content}</Comment>
-      <Date>{`Hace ${comment.when}`}</Date>
-    </TextWrapper>
-  </StyledCommentItem>
-)
+
+class FundationCommentCard extends Component {
+  state = {
+    liked: false
+  }
+
+  componentDidMount () {
+    console.log(this.props.comment)
+  }
+
+  render () {
+    const { comment } = this.props
+    return (
+      <StyledCommentItem>
+        <UserAvatar avatarImg={comment.user.avatar || '/static/assets/userdefault.png'} />
+        <TextWrapper>
+          <Username>{comment.user.fullname}</Username>
+          <Charge>{''}</Charge>
+          <Comment>{comment.content}</Comment>
+          <Date>{`Hace ${comment.when}`}</Date>
+        </TextWrapper>
+      </StyledCommentItem>
+    )
+  }
+}
 
 FundationCommentCard.propTypes = {
   comment: PropTypes.object.isRequired
