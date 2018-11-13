@@ -55,6 +55,15 @@ const TextWrapper = styled.div`
   width:90%;
 `
 
+const StyledLikeWrapper = styled.div`
+  padding-top: 20px;
+  color: ${({ liked }) => liked ? '#ef885d' : '#5c97bc'};
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+`
+
 class FundationCommentCard extends Component {
   state = {
     liked: false
@@ -66,7 +75,7 @@ class FundationCommentCard extends Component {
     })
   }
 
-  handleLike = () => () => {
+  handleLike = () => {
     this.setState((prevState) => {
       return {
         liked: !prevState.liked
@@ -94,9 +103,9 @@ class FundationCommentCard extends Component {
           <Charge>{(comment.user.fields && comment.user.fields.occupation) ? comment.user.fields.occupation : '' }</Charge>
           <Comment>{comment.content}</Comment>
           <Date>{`Hace ${comment.when}`}</Date>
-          <div>
+          <StyledLikeWrapper liked={this.state.liked} onClick={this.handleLike}>
             <Icon icon={thumbsUp} style={{ marginRight: '5px' }} /> { comment.likes }
-          </div>
+          </StyledLikeWrapper>
         </TextWrapper>
       </StyledCommentItem>
     )
