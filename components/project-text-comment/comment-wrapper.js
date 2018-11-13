@@ -18,7 +18,7 @@ export default class CommentCounterWrapper extends Component {
   
     updateMousePosition = (e) => {
       this.setState({
-        top: e.pageY - 800,
+        top: e.pageY - 780,
         left: e.pageX - 100
       })
     }
