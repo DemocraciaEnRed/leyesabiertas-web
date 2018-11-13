@@ -91,12 +91,12 @@ class ProjectComments extends Component {
 
   fetchComments = async () => {
     try {
-      const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`,{
+      const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`, {
         'headers': {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + this.props.authContext.keycloak.token
         }
-      }).json()
+      })).json()
       this.setState({
         comments: results,
         status: 'success'
@@ -121,14 +121,17 @@ class ProjectComments extends Component {
   }
 
   render () {
-    const { authContext } = this.props
+    const { authContext, project } = this.props
     const { comments, status } = this.state
     return (
       <StyledProjectComments>
         <StyledTitle>Comentarios</StyledTitle>
         <StyledSubtitle>Espacio abierto para comentarios generales.</StyledSubtitle>
         { comments && comments.map((comment) => (
-          <FundationCommentCard comment={comment} key={comment._id} />
+          <FundationCommentCard
+            comment={comment}
+            key={comment._id}
+            project={project._id} />
         ))}
         {authContext.authenticated
           ? <FundationCommentForm

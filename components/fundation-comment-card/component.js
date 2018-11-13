@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Icon from 'react-icons-kit'
+import { thumbsUp } from 'react-icons-kit/feather'
+import WithUserContext from '../../components/with-user-context/component'
+
+const { API_URL } = process.env
 
 const StyledCommentItem = styled.div`
   min-height:15rem;
@@ -56,19 +61,42 @@ class FundationCommentCard extends Component {
   }
 
   componentDidMount () {
-    console.log(this.props.comment)
+    this.setState({
+      liked: this.props.comment.isLiked
+    })
+  }
+
+  handleLike = () => () => {
+    this.setState((prevState) => {
+      return {
+        liked: !prevState.liked
+      }
+    })
+    fetch(`${API_URL}/api/v1/documents/${this.props.project}/comments/${this.props.comment._id}/like`, {
+      headers: {
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
+        'Content-Type': 'application/json'
+      },
+      method: 'POST'
+    })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   render () {
     const { comment } = this.props
     return (
       <StyledCommentItem>
-        <UserAvatar avatarImg={comment.user.avatar || '/static/assets/userdefault.png'} />
+        <UserAvatar avatarImg={comment.user.avatar} />
         <TextWrapper>
           <Username>{comment.user.fullname}</Username>
-          <Charge>{''}</Charge>
+          <Charge>{(comment.user.fields && comment.user.fields.occupation) ? comment.user.fields.occupation : '' }</Charge>
           <Comment>{comment.content}</Comment>
           <Date>{`Hace ${comment.when}`}</Date>
+          <div>
+            <Icon icon={thumbsUp} style={{ marginRight: '5px' }} /> { comment.likes }
+          </div>
         </TextWrapper>
       </StyledCommentItem>
     )
@@ -76,7 +104,9 @@ class FundationCommentCard extends Component {
 }
 
 FundationCommentCard.propTypes = {
-  comment: PropTypes.object.isRequired
+  comment: PropTypes.object.isRequired,
+  authContext: PropTypes.object.isRequired,
+  project: PropTypes.string.isRequired
 }
 
-export default FundationCommentCard
+export default WithUserContext(FundationCommentCard)
