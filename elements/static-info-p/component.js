@@ -5,6 +5,7 @@ const StaticInfoP = styled.p`
   line-height: 3.0rem;
   color: #454246;
   max-width: 850px;
+  margin-top:40px;
   margin-bottom: 20px;
 `
 

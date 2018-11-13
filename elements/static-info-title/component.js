@@ -5,7 +5,8 @@ const StaticInfoTitle = styled.h1`
   font-family: var(--bold);
   line-height: 1.18rem;
   color: #203340;
-  margin-bottom: 50px;
+  margin-top:23px;
+  margin-bottom: 80px;
 `
 
 export default StaticInfoTitle
