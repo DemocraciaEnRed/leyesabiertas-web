@@ -150,6 +150,11 @@ class CommentForm extends Component {
     this.setState({ value: event.target.value })
   }
 
+  turnOffStatus = () => {
+    setTimeout(() =>
+      this.props.handleClose(), 3000)
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
     fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments`, {
@@ -183,6 +188,7 @@ class CommentForm extends Component {
           error: true
         })
       })
+     .then(() => this.turnOffStatus())
   }
 
   render () {
@@ -209,7 +215,7 @@ class CommentForm extends Component {
             </IconDiv>
 
             <TextDiv>
-              <Close onClick={this.props.handleClose }>&times;</Close>
+              <Close onClick={this.props.handleClose}>&times;</Close>
               <TextTitle>{!this.state.error ? 'Gracias por tu aporte' : 'Ha ocurrido un error'}</TextTitle>
               <Text>{!this.state.error ? 'Su comentario ha sido enviado al diputado y sus asesores.' : 'Lo sentimos. Por favor intente nuevamente más tarde.' }</Text>
             </TextDiv>
