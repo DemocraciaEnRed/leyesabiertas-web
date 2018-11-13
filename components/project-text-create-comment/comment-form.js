@@ -152,7 +152,7 @@ class CommentForm extends Component {
 
   turnOffStatus = () => {
     setTimeout(() =>
-      this.props.handleClose(), 3000)
+      this.props.handleClose(), 5000)
   }
 
   handleSubmit = (event) => {
@@ -169,26 +169,31 @@ class CommentForm extends Component {
         decoration: this.props.decoration
       })
     })
-      .then((res) => res.json())
       .then((res) => {
-        console.log(res)
+        console.log(res.ok)
         console.log('comentario guardado...')
         let decoration = this.props.decoration
         decoration.mark.data.preview = false
         const decorations = this.props.editor.value.decorations.push(decoration)
         this.props.editor.setDecorations(decorations)
-        this.setState({
-          value: '',
-          status: true
-        })
+        if (res.ok) {
+          this.setState({
+            value: '',
+            status: true
+          })
+          this.turnOffStatus()
+        } else {
+          this.setState({
+            value: '',
+            status: true,
+            error: true
+          })
+          this.turnOffStatus()
+        }
       })
       .catch((err) => {
         console.log(err)
-        this.setState({
-          error: true
-        })
       })
-     .then(() => this.turnOffStatus())
   }
 
   render () {
