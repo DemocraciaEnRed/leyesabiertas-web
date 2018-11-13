@@ -60,7 +60,7 @@ class commentCard extends Component {
     }
   }
 
-  componentDidMount ( ) {
+  componentDidMount () {
     this.setState({ liked: this.props.comment.isLiked })
   }
 
@@ -70,12 +70,10 @@ class commentCard extends Component {
         liked: !prevState.liked
       }
     })
-    this.setState({ resolved: true })
     fetch(`${API_URL}/api/v1/documents/${projectId}/comments/${this.props.comment._id}/like`, {
       headers: {
         Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
-        
       },
       method: 'POST'
     })
