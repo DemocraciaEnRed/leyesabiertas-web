@@ -49,7 +49,7 @@ const TextWrapper = styled.div`
   margin-left:2rem;
   width:90%;
 `
-const ProjectComments = ({ comment }) => (
+const FundationCommentCard = ({ comment }) => (
   <StyledCommentItem>
     <UserAvatar avatarImg={comment.user.avatar || '/static/assets/userdefault.png'} />
     <TextWrapper>
@@ -61,8 +61,8 @@ const ProjectComments = ({ comment }) => (
   </StyledCommentItem>
 )
 
-ProjectComments.propTypes = {
+FundationCommentCard.propTypes = {
   comment: PropTypes.object.isRequired
 }
 
-export default ProjectComments
+export default FundationCommentCard

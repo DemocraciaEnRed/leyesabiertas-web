@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import fetch from 'isomorphic-unfetch'
 import styled from 'styled-components'
-import CommentItem from '../../elements/comment-item/component'
+import FundationCommentCard from '../fundation-comment-card/component'
 import FundationCommentForm from '../fundation-comment-form/component'
 import FundationAlertLogin from '../fundation-alert-login/component'
 import WithUserContext from '../with-user-context/component'
@@ -118,7 +118,7 @@ class ProjectComments extends Component {
         <StyledTitle>Comentarios</StyledTitle>
         <StyledSubtitle>Espacio abierto para comentarios generales.</StyledSubtitle>
         { comments && comments.map((comment) => (
-          <CommentItem comment={comment} key={comment._id} />
+          <FundationCommentCard comment={comment} key={comment._id} />
         ))}
         {authContext.authenticated
           ? <FundationCommentForm
