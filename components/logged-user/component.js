@@ -20,14 +20,14 @@ const subtituloUsuario = (props) => {
         return props.authContext.user.fields.party
       }
     }
-    return 'Mi bloque político'
+    return ''
   } else {
     if (props.authContext.user.fields) {
       if (props.authContext.user.fields.occupation !== null || props.authContext.user.fields.occupation !== '') {
         return props.authContext.user.fields.occupation
       }
     }
-    return 'Mi ocupación'
+    return ''
   }
 }
 
