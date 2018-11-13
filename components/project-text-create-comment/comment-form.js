@@ -8,7 +8,6 @@ import { checkCircleO } from 'react-icons-kit/fa/checkCircleO'
 import { timesCircleO } from 'react-icons-kit/fa/timesCircleO'
 import UserAvatarLogged from '../../elements/user-avatar-logged/component'
 import WithUserContext from '../../components/with-user-context/component'
-import {ic_clear} from 'react-icons-kit/md/ic_clear'
 
 const API_URL = process.env.API_URL
 
