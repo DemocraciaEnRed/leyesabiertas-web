@@ -41,7 +41,7 @@ class UserEditor extends Component {
     this.state = {
       value: null,
       selection: null,
-      commentsIds: [],
+      activeComments: [],
       comments: []
     }
     this.editor = null
@@ -111,6 +111,13 @@ class UserEditor extends Component {
     }
   }
 
+  pushComment = (comment) => {
+    console.log(this.state)
+    this.setState({
+      comments: [...this.state.comments, comment]
+    }, () => console.log(this.state))
+  }
+
   removeComment = (id) => {
     const decorations = this.editor.value.decorations.toJSON().filter(d => d.mark.data.id !== id)
     this.editor.setDecorations(decorations)
@@ -129,7 +136,7 @@ class UserEditor extends Component {
     if (this.props.withComments) plugins.push(ProjectTextComment({ onClick: this.showComments }))
     plugins.push(ProjectTextEdit({ id: this.props.id, field: 'articles', isAuthor: this.props.isAuthor }))
     if (this.props.authContext.authenticated && !this.props.editMode && !this.props.isClosed) {
-      plugins.push(ProjectTextCreateComment({ id: this.props.id }))
+      plugins.push(ProjectTextCreateComment({ id: this.props.id, pushComment: this.pushComment }))
     }
     return (
       <StyledEditorWrapper>
