@@ -6,6 +6,11 @@ const StaticInfoWrapper = styled.div`
   display: flex;
   padding: 80px 32px 123px 62px;
   margin-top: 108px;
+  @media (min-width: 1024px) {
+    > section {
+      min-width: 850px;
+    }
+  }
 `
 
 export default StaticInfoWrapper
