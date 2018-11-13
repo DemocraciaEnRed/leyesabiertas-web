@@ -74,7 +74,7 @@ export default class Profile extends Component {
     console.log(files.base64.split('base64,')[1])
     Jimp.read(Buffer.from(files.base64.split('base64,')[1], 'base64'))
       .then(async (image) => {
-        let optimizedImage = await image.cover(250, 250).quality(90).getBase64Async(Jimp.MIME_JPEG)
+        let optimizedImage = await image.cover(150, 150).quality(90).getBase64Async(Jimp.MIME_JPEG)
         this.setState({ avatar: optimizedImage })
       }).catch((err) => {
         console.log(err)
