@@ -16,7 +16,7 @@ export default (options) => {
       }
     },
     renderEditor: (props, editor, next) => 
-      <AddCommentWrapper editor={editor} id={options.id}>
+      <AddCommentWrapper editor={editor} id={options.id} pushComment={options.pushComment}>
         { next() }
       </AddCommentWrapper>
   }

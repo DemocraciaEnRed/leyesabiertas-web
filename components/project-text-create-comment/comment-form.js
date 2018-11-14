@@ -155,16 +155,17 @@ class CommentForm extends Component {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res)
-        console.log('comentario guardado...')
+        let comment = res
+        comment.user = this.props.authContext.user
         let decoration = this.props.decoration
         decoration.mark.data.preview = false
+        decoration.mark.data.id = res._id
         const decorations = this.props.editor.value.decorations.push(decoration)
         this.props.editor.setDecorations(decorations)
         this.setState({
           value: '',
           status: true
-        })
+        }, () => this.props.pushComment(comment))
       })
       .catch((err) => {
         console.log(err)
