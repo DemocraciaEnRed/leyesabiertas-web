@@ -24,8 +24,8 @@ export default class CommentMark extends Component {
         {
           (value) => 
             <StyledCommentSpan
-              onMouseEnter={value.addId(id)}
-              onMouseLeave={value.removeId(id)}>
+              onMouseEnter={id && value.addId(id)}
+              onMouseLeave={id && value.removeId(id)}>
               {this.props.children}
             </StyledCommentSpan>
         }

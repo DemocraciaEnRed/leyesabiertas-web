@@ -41,7 +41,7 @@ class UserEditor extends Component {
     this.state = {
       value: null,
       selection: null,
-      activeComments: [],
+      commentsIds: [],
       comments: []
     }
     this.editor = null
@@ -112,10 +112,9 @@ class UserEditor extends Component {
   }
 
   pushComment = (comment) => {
-    console.log(this.state)
     this.setState({
       comments: [...this.state.comments, comment]
-    }, () => console.log(this.state))
+    })
   }
 
   removeComment = (id) => {
