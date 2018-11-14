@@ -12,7 +12,8 @@ import FundationErrorSpan from '../../elements/fundation-error-span/component'
 export default class extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
-    status: PropTypes.string
+    error: PropTypes.bool,
+    closeMessage: PropTypes.func.isRequired
   }
 
   state = {
@@ -56,11 +57,11 @@ export default class extends Component {
           <FundationErrorSpan>Este campo no puede estar vacío. Escriba su opinión y luego haga click en agregar.</FundationErrorSpan>
         }
         <FundationFormButtonWrapper>
-          {!this.props.status
-            ? <SubmitInput type='submit' value='Enviar opinión' />
-            : <CommentFormFeedback error={this.props.status === 'error'}>
-              {this.props.status === 'success' ? '¡Gracias! Su comentario fue enviado correctamente' : 'Ha ocurrido un error, por favor vuelva a intentarlo más tarde'}
-            </CommentFormFeedback>
+          {!this.props.error &&
+          <SubmitInput type='submit' value='Enviar opinión' />
+          }
+          {this.props.error &&
+          <CommentFormFeedback closeMessage={this.props.closeMessage} />
           }
         </FundationFormButtonWrapper>
       </FundationForm>
