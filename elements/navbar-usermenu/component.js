@@ -37,7 +37,7 @@ padding-left:10px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
-@media (max-width: 460px) {
+@media (max-width: 660px) {
     display:none;
   }
 `
