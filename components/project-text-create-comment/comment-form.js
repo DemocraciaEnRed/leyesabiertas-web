@@ -170,24 +170,27 @@ class CommentForm extends Component {
       })
     })
       .then((res) => {
-        console.log(res.ok)
-        console.log('comentario guardado...')
-        let decoration = this.props.decoration
-        decoration.mark.data.preview = false
-        const decorations = this.props.editor.value.decorations.push(decoration)
-        this.props.editor.setDecorations(decorations)
-        if (res.ok) {
-          this.setState({
-            value: '',
-            status: true
-          })
-        } else {
-          this.setState({
+         this.setState({
             value: '',
             status: true,
-            error: true
+            error: !res.ok
           })
-        }
+
+        return res.json()
+      })
+      .then((res) => {
+        let comment = res
+        comment.user = this.props.authContext.user
+        let decoration = this.props.decoration
+        decoration.mark.data.preview = false
+        decoration.mark.data.id = res._id
+        const decorations = this.props.editor.value.decorations.push(decoration)
+        this.props.editor.setDecorations(decorations)
+
+        this.setState({
+          value: '',
+          status: true
+        }, () => this.props.pushComment(comment))
       })
       .catch((err) => {
         console.log(err)

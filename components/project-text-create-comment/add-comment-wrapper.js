@@ -84,8 +84,9 @@ export default class AddCommentWrapper extends Component {
                 decoration={this.decoration}
                 editor={this.props.editor}
                 id={this.props.id}
-                top={this.state.top} 
-                handleClose={this.clearTools} />
+                handleClose={this.clearTools}
+                pushComment={this.props.pushComment}
+                top={this.state.top} />
           }
         </ToolsWrapper>
         <div

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import fetch from 'isomorphic-unfetch'
 import styled from 'styled-components'
-import CommentItem from '../../elements/comment-item/component'
+import FundationCommentCard from '../fundation-comment-card/component'
 import FundationCommentForm from '../fundation-comment-form/component'
 import FundationAlertLogin from '../fundation-alert-login/component'
 import WithUserContext from '../with-user-context/component'
@@ -51,7 +51,12 @@ class ProjectComments extends Component {
 
   async componentDidMount () {
     try {
-      const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`)).json()
+      const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`, {
+        'headers': {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.props.authContext.keycloak.token
+        }
+      })).json()
       this.setState({
         comments: results
       })
@@ -86,7 +91,12 @@ class ProjectComments extends Component {
 
   fetchComments = async () => {
     try {
-      const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`)).json()
+      const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`, {
+        'headers': {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.props.authContext.keycloak.token
+        }
+      })).json()
       this.setState({
         comments: results,
         status: 'success'
@@ -111,14 +121,17 @@ class ProjectComments extends Component {
   }
 
   render () {
-    const { authContext } = this.props
+    const { authContext, project } = this.props
     const { comments, status } = this.state
     return (
       <StyledProjectComments>
         <StyledTitle>Comentarios</StyledTitle>
         <StyledSubtitle>Espacio abierto para comentarios generales.</StyledSubtitle>
         { comments && comments.map((comment) => (
-          <CommentItem comment={comment} key={comment._id} />
+          <FundationCommentCard
+            comment={comment}
+            key={comment._id}
+            project={project._id} />
         ))}
         {authContext.authenticated
           ? <FundationCommentForm

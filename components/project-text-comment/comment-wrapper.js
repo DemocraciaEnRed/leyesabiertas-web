@@ -18,7 +18,7 @@ export default class CommentCounterWrapper extends Component {
   
     updateMousePosition = (e) => {
       this.setState({
-        top: e.pageY - 800,
+        top: e.pageY - 780,
         left: e.pageX - 100
       })
     }
@@ -27,7 +27,6 @@ export default class CommentCounterWrapper extends Component {
       this.setState(({ ids }) => {
         if (ids.includes(id)) return
         const _ids = ids.concat([id])
-  
         return { ids: _ids }
       })
     }
@@ -36,7 +35,6 @@ export default class CommentCounterWrapper extends Component {
       this.setState(({ ids }) => {
         if (!ids.includes(id)) return
         const _ids = ids.filter(_id => _id !== id)
-  
         return { ids: _ids }
       })
     }

@@ -64,10 +64,6 @@ class UserProfile extends Component {
       if (this.props.userId) {
         user = await (await fetch(`${API_URL}/api/v1/users/${this.props.userId}`)).json()
         isOwner = false
-        console.log(this.props.authContext.keycloak.userInfo.sub)
-        console.log(user.keycloak)
-        console.log((user.keycloak == this.props.authContext.keycloak.userInfo.sub))
-        console.log(authenticated)
         if (authenticated) isOwner = (user.keycloak == this.props.authContext.keycloak.userInfo.sub)
       } else {
         user = await (await fetch(`${API_URL}/api/v1/users/me`, {
@@ -88,16 +84,9 @@ class UserProfile extends Component {
     const { authContext } = this.props
     if (!authContext.authenticated || !this.state.isOwner) return false
     try {
-      const updatedUser = await (await fetch(`${API_URL}/api/v1/users`, {
-        'method': 'PUT',
-        'headers': {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + authContext.keycloak.token
-        },
-        'body': JSON.stringify(newProfile)
-      })).json()
+      await authContext.updateMe(newProfile)
       window.alert('¡Perfil actualizado!')
-      this.fetchUser(this.props.authContext.authenticated, this.props.authContext.keycloak.token)
+      // this.fetchUser(this.props.authContext.authenticated, this.props.authContext.keycloak.token)
     } catch (error) {
       window.alert('Ocurrio un error')
       console.error(error)

@@ -17,16 +17,42 @@ export default class extends Component {
     keycloak: null,
     authenticated: false,
     login: null,
-    isAuthor: null
+    isAuthor: null,
+    user: null
   }
 
-  async fetchMe (token) {
+  fetchMe = async (token) => {
     return (await fetch(`${API_URL}/api/v1/users/me`, {
       'headers': {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
       }
     })).json()
+  }
+
+  // syncMe = async (updatedUser) => {
+  //   // const updatedUser = await this.fetchMe()
+  //   this.setState({
+  //     user: updatedUser
+  //   })
+  // }
+
+  updateMe = async (newProfile) => {
+    const updatedUser = await (await fetch(`${API_URL}/api/v1/users`, {
+      'method': 'PUT',
+      'headers': {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.state.keycloak.token
+      },
+      'body': JSON.stringify(newProfile)
+    })).json()
+    if (!updatedUser) {
+      throw Error()
+    }
+    this.setState({
+      user: updatedUser
+    })
+    return updatedUser
   }
 
   async componentDidMount () {
@@ -66,7 +92,9 @@ export default class extends Component {
   }
 
   render () {
-    const value = this.state
+    let value = this.state
+    value.fetchMe = this.fetchMe
+    value.updateMe = this.updateMe
 
     return (
       <UserContext.Provider value={value} >
