@@ -67,6 +67,9 @@ injectGlobal`
     --lined: calc(width/22);
 
     font-size: 10px;
+    @media (max-width: 760px) {
+    font-size: 7px;
+  }
   }
 
   * {

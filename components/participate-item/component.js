@@ -10,6 +10,11 @@ const ParticipateItem = styled.div`
   justify-content:space-between;
   align-items:center;
   box-sizing: border-box;
+  @media (max-width: 1060px) {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
   &:nth-child(even) {
       padding-left:1rem;
       padding-right:1rem;

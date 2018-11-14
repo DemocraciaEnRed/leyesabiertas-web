@@ -11,6 +11,9 @@ const FooterBar = styled.div`
   display: flex;
   justify-content:center;
   margin-bottom: 2rem;
+  @media (max-width: 760px) {
+    margin-bottom: 6rem;
+  }
   > a {
     color: #2c4c61;
     display: inline-block;
