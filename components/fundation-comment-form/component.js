@@ -15,7 +15,8 @@ export default class extends Component {
   }
 
   state = {
-    comment: ''
+    comment: '',
+    emptyComment: false
   }
 
   handleChange = (e) => {
@@ -26,6 +27,12 @@ export default class extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
+    if (this.state.comment === '') {
+      this.setState({
+        emptyComment: true
+      })
+      return
+    }
     this.props.handleSubmit(this.state.comment)
     this.setState({ comment: '' })
   }

@@ -10,6 +10,9 @@ const FundationFormTextarea = styled.textarea`
   font-size: 1.6rem;
   padding: 1rem;
   line-height: 1.57rem;
+  & .error {
+    border: solid 1px #c64343;
+  }
 `
 
 export default FundationFormTextarea
