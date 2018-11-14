@@ -7,6 +7,7 @@ import FundationFormTextarea from '../../elements/fundation-form-textarea/compon
 import FundationFormButtonWrapper from '../../elements/fundation-form-button-wrapper/component'
 import SubmitInput from '../../elements/submit-input/component'
 import CommentFormFeedback from '../../elements/comment-form-feedback/component'
+import FundationErrorSpan from '../../elements/fundation-error-span/component'
 
 export default class extends Component {
   static propTypes = {
@@ -21,6 +22,7 @@ export default class extends Component {
 
   handleChange = (e) => {
     this.setState({
+      emptyComment: e.target.value === '',
       comment: e.target.value
     })
   }
@@ -31,7 +33,7 @@ export default class extends Component {
       this.setState({
         emptyComment: true
       })
-      return
+      return null
     }
     this.props.handleSubmit(this.state.comment)
     this.setState({ comment: '' })
@@ -47,8 +49,12 @@ export default class extends Component {
           Su opinión
           <FundationFormTextarea
             value={this.state.comment}
-            onChange={this.handleChange} />
+            onChange={this.handleChange}
+            error={this.state.emptyComment} />
         </FundationFormLabel>
+        { this.state.emptyComment &&
+          <FundationErrorSpan>Este campo no puede estar vacío. Escriba su opinión y luego haga click en agregar.</FundationErrorSpan>
+        }
         <FundationFormButtonWrapper>
           {!this.props.status
             ? <SubmitInput type='submit' value='Enviar opinión' />
