@@ -17,6 +17,7 @@ export default class AddCommentWrapper extends Component {
     this.decoration = null
   }
 
+
   handleClickAdd = () => {
     this.setState({ showCommentForm: true })
     let decoration = {
@@ -83,8 +84,9 @@ export default class AddCommentWrapper extends Component {
                 decoration={this.decoration}
                 editor={this.props.editor}
                 id={this.props.id}
-                top={this.state.top}
-                pushComment={this.props.pushComment} />
+                handleClose={this.clearTools}
+                pushComment={this.props.pushComment}
+                top={this.state.top} />
           }
         </ToolsWrapper>
         <div

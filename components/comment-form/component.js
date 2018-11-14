@@ -62,6 +62,7 @@ const CommentFormFooter = styled.button`
   padding-left:20px;
   padding-right:20px;
   opacity: 0.5;
+  background: #fff;
   cursor:pointer;
   :focus {outline:0;}
 

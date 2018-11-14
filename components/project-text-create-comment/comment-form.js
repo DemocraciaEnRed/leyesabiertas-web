@@ -107,6 +107,7 @@ const IconDiv = styled.div`
 const TextTitle = styled.div`
   color: #2c4c61;
   font-size:1.4rem;
+  margin-top:1rem;
   margin-bottom:1.6rem;
   font-family:var(--bold);
 `
@@ -114,12 +115,22 @@ const TextDiv = styled.div`
   display:flex;
   flex-direction:column;
   padding-left:1rem;
-  justify-content:center;
+  justify-content:flex-start;
+  padding: 5px 5px 0px 10px;
 
 `
 const Text = styled.div`
   color: #181818;
   font-size:1.4rem;
+`
+const Close = styled.button`
+  height: 20px;
+  width: 20px;
+  margin-left: auto;
+  color: #181818;
+  border: none;
+  font-size: 20px;
+  cursor:pointer;
 `
 
 class CommentForm extends Component {
@@ -139,6 +150,11 @@ class CommentForm extends Component {
     this.setState({ value: event.target.value })
   }
 
+  turnOffStatus = () => {
+    setTimeout(() =>
+      this.props.handleClose(), 3000)
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
     fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments`, {
@@ -153,7 +169,15 @@ class CommentForm extends Component {
         decoration: this.props.decoration
       })
     })
-      .then((res) => res.json())
+      .then((res) => {
+         this.setState({
+            value: '',
+            status: true,
+            error: !res.ok
+          })
+
+        return res.json()
+      })
       .then((res) => {
         let comment = res
         comment.user = this.props.authContext.user
@@ -162,6 +186,7 @@ class CommentForm extends Component {
         decoration.mark.data.id = res._id
         const decorations = this.props.editor.value.decorations.push(decoration)
         this.props.editor.setDecorations(decorations)
+
         this.setState({
           value: '',
           status: true
@@ -169,10 +194,8 @@ class CommentForm extends Component {
       })
       .catch((err) => {
         console.log(err)
-        this.setState({
-          error: true
-        })
       })
+      .finally(() => { this.turnOffStatus() })
   }
 
   render () {
@@ -199,6 +222,7 @@ class CommentForm extends Component {
             </IconDiv>
 
             <TextDiv>
+              <Close onClick={this.props.handleClose}>&times;</Close>
               <TextTitle>{!this.state.error ? 'Gracias por tu aporte' : 'Ha ocurrido un error'}</TextTitle>
               <Text>{!this.state.error ? 'Su comentario ha sido enviado al diputado y sus asesores.' : 'Lo sentimos. Por favor intente nuevamente más tarde.' }</Text>
             </TextDiv>
