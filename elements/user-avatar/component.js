@@ -8,6 +8,7 @@ display:flex;
 align-items:flex-start;
 text-align:left;
 margin-bottom:2rem;
+min-width:200px;
 `
 const Avatar = styled.div`
   width: 40px;

@@ -47,7 +47,7 @@ const ProjectHeader = ({ project, section }) => (
       section={section} />
     <ProjectHeaderWrapper>
       <TopBarWrapper>
-        <UserAvatar
+        <UserAvatar headerbar
           authorId={project.author._id}
           avatarImg={project.author.avatar}
           name={project.author.fullname}
