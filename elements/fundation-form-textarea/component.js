@@ -1,10 +1,10 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const FundationFormTextarea = styled.textarea`
-  margin-top: 15px;
+  margin: 15px 0 4px;
   width: 100%;
   height: 150px;
-  border: solid 1px #dae1e7;
+  border: ${(props) => props.error ? 'solid 1px #c64343' : 'solid 1px #dae1e7'};
   background-color: #ffffff;
   resize: none;
   font-size: 1.6rem;

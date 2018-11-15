@@ -46,7 +46,7 @@ class ProjectComments extends Component {
 
   state = {
     comments: null,
-    status: null
+    error: null
   }
 
   async componentDidMount () {
@@ -98,8 +98,7 @@ class ProjectComments extends Component {
         }
       })).json()
       this.setState({
-        comments: results,
-        status: 'success'
+        comments: results
       }, this.turnOffStatus())
     } catch (err) {
       console.error(err)
@@ -108,21 +107,27 @@ class ProjectComments extends Component {
 
   setSuccessFalse = () => {
     this.setState({
-      status: 'error'
+      error: true
     }, this.turnOffStatus())
   }
 
   turnOffStatus = () => {
     setTimeout(() => {
       this.setState({
-        status: null
+        error: null
       })
     }, 3000)
   }
 
+  setErrorFalse = () => {
+    this.setState({
+      error: null
+    })
+  }
+
   render () {
     const { authContext, project } = this.props
-    const { comments, status } = this.state
+    const { comments } = this.state
     return (
       <StyledProjectComments>
         <StyledTitle>Comentarios</StyledTitle>
@@ -136,7 +141,8 @@ class ProjectComments extends Component {
         {authContext.authenticated
           ? <FundationCommentForm
             handleSubmit={this.handleSubmit}
-            status={status} />
+            error={this.state.error}
+            closeMessage={this.setErrorFalse} />
           : <FundationAlertLogin />
         }
       </StyledProjectComments>
