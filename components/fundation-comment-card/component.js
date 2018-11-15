@@ -66,19 +66,22 @@ const StyledLikeWrapper = styled.div`
 
 class FundationCommentCard extends Component {
   state = {
-    liked: false
+    liked: false,
+    likes: null
   }
 
   componentDidMount () {
     this.setState({
-      liked: this.props.comment.isLiked
+      liked: this.props.comment.isLiked,
+      likes: this.props.comment.likes
     })
   }
 
   handleLike = () => {
     this.setState((prevState) => {
       return {
-        liked: !prevState.liked
+        liked: !prevState.liked,
+        likes: prevState.liked ? prevState.likes - 1 : prevState.likes + 1
       }
     })
     fetch(`${API_URL}/api/v1/documents/${this.props.project}/comments/${this.props.comment._id}/like`, {
@@ -104,7 +107,7 @@ class FundationCommentCard extends Component {
           <Comment>{comment.content}</Comment>
           <Date>{`Hace ${comment.when}`}</Date>
           <StyledLikeWrapper liked={this.state.liked} onClick={this.handleLike}>
-            <Icon icon={thumbsUp} style={{ marginRight: '5px' }} /> { comment.likes }
+            <Icon icon={thumbsUp} style={{ marginRight: '5px' }} /> { this.state.likes }
           </StyledLikeWrapper>
         </TextWrapper>
       </StyledCommentItem>
