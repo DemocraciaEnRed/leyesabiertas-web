@@ -5,6 +5,10 @@ import styled from 'styled-components'
 const StyledUl = styled.ul`
   width: 200px;
   height: 104px; /* 154px */
+  @media (max-width: 760px) {
+    width: 150px;
+    height: 74px;
+  }
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
   border: solid 1px #e9e9e9;
   background-color: #f6f6f6;

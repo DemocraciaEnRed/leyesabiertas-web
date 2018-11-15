@@ -16,6 +16,11 @@ const Logo = styled.div`
   background-position: center;  
   box-sizing: border-box;
   cursor:pointer;
+  @media (max-width: 760px) {
+    width: 67px;
+    height: 51px;
+    margin-top:auto;
+  }
 `
 
 const NavbarLogo = () => (

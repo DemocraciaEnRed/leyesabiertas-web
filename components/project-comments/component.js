@@ -26,15 +26,15 @@ const StyledProjectComments = styled.div`
   `
 const StyledTitle = styled.div`
   width: 136px;
-  height: 16px;
-  font-size: 14px;
+  height: 1.6rem;
+  font-size: 1.4rem;
   font-family:var(--bold);
   color: #2c4c61;
   margin:2rem 0;
   `
-const StyledSubtitle = styled.div`;
-  height: 16px;
-  font-size: 14px;
+const StyledSubtitle = styled.div`
+  height: 1.6rem;
+  font-size: 1.4rem;
   color: #9b9b9b;
   margin:2rem 0;
 `
