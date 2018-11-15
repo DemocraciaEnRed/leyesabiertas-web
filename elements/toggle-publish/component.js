@@ -33,6 +33,10 @@ const StyledCheck = styled.input`
   :checked ~  b {
     box-shadow: inset 0 0 0 20px #ef885d;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> completa componente toggle publicar
   :checked ~ b {
     right: 2px;
     left: 33px;

@@ -32,7 +32,7 @@ const TopBarWrapper = styled.div`
   flex-direction:row;
   justify-content:space-between;
   & > div {
-    padding: 0 3rem;
+    padding: 0 2rem;
     border-right: 1px solid #e9e9e9;
     height: 50px;
   }
@@ -41,6 +41,7 @@ const TopBarWrapper = styled.div`
   }
   & > div:last-child {
     border-right: none;
+    padding-right:0px;
   }
   `
 
@@ -60,12 +61,19 @@ const ProjectHeader = ({ project, section }) => (
         <ProjectVersionData
           version={project.currentVersion.version}
           createdAt={project.currentVersion.createdAt} />
+<<<<<<< HEAD
         {!project.closed
           ? <ProjectLimitDate
             limitDate={project.currentVersion.content.closingDate} />
           : <ClosingDate date={project.currentVersion.content.closingDate} />
         }
         <ProjectEditMode />
+=======
+        <ProjectLimitDate
+          limitDate={project.currentVersion.content.closingDate} />
+        <ProjectEditMode />
+
+>>>>>>> completa componente toggle publicar
       </TopBarWrapper>
       { project.closed &&
         <ClosedProposal
