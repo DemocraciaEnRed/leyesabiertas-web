@@ -6,8 +6,6 @@ import Jimp from 'jimp'
 import ProfileForm from '../../elements/profile-form/component'
 import ProfileAvatar from '../../elements/profile-avatar/component'
 import ProfileName from '../../elements/profile-name/component'
-import ProfileResume from '../../elements/profile-resume/component'
-import ProfileCharge from '../../elements/profile-charge/component'
 import ProfileMail from '../../elements/profile-mail/component'
 import ProfileLabel from '../../elements/profile-label/component'
 import ProfileInput from '../../elements/profile-input/component'
@@ -28,6 +26,7 @@ const ButtonLink = styled.a`
 `
 
 const genderOptions = [
+  { 'name': '', 'value': '' },
   { 'name': 'Masculino', 'value': 'Masculino' },
   { 'name': 'Femenino', 'value': 'Femenino' },
   { 'name': 'Otro', 'value': 'Otro' },
@@ -54,12 +53,6 @@ export default class Profile extends Component {
 
   componentDidMount () {
     const { user } = this.props
-    // let arrayData = []
-    // if (user.fields && user.fields.occupation) arrayData.push(user.fields.occupation)
-    // if (user.fields && user.fields.party) arrayData.push(user.fields.party)
-    // if (user.fields && user.fields.province) arrayData.push(user.fields.province)
-    // if(user.fields && user.fields.) arrayData.push(user.fields.occupation)
-    // if(user.fields && user.fields.occupation) arrayData.push(user.fields.occupation)
     this.setState({
       occupation: user.fields && user.fields.occupation ? user.fields.occupation : '',
       gender: user.fields && user.fields.gender ? user.fields.gender : '',
@@ -105,14 +98,9 @@ export default class Profile extends Component {
     })
   }
 
-  // isEmpty = (field) => {
-  // if(field == '' || field === null) return null,
-  // }
-
   handleSubmit = (e) => {
     e.preventDefault()
     const newData = {
-      // 'avatar': this.state.avatar || '',
       fields: {
         occupation: this.state.occupation || '',
         gender: this.state.gender || '',
