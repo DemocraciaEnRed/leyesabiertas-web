@@ -7,11 +7,13 @@ import FundationFormTextarea from '../../elements/fundation-form-textarea/compon
 import FundationFormButtonWrapper from '../../elements/fundation-form-button-wrapper/component'
 import SubmitInput from '../../elements/submit-input/component'
 import CommentFormFeedback from '../../elements/comment-form-feedback/component'
+import FundationAlertLogin from '../fundation-alert-login/component'
 import FundationErrorSpan from '../../elements/fundation-error-span/component'
 
 export default class extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
+    authenticated: PropTypes.bool.isRequired,
     error: PropTypes.bool,
     closeMessage: PropTypes.func.isRequired
   }
@@ -41,6 +43,8 @@ export default class extends Component {
   }
 
   render () {
+    const { authenticated } = this.props
+    if (!authenticated) return <FundationAlertLogin />
     return (
       <FundationForm onSubmit={this.handleSubmit}>
         <FundationFormTitle>

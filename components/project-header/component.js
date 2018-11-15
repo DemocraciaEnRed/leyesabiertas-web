@@ -9,11 +9,12 @@ import ProjectTitle from '../../elements/project-title/component'
 import ProjectLimitDate from '../../elements/project-limit-date/component'
 import ProjectEditMode from '../../elements/project-edit-mode/component'
 import ProjectHeaderLink from '../../elements/project-header-link/component'
+import ClosingDate from '../../elements/closing-date/component'
 import ProjectBreadcrumb from '../project-breadcrumb/component'
-
+import ClosedProposal from '../closed-proposal/component'
 
 const ProjectHeaderContainer = styled.div`
-  height: 383px;
+  min-height: 383px;
   width:100%;
   background-color: #a4cee8;
   background-image: url('${(props) => props.img}');
@@ -58,10 +59,18 @@ const ProjectHeader = ({ project, section }) => (
         <ProjectVersionData
           version={project.currentVersion.version}
           createdAt={project.currentVersion.createdAt} />
-        <ProjectLimitDate
-          limitDate={project.currentVersion.content.closingDate} />
+        {!project.closed
+          ? <ProjectLimitDate
+            limitDate={project.currentVersion.content.closingDate} />
+          : <ClosingDate date={project.currentVersion.content.closingDate} />
+        }
         <ProjectEditMode />
       </TopBarWrapper>
+      { project.closed &&
+        <ClosedProposal
+          contributors={project.currentVersion.contributors}
+          contributions={project.currentVersion.contributions.length} />
+      }
       { section === '/articulado'
         ? <Link href={{ pathname: '/proyecto', query: { id: project._id } }}>
           <ProjectHeaderLink>

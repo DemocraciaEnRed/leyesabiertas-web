@@ -138,12 +138,12 @@ class ProjectComments extends Component {
             key={comment._id}
             project={project._id} />
         ))}
-        {authContext.authenticated
-          ? <FundationCommentForm
+        {!project.closed &&
+          <FundationCommentForm
+            authenticated={authContext.authenticated}
             handleSubmit={this.handleSubmit}
             error={this.state.error}
             closeMessage={this.setErrorFalse} />
-          : <FundationAlertLogin />
         }
       </StyledProjectComments>
     )
