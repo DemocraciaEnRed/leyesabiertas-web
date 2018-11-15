@@ -11,7 +11,7 @@ import TitleMark from '../../elements/title-mark/component'
 import ProjectTextEdit from '../../components/project-text-edit'
 import ProjectTextComment from '../../components/project-text-comment'
 import ProjectTextCreateComment from '../../components/project-text-create-comment'
-import Subtitle from '../../elements/editor-subtitle/component'
+import ArticlesSubtitle from '../articles-subtitle/component'
 
 const API_URL = process.env.API_URL
 
@@ -147,10 +147,10 @@ class UserEditor extends Component {
             removeComment={this.removeComment}
             top={this.state.top} />
         }
-        <EditorTitle>Artículos de la propuesta</EditorTitle>
-        { this.props.authContext.authenticated && !this.props.isClosed &&
-          <Subtitle>Puede comentar haciendo selección sobre el fragmento de texto deseado.</Subtitle>
+        { !this.props.isClosed &&
+          <ArticlesSubtitle authenticated={this.props.authContext.authenticated} />
         }
+        <EditorTitle>Artículos de la propuesta</EditorTitle>
         <div ref={this.myEditor}>
           <Editor
             plugins={plugins}

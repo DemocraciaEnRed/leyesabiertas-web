@@ -4,10 +4,10 @@ import FundationFormAlert from '../../elements/fundation-form-alert/component'
 import CommentIcon from '../../elements/comment-icon/component'
 
 const FundationAlertLogin = (props) => (
-  <FundationFormAlert>
+  <FundationFormAlert {...props} >
     <CommentIcon />
     <p>
-      Para comentar debe estar registrado. Puede crear su cuenta haciendo <a href={props.authContext.keycloak.createRegisterUrl()}>click aquí </a>
+      Para {props.articles ? 'agregar aportes ' : 'comentar '} debe estar registrado. Puede crear su cuenta haciendo <a href={props.authContext.keycloak.createRegisterUrl()}>click aquí </a>
     </p>
   </FundationFormAlert>
 )
