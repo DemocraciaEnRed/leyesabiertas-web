@@ -1,10 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
+import fetch from 'isomorphic-unfetch'
 import styled from 'styled-components'
 
 const StyledUl = styled.ul`
+  height: ${(props) => props.isAuthor ? '154px' : '104px'};
   width: 200px;
-  height: 104px; /* 154px */
   @media (max-width: 760px) {
     width: 150px;
     height: 74px;
@@ -52,6 +53,7 @@ const StyledUl = styled.ul`
 
 const Li = styled.li`
   border-bottom:1px solid #dae1e7;
+  width: 100%;
   &:last-child{
     border:none;
   }
@@ -70,7 +72,7 @@ const StyledA = styled.a`
 
 `
 
-const Usermenu = (logout) => (
+const Usermenu = ({ logout }) => (
 
   <StyledUl>
     <Li>
@@ -78,11 +80,13 @@ const Usermenu = (logout) => (
         <StyledA>Mi perfil</StyledA>
       </Link>
     </Li>
-    {/* <Li>
-      <StyledA>Ayuda</StyledA>
-    </Li> */}
+    {/* { isAuthor &&
     <Li>
-      <StyledA onClick={logout.logout}>Cerrar sesión</StyledA>
+      <StyledA onClick={create}>Nueva propuesta</StyledA>
+    </Li>
+    } */}
+    <Li>
+      <StyledA onClick={logout}>Cerrar sesión</StyledA>
     </Li>
   </StyledUl>
 )

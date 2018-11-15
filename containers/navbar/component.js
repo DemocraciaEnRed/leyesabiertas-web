@@ -19,6 +19,7 @@ const StyledNav = styled.nav`
   justify-content: center;
   border-bottom:1px solid #dae1e7;
 `
+
 class NavBar extends Component {
   constructor (props) {
     super(props)
@@ -45,7 +46,7 @@ render () {
           <LoggedUserBar>
             <LoggedUser onClick={this.handleMenu} user={this.props.authContext.user} />
             {this.state.menu &&
-              <UserMenu logout={this.props.authContext.logout} />
+              <UserMenu logout={this.props.authContext.logout} user={this.props.authContext.user} create={this.createProject} isAuthor={this.props.authContext.isAuthor} />
             }
           </LoggedUserBar>
         ) : (
