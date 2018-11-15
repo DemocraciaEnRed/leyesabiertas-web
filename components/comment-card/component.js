@@ -55,19 +55,24 @@ class commentCard extends Component {
     super(props)
 
     this.state = {
+      likes: null,
       liked: false,
       resolved: false
     }
   }
 
   componentDidMount () {
-    this.setState({ liked: this.props.comment.isLiked })
+    this.setState({
+      liked: this.props.comment.isLiked,
+      likes: this.props.comment.likes
+    })
   }
 
   handleLike = (projectId) => () => {
     this.setState((prevState) => {
       return {
-        liked: !prevState.liked
+        liked: !prevState.liked,
+        likes: prevState.liked ? prevState.likes - 1 : prevState.likes + 1
       }
     })
     fetch(`${API_URL}/api/v1/documents/${projectId}/comments/${this.props.comment._id}/like`, {
@@ -112,7 +117,7 @@ class commentCard extends Component {
             ({ isAuthor, toggleSelectedComment, editMode, selectedCommentsIds, project }) =>
               <Fragment>
                 <StyledLikeWrapper liked={this.state.liked} onClick={this.handleLike(project._id)}>
-                  <Icon icon={thumbsUp} style={{ marginRight: '5px' }} /> { this.props.comment.likes }
+                  <Icon icon={thumbsUp} style={{ marginRight: '5px' }} /> { this.state.likes }
                 </StyledLikeWrapper>
 
                 {(isAuthor &&
