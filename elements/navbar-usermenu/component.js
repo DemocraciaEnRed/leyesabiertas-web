@@ -29,11 +29,17 @@ text-transform:uppercase;
 `
 const TextWrapper = styled.div`
 height:35px;
+@media (max-width: 760px) {
+    height:25px;
+  }
 margin-top:0px;
 padding-left:10px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
+@media (max-width: 660px) {
+    display:none;
+  }
 `
 const Arrow = styled.i`
   margin:5px 0px 0px 15px;

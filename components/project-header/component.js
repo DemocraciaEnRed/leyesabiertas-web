@@ -31,9 +31,12 @@ const TopBarWrapper = styled.div`
   flex-direction:row;
   justify-content:space-between;
   & > div {
-    padding: 0 30px;
+    padding: 0 3rem;
     border-right: 1px solid #e9e9e9;
     height: 50px;
+  }
+  & > div:first-child {
+    padding-left:0px;
   }
   & > div:last-child {
     border-right: none;
@@ -48,7 +51,7 @@ const ProjectHeader = ({ project, section }) => (
       section={section} />
     <ProjectHeaderWrapper>
       <TopBarWrapper>
-        <UserAvatar
+        <UserAvatar headerbar
           authorId={project.author._id}
           avatarImg={project.author.avatar}
           name={project.author.fullname}

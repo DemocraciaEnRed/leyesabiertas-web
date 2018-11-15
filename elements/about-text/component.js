@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 const StyledText = styled.div`
   padding-left: 8%;
+  padding-right: 8%;
   padding-top: 6.8rem;
   padding-bottom: 8%;
   width: 50%;
