@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import fetch from 'isomorphic-unfetch'
 import WithUserContext from '../../components/with-user-context/component'
 import Profile from '../../components/profile/component'
+import Alert from '../../elements/alert/component'
 
 const API_URL = process.env.API_URL
 
@@ -13,7 +14,10 @@ class UserProfile extends Component {
 
   state = {
     user: null,
-    isOwner: false
+    isOwner: false,
+    showAlert: false,
+    alertText: null,
+    alertStatus: null
   }
 
   async componentDidMount () {
@@ -64,7 +68,7 @@ class UserProfile extends Component {
       if (this.props.userId) {
         user = await (await fetch(`${API_URL}/api/v1/users/${this.props.userId}`)).json()
         isOwner = false
-        if (authenticated) isOwner = (user.keycloak == this.props.authContext.keycloak.userInfo.sub)
+        if (authenticated) isOwner = (user.keycloak == authContext.keycloak.userInfo.sub)
       } else {
         user = await (await fetch(`${API_URL}/api/v1/users/me`, {
           'headers': {
@@ -85,12 +89,25 @@ class UserProfile extends Component {
     if (!authContext.authenticated || !this.state.isOwner) return false
     try {
       await authContext.updateMe(newProfile)
-      window.alert('¡Perfil actualizado!')
-      // this.fetchUser(this.props.authContext.authenticated, this.props.authContext.keycloak.token)
+      this.setState({
+        showAlert: true,
+        alertText: '¡Perfil actualizado!',
+        alertStatus: 'success'
+      })
     } catch (error) {
-      window.alert('Ocurrio un error')
+      this.setState({
+        showAlert: true,
+        alertText: 'Ocurrió un error actualizando el perfil',
+        alertStatus: 'error'
+      })
       console.error(error)
     }
+  }
+
+  dismissAlert = () => {
+    this.setState({
+      showAlert: false
+    })
   }
 
   render () {
@@ -99,6 +116,12 @@ class UserProfile extends Component {
       <Fragment>
         {user &&
           <Profile user={user} isOwner={isOwner} onSubmit={this.updateProfile} />
+        }
+        {
+          this.state.showAlert &&
+          <Alert status={this.state.alertStatus} dismissAlert={this.dismissAlert}>
+            {this.state.alertText}
+          </Alert>
         }
       </Fragment>
     )

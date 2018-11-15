@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const StyledSection = styled.section`
-    margin-left: 5rem;
+    margin-left: ${(props) => props.noMargin ? '0em' : '5em'};
     padding: 8.4rem 4.3rem;
     display: flex;
     flex-wrap: wrap;
@@ -17,8 +17,8 @@ const StyledSection = styled.section`
     }
 `
 
-const Section = ({ id, children }) => (
-  <StyledSection id={id}>
+const Section = ({ id, children, noMargin }) => (
+  <StyledSection id={id} noMargin={noMargin} >
     { children }
   </StyledSection>
 )
@@ -28,7 +28,8 @@ Section.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
-  ]).isRequired
+  ]).isRequired,
+  noMargin: PropTypes.bool
 }
 
 export default Section
