@@ -25,7 +25,7 @@ const Card = ({ project }) => (
   <Link href={{ pathname: '/proyecto', query: { id: project._id } }}>
     <CardContainer>
       { project.currentVersion.content.imageCover &&
-      <CardHeader img={project.currentVersion.content.imageCover} />
+      <CardHeader img={project.currentVersion.content.imageCover} published={project.published} />
       }
       <CardContent
         title={project.currentVersion.content.title}
