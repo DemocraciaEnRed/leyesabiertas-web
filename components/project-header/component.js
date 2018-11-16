@@ -15,6 +15,7 @@ import ClosingDate from '../../elements/closing-date/component'
 import ArticlesCommentsCounter from '../../elements/articles-comments-counter/component'
 import ProjectBreadcrumb from '../project-breadcrumb/component'
 import ClosedProposal from '../closed-proposal/component'
+import SharerSocial from '../../elements/sharer-social/component'
 
 const ProjectHeaderContainer = styled.div`
   min-height: 383px;
@@ -33,6 +34,8 @@ const TopBarWrapper = styled.div`
   height:60px;
   flex-direction:row;
   justify-content:space-between;
+  width: 100%;
+  margin-right: 3%;
   & > div {
     padding: 0 2rem;
     border-right: 1px solid #e9e9e9;
@@ -71,6 +74,7 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
         {section === '/articulado' && !project.closed && !isAuthor && project.commentsCount &&
           <ArticlesCommentsCounter commentsCount={project.commentsCount} />
         }
+        {!isAuthor && <SharerSocial /> }
         <ProjectEditMode />
         {isAuthor &&
         <TogglePublish project={project} isPublished={isPublished} setPublish={setPublish} togglePublish={togglePublish} />
