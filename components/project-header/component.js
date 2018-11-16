@@ -67,7 +67,7 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
             limitDate={project.currentVersion.content.closingDate} />
           : <ClosingDate date={project.currentVersion.content.closingDate} />
         }
-        {!project.closed && !isAuthor && project.commentsCount &&
+        {section === '/articulado' && !project.closed && !isAuthor && project.commentsCount &&
           <ArticlesCommentsCounter commentsCount={project.commentsCount} />
         }
         <ProjectEditMode />
