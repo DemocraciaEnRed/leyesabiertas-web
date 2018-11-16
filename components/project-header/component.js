@@ -11,6 +11,7 @@ import ProjectEditMode from '../../elements/project-edit-mode/component'
 import TogglePublish from '../../components/project-toggle-publish/component'
 import ProjectHeaderLink from '../../elements/project-header-link/component'
 import ClosingDate from '../../elements/closing-date/component'
+import ArticlesCommentsCounter from '../../elements/articles-comments-counter/component'
 import ProjectBreadcrumb from '../project-breadcrumb/component'
 import ClosedProposal from '../closed-proposal/component'
 
@@ -65,6 +66,9 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
           ? <ProjectLimitDate
             limitDate={project.currentVersion.content.closingDate} />
           : <ClosingDate date={project.currentVersion.content.closingDate} />
+        }
+        {section === '/articulado' && !project.closed && !isAuthor && project.commentsCount &&
+          <ArticlesCommentsCounter commentsCount={project.commentsCount} />
         }
         <ProjectEditMode />
         {isAuthor &&
