@@ -6,7 +6,7 @@ import { ArticlesContext } from '../../containers/user-project-container/compone
 const Wrapper = styled.div`
   display:flex;
   flex-direction:column;
-  width:200px;
+  width:250px;
   height:57px;
 `
 const ToggleItem = styled.div`
@@ -54,7 +54,7 @@ const ItemOn = styled.b`
   top: 2px;
   bottom: 2px;
   right: 2px;
-  background-color: #a0705d;
+  background-color: #2c4c61;
   border-radius: 36px;
   z-index: 1;
   transition: .35s cubic-bezier(0.785, 0.135, 0.150, 0.860);
@@ -91,16 +91,16 @@ const ProjectEditMode = () => (
     {
       ({ isAuthor, editMode, toggleEditMode }) => isAuthor &&
         <Wrapper>
-            <Label>Modo edición</Label>
-            <div>
-              <ToggleItem onClick={toggleEditMode}>
-                <StyledCheck type='checkbox' />
-                <ItemOn>{ editMode ? 'Activado' : 'Desactivado' }</ItemOn>
-                <ItemOff>Desactivado</ItemOff>
-              </ToggleItem>
-            </div>
+          <Label>Modo edición</Label>
+          <div>
+            <ToggleItem onClick={toggleEditMode}>
+              <StyledCheck type='checkbox' />
+              <ItemOn>{ editMode ? 'Activado' : 'Desactivado' }</ItemOn>
+              <ItemOff>Desactivado</ItemOff>
+            </ToggleItem>
+          </div>
 
-          </Wrapper>
+        </Wrapper>
     }
   </ArticlesContext.Consumer>
 )

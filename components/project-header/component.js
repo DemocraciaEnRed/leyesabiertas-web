@@ -8,6 +8,7 @@ import ProjectVersionData from '../../components/project-version-data/component'
 import ProjectTitle from '../../elements/project-title/component'
 import ProjectLimitDate from '../../elements/project-limit-date/component'
 import ProjectEditMode from '../../elements/project-edit-mode/component'
+import TogglePublish from '../../components/project-toggle-publish/component'
 import ProjectHeaderLink from '../../elements/project-header-link/component'
 import ClosingDate from '../../elements/closing-date/component'
 import ProjectBreadcrumb from '../project-breadcrumb/component'
@@ -31,7 +32,7 @@ const TopBarWrapper = styled.div`
   flex-direction:row;
   justify-content:space-between;
   & > div {
-    padding: 0 3rem;
+    padding: 0 2rem;
     border-right: 1px solid #e9e9e9;
     height: 50px;
   }
@@ -40,10 +41,11 @@ const TopBarWrapper = styled.div`
   }
   & > div:last-child {
     border-right: none;
+    padding-right:0px;
   }
   `
 
-const ProjectHeader = ({ project, section }) => (
+const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, togglePublish }) => (
   <ProjectHeaderContainer img={project.currentVersion.content.imageCover}>
     <ProjectBreadcrumb
       title={project.currentVersion.content.title}
@@ -65,6 +67,9 @@ const ProjectHeader = ({ project, section }) => (
           : <ClosingDate date={project.currentVersion.content.closingDate} />
         }
         <ProjectEditMode />
+        {isAuthor &&
+        <TogglePublish project={project} isPublished={isPublished} setPublish={setPublish} togglePublish={togglePublish} />
+        }
       </TopBarWrapper>
       { project.closed &&
         <ClosedProposal
