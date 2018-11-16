@@ -27,9 +27,9 @@ const Footer = () => (
     <SocialBar>
       <SocialIcon
         img={'/static/assets/facebook-icon.svg'}
-        link={'/'} />
+        link={'https://www.facebook.com/diputados.argentina'} />
       <SocialIcon img={'/static/assets/twitter-icon.svg'}
-        link={'/'} />
+        link={'https://twitter.com/DiputadosAR'} />
     </SocialBar>
   </FooterWrapper>
 )

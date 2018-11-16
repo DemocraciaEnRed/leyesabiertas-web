@@ -51,11 +51,11 @@ export default class extends Component {
           Complete el formulario para enviar su opinión
         </FundationFormTitle>
         <FundationFormLabel>
-          Su opinión
           <FundationFormTextarea
             value={this.state.comment}
             onChange={this.handleChange}
-            error={this.state.emptyComment} />
+            error={this.state.emptyComment}
+            placeholder='Su opinión' />
         </FundationFormLabel>
         { this.state.emptyComment &&
           <FundationErrorSpan>Este campo no puede estar vacío. Escriba su opinión y luego haga click en agregar.</FundationErrorSpan>
