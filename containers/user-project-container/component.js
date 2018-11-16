@@ -20,7 +20,8 @@ export default class extends Component {
     selectedCommentsIds: [],
     editMode: false,
     newYoutubeId: null,
-    editedYoutubeId: false
+    editedYoutubeId: false,
+    isPublished: false
   }
 
   switchComments = () => {
@@ -42,12 +43,14 @@ export default class extends Component {
   }
 
   toggleEditMode = () => this.setState(({ editMode }) => ({ editMode: !editMode }))
+  togglePublish = () => this.setState({ isPublished: !this.state.isPublished })
+  setPublish = (isPublished) => this.setState({ isPublished: isPublished })
   setYoutubeId = (theId) => this.setState({ newYoutubeId: theId }, () => { this.setEditedYoutubeId(true) /* console.log(this.state.newYoutubeId) */ })
   setEditedYoutubeId = (value) => this.setState({ editedYoutubeId: value }, () => { /* console.log(this.state.editedYoutubeId) */ })
 
   render () {
     const { project, section, fetchDocument } = this.props
-    const { withComments } = this.state
+    const { withComments, isPublished } = this.state
     if (!project) return null
     const { isAuthor } = project
     return (
@@ -67,7 +70,7 @@ export default class extends Component {
           editedYoutubeId: this.state.editedYoutubeId,
           fetchDocument: fetchDocument
         }}>
-          <ProjectHeader project={project.document} section={section} />
+          <ProjectHeader project={project.document} section={section} isPublished={isPublished} setPublish={this.setPublish} togglePublish={this.togglePublish} isAuthor={isAuthor} />
           {this.props.section === '/proyecto' &&
           <Fragment>
             <ProjectBody project={project.document} />

@@ -8,7 +8,7 @@ import ProjectVersionData from '../../components/project-version-data/component'
 import ProjectTitle from '../../elements/project-title/component'
 import ProjectLimitDate from '../../elements/project-limit-date/component'
 import ProjectEditMode from '../../elements/project-edit-mode/component'
-import TogglePublish from '../../elements/toggle-publish/component'
+import TogglePublish from '../../components/project-toggle-publish/component'
 import ProjectHeaderLink from '../../elements/project-header-link/component'
 import ClosingDate from '../../elements/closing-date/component'
 import ProjectBreadcrumb from '../project-breadcrumb/component'
@@ -45,7 +45,7 @@ const TopBarWrapper = styled.div`
   }
   `
 
-const ProjectHeader = ({ project, section }) => (
+const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, togglePublish }) => (
   <ProjectHeaderContainer img={project.currentVersion.content.imageCover}>
     <ProjectBreadcrumb
       title={project.currentVersion.content.title}
@@ -61,19 +61,15 @@ const ProjectHeader = ({ project, section }) => (
         <ProjectVersionData
           version={project.currentVersion.version}
           createdAt={project.currentVersion.createdAt} />
-<<<<<<< HEAD
         {!project.closed
           ? <ProjectLimitDate
             limitDate={project.currentVersion.content.closingDate} />
           : <ClosingDate date={project.currentVersion.content.closingDate} />
         }
         <ProjectEditMode />
-=======
-        <ProjectLimitDate
-          limitDate={project.currentVersion.content.closingDate} />
-        <ProjectEditMode />
-
->>>>>>> completa componente toggle publicar
+        {isAuthor &&
+        <TogglePublish project={project} isPublished={isPublished} setPublish={setPublish} togglePublish={togglePublish} />
+        }
       </TopBarWrapper>
       { project.closed &&
         <ClosedProposal
