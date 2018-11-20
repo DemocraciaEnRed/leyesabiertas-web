@@ -27,48 +27,54 @@ class NavBar extends Component {
 
     this.state = {
       menu: false,
-      showTooltip: true
+      showTooltip: false
     }
   }
 
-handleMenu = () => {
-  this.setState({
-    menu: !this.state.menu
-  })
-}
+  componentDidMount () {
+    const hideTooltips = localStorage.getItem('hide-tooltips') || false
+    if (window.location.pathname === '/articulado' && !this.props.authContext.authenticated && !hideTooltips) {
+      this.setState({
+        showTooltip: true
+      })
+    }
+  }
 
-handleTooltip = () => {
-  this.setState({
-    showTooltip: false
-  })
-}
+  handleMenu = () => {
+    this.setState({
+      menu: !this.state.menu
+    })
+  }
 
-render () {
-  if (!this.props.authContext) return null
-  return (
-    <StyledNav>
-      <BetaLabel />
-      <NavbarLogo />
-      {this.props.authContext.authenticated
-        ? (
-          <LoggedUserBar>
-            <LoggedUser onClick={this.handleMenu} user={this.props.authContext.user} />
-            {this.state.menu &&
+  render () {
+    if (!this.props.authContext) return null
+    return (
+      <StyledNav>
+        <BetaLabel />
+        <NavbarLogo />
+        {this.props.authContext.authenticated
+          ? (
+            <LoggedUserBar>
+              <LoggedUser onClick={this.handleMenu} user={this.props.authContext.user} />
+              {this.state.menu &&
               <UserMenu logout={this.props.authContext.logout} user={this.props.authContext.user} create={this.createProject} isAuthor={this.props.authContext.isAuthor} />
-            }
-          </LoggedUserBar>
-        ) : (
-          <UserBar>
-            <Button onClick={this.props.authContext.login}>Iniciar sesión</Button>
-            <Button primary onClick={this.props.authContext.register}>Registrarse</Button>
-          </UserBar>
-        )}
-      { this.state.showTooltip &&
-        <Tooltip hideTooltip={this.handleTooltip} />
-      }
-    </StyledNav>
-  )
-}
+              }
+            </LoggedUserBar>
+          ) : (
+            <UserBar>
+              <Button onClick={this.props.authContext.login}>Iniciar sesión</Button>
+              <Button primary onClick={this.props.authContext.register}>Registrarse</Button>
+            </UserBar>
+          )}
+        { this.state.showTooltip &&
+          <Tooltip top={'110px'} right={'20px'}>
+            Para agregar aportes debe estar registrado.
+            Ingrese a la sección y complete el formulario
+          </Tooltip>
+        }
+      </StyledNav>
+    )
+  }
 }
 
 NavBar.propTypes = {

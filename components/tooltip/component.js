@@ -13,8 +13,13 @@ const StyledTooltip = styled.div`
   line-height: 1.6rem;
   color: var(--white);
   display: flex;
-  align-items: center;
-  position: relative;
+  flex-wrap: wrap;
+  align-items: space-between;
+  justify-content: center;
+  position: fixed;
+  top: ${(props) => props.top};
+  right: ${(props) => props.right};
+  z-index: 9;
   &::before {
     content: "";
     display: block;
@@ -24,23 +29,49 @@ const StyledTooltip = styled.div`
     border-right: 5px solid transparent;
     border-left: 5px solid transparent;
     top: -5px;
-    left: 50%;
+    left: 80%;
     width: 0;
     height: 0;
     margin-left: -5px;
   }
 `
 
+const StyledButton = styled.button`
+  background: none;
+  border: none;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+`
+
 class Tooltip extends Component {
+  state = {
+    showTooltip: true
+  }
+
   handleClickOutside = (evt) => {
-    this.props.hideTooltip()
+    this.setState({
+      showTooltip: false
+    })
+  }
+
+  hideTooltip = () => {
+    localStorage.setItem('hide-tooltips', true)
+    this.setState({
+      showTooltip: false
+    })
   }
 
   render () {
+    const { children } = this.props
+    const { showTooltip } = this.state
+    if (!showTooltip) return null
     return (
-      <StyledTooltip>
-        Para agregar aportes debe estár registrado. 
-        Ingrese a la sección y complete el formulario
+      <StyledTooltip {...this.props} >
+        { children }
+        <StyledButton onClick={this.hideTooltip}>
+          No mostrar más estos mensajes
+        </StyledButton>
       </StyledTooltip>
     )
   }
