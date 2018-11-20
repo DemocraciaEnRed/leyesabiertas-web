@@ -10,6 +10,7 @@ import Button from '../../elements/navbar-button/component'
 import LoggedUser from '../../components/logged-user/component'
 import Notifications from '../../components/notifications-bar/component'
 import UserMenu from '../../components/user-menu/component'
+import Tooltip from '../../components/tooltip/component'
 
 const StyledNav = styled.nav`
   height:12rem;
@@ -55,6 +56,7 @@ render () {
             <Button primary onClick={this.props.authContext.register}>Registrarse</Button>
           </UserBar>
         )}
+      <Tooltip />
     </StyledNav>
   )
 }
