@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import PropTypes from 'prop-types'
 import onClickOutside from 'react-onclickoutside'
+
+const transition = keyframes`
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-1px); }
+  60% { transform: translateY(-1px); }
+`
 
 const StyledTooltip = styled.div`
   width: 37.6rem;
@@ -20,6 +26,9 @@ const StyledTooltip = styled.div`
   top: ${(props) => props.top};
   right: ${(props) => props.right};
   z-index: 9;
+  animation-name: ${transition};
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
   &::before {
     content: "";
     display: block;
