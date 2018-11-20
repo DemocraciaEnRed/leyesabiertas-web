@@ -26,13 +26,20 @@ class NavBar extends Component {
     super(props)
 
     this.state = {
-      menu: false
+      menu: false,
+      showTooltip: true
     }
   }
 
 handleMenu = () => {
   this.setState({
     menu: !this.state.menu
+  })
+}
+
+handleTooltip = () => {
+  this.setState({
+    showTooltip: false
   })
 }
 
@@ -56,7 +63,9 @@ render () {
             <Button primary onClick={this.props.authContext.register}>Registrarse</Button>
           </UserBar>
         )}
-      <Tooltip />
+      { this.state.showTooltip &&
+        <Tooltip hideTooltip={this.handleTooltip} />
+      }
     </StyledNav>
   )
 }

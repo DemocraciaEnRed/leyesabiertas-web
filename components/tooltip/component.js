@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import onClickOutside from 'react-onclickoutside'
 
 const StyledTooltip = styled.div`
   width: 37.6rem;
@@ -31,6 +32,10 @@ const StyledTooltip = styled.div`
 `
 
 class Tooltip extends Component {
+  handleClickOutside = (evt) => {
+    this.props.hideTooltip()
+  }
+
   render () {
     return (
       <StyledTooltip>
@@ -41,4 +46,4 @@ class Tooltip extends Component {
   }
 }
 
-export default Tooltip
+export default onClickOutside(Tooltip)
