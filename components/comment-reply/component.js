@@ -101,7 +101,7 @@ class CommentReply extends Component {
         attachReply(comment, inputText)
         this.setState({
           showAlert: true,
-          alertText: 'Se ha guardado la respuesta',
+          alertText: 'Se ha guardado su respuesta',
           alertType: 'success',
           isLoading: false,
           showInput: false,
@@ -112,7 +112,7 @@ class CommentReply extends Component {
       console.log(err)
       this.setState({
         showAlert: true,
-        alertText: 'Ocurrio un error',
+        alertText: 'Ocurrió un error al guardar su respuesta',
         alertType: 'error',
         isLoading: false,
         showInput: false,
