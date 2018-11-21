@@ -2,8 +2,9 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Icon from 'react-icons-kit'
-import WithUserContext from '../../components/with-user-context/component'
 import { thumbsUp, star, square, checkSquare } from 'react-icons-kit/feather'
+import WithUserContext from '../../components/with-user-context/component'
+import CommentReply from '../../components/comment-reply/component'
 import UserAvatar from '../../elements/user-avatar/component'
 import { ArticlesContext } from '../../containers/user-project-container/component'
 import getConfig from 'next/config'
@@ -26,6 +27,8 @@ const StyledCommentCard = styled.div`
 `
 const StyledLikeWrapper = styled.div`
   margin-top: 11px;
+  border-top: 1px solid #dae1e7;
+  padding-top: 15px;
   color: ${({ liked }) => liked ? '#ef885d' : '#5c97bc'};
   cursor: pointer;
   font-size: 14px;
@@ -49,6 +52,11 @@ const SelectCommentText = styled.span`
 const StyledCheckbox = styled.input`
   margin-left:2px;
   margin-right:2px;
+`
+
+const ReplyComment = styled.p`
+  font-size: 1.2em !important;
+  line-heignt:
 `
 
 class commentCard extends Component {
@@ -117,6 +125,7 @@ class commentCard extends Component {
           {
             ({ isAuthor, toggleSelectedComment, editMode, selectedCommentsIds, project }) =>
               <Fragment>
+                <CommentReply isAuthor={isAuthor} reply={this.props.comment.reply} comment={this.props.comment._id} token={this.props.authContext.keycloak.token} project={project} attachReply={this.props.attachReply} />
                 <StyledLikeWrapper liked={this.state.liked} onClick={this.handleLike(project._id)}>
                   <Icon icon={thumbsUp} style={{ marginRight: '5px' }} /> { this.state.likes }
                 </StyledLikeWrapper>
@@ -126,23 +135,21 @@ class commentCard extends Component {
                 <StyledIconWrapper
                   active={this.state.resolved}
                   onClick={this.handleResolved(project._id)}>
-                    {
-                      this.state.resolved
-                        ?
-                          <>
-                            <Icon icon={checkSquare} />
-                            <SelectCommentText active={this.state.resolved}>
+                  {
+                    this.state.resolved
+                      ? <>
+                        <Icon icon={checkSquare} />
+                        <SelectCommentText active={this.state.resolved}>
                               Marcado como resuelto
-                            </SelectCommentText>
+                        </SelectCommentText>
                           </>
-                        :
-                          <>
-                            <Icon icon={square} />
-                            <SelectCommentText active={this.state.resolved}>
+                      : <>
+                        <Icon icon={square} />
+                        <SelectCommentText active={this.state.resolved}>
                               Marcar como resuelto
-                            </SelectCommentText>
+                        </SelectCommentText>
                           </>
-                    }
+                  }
                 </StyledIconWrapper>
                 )}
 

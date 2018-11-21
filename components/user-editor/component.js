@@ -77,9 +77,9 @@ class UserEditor extends Component {
       //   console.log(o.type)
       //   return o
       // })
-      .map(o => o.type)
-      .filter(o => o !== 'set_value')
-      .filter(o => o !== 'set_selection')
+      .map((o) => o.type)
+      .filter((o) => o !== 'set_value')
+      .filter((o) => o !== 'set_selection')
       .count()
 
     this.setState({
@@ -94,6 +94,19 @@ class UserEditor extends Component {
     })
   }
 
+  attachReply = async (commentId, reply) => {
+    let updatedComments = this.state.comments.map((comment) => {
+      if (comment._id === commentId) {
+        comment.reply = reply
+        return comment
+      }
+      return comment
+    })
+    this.setState({
+      comments: updatedComments
+    })
+  }
+
   fetchComments = async () => {
     try {
       const comments = await fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments?field=articles`, {
@@ -101,9 +114,9 @@ class UserEditor extends Component {
           Authorization: `Bearer ${this.props.authContext.keycloak.token}`
         }
       })
-      .then(docs => docs.json())
+        .then((docs) => docs.json())
 
-      const decorations = comments.map(c => c.decoration).filter(d => d)
+      const decorations = comments.map((c) => c.decoration).filter((d) => d)
 
       this.editor.setDecorations(decorations)
       this.setState({ comments })
@@ -119,11 +132,11 @@ class UserEditor extends Component {
   }
 
   removeComment = (id) => {
-    const decorations = this.editor.value.decorations.toJSON().filter(d => d.mark.data.id !== id)
+    const decorations = this.editor.value.decorations.toJSON().filter((d) => d.mark.data.id !== id)
     this.editor.setDecorations(decorations)
 
     this.setState((prevState) => {
-      const ids = prevState.activeComments.filter(_id => _id !== id)
+      const ids = prevState.activeComments.filter((_id) => _id !== id)
       return { activeComments: ids }
     })
   }
@@ -146,7 +159,8 @@ class UserEditor extends Component {
             activeComments={this.state.activeComments}
             comments={this.state.comments}
             removeComment={this.removeComment}
-            top={this.state.top} />
+            top={this.state.top}
+            attachReply={this.attachReply} />
         }
         { !this.props.isClosed &&
           <ArticlesSubtitle authenticated={this.props.authContext.authenticated} />

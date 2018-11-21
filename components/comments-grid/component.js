@@ -12,14 +12,15 @@ const StyledCommentsGrid = styled.div`
   z-index: 1;
 `
 
-const CommentsGrid = ({ activeComments = [], top, comments, removeComment }) => {
+const CommentsGrid = ({ activeComments = [], top, comments, removeComment, attachReply }) => {
   const displayComments = comments
-    .filter(comment => activeComments.includes(comment._id))
+    .filter((comment) => activeComments.includes(comment._id))
     .map((comment) =>
       <CommentCard
         removeComment={removeComment}
         key={comment._id}
-        comment={comment} />)
+        comment={comment}
+        attachReply={attachReply} />)
 
   return (
     <StyledCommentsGrid style={{ top }}>
