@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import getConfig from 'next/config'
 import Icon from 'react-icons-kit'
 import { clockO, sendO, mailReply } from 'react-icons-kit/fa'
 import fetch from 'isomorphic-unfetch'
 import Alert from '../../elements/alert/component'
 
-const { API_URL } = process.env
+const { publicRuntimeConfig: { API_URL }} = getConfig()
 
 const ReplyText = styled.p`
   font-size: 1.2em !important;
