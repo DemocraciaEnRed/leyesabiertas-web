@@ -80,6 +80,9 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
           contributors={project.currentVersion.contributors}
           contributions={project.currentVersion.contributions.length} />
       }
+      { section === '/proyecto' &&
+        <h2>Fundamentación.</h2>
+      }
       { section === '/articulado'
         ? <Link href={{ pathname: '/proyecto', query: { id: project._id } }}>
           <ProjectHeaderLink>

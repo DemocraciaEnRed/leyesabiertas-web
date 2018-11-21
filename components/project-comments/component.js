@@ -30,7 +30,7 @@ const StyledTitle = styled.div`
   font-size: 1.4rem;
   font-family:var(--bold);
   color: #2c4c61;
-  margin:2rem 0;
+  margin:2.1rem 0;
   `
 const StyledSubtitle = styled.div`
   height: 1.6rem;
