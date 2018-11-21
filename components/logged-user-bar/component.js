@@ -8,6 +8,7 @@ display:flex;
 justify-content:flex-end;
 width:33%;
 margin-top:auto;
+padding-bottom:.5rem;
 `
 
 const LoggedUserBar = ({ children }) => (
