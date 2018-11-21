@@ -1,22 +1,14 @@
 require('dotenv').config()
 
-const path = require('path')
-const Dotenv = require('dotenv-webpack')
-
 module.exports = {
-  webpack: (config) => {
-    config.plugins = config.plugins || []
-
-    config.plugins = [
-      ...config.plugins,
-
-      // Read the .env file
-      new Dotenv({
-        path: path.join(__dirname, '.env'),
-        systemvars: true
-      })
-    ]
-
-    return config
+  publicRuntimeConfig: {
+    API_URL: process.env.API_URL,
+    NODE_ENV: process.env.NODE_ENV,
+    REALM: process.env.REALM,
+    AUTH_SERVER_URL: process.env.AUTH_SERVER_URL,
+    SSL_REQUIRED: process.env.SSL_REQUIRED,
+    RESOURCE: process.env.RESOURCE,
+    PUBLIC_CLIENT: process.env.PUBLIC_CLIENT,
+    CONFIDENTIAL_PORT: process.env.CONFIDENTIAL_PORT
   }
 }

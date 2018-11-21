@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import UserContext from '../../components/user-context/component'
+import getConfig from 'next/config'
 
-const API_URL = process.env.API_URL
-const NODE_ENV = process.env.NODE_ENV
-const REALM = process.env.REALM
-const AUTH_SERVER_URL = process.env.AUTH_SERVER_URL
-const SSL_REQUIRED = process.env.SSL_REQUIRED
-const RESOURCE = process.env.RESOURCE
-const PUBLIC_CLIENT = process.env.PUBLIC_CLIENT
-const CONFIDENTIAL_PORT = process.env.CONFIDENTIAL_PORT
+const { publicRuntimeConfig: {
+  API_URL,
+  NODE_ENV,
+  REALM,
+  AUTH_SERVER_URL,
+  SSL_REQUIRED,
+  RESOURCE,
+  PUBLIC_CLIENT,
+  CONFIDENTIAL_PORT
+} } = getConfig()
 
 let Keycloak
 

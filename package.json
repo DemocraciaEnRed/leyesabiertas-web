@@ -20,7 +20,6 @@
   "homepage": "https://github.com/DemocraciaEnRed/congreso#readme",
   "dependencies": {
     "dotenv": "^6.0.0",
-    "dotenv-webpack": "^1.5.7",
     "get-selection-range": "^0.1.0",
     "immutable": "^3.8.2",
     "isomorphic-unfetch": "^2.1.1",
