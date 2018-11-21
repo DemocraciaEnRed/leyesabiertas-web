@@ -119,7 +119,8 @@ class commentCard extends Component {
       <StyledCommentCard>
         <UserAvatar
           avatarImg={this.props.comment.user.avatar}
-          name={this.props.comment.user.fullname} />
+          name={this.props.comment.user.fullname}
+          party={this.props.comment.user.party} />
         <p>{this.props.comment.content}</p>
         <ArticlesContext.Consumer>
           {

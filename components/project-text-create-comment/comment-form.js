@@ -208,7 +208,8 @@ class CommentForm extends Component {
             <CommentFormContent>
               <UserAvatarLogged
                 avatarImg={this.props.authContext.user.avatar}
-                name={this.props.authContext.profile.name} />
+                name={this.props.authContext.profile.name} 
+                party={this.props.authContext.profile.party} />
               <CommentText
                 placeholder='Agregue su comentario aquí'
                 value={this.state.value}

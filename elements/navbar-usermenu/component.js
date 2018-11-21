@@ -29,6 +29,7 @@ color: #5c97bc;
 text-transform:uppercase;
 display:flex;
 margin-top:.7rem;
+align-items:center;
 
 `
 const TextWrapper = styled.div`
@@ -63,7 +64,6 @@ const UserAvatar = ({ avatarImg, name, party, badge }) => (
     <TextWrapper>
       <Name>{name} </Name>
       <Party>
-
         { badge &&
           <IconWrapper><Icon icon={checkCircle} /></IconWrapper>
         }
