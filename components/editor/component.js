@@ -11,7 +11,9 @@ import CommentMark from '../../elements/comment-mark/component'
 import CommentCounter from '../../elements/comment-counter/component'
 import HighlightMark from '../../elements/highlight-mark/component'
 import AddComment from '../../elements/add-comment/component'
-const API_URL = process.env.API_URL
+import getConfig from 'next/config'
+
+const { publicRuntimeConfig: { API_URL }} = getConfig()
 
 const StyledEditorWrapper = styled.div`
   width: 50%;

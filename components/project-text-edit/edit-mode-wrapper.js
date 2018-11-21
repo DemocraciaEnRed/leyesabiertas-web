@@ -5,8 +5,9 @@ import Alert from '../../elements/alert/component'
 import WithUserContext from '../with-user-context/component'
 import Toolbar from './toolbar'
 import BottomBar from './bottom-bar'
+import getConfig from 'next/config'
 
-const API_URL = process.env.API_URL
+const { publicRuntimeConfig: { API_URL }} = getConfig()
 
 class AddCommentWrapper extends Component {
   constructor (props) {

@@ -4,8 +4,9 @@ import styled from 'styled-components'
 import Icon from 'react-icons-kit'
 import { thumbsUp } from 'react-icons-kit/feather'
 import WithUserContext from '../../components/with-user-context/component'
+import getConfig from 'next/config'
 
-const { API_URL } = process.env
+const { publicRuntimeConfig: { API_URL }} = getConfig()
 
 const StyledCommentItem = styled.div`
   min-height:15rem;

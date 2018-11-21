@@ -7,7 +7,9 @@ import Card from '../../components/card/component'
 import TitleH2 from '../../elements/title-h2/component'
 import SubtitleH3 from '../../elements/subtitle-h3/component'
 import Button from '../../elements/button/component'
-const API_URL = process.env.API_URL
+import getConfig from 'next/config'
+
+const { publicRuntimeConfig: { API_URL }} = getConfig()
 
 const Grid = styled.div`
   width: 100%;

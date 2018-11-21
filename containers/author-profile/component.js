@@ -8,8 +8,9 @@ import ProfileName from '../../elements/profile-name/component'
 import ProfileMail from '../../elements/profile-mail/component'
 import ProfilePeriod from '../../elements/profile-period/component'
 import ProfileResume from '../../elements/profile-resume/component'
+import getConfig from 'next/config'
 
-const API_URL = process.env.API_URL
+const { publicRuntimeConfig: { API_URL }} = getConfig()
 
 const StyledProfile = styled.div`
   width:59%;

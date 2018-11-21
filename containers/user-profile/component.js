@@ -4,8 +4,9 @@ import fetch from 'isomorphic-unfetch'
 import WithUserContext from '../../components/with-user-context/component'
 import Profile from '../../components/profile/component'
 import Alert from '../../elements/alert/component'
+import getConfig from 'next/config'
 
-const API_URL = process.env.API_URL
+const { publicRuntimeConfig: { API_URL }} = getConfig()
 
 class UserProfile extends Component {
   static propTypes = {

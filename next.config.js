@@ -9,6 +9,7 @@ module.exports = {
     SSL_REQUIRED: process.env.SSL_REQUIRED,
     RESOURCE: process.env.RESOURCE,
     PUBLIC_CLIENT: process.env.PUBLIC_CLIENT,
-    CONFIDENTIAL_PORT: process.env.CONFIDENTIAL_PORT
+    CONFIDENTIAL_PORT: process.env.CONFIDENTIAL_PORT,
+    API_KEY: process.env.API_KEY
   }
 }

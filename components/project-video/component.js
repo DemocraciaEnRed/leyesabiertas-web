@@ -6,8 +6,9 @@ import styled from 'styled-components'
 // import FundationCommentForm from '../fundation-comment-form/component'
 // import FundationAlertLogin from '../fundation-alert-login/component'
 import WithUserContext from '../with-user-context/component'
+import getConfig from 'next/config'
 
-// const API_URL = process.env.API_URL
+const { publicRuntimeConfig: { API_URL }} = getConfig()
 
 const StyledResponsiveVideo = styled.div`
   overflow:hidden;

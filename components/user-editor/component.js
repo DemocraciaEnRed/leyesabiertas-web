@@ -12,8 +12,9 @@ import ProjectTextEdit from '../../components/project-text-edit'
 import ProjectTextComment from '../../components/project-text-comment'
 import ProjectTextCreateComment from '../../components/project-text-create-comment'
 import ArticlesSubtitle from '../articles-subtitle/component'
+import getConfig from 'next/config'
 
-const API_URL = process.env.API_URL
+const { publicRuntimeConfig: { API_URL }} = getConfig()
 
 const StyledEditorWrapper = styled.div`
   width: 90%;

@@ -9,8 +9,9 @@ import CardNewProject from '../../components/card-new-project/component'
 import WithUserContext from '../../components/with-user-context/component'
 import TitleH2 from '../../elements/title-h2/component'
 import Alert from '../../elements/alert/component'
+import getConfig from 'next/config'
 
-const API_URL = process.env.API_URL
+const { publicRuntimeConfig: { API_URL }} = getConfig()
 
 const Grid = styled.div`
   width: 100%;

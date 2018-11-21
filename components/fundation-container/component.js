@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import { Editor } from 'slate-react'
 import { Value } from 'slate'
 import ProjectTextEdit from '../../components/project-text-edit'
+import getConfig from 'next/config'
 
-const API_URL = process.env.API_URL
+const { publicRuntimeConfig: { API_URL }} = getConfig()
 
 const StyledEditorWrapper = styled.div`
   width: 100%;

@@ -4,8 +4,9 @@ import ModeBar from '../../components/mode-bar/component'
 import Editor from '../../components/editor/component'
 import ModeButton from '../../elements/mode-button/component'
 import fetch from 'isomorphic-unfetch'
+import getConfig from 'next/config'
 
-const API_URL = process.env.API_URL
+const { publicRuntimeConfig: { API_URL }} = getConfig()
 
 const ArticlesContext = createContext()
 

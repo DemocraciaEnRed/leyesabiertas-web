@@ -6,8 +6,9 @@ import WithUserContext from '../../components/with-user-context/component'
 import { thumbsUp, star, square, checkSquare } from 'react-icons-kit/feather'
 import UserAvatar from '../../elements/user-avatar/component'
 import { ArticlesContext } from '../../containers/user-project-container/component'
+import getConfig from 'next/config'
 
-const { API_URL } = process.env
+const { publicRuntimeConfig: { API_URL }} = getConfig()
 
 const StyledCommentCard = styled.div`
   width: 300px;

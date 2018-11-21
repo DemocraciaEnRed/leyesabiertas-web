@@ -5,8 +5,9 @@ import Icon from 'react-icons-kit'
 import { clockO } from 'react-icons-kit/fa/clockO'
 import WithUserContext from '../with-user-context/component'
 import Alert from '../../elements/alert/component'
+import getConfig from 'next/config'
 
-const API_URL = process.env.API_URL
+const { publicRuntimeConfig: { API_URL }} = getConfig()
 
 const Wrapper = styled.div`
   display:flex;

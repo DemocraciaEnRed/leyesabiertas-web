@@ -3,7 +3,9 @@ import fetch from 'isomorphic-unfetch'
 import styled from 'styled-components'
 import DashboardDraftsItem from '../../components/dashboard-drafts-item/component'
 import DashboardDraftsTitle from '../../elements/dashboard-drafts-title/component'
-const API_KEY = process.env.API_KEY
+import getConfig from 'next/config'
+
+const { publicRuntimeConfig: { API_KEY }} = getConfig()
 
 const StyledDraftsContainer = styled.div`
   min-height:640px;

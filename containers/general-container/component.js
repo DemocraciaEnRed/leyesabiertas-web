@@ -7,8 +7,9 @@ import Footer from '../footer/component'
 import WithUserContext from '../../components/with-user-context/component'
 import SecondaryNavbar from '../../containers/secondary-navbar/component'
 import UserProjectContainer from '../user-project-container/component'
+import getConfig from 'next/config'
 
-const API_URL = process.env.API_URL
+const { publicRuntimeConfig: { API_URL }} = getConfig()
 
 const Wrapper = styled.div`
   display:flex;
