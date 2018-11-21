@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import ProjectHeaderWrapper from '../../elements/project-header-wrapper/component'
 import UserAvatar from '../../elements/user-avatar/component'
 import ProjectVersionData from '../../components/project-version-data/component'
+import FundationTitle from '../../components/fundation-title/component'
 import ProjectTitle from '../../elements/project-title/component'
 import ProjectLimitDate from '../../elements/project-limit-date/component'
 import ProjectEditMode from '../../elements/project-edit-mode/component'
@@ -86,7 +87,7 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
             <ProjectTitle>{project.currentVersion.content.title}</ProjectTitle>
           </ProjectHeaderLink>
         </Link>
-        : <ProjectTitle>{project.currentVersion.content.title}</ProjectTitle>
+        : <FundationTitle title={project.currentVersion.content.title} />
       }
     </ProjectHeaderWrapper>
   </ProjectHeaderContainer>

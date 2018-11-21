@@ -42,6 +42,7 @@ const BoldP = styled.p`
 
 const ProjectBody = ({ project }) => (
   <ProjectBodyContainer>
+    <ProjectLinkArticulate id={project._id} />
     <ArticlesContext.Consumer>
       {
         ({ isAuthor, editMode, setYoutubeId, editedYoutubeId, newYoutubeId }) => (
@@ -62,7 +63,6 @@ const ProjectBody = ({ project }) => (
         )
       }
     </ArticlesContext.Consumer>
-    <ProjectLinkArticulate id={project._id} />
   </ProjectBodyContainer>
 )
 

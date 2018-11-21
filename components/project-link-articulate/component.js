@@ -13,8 +13,8 @@ const StyledButton = styled.button`
   color: #fff;
   cursor: pointer;
   font-family: var(--bold);
-  align-self:auto;
-  margin:4rem auto;
+  align-self: auto;
+  margin-bottom: 6.6rem;
   display:flex;
   flex-direction:row;
   flex-wrap:nowrap;
