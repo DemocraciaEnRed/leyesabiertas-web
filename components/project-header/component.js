@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import ProjectHeaderWrapper from '../../elements/project-header-wrapper/component'
 import UserAvatar from '../../elements/user-avatar/component'
 import ProjectVersionData from '../../components/project-version-data/component'
+import FundationTitle from '../../components/fundation-title/component'
 import ProjectTitle from '../../elements/project-title/component'
 import ProjectLimitDate from '../../elements/project-limit-date/component'
 import ProjectEditMode from '../../elements/project-edit-mode/component'
@@ -80,16 +81,13 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
           contributors={project.currentVersion.contributors}
           contributions={project.currentVersion.contributions.length} />
       }
-      { section === '/proyecto' &&
-        <h2>Fundamentación.</h2>
-      }
       { section === '/articulado'
         ? <Link href={{ pathname: '/proyecto', query: { id: project._id } }}>
           <ProjectHeaderLink>
             <ProjectTitle>{project.currentVersion.content.title}</ProjectTitle>
           </ProjectHeaderLink>
         </Link>
-        : <ProjectTitle>{project.currentVersion.content.title}</ProjectTitle>
+        : <FundationTitle title={project.currentVersion.content.title} />
       }
     </ProjectHeaderWrapper>
   </ProjectHeaderContainer>
