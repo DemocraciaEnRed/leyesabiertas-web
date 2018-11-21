@@ -18,33 +18,29 @@ const ClosedProposalData = styled.div`
   }
 `
 
-export default ({ contributors, contributions }) => (
+export default ({ contributors, contributions, contextualComments }) => (
   <ClosedProposalWrapper>
-    <ClosedProposalTitle>Los aportes para esta propuesta ya han sido cerrados</ClosedProposalTitle>
-    <ClosedProposalMessage>Agradecemos a cada uno de los ciudadanos que compartieron sus aportes y comentarios a esta propuesta de ley. <br/> A continuación podrá ver los detalles y el resumen de la  co-creación de esta propuesta de ley.</ClosedProposalMessage>
+    {console.log(contributors, contributions, contextualComments)}
+    <ClosedProposalMessage>Agradecemos a cada uno de los ciudadanos que compartieron sus aportes y comentarios a esta propuesta de ley. <br  /> A continuación podrá ver los detalles y el resumen de la  co-creación de esta propuesta de ley.</ClosedProposalMessage>
     <ClosedProposalData>
-      { contributions > 0 &&
-        <DashboardBarItem>
-          <ActivityIcon img={'/static/assets/citizen-icon.svg'} />
-          <DashboardBarTextContainer>
-            <BarTitle>Cantidad de aportes</BarTitle>
-            <BarActivitySubtitle number={contributions}>
+      <DashboardBarItem>
+        <ActivityIcon img={'/static/assets/citizen-icon.svg'} />
+        <DashboardBarTextContainer>
+          <BarTitle>Cantidad de aportes</BarTitle>
+          <BarActivitySubtitle number={contributions}>
               aportes incluídos
-            </BarActivitySubtitle>
-          </DashboardBarTextContainer>
-        </DashboardBarItem>
-      }
-      { contributors &&
-        <DashboardBarItem>
-          <ActivityIcon img={'/static/assets/comment-smiley-icon.svg'} />
-          <DashboardBarTextContainer>
-            <BarTitle>Total de aportantes</BarTitle>
-            <BarActivitySubtitle number={contributors}>
+          </BarActivitySubtitle>
+        </DashboardBarTextContainer>
+      </DashboardBarItem>
+      <DashboardBarItem>
+        <ActivityIcon img={'/static/assets/comment-smiley-icon.svg'} />
+        <DashboardBarTextContainer>
+          <BarTitle>Total de aportantes</BarTitle>
+          <BarActivitySubtitle number={contributors}>
               aportantes
-            </BarActivitySubtitle>
-          </DashboardBarTextContainer>
-        </DashboardBarItem>
-      }
+          </BarActivitySubtitle>
+        </DashboardBarTextContainer>
+      </DashboardBarItem>
     </ClosedProposalData>
   </ClosedProposalWrapper>
 )

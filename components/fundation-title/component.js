@@ -12,7 +12,9 @@ const StyledSubtitle = styled.h2`
 
 export default ({ title, isClosed }) => (
   <div>
-    <StyledSubtitle closed={isClosed}>{isClosed ? 'Finalizó el periodo para hacer aportes' : 'Fundamentación'}</StyledSubtitle>
+    <StyledSubtitle closed={isClosed}>
+      {isClosed ? 'Finalizó el periodo para hacer aportes' : 'Fundamentación'}
+    </StyledSubtitle>
     <ProjectTitle>{ title }</ProjectTitle>
   </div>
 )

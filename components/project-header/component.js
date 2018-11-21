@@ -47,7 +47,7 @@ const TopBarWrapper = styled.div`
   }
   `
 
-const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, togglePublish }) => (
+const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, togglePublish, contextualCommentsCount, contributionsCount, contributorsCount }) => (
   <ProjectHeaderContainer img={project.currentVersion.content.imageCover}>
     <ProjectBreadcrumb
       title={project.currentVersion.content.title}
@@ -85,6 +85,12 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
         : <FundationTitle
           title={project.currentVersion.content.title}
           isClosed={project.closed} />
+      }
+      { project.closed &&
+        <ClosedProposal
+          contributors={contributorsCount}
+          contributions={contributionsCount}
+          contextualComments={contextualCommentsCount} />
       }
     </ProjectHeaderWrapper>
   </ProjectHeaderContainer>
