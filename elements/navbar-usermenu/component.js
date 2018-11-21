@@ -29,6 +29,7 @@ color: #5c97bc;
 text-transform:uppercase;
 display:flex;
 margin-top:.7rem;
+
 `
 const TextWrapper = styled.div`
 height:35px;
@@ -53,9 +54,8 @@ const Arrow = styled.i`
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 `
-const P = styled.p`
-  padding-left:${(props) => props.badge ? '0.5rem' : '0rem'};
-`
+const IconWrapper = styled.div`
+  padding-right:.5rem;`
 
 const UserAvatar = ({ avatarImg, name, party, badge }) => (
   <Wrapper>
@@ -65,9 +65,9 @@ const UserAvatar = ({ avatarImg, name, party, badge }) => (
       <Party>
 
         { badge &&
-          <Icon icon={checkCircle} />
+          <IconWrapper><Icon icon={checkCircle} /></IconWrapper>
         }
-        <P badge>{party}</P>
+        <p>{party}</p>
       </Party>
     </TextWrapper>
     <Arrow />
