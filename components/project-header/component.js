@@ -76,18 +76,15 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
         <TogglePublish project={project} isPublished={isPublished} setPublish={setPublish} togglePublish={togglePublish} />
         }
       </TopBarWrapper>
-      { project.closed &&
-        <ClosedProposal
-          contributors={project.currentVersion.contributors}
-          contributions={project.currentVersion.contributions.length} />
-      }
       { section === '/articulado'
         ? <Link href={{ pathname: '/proyecto', query: { id: project._id } }}>
           <ProjectHeaderLink>
             <ProjectTitle>{project.currentVersion.content.title}</ProjectTitle>
           </ProjectHeaderLink>
         </Link>
-        : <FundationTitle title={project.currentVersion.content.title} />
+        : <FundationTitle
+          title={project.currentVersion.content.title}
+          isClosed={project.closed} />
       }
     </ProjectHeaderWrapper>
   </ProjectHeaderContainer>

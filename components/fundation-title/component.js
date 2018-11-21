@@ -6,13 +6,13 @@ const StyledSubtitle = styled.h2`
   font-size: 2.4rem;
   font-family: var(--bold);
   line-height: 1.42rem;
-  color: #5c97bc;
+  color: ${(props) => props.closed ? '#ef885d' : '#5c97bc'};
   margin-top: 4.7rem;
 `
 
-export default ({ title }) => (
+export default ({ title, isClosed }) => (
   <div>
-    <StyledSubtitle>Fundamentación</StyledSubtitle>
+    <StyledSubtitle closed={isClosed}>{isClosed ? 'Finalizó el periodo para hacer aportes' : 'Fundamentación'}</StyledSubtitle>
     <ProjectTitle>{ title }</ProjectTitle>
   </div>
 )
