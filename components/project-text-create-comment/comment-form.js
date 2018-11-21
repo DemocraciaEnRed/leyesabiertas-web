@@ -6,11 +6,11 @@ import { Mark } from 'slate'
 import Icon from 'react-icons-kit'
 import { checkCircleO } from 'react-icons-kit/fa/checkCircleO'
 import { timesCircleO } from 'react-icons-kit/fa/timesCircleO'
+import getConfig from 'next/config'
 import UserAvatarLogged from '../../elements/user-avatar-logged/component'
 import WithUserContext from '../../components/with-user-context/component'
-import getConfig from 'next/config'
 
-const { publicRuntimeConfig: { API_URL }} = getConfig()
+const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const CommentFormContainer = styled.form`
   width: 300px;
@@ -156,6 +156,24 @@ class CommentForm extends Component {
       this.props.handleClose(), 3000)
   }
 
+  setSubtitle = (props) => {
+    if (props.authContext.isAuthor) {
+      if (props.authContext.user.fields) {
+        if (props.authContext.user.fields.party !== null || props.authContext.user.fields.party !== '') {
+          return props.authContext.user.fields.party
+        }
+      }
+      return ''
+    } else {
+      if (props.authContext.user.fields) {
+        if (props.authContext.user.fields.occupation !== null || props.authContext.user.fields.occupation !== '') {
+          return props.authContext.user.fields.occupation
+        }
+      }
+      return ''
+    }
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
     fetch(`${API_URL}/api/v1/documents/${this.props.id}/comments`, {
@@ -171,11 +189,11 @@ class CommentForm extends Component {
       })
     })
       .then((res) => {
-         this.setState({
-            value: '',
-            status: true,
-            error: !res.ok
-          })
+        this.setState({
+          value: '',
+          status: true,
+          error: !res.ok
+        })
 
         return res.json()
       })
@@ -208,8 +226,9 @@ class CommentForm extends Component {
             <CommentFormContent>
               <UserAvatarLogged
                 avatarImg={this.props.authContext.user.avatar}
-                name={this.props.authContext.profile.name} 
-                party={this.props.authContext.profile.party} />
+                name={this.props.authContext.profile.name}
+                subtitle={this.setSubtitle(this.props)}
+                badge={this.props.authContext.user.fields.party} />
               <CommentText
                 placeholder='Agregue su comentario aquí'
                 value={this.state.value}

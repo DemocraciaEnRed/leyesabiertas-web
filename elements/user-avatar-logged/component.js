@@ -22,7 +22,7 @@ const Name = styled.div`
   font-family:var(--bold);
   color: #2c4c61;
 `
-const Charge = styled.div`
+const Subtitle = styled.div`
   font-size:1.2rem;
   color: #5c97bc;
   font-size: 12px;
@@ -36,12 +36,12 @@ display:flex;
 flex-direction:column;
 justify-content:space-between;
 `
-const UserAvatar = ({ avatarImg, name, charge }) => (
+const UserAvatar = ({ avatarImg, name, subtitle }) => (
   <Wrapper>
     <Avatar avatarImg={avatarImg} />
     <TextWrapper>
       <Name>{name} </Name>
-      <Charge></Charge>
+      <Subtitle>{subtitle}</Subtitle>
     </TextWrapper>
   </Wrapper>
 )
@@ -49,7 +49,7 @@ const UserAvatar = ({ avatarImg, name, charge }) => (
 UserAvatar.propTypes = {
   name: PropTypes.string.isRequired,
   avatarImg: PropTypes.string.isRequired,
-  charge: PropTypes.string
+  subtitle: PropTypes.string
 }
 
 export default UserAvatar
