@@ -27,6 +27,8 @@ const StyledCommentCard = styled.div`
 `
 const StyledLikeWrapper = styled.div`
   margin-top: 11px;
+  border-top: 1px solid #dae1e7;
+  padding-top: 15px;
   color: ${({ liked }) => liked ? '#ef885d' : '#5c97bc'};
   cursor: pointer;
   font-size: 14px;

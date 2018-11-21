@@ -11,10 +11,9 @@ const { API_URL } = process.env
 const ReplyText = styled.p`
   font-size: 1.2em !important;
   line-height: 1.5em !important;
-  border-left: 1px solid #a7a3a3;
   padding: 0.5em 1em;
   margin-left: 1em;
-  margin-top: 0.5em;
+  margin-top: 2.3em;
 `
 
 const AutorName = styled.span`
@@ -24,15 +23,18 @@ const AutorName = styled.span`
 `
 
 const InputBox = styled.textarea`
-  color: #2d4b5e;
   width: 95%;
-  font-size: 1.2em !important;
+  font-size: 1.4em !important;
+  font-size: 14px;
+  line-height: 1.57rem;
+  color: #181818;
   line-height: 1.5em !important;
-  border: 1px solid #a7a3a3;
+  resize: none;
   padding: 0.5em 1em;
   margin-left: 1em;
   margin-top: 0.5em;
-  resize: vertical;
+  resize: none;
+  border: none;
 `
 
 const ActionButton = styled.div`
@@ -41,7 +43,7 @@ const ActionButton = styled.div`
   // padding: 0.7rem;
   width: 95%;
   font-size: 1.4rem;
-  margin: 1em;
+  margin: 1em 1em 7.7em;
   cursor: pointer;
   text-align: right;
   // background-color: #5c97bc;
@@ -50,7 +52,8 @@ const ActionButton = styled.div`
 `
 const ReplyButton = styled.div`
   color: #5c97bc;
-  margin-top: 1em;
+  margin-top: 1.5em;
+  margin-bottom: 3.3em;
   font-size: 1.4rem;
   cursor: pointer;
 `
@@ -154,12 +157,12 @@ class CommentReply extends Component {
           showInput && isAuthor &&
           <Fragment>
             <ReplyText><AutorName>{project.author.fullname}</AutorName></ReplyText>
-            <InputBox value={this.state.inputText} onChange={this.handleChange} />
+            <InputBox value={this.state.inputText} onChange={this.handleChange} placeholder={'Ingrese su respuesta'} />
             {
               isLoading
                 ? <Loading><Icon icon={clockO} style={{ display: 'inline-block' }} />&nbsp;&nbsp;Enviando...</Loading>
                 : <ActionButton onClick={this.saveReply}>
-                  <Icon icon={sendO} style={{ display: 'inline-block' }} />&nbsp;&nbsp;Enviar respuesta
+                  Enviar respuesta
                 </ActionButton>
             }
           </Fragment>
