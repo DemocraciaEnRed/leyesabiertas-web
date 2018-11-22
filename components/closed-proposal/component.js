@@ -20,24 +20,32 @@ const ClosedProposalData = styled.div`
 
 export default ({ contributors, contributions, contextualComments }) => (
   <ClosedProposalWrapper>
-    {console.log(contributors, contributions, contextualComments)}
     <ClosedProposalMessage>Agradecemos a cada uno de los ciudadanos que compartieron sus aportes y comentarios a esta propuesta de ley. <br  /> A continuación podrá ver los detalles y el resumen de la  co-creación de esta propuesta de ley.</ClosedProposalMessage>
     <ClosedProposalData>
       <DashboardBarItem>
         <ActivityIcon img={'/static/assets/citizen-icon.svg'} />
         <DashboardBarTextContainer>
-          <BarTitle>Cantidad de aportes</BarTitle>
+          <BarTitle>Aportes</BarTitle>
           <BarActivitySubtitle number={contributions}>
-              aportes incluídos
+            comentarios marcados como aportes
           </BarActivitySubtitle>
         </DashboardBarTextContainer>
       </DashboardBarItem>
       <DashboardBarItem>
         <ActivityIcon img={'/static/assets/comment-smiley-icon.svg'} />
         <DashboardBarTextContainer>
-          <BarTitle>Total de aportantes</BarTitle>
+          <BarTitle>Aportantes</BarTitle>
           <BarActivitySubtitle number={contributors}>
-              aportantes
+            Total de aportantes en la propuesta
+          </BarActivitySubtitle>
+        </DashboardBarTextContainer>
+      </DashboardBarItem>
+      <DashboardBarItem>
+        <ActivityIcon img={'/static/assets/comment-smiley-icon.svg'} />
+        <DashboardBarTextContainer>
+          <BarTitle>Comentarios</BarTitle>
+          <BarActivitySubtitle number={contextualComments}>
+            Total de comentarios en contexto
           </BarActivitySubtitle>
         </DashboardBarTextContainer>
       </DashboardBarItem>

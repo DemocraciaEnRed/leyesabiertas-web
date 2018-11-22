@@ -9,10 +9,6 @@ const StyledItem = styled.div`
   display: flex;
   align-items:center;
   box-sizing:border-box;
-  &:nth-child(odd) {
-    border-right:1px solid #e9e9e9;
-  }
-
 `
 
 StyledItem.propTypes = {
