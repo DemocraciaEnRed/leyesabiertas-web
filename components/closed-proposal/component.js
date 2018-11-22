@@ -25,7 +25,7 @@ export default ({ contributors, contributions, contextualComments }) => (
       <DashboardBarItem>
         <BarTitle>Aportes</BarTitle>
         <DashboardBarTextContainer>
-          <ActivityIcon img={'/static/assets/citizen-icon.svg'} />
+          <ActivityIcon img={'/static/assets/cha-rect-star.svg'} />
           <BarActivitySubtitle number={contributions}>
             comentarios marcados como aportes
           </BarActivitySubtitle>
@@ -34,7 +34,7 @@ export default ({ contributors, contributions, contextualComments }) => (
       <DashboardBarItem>
         <BarTitle>Aportantes</BarTitle>
         <DashboardBarTextContainer>
-          <ActivityIcon img={'/static/assets/comment-smiley-icon.svg'} />
+          <ActivityIcon img={'/static/assets/citizen-icon.svg'} />
           <BarActivitySubtitle number={contributors}>
             Total de aportantes en la propuesta
           </BarActivitySubtitle>
@@ -43,7 +43,7 @@ export default ({ contributors, contributions, contextualComments }) => (
       <DashboardBarItem>
         <BarTitle>Comentarios</BarTitle>
         <DashboardBarTextContainer>
-          <ActivityIcon img={'/static/assets/comment-smiley-icon.svg'} />
+          <ActivityIcon img={'/static/assets/group-3.svg'} />
           <BarActivitySubtitle number={contextualComments}>
             Total de comentarios en contexto
           </BarActivitySubtitle>
