@@ -7,6 +7,7 @@ import { clockO, sendO, mailReply } from 'react-icons-kit/fa'
 import fetch from 'isomorphic-unfetch'
 import Alert from '../../elements/alert/component'
 import UserAvatar from '../../elements/user-avatar-logged/component'
+import ProjectCreationDate from '../../elements/project-creation-date/component'
 
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
@@ -152,7 +153,7 @@ class CommentReply extends Component {
           <UserAvatar
             avatarImg={project.author.avatar}
             name={project.author.fullname}
-            subtitle={project.author.fields.party} />
+            subtitle={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
           <br />{reply}</ReplyText>
         }
         { !showInput && isAuthor &&
@@ -167,7 +168,7 @@ class CommentReply extends Component {
               <UserAvatar
                 avatarImg={project.author.avatar}
                 name={project.author.fullname}
-                subtitle={project.author.fields.party} />
+                subtitle={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
             </ReplyText>
             <InputBox value={this.state.inputText} onChange={this.handleChange} placeholder={'Ingrese su respuesta'} />
             {

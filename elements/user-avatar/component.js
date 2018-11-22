@@ -69,7 +69,7 @@ UserAvatar.propTypes = {
   name: PropTypes.string.isRequired,
   avatarImg: PropTypes.string,
   party: PropTypes.string,
-  authorId: PropTypes.string.isRequired,
+  authorId: PropTypes.string,
   badge: PropTypes.string
 }
 

@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Icon from 'react-icons-kit'
 import { thumbsUp, star, square, checkSquare } from 'react-icons-kit/feather'
+import getConfig from 'next/config'
 import WithUserContext from '../../components/with-user-context/component'
 import CommentReply from '../../components/comment-reply/component'
 import UserAvatar from '../../elements/user-avatar/component'
 import { ArticlesContext } from '../../containers/user-project-container/component'
-import getConfig from 'next/config'
 
-const { publicRuntimeConfig: { API_URL }} = getConfig()
+const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const StyledCommentCard = styled.div`
   width: 300px;
@@ -119,7 +119,7 @@ class commentCard extends Component {
         <UserAvatar
           avatarImg={this.props.comment.user.avatar}
           name={this.props.comment.user.fullname}
-          party={this.props.comment.user.party} />
+          party={this.props.comment.user.party ? this.props.comment.user.party : (this.props.comment.user.occupation ? this.props.comment.user.occupation : '')} />
         <p>{this.props.comment.content}</p>
         <ArticlesContext.Consumer>
           {
