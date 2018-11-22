@@ -3,13 +3,11 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const StyledBarTitle = styled.h4`
-  font-size: 1.6rem;
-  line-height: 2.5rem;
+  font-size: 2.2rem;
+  font-family: var(--bold);
+  line-height: 1.14rem;
   color: #5c97bc;
-  max-width: 22.2rem;
-  font-family:var(--bold);
-  margin:0;
-
+  margin-bottom: 3rem;
 `
 
 const BarTitle = ({ children }) => (

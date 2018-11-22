@@ -23,27 +23,27 @@ export default ({ contributors, contributions, contextualComments }) => (
     <ClosedProposalMessage>Agradecemos a cada uno de los ciudadanos que compartieron sus aportes y comentarios a esta propuesta de ley. <br  /> A continuación podrá ver los detalles y el resumen de la  co-creación de esta propuesta de ley.</ClosedProposalMessage>
     <ClosedProposalData>
       <DashboardBarItem>
-        <ActivityIcon img={'/static/assets/citizen-icon.svg'} />
+        <BarTitle>Aportes</BarTitle>
         <DashboardBarTextContainer>
-          <BarTitle>Aportes</BarTitle>
+          <ActivityIcon img={'/static/assets/citizen-icon.svg'} />
           <BarActivitySubtitle number={contributions}>
             comentarios marcados como aportes
           </BarActivitySubtitle>
         </DashboardBarTextContainer>
       </DashboardBarItem>
       <DashboardBarItem>
-        <ActivityIcon img={'/static/assets/comment-smiley-icon.svg'} />
+        <BarTitle>Aportantes</BarTitle>
         <DashboardBarTextContainer>
-          <BarTitle>Aportantes</BarTitle>
+          <ActivityIcon img={'/static/assets/comment-smiley-icon.svg'} />
           <BarActivitySubtitle number={contributors}>
             Total de aportantes en la propuesta
           </BarActivitySubtitle>
         </DashboardBarTextContainer>
       </DashboardBarItem>
       <DashboardBarItem>
-        <ActivityIcon img={'/static/assets/comment-smiley-icon.svg'} />
+        <BarTitle>Comentarios</BarTitle>
         <DashboardBarTextContainer>
-          <BarTitle>Comentarios</BarTitle>
+          <ActivityIcon img={'/static/assets/comment-smiley-icon.svg'} />
           <BarActivitySubtitle number={contextualComments}>
             Total de comentarios en contexto
           </BarActivitySubtitle>

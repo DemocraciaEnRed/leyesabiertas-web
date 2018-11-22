@@ -5,26 +5,20 @@ import styled from 'styled-components'
 const StyledBarSubtitle = styled.div`
   height:2.9rem;
   max-width:25rem;
-  display:flex;
-  flex-direction:row;
-  align-items:center;
+  margin-top: 0.8rem;
 `
 const Span = styled.span`
-  font-size:2.5rem;
-  padding-right:0.5rem;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.13rem;
   color: #ef885d;
-  line-height:3.4rem;
-  font-family:var(--bold);
-  margin:0;
-
-
+  margin-bottom: 0.5rem;
 `
 const ItemStyle = styled.p`
   font-size: 1.6rem;
-  line-height: 2.5rem;
-  color: #4a4a4a;
+  line-height: 1.38;
+  color: #4a4a4a; 
   margin:0;
-
 `
 const BarActivitySubtitle = ({ number, children }) => (
   <StyledBarSubtitle>

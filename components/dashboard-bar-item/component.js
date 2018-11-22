@@ -2,13 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-const StyledItem = styled.div`
-  width:35rem;
-  height:8rem;  
+const StyledItem = styled.div` 
   padding:1rem 3rem;
-  display: flex;
-  align-items:center;
   box-sizing:border-box;
+  margin-bottom: 5rem;
 `
 
 StyledItem.propTypes = {
