@@ -56,7 +56,6 @@ const StyledCheckbox = styled.input`
 
 const ReplyComment = styled.p`
   font-size: 1.2em !important;
-  line-heignt:
 `
 
 class commentCard extends Component {

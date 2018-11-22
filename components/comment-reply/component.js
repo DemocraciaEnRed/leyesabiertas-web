@@ -6,8 +6,9 @@ import Icon from 'react-icons-kit'
 import { clockO, sendO, mailReply } from 'react-icons-kit/fa'
 import fetch from 'isomorphic-unfetch'
 import Alert from '../../elements/alert/component'
+import UserAvatar from '../../elements/user-avatar-logged/component'
 
-const { publicRuntimeConfig: { API_URL }} = getConfig()
+const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const ReplyText = styled.p`
   font-size: 1.2em !important;
@@ -147,7 +148,12 @@ class CommentReply extends Component {
     return (
       <Fragment>
         { reply && !showInput &&
-        <ReplyText><AutorName>{project.author.fullname}</AutorName><br />{reply}</ReplyText>
+        <ReplyText>
+          <UserAvatar
+            avatarImg={project.author.avatar}
+            name={project.author.fullname}
+            subtitle={project.author.fields.party} />
+          <br />{reply}</ReplyText>
         }
         { !showInput && isAuthor &&
         <ReplyButton onClick={this.showReplyInput}>
@@ -157,7 +163,12 @@ class CommentReply extends Component {
         {
           showInput && isAuthor &&
           <Fragment>
-            <ReplyText><AutorName>{project.author.fullname}</AutorName></ReplyText>
+            <ReplyText>
+              <UserAvatar
+                avatarImg={project.author.avatar}
+                name={project.author.fullname}
+                subtitle={project.author.fields.party} />
+            </ReplyText>
             <InputBox value={this.state.inputText} onChange={this.handleChange} placeholder={'Ingrese su respuesta'} />
             {
               isLoading
