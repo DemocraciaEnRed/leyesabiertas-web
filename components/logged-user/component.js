@@ -36,7 +36,8 @@ const LoggedUser = (props) => (
     <NavbarUsermenu
       name={props.authContext.user.fullname}
       avatarImg={props.authContext.user.avatar}
-      party={subtituloUsuario(props)} />
+      party={subtituloUsuario(props)}
+      badge={props.authContext.user.fields.party} />
   </StyledLoggedUser>
 )
 

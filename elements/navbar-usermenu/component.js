@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Icon from 'react-icons-kit'
+import { checkCircle } from 'react-icons-kit/fa/checkCircle'
 
 const Wrapper = styled.div`
 display:flex;
@@ -9,7 +11,6 @@ text-align:left;
 margin-bottom:2rem;
 `
 const Avatar = styled.div`
-  margin-top:-5px; /* ONLY FOR ALPHA VERSION */
   width: 40px;
   height: 40px;
   border-radius:50%;
@@ -26,6 +27,10 @@ const Party = styled.div`
 font-size:1.2rem;
 color: #5c97bc;
 text-transform:uppercase;
+display:flex;
+margin-top:.7rem;
+align-items:center;
+
 `
 const TextWrapper = styled.div`
 height:35px;
@@ -42,7 +47,7 @@ justify-content:space-between;
   }
 `
 const Arrow = styled.i`
-  margin:5px 0px 0px 15px;
+  margin:0px 0px 0px 15px;
   border: solid #4a5d68;
   border-width: 0 2px 2px 0;
   display: inline-block;
@@ -50,13 +55,20 @@ const Arrow = styled.i`
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 `
+const IconWrapper = styled.div`
+  padding-right:.5rem;`
 
-const UserAvatar = ({ avatarImg, name, party }) => (
+const UserAvatar = ({ avatarImg, name, party, badge }) => (
   <Wrapper>
     <Avatar avatarImg={avatarImg} />
     <TextWrapper>
       <Name>{name} </Name>
-      <Party>{party}</Party>
+      <Party>
+        { badge &&
+          <IconWrapper><Icon icon={checkCircle} /></IconWrapper>
+        }
+        <p>{party}</p>
+      </Party>
     </TextWrapper>
     <Arrow />
   </Wrapper>
@@ -65,7 +77,8 @@ const UserAvatar = ({ avatarImg, name, party }) => (
 UserAvatar.propTypes = {
   name: PropTypes.string.isRequired,
   avatarImg: PropTypes.string,
-  party: PropTypes.string
+  party: PropTypes.string,
+  badge: PropTypes.string
 }
 
 export default UserAvatar

@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Icon from 'react-icons-kit'
+import { checkCircle } from 'react-icons-kit/fa/checkCircle'
 
 const Wrapper = styled.div`
 display:flex;
@@ -10,8 +12,8 @@ width:296px;
 margin-bottom:2rem;
 `
 const Avatar = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border-radius:50%;
   background-image: url('${(props) => props.avatarImg ? props.avatarImg : '/static/assets/userdefault.png'}');
   background-size: cover;
@@ -22,11 +24,14 @@ const Name = styled.div`
   font-family:var(--bold);
   color: #2c4c61;
 `
-const Charge = styled.div`
+const Subtitle = styled.div`
   font-size:1.2rem;
   color: #5c97bc;
   font-size: 12px;
   text-transform:uppercase;
+  display:flex;
+  margin-top:1rem;
+  align-items:center;
 
 `
 const TextWrapper = styled.div`
@@ -36,12 +41,22 @@ display:flex;
 flex-direction:column;
 justify-content:space-between;
 `
-const UserAvatar = ({ avatarImg, name, charge }) => (
+
+const IconWrapper = styled.div`
+  padding-right:.5rem;`
+
+const UserAvatar = ({ avatarImg, name, subtitle }) => (
   <Wrapper>
     <Avatar avatarImg={avatarImg} />
     <TextWrapper>
       <Name>{name} </Name>
-      <Charge></Charge>
+      <Subtitle>
+        { subtitle &&
+          <IconWrapper><Icon icon={checkCircle} /></IconWrapper>
+        }
+        <p>{subtitle}</p>
+      </Subtitle>
+
     </TextWrapper>
   </Wrapper>
 )
@@ -49,7 +64,7 @@ const UserAvatar = ({ avatarImg, name, charge }) => (
 UserAvatar.propTypes = {
   name: PropTypes.string.isRequired,
   avatarImg: PropTypes.string.isRequired,
-  charge: PropTypes.string
+  subtitle: PropTypes.string
 }
 
 export default UserAvatar
