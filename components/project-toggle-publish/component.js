@@ -127,7 +127,6 @@ class TogglePublished extends Component {
           isLoading: false
         })
       }
-      console.log(res.ok)
     }).catch((err) => {
       console.error(err)
       this.setState({

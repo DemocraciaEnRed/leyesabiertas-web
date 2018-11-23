@@ -70,7 +70,16 @@ export default class extends Component {
           editedYoutubeId: this.state.editedYoutubeId,
           fetchDocument: fetchDocument
         }}>
-          <ProjectHeader project={project.document} section={section} isPublished={isPublished} setPublish={this.setPublish} togglePublish={this.togglePublish} isAuthor={isAuthor} />
+          <ProjectHeader
+            project={project.document}
+            section={section}
+            isPublished={isPublished}
+            setPublish={this.setPublish}
+            togglePublish={this.togglePublish}
+            isAuthor={isAuthor}
+            contributorsCount={project.contributorsCount}
+            contextualCommentsCount={project.contextualCommentsCount}
+            contributionsCount={project.contributionsCount} />
           {this.props.section === '/proyecto' &&
           <Fragment>
             <ProjectBody project={project.document} />
