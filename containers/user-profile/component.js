@@ -44,10 +44,11 @@ class UserProfile extends Component {
     // if(user.fields && user.fields.occupation) arrayData.push(user.fields.occupation)
     this.setState({
       'user': {
+        'id': user._id,
         'surnames': user.surnames,
         'names': user.names,
         'username': user.username,
-        'avatar': user.avatar,
+        // 'avatar': user.avatar,
         'occupation': user.fields && user.fields.occupation ? user.fields.occupation : '',
         'gender': user.fields && user.fields.gender ? user.fields.gender : '',
         'party': user.fields && user.fields.party ? user.fields.party : '',
