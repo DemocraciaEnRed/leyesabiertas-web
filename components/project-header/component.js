@@ -31,8 +31,11 @@ const ProjectHeaderContainer = styled.div`
 `
 const TopBarWrapper = styled.div`
   display: flex;
-  height:60px;
   flex-direction:row;
+  @media (max-width:500px){
+    flex-wrap:wrap;
+  }
+  min-height:60px;
   justify-content:space-between;
   width: 100%;
   margin-right: 3%;
@@ -40,6 +43,9 @@ const TopBarWrapper = styled.div`
     padding: 0 2rem;
     border-right: 1px solid #e9e9e9;
     height: 50px;
+    @media (max-width:510px){
+      border:none;
+    }
   }
   & > div:first-child {
     padding-left:0px;

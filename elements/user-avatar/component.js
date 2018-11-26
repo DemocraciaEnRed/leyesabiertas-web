@@ -13,10 +13,11 @@ display:flex;
 align-items:flex-start;
 text-align:left;
 margin-bottom:2rem;
-min-width:200px;
+min-width:150px;
 `
 const Avatar = styled.div`
   width: 40px;
+  min-width:40px;
   height: 40px;
   border-radius:50%;
   background-image: url('${(props) => props.userId ? `${API_URL}/api/v1/users/${props.userId}/avatar` : '/static/assets/userdefault.png'}');
@@ -29,6 +30,7 @@ color: #2d4b5e;
 font-size: 1.4rem;
 font-family:var(--bold);
 cursor: pointer;
+min-width:100px;
 `
 const Party = styled.div`
 font-size:1.2rem;
@@ -51,13 +53,13 @@ const IconWrapper = styled.div`
   padding-right:.5rem;`
 
  
-const UserAvatar = ({ authorId, userId, name, party, badge }) => (
+const UserAvatar = ({ userId, name, party, badge }) => (
   <Wrapper>
-    <Link href={{ pathname: '/userprofile', query: { id: authorId } }}>
+    <Link href={{ pathname: '/userprofile', query: { id: userId } }}>
       <Avatar userId={userId} />
     </Link>
     <TextWrapper>
-      <Link href={{ pathname: '/userprofile', query: { id: authorId } }}>
+      <Link href={{ pathname: '/userprofile', query: { id: userId } }}>
         <Name>{name}</Name>
       </Link>
       <Party>
