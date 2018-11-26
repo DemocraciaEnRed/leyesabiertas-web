@@ -118,7 +118,7 @@ class CommentForm extends Component {
         <CommentFormHeader>Agregar comentario</CommentFormHeader>
         <CommentFormContent>
           <UserAvatarLogged
-            avatarImg={'/static/assets/userdefault.png'}
+            userId={'/static/assets/userdefault.png'}
             /*        name={props.authContext.userInfo.name} /> */
             name={'Nombre'} />
           <CommentText

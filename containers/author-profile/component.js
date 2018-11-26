@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import fetch from 'isomorphic-unfetch'
+import getConfig from 'next/config'
 import ProfileAvatar from '../../elements/profile-avatar/component'
 import ProfileCharge from '../../elements/profile-charge/component'
 import ProfileName from '../../elements/profile-name/component'
 import ProfileMail from '../../elements/profile-mail/component'
 import ProfilePeriod from '../../elements/profile-period/component'
 import ProfileResume from '../../elements/profile-resume/component'
-import getConfig from 'next/config'
 
-const { publicRuntimeConfig: { API_URL }} = getConfig()
+const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const StyledProfile = styled.div`
   width:59%;
@@ -45,7 +45,7 @@ class Profile extends Component {
     if (!user) return null
     return (
       <StyledProfile>
-        <ProfileAvatar img={user.avatar} />
+        <ProfileAvatar id={user._id} />
         <ProfileName name={user.fields.name} />
         <ProfileCharge charge={user.fields.occupation} />
         <ProfilePeriod period={'Período: 10/12/2015 - 09/12/2019'} />

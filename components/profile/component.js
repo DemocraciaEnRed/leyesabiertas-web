@@ -122,7 +122,7 @@ export default class Profile extends Component {
     const { user, isOwner, isLoading } = this.props
     return (
       <ProfileForm onSubmit={this.handleSubmit}>
-        <ProfileAvatar img={user.avatar} />
+        <ProfileAvatar id={user.id} />
         <ProfileName>{`${user.surnames}, ${user.names}`}</ProfileName>
         <ProfileMail mail={user.arrayData.join(' - ')} />
         { isOwner && !this.state.editMode ? <ButtonLink onClick={this.toggleEdit}>Editar perfil</ButtonLink> : null }

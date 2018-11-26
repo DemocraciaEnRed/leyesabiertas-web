@@ -225,7 +225,7 @@ class CommentForm extends Component {
             <CommentFormHeader>Agregar comentario</CommentFormHeader>
             <CommentFormContent>
               <UserAvatarLogged
-                avatarImg={this.props.authContext.user.avatar}
+                userId={this.props.authContext.user._id}
                 name={this.props.authContext.profile.name}
                 subtitle={this.setSubtitle(this.props)}
                 badge={this.props.authContext.user.fields.party} />
