@@ -151,7 +151,7 @@ class CommentReply extends Component {
         { reply && !showInput &&
         <ReplyText>
           <UserAvatar
-            avatarImg={project.author.avatar}
+            userId={project.author._id}
             name={project.author.fullname}
             subtitle={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
           <br />{reply}</ReplyText>
@@ -166,7 +166,7 @@ class CommentReply extends Component {
           <Fragment>
             <ReplyText>
               <UserAvatar
-                avatarImg={project.author.avatar}
+                userId={project.author._id}
                 name={project.author.fullname}
                 subtitle={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
             </ReplyText>

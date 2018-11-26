@@ -117,7 +117,7 @@ class commentCard extends Component {
     return (
       <StyledCommentCard>
         <UserAvatar
-          avatarImg={this.props.comment.user.avatar}
+          userId={this.props.comment.user._id}
           name={this.props.comment.user.fullname}
           party={this.props.comment.user.party ? this.props.comment.user.party : (this.props.comment.user.occupation ? this.props.comment.user.occupation : '')} />
         <p>{this.props.comment.content}</p>

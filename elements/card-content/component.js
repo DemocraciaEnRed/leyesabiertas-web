@@ -35,7 +35,7 @@ const TextWrapper = styled.div`
 
 const croppedTitle = (title) => title.slice(0, 42).concat('...')
 
-const CardContent = ({ authorId, tagTitle, title, avatarImg, name, party }) => (
+const CardContent = ({ authorId, tagTitle, title, userId, name, party }) => (
   <Wrapper>
     <TextWrapper>
       { tagTitle &&
@@ -44,7 +44,7 @@ const CardContent = ({ authorId, tagTitle, title, avatarImg, name, party }) => (
       <Title>{title} </Title>
     </TextWrapper>
     <UserAvatar
-      avatarImg={avatarImg}
+      userId={userId}
       name={name}
       party={party}
       authorId={authorId} />
@@ -54,7 +54,7 @@ const CardContent = ({ authorId, tagTitle, title, avatarImg, name, party }) => (
 CardContent.propTypes = {
   title: PropTypes.string.isRequired,
   tagTitle: PropTypes.string,
-  avatarImg: PropTypes.string,
+  userId: PropTypes.string,
   name: PropTypes.string.isRequired,
   party: PropTypes.string.isRequired,
   authorId: PropTypes.string.isRequired

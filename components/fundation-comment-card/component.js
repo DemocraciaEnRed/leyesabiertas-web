@@ -34,7 +34,7 @@ const UserAvatar = styled.div`
   width: 40px;
   height: 40px;
   border-radius:50%;
-  background-image: url('${(props) => props.avatarImg}');
+  background-image: url('${(props) => props.userId}');
   background-size: cover;
   background-position: center;
   `
@@ -101,7 +101,7 @@ class FundationCommentCard extends Component {
     const { comment } = this.props
     return (
       <StyledCommentItem>
-        <UserAvatar avatarImg={comment.user.avatar} />
+        <UserAvatar userId={comment.user._id} />
         <TextWrapper>
           <Username>{comment.user.fullname}</Username>
           <Charge>{(comment.user.fields && comment.user.fields.occupation) ? comment.user.fields.occupation : '' }</Charge>

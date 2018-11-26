@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Icon from 'react-icons-kit'
 import { checkCircle } from 'react-icons-kit/fa/checkCircle'
+import getConfig from 'next/config'
+
+const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const Wrapper = styled.div`
 display:flex;
@@ -16,7 +19,7 @@ const Avatar = styled.div`
   width: 40px;
   height: 40px;
   border-radius:50%;
-  background-image: url('${(props) => props.avatarImg ? props.avatarImg : '/static/assets/userdefault.png'}');
+  background-image: url('${(props) => props.userId ? `${API_URL}/users/${props.userId}/avatar` : '/static/assets/userdefault.png'}');
   background-size: cover;
   background-position: center;
   cursor: pointer;
@@ -48,10 +51,10 @@ const IconWrapper = styled.div`
   padding-right:.5rem;`
 
  
-const UserAvatar = ({ authorId, avatarImg, name, party, badge }) => (
+const UserAvatar = ({ authorId, userId, name, party, badge }) => (
   <Wrapper>
     <Link href={{ pathname: '/userprofile', query: { id: authorId } }}>
-      <Avatar avatarImg={avatarImg} />
+      <Avatar userId={userId} />
     </Link>
     <TextWrapper>
       <Link href={{ pathname: '/userprofile', query: { id: authorId } }}>
@@ -67,7 +70,7 @@ const UserAvatar = ({ authorId, avatarImg, name, party, badge }) => (
 
 UserAvatar.propTypes = {
   name: PropTypes.string.isRequired,
-  avatarImg: PropTypes.string,
+  userId: PropTypes.string,
   party: PropTypes.string,
   authorId: PropTypes.string,
   badge: PropTypes.string

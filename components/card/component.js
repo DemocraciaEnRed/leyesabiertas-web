@@ -30,7 +30,7 @@ const Card = ({ project }) => (
       <CardContent
         title={project.currentVersion.content.title}
         authorId={project.author._id}
-        avatarImg={project.author.avatar}
+        userId={project.author._id}
         name={project.author.fullname}
         party={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
       <CardSocial commentaries={project.commentsCount}
