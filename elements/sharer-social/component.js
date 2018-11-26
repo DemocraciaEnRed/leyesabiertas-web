@@ -1,10 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import SocialIcon from '../../elements/social-icon/component'
-
-
-const socialLinksUrl = window.location.origin
 
 const SocialWrapper = styled.div`
   display:flex;
@@ -22,23 +18,25 @@ const SocialSpan = styled.span`
   color:#4a5d68;
   margin-bottom:1rem;
   `
+export default ({ id }) => {
+  const socialLinksUrl = (window.location.origin + '/proyecto?id=' + id)
+  const twitterText = encodeURIComponent('Estoy tratando de mejorar este proyecto')
 
-const SocialSharer = () => (
-  <SocialWrapper>
-    <SocialSpan>Compartir</SocialSpan>
-    <IconWrapper>
-      <SocialIcon
-        img={'/static/assets/facebook-icon.svg'}
-        link={`http://www.facebook.com/sharer.php?u=${socialLinksUrl}`}
-        target={'_blank'}
-        rel={'noopener noreferrer'} />
+  return (
+    <SocialWrapper>
+      <SocialSpan>Compartir</SocialSpan>
+      <IconWrapper>
+        <SocialIcon
+          img={'/static/assets/facebook-icon.svg'}
+          link={`http://www.facebook.com/sharer.php?u=${socialLinksUrl}`}
+          target={'_blank'}
+          rel={'noopener noreferrer'} />
 
-      <SocialIcon img={'/static/assets/twitter-icon.svg'}
-        link={`http://twitter.com/share?text=${twitterText}&url=${socialLinksUrl}`}
-        target={'_blank'}
-        rel={'noopener noreferrer'} />
-    </IconWrapper>
-  </SocialWrapper>
-)
-
-export default SocialSharer
+        <SocialIcon img={'/static/assets/twitter-icon.svg'}
+          link={`http://twitter.com/share?text=${twitterText}&url=${socialLinksUrl}`}
+          target={'_blank'}
+          rel={'noopener noreferrer'} />
+      </IconWrapper>
+    </SocialWrapper>
+  )
+}

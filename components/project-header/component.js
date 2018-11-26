@@ -74,7 +74,7 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
         {section === '/articulado' && !project.closed && !isAuthor && project.commentsCount &&
           <ArticlesCommentsCounter commentsCount={project.commentsCount} />
         }
-        {!isAuthor && <SharerSocial /> }
+        {!isAuthor && <SharerSocial id={project._id} /> }
         <ProjectEditMode />
         {isAuthor &&
         <TogglePublish project={project} isPublished={isPublished} setPublish={setPublish} togglePublish={togglePublish} />
