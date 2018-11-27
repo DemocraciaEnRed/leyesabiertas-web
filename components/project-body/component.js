@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import FundationContainer from '../fundation-container/component'
 import ProjectVideo from '../project-video/component'
 import ProjectLinkArticulate from '../../components/project-link-articulate/component'
+import ProjectFields from '../../components/project-fields/component'
 import { ArticlesContext } from '../../containers/user-project-container/component'
 
 const ProjectBodyContainer = styled.div`
@@ -47,6 +48,12 @@ const ProjectBody = ({ project }) => (
       {
         ({ isAuthor, editMode, setYoutubeId, editedYoutubeId, newYoutubeId }) => (
           <div>
+            {isAuthor && editMode &&
+              <ProjectFields
+                title={project.currentVersion.content.title}
+                closingDate={project.currentVersion.content.closingDate}
+                imageCover={project.currentVersion.content.imageCover} />
+            }
             <ProjectVideo
               isAuthor={isAuthor}
               editMode={editMode}
