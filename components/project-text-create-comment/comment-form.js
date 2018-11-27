@@ -228,7 +228,7 @@ class CommentForm extends Component {
                 userId={this.props.authContext.user._id}
                 name={this.props.authContext.profile.name}
                 subtitle={this.setSubtitle(this.props)}
-                badge={this.props.authContext.user.fields.party} />
+                badge={(this.props.authContext.user.fields && this.props.authContext.user.fields.party) ? this.props.authContext.user.fields.party : ''} />
               <CommentText
                 placeholder='Agregue su comentario aquí'
                 value={this.state.value}
