@@ -15,6 +15,7 @@ margin-bottom:2rem;
 `
 const Avatar = styled.div`
   width: 40px;
+  min-width:40px;
   height: 40px;
   border-radius:50%;
   background-image: url('${(props) => props.userId ? `${API_URL}/api/v1/users/${props.userId}/avatar` : '/static/assets/userdefault.png'}');

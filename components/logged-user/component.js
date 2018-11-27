@@ -12,6 +12,15 @@ const StyledLoggedUser = styled.div`
   box-sizing: border-box;
   cursor: pointer;
 `
+const badge = (props) => {
+  if (props.authContext.isAuthor) {
+    if (props.authContext.user.fields) {
+      if (props.authContext.user.fields.party !== null || props.authContext.user.fields.party !== '') {
+        return true
+      }
+    }
+  }
+}
 
 const subtituloUsuario = (props) => {
   if (props.authContext.isAuthor) {
@@ -37,7 +46,7 @@ const LoggedUser = (props) => (
       name={props.authContext.user.fullname}
       userId={props.authContext.user._id}
       party={subtituloUsuario(props)}
-      badge={props.authContext.user.fields.party} />
+      badge={badge(props)} />
   </StyledLoggedUser>
 )
 

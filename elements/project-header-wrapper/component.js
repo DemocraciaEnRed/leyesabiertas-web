@@ -11,6 +11,11 @@ const ProjectHeaderWrapper = styled.div`
   flex-wrap: wrap;
   align-items: flex-start;
   margin-top: 108px;
-`
+  @media (max-width: 800px) {
+    > div{
+      width:300px !important;
+      display:flex;
+    }
+  }`
 
 export default ProjectHeaderWrapper
