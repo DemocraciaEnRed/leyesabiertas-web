@@ -70,22 +70,20 @@ const CommentFormHeader = styled.div`
 `
 
 const CommentFormFooter = styled.button`
+  background-color: var(--white);
   height: 5.5rem;
   border:none;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   color: #5c97bc;
   border-top: 1px solid #dae1e7;
-  font-size:1.3em;
   display:flex;
   align-items:center;
   justify-content:flex-end;
   box-sizing:border-box;
   padding-left:20px;
   padding-right:20px;
-  opacity: 0.5;
   cursor:pointer;
-  :focus {outline:0;}
-
+  &:focus {outline:0;}
 `
 const CommentText = styled.textarea`
   font-size:1.4rem;
