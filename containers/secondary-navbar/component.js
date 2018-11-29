@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import jump from 'jump.js'
+import Link from 'next/link'
 import StyledSecondaryNavbarTitle from '../../elements/secondary-navbar-title/component'
 import LinkBar from '../../components/link-bar/component'
 
@@ -19,15 +20,18 @@ const SecondaryBar = styled.div`
 const links = [
   {
     name: 'Propuestas',
-    value: '#projects'
+    hash: '#projects',
+    link: '/#projects'
   },
   {
     name: 'Cómo participar',
-    value: '#participate'
+    hash: '#participate',
+    link: '/info?section=como-participar'
   },
   {
     name: 'Acerca de',
-    value: '#about'
+    hash: '#about',
+    link: '/info?section=acerca-de'
   }
 ]
 
@@ -35,15 +39,39 @@ const scroll = (target) => (e) => {
   jump(target)
 }
 
-const SecondaryNavbar = () => (
+const LandingLink = ({ name, value}) => (
+  <a onClick={scroll(value)}>{name}</a>
+)
+
+const NavbarLink = ({ name, link}) => (
+  <Link href={link}>
+    <a>
+      { name }
+    </a>
+  </Link>
+)
+
+const SecondaryNavbar = ({ isLanding }) => (
   <SecondaryBar>
     <StyledSecondaryNavbarTitle />
     <LinkBar>
-      {links.map((li, i) => (
-        <a key={li.value} onClick={scroll(li.value)}>{li.name}</a>
-      ))}
+      {links.map((li, i) => {
+        return isLanding
+          ? <LandingLink
+            key={i}
+            name={li.name}
+            value={li.hash} />
+          : <NavbarLink
+            key={i}
+            name={li.name}
+            link={li.link} />
+      })}
     </LinkBar>
   </SecondaryBar>
 )
+
+SecondaryNavbar.propTypes = {
+  isLanding: PropTypes.bool
+}
 
 export default SecondaryNavbar
