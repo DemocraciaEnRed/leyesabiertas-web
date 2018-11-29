@@ -16,7 +16,7 @@ export default () => (
         ¿Qué es?
       </StaticInfoBold>
       <StaticInfoP>
-        <strong><u>El Portal de Co-creación legislativa</u></strong> es una <strong>plataforma de elaboración colaborativa de normas</strong> donde los diputados asumen el compromiso con la ciudadanía de <strong>abrir el debate para incorporar puntos de vista en sus propuestas</strong>. El objetivo de la plataforma es <strong>enriquecer las propuestas de ley</strong> con aportes de la ciudadanía.
+        <strong><u>El Portal de Leyes Abiertas</u></strong> es una <strong>plataforma de elaboración colaborativa de normas</strong> donde los diputados asumen el compromiso con la ciudadanía de <strong>abrir el debate para incorporar puntos de vista en sus propuestas</strong>. El objetivo de la plataforma es <strong>enriquecer las propuestas de ley</strong> con aportes de la ciudadanía.
       </StaticInfoP>
     </StyledDiv>
     <StyledDiv>

@@ -18,7 +18,7 @@ export default () => (
         Avda. Callao 86, 5º Piso
       </StaticInfoP>
       <StaticInfoP>
-        <a href='mailto:programamodernizacion@hcdn.gob.ar'>programamodernizacion@hcdn.gob.ar</a>.
+        <a href='mailto:leyesabiertas@hcdn.gob.ar'>leyesabiertas@hcdn.gob.ar</a>.
       </StaticInfoP>
       <StaticInfoP>
         (+5411) 4127-7100 int. 5090

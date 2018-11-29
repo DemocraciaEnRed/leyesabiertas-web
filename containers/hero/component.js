@@ -18,8 +18,8 @@ const StyledHero = styled.div`
 
 const Hero = () => (
   <StyledHero>
-    <HeroTitle>La ciudadanía y los diputados conectados para co-crear mejores leyes</HeroTitle>
-    <HeroSubtitle>¡Participe haciendo comentarios y sugerencias en las propuestas de ley!</HeroSubtitle>
+    <HeroTitle>Plataforma de intervención ciudadana en propuestas de ley</HeroTitle>
+    <HeroSubtitle>¡Participe haciendo comentarios y sugerencias para co-crear mejores leyes!</HeroSubtitle>
   </StyledHero>
 )
 
