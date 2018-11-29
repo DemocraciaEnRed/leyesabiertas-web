@@ -13,9 +13,11 @@ const ProjectBreadcrumb = ({ title, id, section }) => (
       <Link href={`/proyecto?id=${id}`}>
         <BreadcrumbItem isActive={section === '/proyecto'}>{title}</BreadcrumbItem>
       </Link>
-      <Link href={`/articulado?id=${id}`}>
-        <BreadcrumbItem isActive={section === '/articulado'}>Articulado de la propuesta</BreadcrumbItem>
-      </Link>
+      { section === '/articulado' &&
+        <Link href={`/articulado?id=${id}`}>
+          <BreadcrumbItem isActive={section === '/articulado'}>Articulado de la propuesta</BreadcrumbItem>
+        </Link>
+      }
     </BreadcrumbWrapper>
   </BreadcrumbNav>
 )
