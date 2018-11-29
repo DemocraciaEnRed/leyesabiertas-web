@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import React from 'react'
 import Link from 'next/link'
+import { version } from '../../package.json'
 
 const Label = styled.span`
   width: 95px;
@@ -16,6 +17,22 @@ const Label = styled.span`
   margin-bottom: 8px;
   position: relative;
   bottom: 7px
+  &:hover {
+    > .version {
+      display: block;
+      top: 5px;
+    }
+  }
+`
+const Version = styled.span`
+  font-size: 1.0rem;
+  font-weight: 500;
+  color: #5c97bc;
+  font-family: var(--bold);
+  text-transform: uppercase;
+  position: absolute;
+  left: 90px;
+  display: none;
 `
 
 const BetaLabelContainer = styled.div`
@@ -28,7 +45,9 @@ const BetaLabel = () => (
   <BetaLabelContainer>
     <Link href='/info?section=sobre-el-sitio'>
       <a>
-        <Label>Versión beta</Label>
+        <Label>Versión beta
+          <Version className='version'>{version}</Version>
+        </Label>
       </a>
     </Link>
   </BetaLabelContainer>
