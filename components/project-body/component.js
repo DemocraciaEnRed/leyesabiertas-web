@@ -46,13 +46,15 @@ const ProjectBody = ({ project }) => (
     <ProjectLinkArticulate id={project._id} />
     <ArticlesContext.Consumer>
       {
-        ({ isAuthor, editMode, setYoutubeId, editedYoutubeId, newYoutubeId }) => (
+        ({ isAuthor, editMode, setYoutubeId, editedYoutubeId, newYoutubeId, setNewFields }) => (
           <div>
             {isAuthor && editMode &&
               <ProjectFields
                 title={project.currentVersion.content.title}
                 closingDate={project.currentVersion.content.closingDate}
-                imageCover={project.currentVersion.content.imageCover} />
+                imageCover={project.currentVersion.content.imageCover}
+                youtubeId={project.currentVersion.content.youtubeId}
+                setNewFields={setNewFields} />
             }
             <ProjectVideo
               isAuthor={isAuthor}

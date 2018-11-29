@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react'
 import styled from 'styled-components'
+import getConfig from 'next/config'
 import { ArticlesContext } from '../../containers/user-project-container/component'
 import Alert from '../../elements/alert/component'
 import WithUserContext from '../with-user-context/component'
 import Toolbar from './toolbar'
 import BottomBar from './bottom-bar'
-import getConfig from 'next/config'
 
-const { publicRuntimeConfig: { API_URL }} = getConfig()
+const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 class AddCommentWrapper extends Component {
   constructor (props) {
@@ -17,7 +17,7 @@ class AddCommentWrapper extends Component {
     }
   }
 
-  saveValue = async (ids, field, newYoutubeId, editedYoutubeId, setEditedYoutubeId, fetchDocument) => {
+  saveValue = async (ids, field, fetchDocument, projectFields) => {
     const value = this.props.editor.value.toJSON()
     const decorations = this.props.editor.value.decorations.toJSON()
     this.setState({
@@ -31,8 +31,10 @@ class AddCommentWrapper extends Component {
           [field]: value
         }
       }
-      if (editedYoutubeId) {
-        payload.content.youtubeId = newYoutubeId
+      if (projectFields) {
+        Object.keys(projectFields).forEach((key) => {
+          payload.content[key] = projectFields[key]
+        })
       }
       const saveRequest = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}`, {
         'method': 'PUT',
@@ -75,7 +77,7 @@ class AddCommentWrapper extends Component {
     return (
       <ArticlesContext.Consumer>
         {
-          ({ editMode, selectedCommentsIds, newYoutubeId, editedYoutubeId, setEditedYoutubeId, fetchDocument }) =>
+          ({ editMode, selectedCommentsIds, fetchDocument, projectFields }) =>
             <Fragment>
               { editMode && <Toolbar editor={this.props.editor} /> }
               {this.props.children}
@@ -85,10 +87,8 @@ class AddCommentWrapper extends Component {
                     onClick={this.saveValue}
                     selectedCommentsIds={selectedCommentsIds}
                     field={this.props.field}
-                    newYoutubeId={newYoutubeId}
-                    editedYoutubeId={editedYoutubeId}
-                    setEditedYoutubeId={setEditedYoutubeId}
                     fetchDocument={fetchDocument}
+                    projectFields={projectFields}
                     buttonIsDisabled={status === 'loading'} />
               }
               { (status === 'success' || status === 'error') &&
