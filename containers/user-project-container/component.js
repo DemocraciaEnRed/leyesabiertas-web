@@ -24,10 +24,10 @@ export default class extends Component {
     isPublished: false
   }
 
-  switchComments = () => {
-    this.setState((prevState) => ({
-      withComments: !prevState.withComments
-    }))
+  switchComments = (receivedValue) => () => {
+    this.setState({
+      withComments: receivedValue
+    })
   }
 
   toggleSelectedComment = (id) => () => {
