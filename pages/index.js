@@ -11,7 +11,7 @@ import Footer from '../containers/footer/component'
 export default () => (
   <div>
     <NavBar />
-    <SecondaryNavbar />
+    <SecondaryNavbar isLanding />
     <Hero />
     <Projects />
     <Participate />
