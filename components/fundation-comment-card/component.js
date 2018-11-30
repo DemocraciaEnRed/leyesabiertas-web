@@ -79,12 +79,9 @@ class FundationCommentCard extends Component {
   }
 
   handleLike = () => {
-    this.setState((prevState) => {
-      return {
-        liked: !prevState.liked,
-        likes: prevState.liked ? prevState.likes - 1 : prevState.likes + 1
-      }
-    })
+    if (!this.props.authContext.authenticated) {
+      window.location = this.props.authContext.keycloak.createRegisterUrl()
+    }
     fetch(`${API_URL}/api/v1/documents/${this.props.project}/comments/${this.props.comment._id}/like`, {
       headers: {
         Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
@@ -92,6 +89,14 @@ class FundationCommentCard extends Component {
       },
       method: 'POST'
     })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            liked: !prevState.liked,
+            likes: prevState.liked ? prevState.likes - 1 : prevState.likes + 1
+          }
+        })
+      })
       .catch((err) => {
         console.log(err)
       })

@@ -77,12 +77,9 @@ class commentCard extends Component {
   }
 
   handleLike = (projectId) => () => {
-    this.setState((prevState) => {
-      return {
-        liked: !prevState.liked,
-        likes: prevState.liked ? prevState.likes - 1 : prevState.likes + 1
-      }
-    })
+    if (!this.props.authContext.authenticated) {
+      window.location = this.props.authContext.keycloak.createRegisterUrl()
+    }
     fetch(`${API_URL}/api/v1/documents/${projectId}/comments/${this.props.comment._id}/like`, {
       headers: {
         Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
@@ -90,6 +87,14 @@ class commentCard extends Component {
       },
       method: 'POST'
     })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            liked: !prevState.liked,
+            likes: prevState.liked ? prevState.likes - 1 : prevState.likes + 1
+          }
+        })
+      })
       .catch((err) => {
         console.log(err)
       })
