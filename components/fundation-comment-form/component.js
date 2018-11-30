@@ -58,7 +58,7 @@ export default class extends Component {
             placeholder='Su opinión' />
         </FundationFormLabel>
         { this.state.emptyComment &&
-          <FundationErrorSpan>Este campo no puede estar vacío. Escriba su opinión y luego haga click en agregar.</FundationErrorSpan>
+          <FundationErrorSpan>Este campo no puede estar vacío. Escriba su opinión y luego haga click en enviar opinión.</FundationErrorSpan>
         }
         <FundationFormButtonWrapper>
           {!this.props.error &&
