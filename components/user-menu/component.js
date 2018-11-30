@@ -59,13 +59,14 @@ const Li = styled.li`
   }
 `
 
-const StyledA = styled.a`
+const StyledA = styled.span`
  height:5rem;
  font-size:1.6rem;
  color: #101a21;
  align-items:center;
  display:flex;
  padding-left:3rem;
+ cursor: pointer;
  &:hover{
    background:#f6f6f0;
  }
@@ -77,7 +78,9 @@ const Usermenu = ({ logout }) => (
   <StyledUl>
     <Li>
       <Link href={{ pathname: '/userprofile' }}>
-        <StyledA>Mi perfil</StyledA>
+        <a>
+          <StyledA>Mi perfil</StyledA>
+        </a>
       </Link>
     </Li>
     {/* { isAuthor &&

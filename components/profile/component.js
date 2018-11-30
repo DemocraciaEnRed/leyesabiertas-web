@@ -13,7 +13,7 @@ import ProfileSelect from '../../elements/profile-select/component'
 import ProfileButtonWrapper from '../../elements/profile-button-wrapper/component'
 import SubmitInput from '../../elements/submit-input/component'
 
-const ButtonLink = styled.a`
+const ButtonLink = styled.button`
   background-color: #5c97bc;
   font-size: 1.2rem;
   border-style: none;
@@ -149,7 +149,6 @@ export default class Profile extends Component {
               </ProfileLabel>
               <ProfileLabel htmlFor='gender'>
           Género
-                {console.log(isOwner)}
                 {isOwner
                   ? <ProfileSelect name='gender' value={this.state.gender} options={genderOptions} onChange={this.handleChange} />
                   : <ProfileInput type='text' name='gender' value={this.state.gender} readOnly disabled />
