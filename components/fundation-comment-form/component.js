@@ -55,14 +55,14 @@ export default class extends Component {
             value={this.state.comment}
             onChange={this.handleChange}
             error={this.state.emptyComment}
-            placeholder='Su opinión' />
+            placeholder='Su comentario' />
         </FundationFormLabel>
         { this.state.emptyComment &&
-          <FundationErrorSpan>Este campo no puede estar vacío. Escriba su opinión y luego haga click en enviar opinión.</FundationErrorSpan>
+          <FundationErrorSpan>Este campo no puede estar vacío. Escriba su opinión y luego haga click en enviar comentario.</FundationErrorSpan>
         }
         <FundationFormButtonWrapper>
           {!this.props.error &&
-          <SubmitInput type='submit' value='Enviar opinión' />
+          <SubmitInput type='submit' value='Enviar comentario' />
           }
           {this.props.error &&
           <CommentFormFeedback closeMessage={this.props.closeMessage} />
