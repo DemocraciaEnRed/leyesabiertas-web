@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import getConfig from 'next/config'
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
-const StyledImg = styled.img`
+const StyledImg = styled.div`
   width: 130px;
   height: 130px;
   border-radius:50%;

@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import FileBase64 from 'react-file-base64'
 import Jimp from 'jimp'
 import jump from 'jump.js'
-import Router from 'next/router'
 import ProfileForm from '../../elements/profile-form/component'
 import ProfileAvatar from '../../elements/profile-avatar/component'
 import ProfileName from '../../elements/profile-name/component'
@@ -50,8 +49,7 @@ export default class Profile extends Component {
     birthday: '',
     province: '',
     editMode: false,
-    files: [],
-    showAvatar: true
+    files: []
   }
 
   componentDidMount () {
