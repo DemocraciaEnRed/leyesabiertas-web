@@ -46,7 +46,8 @@ const LoggedUser = (props) => (
       name={props.authContext.user.fullname}
       userId={props.authContext.user._id}
       party={subtituloUsuario(props)}
-      badge={badge(props)} />
+      badge={badge(props)}
+      updatedAt={props.authContext.user.updatedAt} />
   </StyledLoggedUser>
 )
 

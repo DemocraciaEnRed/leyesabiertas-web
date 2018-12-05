@@ -56,7 +56,8 @@ class UserProfile extends Component {
         'province': user.fields && user.fields.province ? user.fields.province : '',
         'roles': user.roles,
         'fields': user.fields,
-        'arrayData': arrayData
+        'arrayData': arrayData,
+        'updatedAt': user.updatedAt
       },
       isOwner: isOwner
     })
