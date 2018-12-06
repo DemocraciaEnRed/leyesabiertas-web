@@ -65,7 +65,7 @@ export default class Toolbar extends Component {
   }
 
   handleOnClick = () => {
-    this.props.onClick(this.props.selectedCommentsIds, this.props.field, this.props.newYoutubeId, this.props.editedYoutubeId, this.props.setEditedYoutubeId, this.props.fetchDocument)
+    this.props.onClick(this.props.selectedCommentsIds, this.props.field, this.props.fetchDocument, this.props.projectFields)
   }
 
   render () {

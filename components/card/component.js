@@ -18,24 +18,26 @@ justify-content:space-between;
 background: #fff;
 box-sizing: border-box;
 cursor: pointer;
-
+margin-bottom: 2rem;
 `
 
 const Card = ({ project }) => (
   <Link href={{ pathname: '/proyecto', query: { id: project._id } }}>
-    <CardContainer>
-      { project.currentVersion.content.imageCover &&
-      <CardHeader img={project.currentVersion.content.imageCover} published={project.published} />
-      }
-      <CardContent
-        title={project.currentVersion.content.title}
-        authorId={project.author._id}
-        userId={project.author._id}
-        name={project.author.fullname}
-        party={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
-      <CardSocial commentaries={project.commentsCount}
-        limitDate={project.currentVersion.content.limitDate} />
-    </CardContainer>
+    <a>
+      <CardContainer>
+        { project.currentVersion.content.imageCover &&
+        <CardHeader img={project.currentVersion.content.imageCover} published={project.published} />
+        }
+        <CardContent
+          title={project.currentVersion.content.title}
+          authorId={project.author._id}
+          userId={project.author._id}
+          name={project.author.fullname}
+          party={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
+        <CardSocial commentaries={project.commentsCount}
+          limitDate={project.currentVersion.content.limitDate} />
+      </CardContainer>
+    </a>
   </Link>
 )
 

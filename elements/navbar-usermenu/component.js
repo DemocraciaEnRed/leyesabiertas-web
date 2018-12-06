@@ -18,7 +18,7 @@ const Avatar = styled.div`
   min-width:40px;
   height: 40px;
   border-radius:50%;
-  background-image: url('${(props) => props.userId ? `${API_URL}/api/v1/users/${props.userId}/avatar` : '/static/assets/userdefault.png'}');
+  background-image: url('${(props) => props.userId ? `${API_URL}/api/v1/users/${props.userId}/avatar?${props.updatedAt}` : '/static/assets/userdefault.png'}');
   background-size: cover;
   background-position: center;
 `
@@ -62,9 +62,11 @@ const Arrow = styled.i`
 const IconWrapper = styled.div`
   padding-right:.5rem;`
 
-const UserAvatar = ({ userId, name, party, badge }) => (
+const UserAvatar = ({ userId, name, party, badge, updatedAt }) => (
   <Wrapper>
-    <Avatar userId={userId} />
+    <Avatar
+      userId={userId}
+      updatedAt={updatedAt} />
     <TextWrapper>
       <Name>{name} </Name>
       <Party>
@@ -82,7 +84,8 @@ UserAvatar.propTypes = {
   name: PropTypes.string.isRequired,
   userId: PropTypes.string,
   party: PropTypes.string,
-  badge: PropTypes.string
+  badge: PropTypes.string,
+  updatedAt: PropTypes.updatedAt
 }
 
 export default UserAvatar

@@ -11,7 +11,8 @@ const ArticlesContext = createContext({
   switchComments: null,
   selectedCommentsIds: [],
   isAuthor: false,
-  editMode: false
+  editMode: false,
+  projectFields: null
 })
 
 export default class extends Component {
@@ -19,9 +20,8 @@ export default class extends Component {
     withComments: true,
     selectedCommentsIds: [],
     editMode: false,
-    newYoutubeId: null,
-    editedYoutubeId: false,
-    isPublished: false
+    isPublished: false,
+    projectFields: null
   }
 
   switchComments = (receivedValue) => () => {
@@ -41,12 +41,11 @@ export default class extends Component {
       return { selectedCommentsIds: _ids }
     })
   }
+  setNewFields = (projectFields) => this.setState({ projectFields: projectFields })
 
   toggleEditMode = () => this.setState(({ editMode }) => ({ editMode: !editMode }))
   togglePublish = () => this.setState({ isPublished: !this.state.isPublished })
   setPublish = (isPublished) => this.setState({ isPublished: isPublished })
-  setYoutubeId = (theId) => this.setState({ newYoutubeId: theId }, () => { this.setEditedYoutubeId(true) /* console.log(this.state.newYoutubeId) */ })
-  setEditedYoutubeId = (value) => this.setState({ editedYoutubeId: value }, () => { /* console.log(this.state.editedYoutubeId) */ })
 
   render () {
     const { project, section, fetchDocument } = this.props
@@ -64,11 +63,9 @@ export default class extends Component {
           toggleSelectedComment: this.toggleSelectedComment,
           toggleEditMode: this.toggleEditMode,
           selectedCommentsIds: this.state.selectedCommentsIds,
-          setYoutubeId: this.setYoutubeId,
-          newYoutubeId: this.state.newYoutubeId,
-          setEditedYoutubeId: this.setEditedYoutubeId,
-          editedYoutubeId: this.state.editedYoutubeId,
-          fetchDocument: fetchDocument
+          fetchDocument: fetchDocument,
+          setNewFields: this.setNewFields,
+          projectFields: this.state.projectFields
         }}>
           <ProjectHeader
             project={project.document}

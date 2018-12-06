@@ -44,8 +44,12 @@ const CommentCounter = (props) => (
     top: props.top + 'px',
     left: props.left + 'px'
   }}>
-    <span className='counter-span'>{props.count} aportes de usuarios</span>
-    <span className='text-span'>click para abrir aportes</span>
+    <span className='counter-span'>
+      {`${props.count} ${props.count !== 1 ? 'aportes' : 'aporte'} de usuarios`}
+    </span>
+    <span className='text-span'>
+      click para abrir aportes
+    </span>
   </CounterWrapper>
 )
 

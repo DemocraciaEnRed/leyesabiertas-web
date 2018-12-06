@@ -72,17 +72,14 @@ class commentCard extends Component {
   componentDidMount () {
     this.setState({
       liked: this.props.comment.isLiked,
-      likes: this.props.comment.likes
+      likes: this.props.comment.likes ? this.props.comment.likes : 0
     })
   }
 
   handleLike = (projectId) => () => {
-    this.setState((prevState) => {
-      return {
-        liked: !prevState.liked,
-        likes: prevState.liked ? prevState.likes - 1 : prevState.likes + 1
-      }
-    })
+    if (!this.props.authContext.authenticated) {
+      window.location = this.props.authContext.keycloak.createRegisterUrl()
+    }
     fetch(`${API_URL}/api/v1/documents/${projectId}/comments/${this.props.comment._id}/like`, {
       headers: {
         Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
@@ -90,6 +87,14 @@ class commentCard extends Component {
       },
       method: 'POST'
     })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            liked: !prevState.liked,
+            likes: prevState.liked ? prevState.likes - 1 : prevState.likes + 1
+          }
+        })
+      })
       .catch((err) => {
         console.log(err)
       })
@@ -127,7 +132,7 @@ class commentCard extends Component {
               <Fragment>
                 <CommentReply isAuthor={isAuthor} reply={this.props.comment.reply} comment={this.props.comment._id} token={this.props.authContext.keycloak.token} project={project} attachReply={this.props.attachReply} />
                 <StyledLikeWrapper liked={this.state.liked} onClick={this.handleLike(project._id)}>
-                  <Icon icon={thumbsUp} style={{ marginRight: '5px' }} /> { this.state.likes }
+                  <Icon icon={thumbsUp} style={{ marginRight: '5px' }} /> {this.state.likes }
                 </StyledLikeWrapper>
 
                 {(isAuthor &&

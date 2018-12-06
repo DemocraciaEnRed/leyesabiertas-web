@@ -66,7 +66,7 @@ class NavBar extends Component {
               <Button primary onClick={this.props.authContext.register}>Registrarse</Button>
             </UserBar>
           )}
-        { this.state.showTooltip &&
+        { !this.props.authContext.authenticated && this.state.showTooltip &&
           <Tooltip top={'110px'} right={'20px'}>
             Para agregar aportes debe estar registrado.
             Ingrese a la sección y complete el formulario

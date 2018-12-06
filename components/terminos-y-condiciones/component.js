@@ -79,7 +79,7 @@ export default () => (
           <StaticInfoP>
         La Plataforma está destinada únicamente a personas mayores de 16 años cumplidos, de modo que cualquier registro de uso o acceso al Sitio Web por cualquier menor de esa edad no está autorizado. Al registrarse, el Usuario declara y garantiza ser mayor de 16 años.
           </StaticInfoP>
-          <StaticInfoP>El Usuario debe registrarse usando su nombre. Las cuentas de “bots” u otros registros automáticos no están permitidas. La privacidad de la contraseña de la cuenta del Usuario es de su exclusiva responsabilidad. Ante cualquier ingreso indebido en su cuenta, el Usuario deberá informarlo inmediatamente a través de XXXXXXXX@hcdn.gob.ar.​</StaticInfoP>
+          <StaticInfoP>El Usuario debe registrarse usando su nombre. Las cuentas de “bots” u otros registros automáticos no están permitidas. La privacidad de la contraseña de la cuenta del Usuario es de su exclusiva responsabilidad. Ante cualquier ingreso indebido en su cuenta, el Usuario deberá informarlo inmediatamente a través de <a href='mailto:leyesabiertas@hcdn.gob.ar'>leyesabiertas@hcdn.gob.ar</a>.​</StaticInfoP>
           <StaticInfoP>El Usuario será exclusivamente responsable de hacer cumplir estas disposiciones y  ante todo incumplimiento, sin perjuicio de las medidas que pudiera tomar la administración de la Plataforma. La <em>HCDN</em> se reserva el derecho de rechazar cualquier solicitud de inscripción o de cancelar un registro previamente aceptado.
           </StaticInfoP>
         </div>
@@ -114,7 +114,7 @@ export default () => (
             <li>Infringir mediante toda publicación cualquier ley, norma, reglamento u otra disposición legal</li>
           </StaticInfoList>
           <StaticInfoP>
-        En caso de sufrir alguna de estas situaciones, comunicarse inmediatamente con la administración de la Plataforma través de XXXXXXXX@hcdn.gob.ar.
+        En caso de sufrir alguna de estas situaciones, comunicarse inmediatamente con la administración de la Plataforma través de <a href='mailto:leyesabiertas@hcdn.gob.ar'>leyesabiertas@hcdn.gob.ar</a>.
           </StaticInfoP>
           <StaticInfoP>
             <u><em>Moderación de las iniciativas</em></u>
@@ -177,7 +177,7 @@ export default () => (
         La administración de la Plataforma garantiza la debida protección integral de los datos personales almacenados así como también el acceso a la información personal que se registre, de conformidad a lo establecido en el artículo 43, párrafo tercero de la Constitución Nacional y la Ley N° 25.326 de Protección de los Datos Personales.
           </StaticInfoP>
           <StaticInfoP>
-        Los Usuarios se comprometen a notificar de inmediato al correo XXXXXXXX@hcdn.gob.ar, cualquier uso no autorizado de su cuenta o cualquier otra situación que pudiera ir contra la seguridad del sitio, como así también de casos de cyberbullyng, cyberstalking, cybergrooming y/o cualquier otra situación de hostigamiento, discriminación o acoso.
+        Los Usuarios se comprometen a notificar de inmediato al correo <a href='mailto:leyesabiertas@hcdn.gob.ar'>leyesabiertas@hcdn.gob.ar</a>, cualquier uso no autorizado de su cuenta o cualquier otra situación que pudiera ir contra la seguridad del sitio, como así también de casos de cyberbullyng, cyberstalking, cybergrooming y/o cualquier otra situación de hostigamiento, discriminación o acoso.
           </StaticInfoP>
           <StaticInfoP>
             <u><em>Información proporcionada por las/os usuarias/os</em></u>
@@ -198,7 +198,7 @@ export default () => (
         Las direcciones de correo electrónico o cuenta de Facebook sólo se utilizarán para enviar notificaciones sobre el uso de la plataforma, avisos sobre futuras votaciones o consultas y otra información relevante sobre la HCDN. No obstante, cada usuario podrá darse de baja en cualquier momento si así lo desea.
           </StaticInfoP>
           <StaticInfoP>
-        El Usuario puede ejercer los derechos que como titular de datos personales le asisten (acceso, rectificación, cancelación, oposición, información o revocación). Para tal efecto, puede enviar una comunicación a XXXXXXXX@hcdn.gob.ar.
+        El Usuario puede ejercer los derechos que como titular de datos personales le asisten (acceso, rectificación, cancelación, oposición, información o revocación). Para tal efecto, puede enviar una comunicación a <a href='mailto:leyesabiertas@hcdn.gob.ar'>leyesabiertas@hcdn.gob.ar</a>.
           </StaticInfoP>
           <StaticInfoP>
             <u><em>Información obtenida a partir del uso de la plataforma</em></u>
