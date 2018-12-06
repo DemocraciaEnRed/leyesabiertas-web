@@ -93,7 +93,7 @@ class AddCommentWrapper extends Component {
               }
               { (status === 'success' || status === 'error') &&
                 <Alert status={status} dismissAlert={this.dismissAlert}>
-                  { status === 'success' ? 'Los cambios que ha realizado en su propuesta fueron guardados y publicados con éxito.' : 'Los cambios que ha tratado de publicar no han podido ser procesados. Le aconsejamos que lo intente nuevamente.'}
+                  { status === 'success' ? 'Los cambios que ha realizado en su propuesta fueron guardados con éxito.' : 'Los cambios que ha tratado de guardar no han podido ser procesados. Le aconsejamos que lo intente nuevamente.'}
                 </Alert>
               }
             </Fragment>
