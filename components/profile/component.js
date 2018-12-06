@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import FileBase64 from 'react-file-base64'
 import Jimp from 'jimp'
+import jump from 'jump.js'
 import ProfileForm from '../../elements/profile-form/component'
 import ProfileAvatar from '../../elements/profile-avatar/component'
 import ProfileName from '../../elements/profile-name/component'
@@ -64,7 +65,6 @@ export default class Profile extends Component {
 
   // Callback~
   getFiles = async (files) => {
-    console.log(files.base64.split('base64,')[1])
     Jimp.read(Buffer.from(files.base64.split('base64,')[1], 'base64'))
       .then(async (image) => {
         let optimizedImage = await image.cover(150, 150).quality(90).getBase64Async(Jimp.MIME_JPEG)
@@ -116,13 +116,14 @@ export default class Profile extends Component {
     this.setState({
       editMode: !this.state.editMode
     })
+    jump(-1000)
   }
 
   render () {
     const { user, isOwner, isLoading } = this.props
     return (
       <ProfileForm onSubmit={this.handleSubmit}>
-        <ProfileAvatar id={user.id} />
+        <ProfileAvatar id={user.id} date={user.updatedAt} />
         <ProfileName>{`${user.surnames}, ${user.names}`}</ProfileName>
         <ProfileMail mail={user.arrayData.join(' - ')} />
         { isOwner && !this.state.editMode ? <ButtonLink onClick={this.toggleEdit}>Editar perfil</ButtonLink> : null }
