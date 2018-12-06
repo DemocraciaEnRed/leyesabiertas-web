@@ -40,7 +40,7 @@ const TopBarWrapper = styled.div`
   width: 100%;
   margin-right: 3%;
   & > div {
-    padding: 0 2rem;
+    padding: 0 1.5rem;
     border-right: 1px solid #e9e9e9;
     height: 50px;
     @media (max-width:510px){
