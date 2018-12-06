@@ -72,7 +72,7 @@ class commentCard extends Component {
   componentDidMount () {
     this.setState({
       liked: this.props.comment.isLiked,
-      likes: this.props.comment.likes
+      likes: this.props.comment.likes ? this.props.comment.likes : 0
     })
   }
 
@@ -132,7 +132,7 @@ class commentCard extends Component {
               <Fragment>
                 <CommentReply isAuthor={isAuthor} reply={this.props.comment.reply} comment={this.props.comment._id} token={this.props.authContext.keycloak.token} project={project} attachReply={this.props.attachReply} />
                 <StyledLikeWrapper liked={this.state.liked} onClick={this.handleLike(project._id)}>
-                  <Icon icon={thumbsUp} style={{ marginRight: '5px' }} /> { this.state.likes }
+                  <Icon icon={thumbsUp} style={{ marginRight: '5px' }} /> {this.state.likes }
                 </StyledLikeWrapper>
 
                 {(isAuthor &&
