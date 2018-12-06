@@ -5,15 +5,16 @@ import HeroTitle from '../../elements/hero-title/component'
 import HeroSubtitle from '../../elements/hero-subtitle/component'
 
 const StyledHero = styled.div`
-  margin: 5%;
-  padding-right:45%;
+  height: 350px;
+  background-image: url('/static/assets/background-hero.jpg');
+  background-repeat: no-repeat;
+  background-position: right 0px bottom 42%;
+  background-size: 130%;
   display: flex;
-  flex-direction:column;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: flex-start;
-  @media (max-width:1200px) {
-    padding-right:20%;
-  }
+  justify-content: center;
+  padding: 0 7rem;
 `
 
 const Hero = () => (
