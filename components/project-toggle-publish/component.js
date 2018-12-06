@@ -122,7 +122,7 @@ class TogglePublished extends Component {
         this.props.togglePublish()
         this.setState({
           showAlert: true,
-          alertText: newState ? 'La propuesta se ha publicado' : 'La propuesta se ha ocultada',
+          alertText: newState ? 'La propuesta se ha publicado' : 'La propuesta se ha ocultado',
           alertType: 'success',
           isLoading: false
         })
