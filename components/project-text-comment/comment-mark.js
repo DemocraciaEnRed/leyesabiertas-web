@@ -9,6 +9,21 @@ const StyledCommentSpan = styled.span`
   cursor:pointer;
 `
 
+class CommentSpanWrapper extends Component {
+
+  componentWillUnmount () {
+    this.props.removeId()
+  }
+
+  render () {
+    return (
+      <Fragment>
+        {this.props.children}
+      </Fragment>
+    )
+  }
+}
+
 export default class CommentMark extends Component {
   constructor (props) {
     super(props)
@@ -22,12 +37,15 @@ export default class CommentMark extends Component {
     return (
       <CommentCounterContext.Consumer>
         {
-          (value) => 
-            <StyledCommentSpan
-              onMouseEnter={id && value.addId(id)}
-              onMouseLeave={id && value.removeId(id)}>
-              {this.props.children}
-            </StyledCommentSpan>
+          (value) =>
+            <CommentSpanWrapper
+              removeId={value.removeId(id)}>
+              <StyledCommentSpan
+                onMouseEnter={id && value.addId(id)}
+                onMouseLeave={id && value.removeId(id)}>
+                {this.props.children}
+              </StyledCommentSpan>
+            </CommentSpanWrapper>
         }
       </CommentCounterContext.Consumer>
     )
