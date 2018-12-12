@@ -60,7 +60,9 @@ const Arrow = styled.i`
   -webkit-transform: rotate(45deg);
 `
 const IconWrapper = styled.div`
-  padding-right:.5rem;`
+  padding-right:.5rem;
+  color: #5c97bc;
+  `
 
 const UserAvatar = ({ userId, name, party, badge, updatedAt }) => (
   <Wrapper>
@@ -84,7 +86,7 @@ UserAvatar.propTypes = {
   name: PropTypes.string.isRequired,
   userId: PropTypes.string,
   party: PropTypes.string,
-  badge: PropTypes.string,
+  badge: PropTypes.bool,
   updatedAt: PropTypes.updatedAt
 }
 

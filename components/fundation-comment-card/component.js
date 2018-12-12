@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Icon from 'react-icons-kit'
 import { thumbsUp } from 'react-icons-kit/feather'
+import { checkCircle } from 'react-icons-kit/fa/checkCircle'
 import WithUserContext from '../../components/with-user-context/component'
 import getConfig from 'next/config'
 
@@ -34,7 +35,7 @@ const UserAvatar = styled.div`
   width: 40px;
   height: 40px;
   border-radius:50%;
-  background-image: url('${(props) => props.userId}');
+  background-image: url('${(props) => props.id ? `${API_URL}/api/v1/users/${props.id}/avatar?` : '/static/assets/userdefault.png'}');
   background-size: cover;
   background-position: center;
   `
@@ -49,7 +50,7 @@ const Charge = styled.div`
   font-size:1.2rem;
   color:  #5c97bc;
   text-transform:uppercase;
-  padding-bottom:1rem;`
+`
 
 const TextWrapper = styled.div`
   margin-left:2rem;
@@ -63,6 +64,17 @@ const StyledLikeWrapper = styled.div`
   font-size: 14px;
   display: flex;
   align-items: center;
+`
+
+const ChargeWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding-bottom: 1rem;
+`
+
+const IconWrapper = styled.div`
+  padding-right:.5rem;
+  color: #5c97bc;
 `
 
 class FundationCommentCard extends Component {
@@ -104,12 +116,20 @@ class FundationCommentCard extends Component {
 
   render () {
     const { comment } = this.props
+    const isAuthor = comment.user.roles.includes('accountable')
     return (
       <StyledCommentItem>
-        <UserAvatar userId={comment.user._id} />
+        <UserAvatar id={comment.user._id} />
         <TextWrapper>
           <Username>{comment.user.fullname}</Username>
-          <Charge>{(comment.user.fields && comment.user.fields.occupation) ? comment.user.fields.occupation : '' }</Charge>
+          <ChargeWrapper>
+            {isAuthor &&
+              <IconWrapper>
+                <Icon icon={checkCircle} />
+              </IconWrapper>
+            }
+            <Charge>{(comment.user.fields && comment.user.fields.occupation) ? comment.user.fields.occupation : '' }</Charge>
+          </ChargeWrapper>
           <Comment>{comment.content}</Comment>
           <Date>{`Hace ${comment.when}`}</Date>
           <StyledLikeWrapper liked={this.state.liked} onClick={this.handleLike}>
