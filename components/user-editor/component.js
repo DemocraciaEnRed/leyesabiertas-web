@@ -163,7 +163,7 @@ class UserEditor extends Component {
             attachReply={this.attachReply} />
         }
         { !this.props.isClosed &&
-          <ArticlesSubtitle authenticated={this.props.authContext.authenticated} />
+          <ArticlesSubtitle authenticated={this.props.authContext.authenticated} editMode={this.props.editMode} />
         }
         <EditorTitle>Artículos de la propuesta</EditorTitle>
         <div ref={this.myEditor}>

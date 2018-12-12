@@ -77,7 +77,7 @@ export default class extends Component {
             contributorsCount={project.contributorsCount}
             contextualCommentsCount={project.contextualCommentsCount}
             contributionsCount={project.contributionsCount} />
-          {this.props.section === '/proyecto' &&
+          {this.props.section === '/propuesta' &&
           <Fragment>
             <ProjectBody project={project.document} />
             <ProjectComments project={project.document} />

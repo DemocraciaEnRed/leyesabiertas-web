@@ -22,7 +22,7 @@ margin-bottom: 2rem;
 `
 
 const Card = ({ project }) => (
-  <Link href={{ pathname: '/proyecto', query: { id: project._id } }}>
+  <Link href={{ pathname: '/propuesta', query: { id: project._id } }}>
     <a>
       <CardContainer>
         { project.currentVersion.content.imageCover &&

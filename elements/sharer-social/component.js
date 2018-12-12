@@ -19,7 +19,7 @@ const SocialSpan = styled.span`
   margin-bottom:1rem;
   `
 export default ({ id }) => {
-  const socialLinksUrl = (window.location.origin + '/proyecto?id=' + id)
+  const socialLinksUrl = (window.location.origin + '/propuesta?id=' + id)
   const twitterText = encodeURIComponent('Estoy tratando de mejorar este proyecto')
 
   return (
