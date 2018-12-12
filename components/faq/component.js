@@ -32,14 +32,6 @@ export default () => (
     </StyledDiv>
     <StyledDiv>
       <StaticInfoBold>
-        ¿Hay algún certificado por ser colaborador?
-      </StaticInfoBold>
-      <StaticInfoP>
-      Este es un reconocimiento que otorgamos en este sitio pero que no es oficial, esperamos lo sea en en el futuro 
-      </StaticInfoP>
-    </StyledDiv>
-    <StyledDiv>
-      <StaticInfoBold>
       ¿Cómo puedo saber qué pasó con la propuesta, una vez finalizado el plazo para hacer aportes?
       </StaticInfoBold>
       <StaticInfoP>

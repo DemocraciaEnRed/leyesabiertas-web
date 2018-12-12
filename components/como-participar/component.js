@@ -18,7 +18,7 @@ export default () => (
         ¿Qué es una <em>propuesta</em>?
       </StaticInfoBold>
       <StaticInfoP>
-        Una propuesta de ley es al <strong>estado anterior al proyecto de ley</strong> que será presentado para debate en la Cámara. 
+        Una propuesta de ley es el <strong>estado anterior al proyecto de ley</strong> que será presentado para debate en la Cámara. 
       </StaticInfoP>
       <StaticInfoP>
         Los diputados y su equipo leerán los <strong>aportes</strong> realizados por la ciudadanía en la propuesta y a partir de esto realizarán los cambios que consideren necesarios.
