@@ -87,7 +87,7 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
         }
       </TopBarWrapper>
       { section === '/articulado'
-        ? <Link href={{ pathname: '/proyecto', query: { id: project._id } }}>
+        ? <Link href={{ pathname: '/propuesta', query: { id: project._id } }}>
           <ProjectHeaderLink>
             <ProjectTitle>{project.currentVersion.content.title}</ProjectTitle>
           </ProjectHeaderLink>
