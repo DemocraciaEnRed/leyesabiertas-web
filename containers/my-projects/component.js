@@ -250,7 +250,7 @@ class MyProjects extends Component {
       })
       .then((content) => {
         Router.push({
-          pathname: '/proyecto',
+          pathname: '/propuesta',
           query: {
             id: content._id
           }
