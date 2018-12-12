@@ -24,10 +24,10 @@ export default class extends Component {
     projectFields: null
   }
 
-  switchComments = () => {
-    this.setState((prevState) => ({
-      withComments: !prevState.withComments
-    }))
+  switchComments = (receivedValue) => () => {
+    this.setState({
+      withComments: receivedValue
+    })
   }
 
   toggleSelectedComment = (id) => () => {
