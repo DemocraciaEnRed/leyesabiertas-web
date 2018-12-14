@@ -13,7 +13,7 @@ const StyledIcon = styled.div`
 `
 
 const SocialIcon = ({ img, link }) => (
-  <a href={link}>
+  <a href={link} target='blank' rel='noopener noreferrer' >
     <StyledIcon img={img} />
   </a>
 )

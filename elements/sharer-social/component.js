@@ -20,7 +20,7 @@ const SocialSpan = styled.span`
   `
 export default ({ id }) => {
   const socialLinksUrl = (window.location.origin + '/propuesta?id=' + id)
-  const twitterText = encodeURIComponent('Estoy tratando de mejorar este proyecto')
+  const twitterText = encodeURIComponent('Proyecto de ley abierto a colaboración')
 
   return (
     <SocialWrapper>
