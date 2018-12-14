@@ -36,16 +36,20 @@ class AddCommentWrapper extends Component {
           payload.content[key] = projectFields[key]
         })
       }
-      const saveRequest = await (await fetch(`${API_URL}/api/v1/documents/${this.props.id}`, {
+      const saveRequest = await fetch(`${API_URL}/api/v1/documents/${this.props.id}`, {
         'method': 'PUT',
         'headers': {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + this.props.authContext.keycloak.token
         },
         'body': JSON.stringify(payload)
-      })).json()
-      this.setStatus('success')
-      fetchDocument(this.props.id, this.props.authContext.keycloak.token)
+      })
+      if (!saveRequest.ok) {
+        this.setStatus('error')
+      } else {
+        this.setStatus('success')
+        fetchDocument(this.props.id, this.props.authContext.keycloak.token)
+      }
     } catch (err) {
       this.setStatus('error')
       console.error(err)
