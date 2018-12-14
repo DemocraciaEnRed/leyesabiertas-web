@@ -31,7 +31,6 @@ const buttons = [
 ]
 
 const scroll = (target) => (e) => {
-  console.log(target)
   jump(target)
 }
 

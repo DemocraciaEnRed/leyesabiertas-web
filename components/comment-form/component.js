@@ -93,7 +93,6 @@ class CommentForm extends Component {
 
   handleSubmit (event) {
     event.preventDefault()
-    console.log('Envia comentario ' + this.state.value)
     fetch(`/api/v1/documents/5bb7bab09a5ac91dffa9e884/comments`, {
       method: 'POST',
       body: {
@@ -103,16 +102,14 @@ class CommentForm extends Component {
     })
       .then((res) => {
         if (res.status === 200) {
-          console.log('paso post')
         }
       })
       .catch((err) => {
-        console.log(err)
+        console.error(err)
       })
   }
 
   render () {
-    console.log(this.state.top)
     return (
       <CommentFormContainer onSubmit={this.handleSubmit}>
         <CommentFormHeader>Agregar comentario</CommentFormHeader>

@@ -242,7 +242,6 @@ class MyProjects extends Component {
       'body': JSON.stringify(newDocument)
     })
       .then((res) => {
-        console.log(res.ok)
         if (!res.ok) {
           throw new Error('Forbidden')
         }
