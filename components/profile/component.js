@@ -70,7 +70,7 @@ export default class Profile extends Component {
         let optimizedImage = await image.cover(150, 150).quality(90).getBase64Async(Jimp.MIME_JPEG)
         this.setState({ avatar: optimizedImage })
       }).catch((err) => {
-        console.log(err)
+        console.error(err)
       })
     this.setState({ files: files })
   }

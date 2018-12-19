@@ -210,7 +210,7 @@ class CommentForm extends Component {
         }, () => this.props.pushComment(comment))
       })
       .catch((err) => {
-        console.log(err)
+        console.error(err)
       })
       .finally(() => { this.turnOffStatus() })
   }

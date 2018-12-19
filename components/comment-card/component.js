@@ -96,7 +96,7 @@ class commentCard extends Component {
         })
       })
       .catch((err) => {
-        console.log(err)
+        console.error(err)
       })
   }
 
@@ -114,7 +114,7 @@ class commentCard extends Component {
         this.props.removeComment(this.props.comment._id)
       })
       .catch((err) => {
-        console.log(err)
+        console.error(err)
       })
   }
 
