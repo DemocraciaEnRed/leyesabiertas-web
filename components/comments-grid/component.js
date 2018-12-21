@@ -12,7 +12,7 @@ const StyledCommentsGrid = styled.div`
   z-index: 1;
 `
 
-const CommentsGrid = ({ activeComments = [], top, comments, removeComment, attachReply }) => {
+const CommentsGrid = ({ activeComments = [], top, comments, removeComment, attachReply, updateComments }) => {
   const displayComments = comments
     .filter((comment) => activeComments.includes(comment._id))
     .map((comment) =>
@@ -20,7 +20,8 @@ const CommentsGrid = ({ activeComments = [], top, comments, removeComment, attac
         removeComment={removeComment}
         key={comment._id}
         comment={comment}
-        attachReply={attachReply} />)
+        attachReply={attachReply}
+        updateComments={updateComments} />)
 
   return (
     <StyledCommentsGrid style={{ top }}>
