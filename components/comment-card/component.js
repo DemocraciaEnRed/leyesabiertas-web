@@ -135,7 +135,6 @@ class commentCard extends Component {
                 <StyledLikeWrapper liked={this.state.liked} onClick={this.handleLike(project._id)}>
                   <Icon icon={thumbsUp} style={{ marginRight: '5px' }} /> {this.state.likes }
                 </StyledLikeWrapper>
-
                 {(isAuthor &&
 
                 <StyledIconWrapper
@@ -159,8 +158,7 @@ class commentCard extends Component {
                 </StyledIconWrapper>
                 )}
 
-                {(editMode &&
-
+                {(editMode && !(project.closed) &&
                 <StyledIconWrapper
                   active={selectedCommentsIds.includes(this.props.comment._id)}
                   onClick={toggleSelectedComment(this.props.comment._id)}>
