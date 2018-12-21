@@ -94,6 +94,7 @@ class commentCard extends Component {
             likes: prevState.liked ? prevState.likes - 1 : prevState.likes + 1
           }
         })
+        this.props.updateComments()
       })
       .catch((err) => {
         console.error(err)
@@ -134,7 +135,6 @@ class commentCard extends Component {
                 <StyledLikeWrapper liked={this.state.liked} onClick={this.handleLike(project._id)}>
                   <Icon icon={thumbsUp} style={{ marginRight: '5px' }} /> {this.state.likes }
                 </StyledLikeWrapper>
-
                 {(isAuthor &&
 
                 <StyledIconWrapper
@@ -158,8 +158,7 @@ class commentCard extends Component {
                 </StyledIconWrapper>
                 )}
 
-                {(editMode &&
-
+                {(editMode && !(project.closed) &&
                 <StyledIconWrapper
                   active={selectedCommentsIds.includes(this.props.comment._id)}
                   onClick={toggleSelectedComment(this.props.comment._id)}>
@@ -182,7 +181,8 @@ class commentCard extends Component {
 }
 
 commentCard.propTypes = {
-  comment: PropTypes.object.isRequired
+  comment: PropTypes.object.isRequired,
+  updateComments: PropTypes.func.isRequired
 }
 
 export default WithUserContext(commentCard)

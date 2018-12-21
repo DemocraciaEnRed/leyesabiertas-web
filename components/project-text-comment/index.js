@@ -15,9 +15,10 @@ export default (options) => {
       if (props.mark.type === 'comment') return <CommentMark {...props} />
       return next()
     },
-    renderEditor: (props, editor, next) => 
+    renderEditor: (props, editor, next) =>
       <CommentCounterWrapper
-        onClick={options.onClick}>
+        onClick={options.onClick}
+        isClosed={options.isClosed} >
         { next() }
       </CommentCounterWrapper>
   }
