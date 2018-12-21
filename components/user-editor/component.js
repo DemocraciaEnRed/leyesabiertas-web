@@ -160,7 +160,8 @@ class UserEditor extends Component {
             comments={this.state.comments}
             removeComment={this.removeComment}
             top={this.state.top}
-            attachReply={this.attachReply} />
+            attachReply={this.attachReply}
+            updateComments={this.fetchComments} />
         }
         { !this.props.isClosed &&
           <ArticlesSubtitle authenticated={this.props.authContext.authenticated} editMode={this.props.editMode} />

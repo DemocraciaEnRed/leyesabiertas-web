@@ -94,6 +94,7 @@ class commentCard extends Component {
             likes: prevState.liked ? prevState.likes - 1 : prevState.likes + 1
           }
         })
+        this.props.updateComments()
       })
       .catch((err) => {
         console.error(err)
@@ -182,7 +183,8 @@ class commentCard extends Component {
 }
 
 commentCard.propTypes = {
-  comment: PropTypes.object.isRequired
+  comment: PropTypes.object.isRequired,
+  updateComments: PropTypes.func.isRequired
 }
 
 export default WithUserContext(commentCard)
