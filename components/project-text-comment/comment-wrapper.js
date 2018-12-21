@@ -3,26 +3,27 @@ import CommentCounter from '../../elements/comment-counter/component'
 import { CommentCounterContext } from './index'
 
 export default class CommentCounterWrapper extends Component {
-    constructor (props) {
-      super(props)
-      this.state = {
-        top: 0,
-        left: 0,
-        ids: []
-      }
+  constructor (props) {
+    super(props)
+    this.state = {
+      top: 0,
+      left: 0,
+      ids: []
     }
-  
+  }
+
     handeOnClick = (e) => {
       if (this.state.ids.length > 0) this.props.onClick(this.state.ids, this.state.top)
     }
-  
+
     updateMousePosition = (e) => {
+      const top = this.props.isClosed ? 1100 : 830
       this.setState({
-        top: e.pageY - 830,
+        top: e.pageY - top,
         left: e.pageX - 100
       })
     }
-  
+
     addId = (id) => (e) => {
       this.setState(({ ids }) => {
         if (ids.includes(id)) return
@@ -30,15 +31,15 @@ export default class CommentCounterWrapper extends Component {
         return { ids: _ids }
       })
     }
-  
+
     removeId = (id) => (e) => {
       this.setState(({ ids }) => {
         if (!ids.includes(id)) return
-        const _ids = ids.filter(_id => _id !== id)
+        const _ids = ids.filter((_id) => _id !== id)
         return { ids: _ids }
       })
     }
-  
+
     render () {
       const { ids, top, left } = this.state
       const context = {
@@ -46,7 +47,7 @@ export default class CommentCounterWrapper extends Component {
         addId: this.addId
       }
       const count = ids.length
-  
+
       return (
         <Fragment>
           {
@@ -66,4 +67,4 @@ export default class CommentCounterWrapper extends Component {
         </Fragment>
       )
     }
-  }
+}
