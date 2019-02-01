@@ -11,6 +11,11 @@ const StyledImg = styled.div`
   background-size: cover;
   background-position: center;  
   box-sizing: border-box;
+  @media (max-width: 700px) {
+    height: 300px;
+    width: auto;
+    
+  }
 
 `
 const AboutImg = ({ img }) => (

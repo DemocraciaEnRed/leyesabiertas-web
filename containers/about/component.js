@@ -10,6 +10,9 @@ import ArrowRightLink from '../../elements/arrow-right-link/component'
 const StyledAbout = styled.div`
   height:540px;
   width:90%;
+  @media(max-width:700px){
+    flex-direction: column;
+  }
   margin-left:auto;
   margin-right:auto;
   display:flex;

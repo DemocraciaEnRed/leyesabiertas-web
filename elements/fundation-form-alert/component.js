@@ -18,7 +18,9 @@ const FundationFormAlert = styled.div`
     justify-content: flex-start;
   `}
   > p {
+    @media(min-width:701px){
     min-width: 300px;
+    }
     flex-wrap: wrap;
     line-height: 1.3;
     display: inline;

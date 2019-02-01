@@ -8,6 +8,9 @@ const StyledText = styled.div`
   padding-top: 6.8rem;
   padding-bottom: 8%;
   width: 50%;
+  @media (max-width: 700px) {
+    width:100%;
+  }
   height: 540px;
   display:flex;
   flex-direction:column;

@@ -27,6 +27,9 @@ const StyledEditorWrapper = styled.div`
     @media (max-width: 1024px) {
     max-width:60%;
   }
+    @media (max-width: 700px) {
+      max-width:100%;
+    }
     span {
       font-size: 1.8rem;
       line-height: 1.89;
