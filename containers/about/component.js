@@ -23,7 +23,7 @@ const StyledAbout = styled.div`
 
 const About = () => (
   <StyledAbout id='about'>
-    <AboutImg img={'/static/assets/diputados-asset.jpg'} />
+    <AboutImg img={'/static/assets/diputados-asset.jpg'} imgMobile='/static/assets/diputados-asset-mobile.jpg' />
     <AboutText>
       <AboutH2>Acerca de</AboutH2>
       <AboutP>¿Qué es? El <strong>Portal de Leyes Abiertas</strong> es una plataforma de elaboración colaborativa de normas, donde las y los diputados abren a debate sus iniciativas para incorporar puntos de vista ciudadanos.</AboutP>

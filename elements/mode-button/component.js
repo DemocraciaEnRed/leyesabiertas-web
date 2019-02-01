@@ -13,6 +13,7 @@ const StyledModeButton = styled.button`
   border-bottom: solid 1px #dae1e7;
   background-color: ${(props) => props.active ? '#f2f5f8' : 'white'};
   font-family: ${(props) => props.active ? 'var(--bold)' : 'var(--regular)'};
+
 `
 
 const ModeButton = (props) => (
