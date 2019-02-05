@@ -8,6 +8,9 @@ const CommentIcon = styled.div`
   background-position: center;
   background-repeat:no-repeat;
   background-size: cover;
+  @media(max-width:700px){
+    display:none;
+  }
 
 `
 

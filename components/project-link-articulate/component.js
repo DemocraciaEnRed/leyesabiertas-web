@@ -21,6 +21,9 @@ const StyledButton = styled.button`
   align-items:center;
   justify-content:space-around;
   border: none;
+  @media(max-width:700px){
+    width:100%;
+  }
 `
 
 const styledButton = (props) => (

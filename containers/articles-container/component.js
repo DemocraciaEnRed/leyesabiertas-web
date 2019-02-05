@@ -16,7 +16,7 @@ class ArticlesContainer extends Component {
     isAuthor: false,
     isLoggedIn: true,
     editionMode: false,
-    withComments: false
+    withComments: null
   }
 
   async componentDidMount () {

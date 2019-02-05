@@ -7,6 +7,9 @@ const SocialWrapper = styled.div`
   flex-direction:column;
   width:6.7rem;
   margin-left:auto;
+  @media(max-width:700px){
+    margin-left:0px;
+  }
 `
 const IconWrapper = styled.div`
   display:flex;

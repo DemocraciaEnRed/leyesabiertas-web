@@ -14,6 +14,8 @@ const SecondaryBar = styled.div`
   padding-left:5%;
   padding-right:5%;
   padding-top:2rem;
+  @media(max-width:700px){
+    height:5rem;
   }
 `
 
