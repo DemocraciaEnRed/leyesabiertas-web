@@ -64,7 +64,7 @@ export default () => (
             <u><em>Registro</em></u>
           </StaticInfoP>
           <StaticInfoP>
-            El ingreso a la Plataforma no requiere registro online previo, el mismo será requerido si el Usuario desea publicar comentarios, sugerir modificaciones o dar apoyo a comentarios o sugerencias. En ese caso, el Usuario deberá completar un formulario y brindar un correo electrónico o registrarse con su cuenta de Facebook.
+            El ingreso a la Plataforma no requiere registro online previo, el mismo será requerido si el Usuario desea publicar comentarios, sugerir modificaciones o dar apoyo a comentarios o sugerencias. En ese caso, el Usuario deberá completar un formulario y brindar un correo electrónico.
             El acceso al perfil del Usuario a está protegido con una clave, y sólo el Usuario podrá modificarla.
           </StaticInfoP>
           <StaticInfoP>
@@ -188,10 +188,10 @@ export default () => (
           Asimismo, si un Usuario se pone en contacto con la Administración de la Plataforma, es posible que la comunicación quede registrada para poder resolver más fácilmente cualquier incidencia que se pueda haber producido.
           </StaticInfoP>
           <StaticInfoP>
-          Las direcciones de correo electrónico o cuenta de Facebook sólo se utilizarán para enviar notificaciones sobre el uso de la plataforma, avisos sobre futuras votaciones o consultas y otra información relevante sobre la HCDN. No obstante, cada usuario podrá darse de baja en cualquier momento si así lo desea.
+          Las direcciones de correo electrónico sólo se utilizarán para enviar notificaciones sobre el uso de la plataforma, avisos sobre futuras votaciones o consultas y otra información relevante sobre la HCDN. No obstante, cada usuario podrá darse de baja en cualquier momento si así lo desea.
           </StaticInfoP>
           <StaticInfoP>
-          Las direcciones de correo electrónico o cuenta de Facebook sólo se utilizarán para enviar notificaciones sobre el uso de la plataforma, avisos sobre futuras votaciones o consultas y otra información relevante sobre la HCDN. No obstante, cada usuario podrá darse de baja en cualquier momento si así lo desea.
+          Las direcciones de correo electrónico sólo se utilizarán para enviar notificaciones sobre el uso de la plataforma, avisos sobre futuras votaciones o consultas y otra información relevante sobre la HCDN. No obstante, cada usuario podrá darse de baja en cualquier momento si así lo desea.
           El Usuario puede ejercer los derechos que como titular de datos personales le asisten (acceso, rectificación, cancelación, oposición, información o revocación). Para tal efecto, puede enviar una comunicación a <a href='mailto:leyesabiertas@hcdn.gob.ar'>leyesabiertas@hcdn.gob.ar</a>.
           </StaticInfoP>
           <StaticInfoP>
