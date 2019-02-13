@@ -53,7 +53,6 @@ const TopBarWrapper = styled.div`
   & > div:last-child {
     border-right: none;
     padding-right:0px;
-    margin-top:10px;
   }
   `
 
