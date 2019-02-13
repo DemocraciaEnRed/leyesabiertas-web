@@ -22,7 +22,8 @@ const StyledButton = styled.button`
   justify-content:space-around;
   border: none;
   @media(max-width:700px){
-    width:100%;
+    width:60%;
+    align-self:center;
   }
 `
 
