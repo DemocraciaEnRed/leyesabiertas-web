@@ -5,6 +5,7 @@ import styled from 'styled-components'
 const StyledDiv = styled.div`
   display: flex;
   align-items: flex-end;
+  padding: 0 1.5rem 0 0rem !important;
 `
 
 const StyledClosingDate = styled.p`
@@ -12,6 +13,7 @@ const StyledClosingDate = styled.p`
   color:#203340;
   margin-top: 0.4rem;
   margin-bottom: 1rem;
+  height:35px;
 `
 
 const formatDate = (createdAt) => {
