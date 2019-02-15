@@ -59,7 +59,7 @@ const newDocument = {
                 'leaves': [
                   {
                     'object': 'leaf',
-                    'text': 'En el siguiente apartado, defina la fundamentación del proyecto, o en otras palabras, el espíritu que persigue y que se mantiene constante aun en la generación de las diversas versiones del documento. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed purus justo. Nam tempus ligula nec est scelerisque aliquet. Phasellus pretium rhoncus pharetra. Duis dapibus felis neque. Fusce elementum posuere dolor id mattis. Sed magna arcu, rutrum eu pellentesque nec, feugiat sit amet lorem. Fusce volutpat, dolor a pretium fermentum, felis justo rhoncus nisl, vel mollis est diam mollis nisl.',
+                    'text': 'Esta sección es un espacio para redactar un texto que sirve para presentar el proyecto, explicar el contexto (de donde surge, su importancia, etc.), e invitar la ciudadanía a participar. Es muy importante mencionar qué tipo de aportes ciudadanos se esperan. El proyecto tiene que estar explicado de manera muy simple, la redacción debe ser fácil de entender.',
                     'marks': [
                     ]
                   }
