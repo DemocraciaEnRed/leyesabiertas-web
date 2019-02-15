@@ -28,11 +28,11 @@ const SpanOk = styled.span`
 `
 const SpanDanger = styled.span`
   margin-top: 0.8em;
-  color: red
+  color: red;
 `
 
 const EditField = styled.div`
-  border: 1px solid #dae1e7
+  border: 1px solid #dae1e7;
   padding: 2.5em 2.5em 1em;
   margin-bottom: 2em;  
 `
@@ -115,7 +115,8 @@ class ProjectFields extends Component {
             type='text'
             value={this.state.title}
             name='title'
-            onChange={this.handleInputChange} />
+            onChange={this.handleInputChange}
+            placeholder='Hacer uso correcto de mayúsculas y minúsculas' />
         </ProfileLabel>
         <ProfileLabel>
             Ingrese la URL para la imagen de encabezado:
