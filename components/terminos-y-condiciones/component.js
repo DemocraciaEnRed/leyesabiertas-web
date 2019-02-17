@@ -55,7 +55,7 @@ export default () => (
       Acerca de este sitio
           </StaticInfoBold>
           <StaticInfoP>
-          La <em>Plataforma</em> es una plataforma web promovida por la Honorable Cámara de Diputados de la Nación a través de su Programa de Modernización (en adelante “Modernización”) a fin de incrementar la participación ciudadana en la redacción y creación de proyectos de ley y generar espacios de colaboración entre el Estado, la sociedad civil, el sector privado y la ciudadanía en general, a la hora de diseñar y producir valor público.
+          La <em>Plataforma</em> es una plataforma web promovida por la Honorable Cámara de Diputados de la Nación Nación (en adelante HCDN) a través de su Programa de Modernización Parlamentaria (en adelante “Modernización Parlamentaria”) a fin de incrementar la participación ciudadana en la redacción y creación de proyectos de ley y generar espacios de colaboración entre el Estado, la sociedad civil, el sector privado y la ciudadanía en general, a la hora de diseñar y producir valor público.
           </StaticInfoP>
           <StaticInfoP>
         La Plataforma es un desarrollo basado en <a href='http://democracyos.org/' target='_blank'>DemocracyOS</a>, una plataforma online de código abierto, diseñada para informar, debatir y votar propuestas públicas hacia la construcción de una democracia adaptada al siglo XXI. DemocracyOS es desarrollada por la Fundación <a href='https://democraciaenred.org/' target='_blank'>Democracia en Red</a>.
@@ -64,7 +64,7 @@ export default () => (
             <u><em>Registro</em></u>
           </StaticInfoP>
           <StaticInfoP>
-            El ingreso a la Plataforma no requiere registro online previo, el mismo será requerido si el Usuario desea publicar comentarios, sugerir modificaciones o dar apoyo a comentarios o sugerencias. En ese caso, el Usuario deberá completar un formulario y brindar un correo electrónico o registrarse con su cuenta de Facebook.
+            El ingreso a la Plataforma no requiere registro online previo, el mismo será requerido si el Usuario desea publicar comentarios, sugerir modificaciones a las propuestas o dar apoyo a comentarios o sugerencias de otros usuarios. En ese caso, el Usuario deberá completar un formulario y brindar un correo electrónico.
             El acceso al perfil del Usuario a está protegido con una clave, y sólo el Usuario podrá modificarla.
           </StaticInfoP>
           <StaticInfoP>
@@ -87,7 +87,7 @@ export default () => (
             Obligaciones y condiciones de uso
           </StaticInfoBold>
           <StaticInfoP>
-          El usuario es responsable del contenido que suba, publique o muestre en la Plataforma, garantizando que el mismo no infringe estos Términos y Condiciones, ni los derechos de terceros, ni viola ninguna ley, reglamento u otra normativa nacional o internacional vigente en la República Argentina. Los Usuarios de la Plataforma aceptarán que el material y/o contenido que suban y/o publiquen podría ser utilizado por otros usuarios de la Plataforma y/o por terceras personas ajenas, y que la <em>HCDN</em> no será responsable en ningún caso por tales utilizaciones. El usuario debe usar la Plataforma en forma correcta y lícita. En caso contrario, la administración de la Plataforma podrá retirar el contenido y/o suspender la cuenta de quienes incurran en actitudes contrarias a estos términos y condiciones y/o de la política de privacidad, ofensivas, ilegales, violatorias de derechos de terceros, contrarias a la moral y/o amenazas para la seguridad de otros usuarios. En relación a los aportes, colaboraciones, comentarios y votaciones que las/os usuarias/os realicen en las iniciativas propuestas para la consulta, las mismas no son de carácter vinculante, obligatorio y/o impositivo sobre las acciones de la <em>HCDN</em>.
+          El usuario es responsable del contenido que suba, publique o muestre en la Plataforma, garantizando que el mismo no infringe estos Términos y Condiciones, ni los derechos de terceros, ni viola ninguna ley, reglamento u otra normativa nacional o internacional vigente en la República Argentina. Los Usuarios de la Plataforma aceptarán que el material y/o contenido que suban y/o publiquen podría ser utilizado por otros usuarios de la Plataforma y/o por terceras personas ajenas, y que la <em>HCDN</em> no será responsable en ningún caso por tales utilizaciones. El usuario debe usar la Plataforma en forma correcta y lícita. En caso contrario, la administración de la Plataforma podrá retirar el contenido y/o suspender la cuenta de quienes incurran en actitudes contrarias a estos términos y condiciones y/o de la política de privacidad, ofensivas, ilegales, violatorias de derechos de terceros, contrarias a la moral y/o amenazas para la seguridad de otros usuarios. En relación a los aportes, colaboraciones y comentarios que las/os usuarias/os realicen en las propuestas para de ley, las mismas no son de carácter vinculante, obligatorio y/o impositivo sobre las acciones de la <em>HCDN</em>.
           </StaticInfoP>
           <StaticInfoP>
             <u><em>Actividades prohibidas</em></u>
@@ -187,11 +187,9 @@ export default () => (
           <StaticInfoP>
           Asimismo, si un Usuario se pone en contacto con la Administración de la Plataforma, es posible que la comunicación quede registrada para poder resolver más fácilmente cualquier incidencia que se pueda haber producido.
           </StaticInfoP>
+
           <StaticInfoP>
-          Las direcciones de correo electrónico o cuenta de Facebook sólo se utilizarán para enviar notificaciones sobre el uso de la plataforma, avisos sobre futuras votaciones o consultas y otra información relevante sobre la HCDN. No obstante, cada usuario podrá darse de baja en cualquier momento si así lo desea.
-          </StaticInfoP>
-          <StaticInfoP>
-          Las direcciones de correo electrónico o cuenta de Facebook sólo se utilizarán para enviar notificaciones sobre el uso de la plataforma, avisos sobre futuras votaciones o consultas y otra información relevante sobre la HCDN. No obstante, cada usuario podrá darse de baja en cualquier momento si así lo desea.
+          Las direcciones de correo electrónico sólo se utilizarán para enviar notificaciones sobre el uso de la plataforma, avisos sobre futuras publicaciones y otra información relevante sobre la HCDN. No obstante, cada usuario podrá darse de baja en cualquier momento si así lo desea.
           El Usuario puede ejercer los derechos que como titular de datos personales le asisten (acceso, rectificación, cancelación, oposición, información o revocación). Para tal efecto, puede enviar una comunicación a <a href='mailto:leyesabiertas@hcdn.gob.ar'>leyesabiertas@hcdn.gob.ar</a>.
           </StaticInfoP>
           <StaticInfoP>

@@ -60,7 +60,7 @@ const Arrow = styled.i`
   -webkit-transform: rotate(45deg);
 `
 const IconWrapper = styled.div`
-  padding-right:.5rem;
+  padding-left:.5rem;
   color: #5c97bc;
   `
 
@@ -72,10 +72,11 @@ const UserAvatar = ({ userId, name, party, badge, updatedAt }) => (
     <TextWrapper>
       <Name>{name} </Name>
       <Party>
+        <p>{party}</p>
         { badge &&
           <IconWrapper><Icon icon={checkCircle} /></IconWrapper>
         }
-        <p>{party}</p>
+
       </Party>
     </TextWrapper>
     <Arrow />

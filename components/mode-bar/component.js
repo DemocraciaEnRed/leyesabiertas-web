@@ -11,6 +11,11 @@ const StyledModeBar = styled.nav`
   background: #FFF;
   padding: 0 3%;
   border-bottom: solid 1px #dae1e7;
+  @media(max-width:700px){
+    button:last-child{
+     // display:none;
+    }
+  }
 `
 
 const ModeBar = ({ children }) => (
