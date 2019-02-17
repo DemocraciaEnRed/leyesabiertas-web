@@ -13,7 +13,7 @@ const StyledModeBar = styled.nav`
   border-bottom: solid 1px #dae1e7;
   @media(max-width:700px){
     button:last-child{
-      display:none;
+     // display:none;
     }
   }
 `

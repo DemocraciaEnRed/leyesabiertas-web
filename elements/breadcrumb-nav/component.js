@@ -4,7 +4,7 @@ const BreadcrumbWrapper = styled.div`
   width: 90%;
   display: flex;
   @media (max-width: 769px) {
-    justify-content: space-around;
+    justify-content: flex-start;
   }
 `
 

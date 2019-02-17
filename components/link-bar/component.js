@@ -16,6 +16,11 @@ const Wrapper = styled.div`
     &:last-child{
       padding-right:0px;
     }
+    @media (max-width:760px){
+      :first-child{
+        height:40px;
+      }
+    }
   }
 `
 const LinkBar = ({ children }) => (

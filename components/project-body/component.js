@@ -15,6 +15,9 @@ const ProjectBodyContainer = styled.div`
   margin-right:auto;
   margin-left:auto;
   padding:5% 20% 5% 10%;
+  @media (max-width:769px){
+    padding:5% 0px;
+  }
 
 `
 const P = styled.p`

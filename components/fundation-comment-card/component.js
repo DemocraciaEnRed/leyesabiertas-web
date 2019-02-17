@@ -34,6 +34,8 @@ const Date = styled.div`
 const UserAvatar = styled.div`
   width: 40px;
   height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   border-radius:50%;
   background-image: url('${(props) => props.id ? `${API_URL}/api/v1/users/${props.id}/avatar?` : '/static/assets/userdefault.png'}');
   background-size: cover;

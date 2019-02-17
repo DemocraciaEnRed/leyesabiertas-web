@@ -27,7 +27,7 @@ export default () => (
         ¿Los diputados leen los comentarios?
       </StaticInfoBold>
       <StaticInfoP>
-      Si, los diputados y su equipo de trabajo involucrados en la plataforma se comprometieron a leer y dar una resolución a cada comentario o posible aporte realizado sobre el articulado.
+      Si, los diputados y diputadas junto a sus equipos de trabajo involucrados en la plataforma administran y moderan sus proyectos, leen y analizan los comentarios, y aceptan los cambios que consideran necesarios.
       </StaticInfoP>
     </StyledDiv>
     <StyledDiv>
@@ -51,7 +51,7 @@ export default () => (
         ¿Me puedo contactar con el diputado? ¿Cómo?
       </StaticInfoBold>
       <StaticInfoP>
-      Para contactarse con el/la diputado/a puede usar los medios de comunicación habituales, disponibles en:  <a rel='noopener noreferrer' target='_blank' href='https://www.diputados.gov.ar/diputados/listadip.html'>https://www.diputados.gov.ar/diputados/listadip.html </a>
+      A través de los medios publicados por el sitio web oficial de la H. Cámara de Diputados: https://www.diputados.gov.ar/diputados/listadip.html <a rel='noopener noreferrer' target='_blank' href='https://www.diputados.gov.ar/diputados/listadip.html'>https://www.diputados.gov.ar/diputados/listadip.html </a>
       </StaticInfoP>
     </StyledDiv>
     <StyledDiv>
