@@ -20,7 +20,7 @@ const ClosedProposalData = styled.div`
 
 export default ({ contributors, contributions, contextualComments }) => (
   <ClosedProposalWrapper>
-    <ClosedProposalMessage>Agradecemos a cada uno de los ciudadanos que compartieron sus aportes y comentarios a esta propuesta de ley. <br  /> A continuación podrá ver los detalles y el resumen de la  co-creación de esta propuesta de ley.</ClosedProposalMessage>
+    <ClosedProposalMessage>Agradecemos a cada uno de los ciudadanos que compartieron sus aportes y comentarios a esta propuesta de ley. <br /> A continuación podrá ver los detalles y el resumen de la co-creación de esta propuesta de ley.</ClosedProposalMessage>
     <ClosedProposalData>
       <DashboardBarItem>
         <BarTitle>Aportes</BarTitle>
@@ -32,11 +32,11 @@ export default ({ contributors, contributions, contextualComments }) => (
         </DashboardBarTextContainer>
       </DashboardBarItem>
       <DashboardBarItem>
-        <BarTitle>Aportantes</BarTitle>
+        <BarTitle>Participantes</BarTitle>
         <DashboardBarTextContainer>
           <ActivityIcon img={'/static/assets/citizen-icon.svg'} />
           <BarActivitySubtitle number={contributors}>
-            Total de aportantes en la propuesta
+            Total de participantes en la propuesta
           </BarActivitySubtitle>
         </DashboardBarTextContainer>
       </DashboardBarItem>
