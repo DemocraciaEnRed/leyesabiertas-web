@@ -1,5 +1,9 @@
 # Changelog
 
+#### 1.0.9
+- Cambiado fundamentacion a "Resumen de la propuesta"
+- Actualizadas las preguntas frecuentes
+
 #### 1.0.8
 - Agregado Google Ananytics
 - Cambiado aportantes a participantes
