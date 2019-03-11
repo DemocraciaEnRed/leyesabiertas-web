@@ -14,7 +14,6 @@ const StyledButton = styled.button`
   cursor: pointer;
   font-family: var(--bold);
   align-self: auto;
-  margin-bottom: 6.6rem;
   display:flex;
   flex-direction:row;
   flex-wrap:nowrap;

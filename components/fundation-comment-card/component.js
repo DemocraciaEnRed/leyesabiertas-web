@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Icon from 'react-icons-kit'
-import { thumbsUp } from 'react-icons-kit/feather'
+import { thumbsUp, trash2 } from 'react-icons-kit/feather'
 import { checkCircle } from 'react-icons-kit/fa/checkCircle'
-import WithUserContext from '../../components/with-user-context/component'
+import { check } from 'react-icons-kit/fa/check'
 import getConfig from 'next/config'
+import WithUserContext from '../../components/with-user-context/component'
 
-const { publicRuntimeConfig: { API_URL }} = getConfig()
+const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const StyledCommentItem = styled.div`
   min-height:15rem;
@@ -22,13 +23,12 @@ const Comment = styled.div`
   color: #181818;
 `
 
-const Date = styled.div`
-  height: 16px;
-  font-size: 1.4rem;
+const Date = styled.p`
+  font-size: 1.1em;
   color: #9b9b9b;
-  padding-top:2rem;
-  margin-top:auto;
-  margin-bottom:1.5rem;
+  padding-top:5px;
+  // margin-top:auto;
+  // margin-bottom:1.5rem;
 
 `
 const UserAvatar = styled.div`
@@ -59,12 +59,28 @@ const TextWrapper = styled.div`
   width:90%;
 `
 
-const StyledLikeWrapper = styled.div`
-  padding-top: 20px;
-  color: ${({ liked }) => liked ? '#ef885d' : '#5c97bc'};
-  cursor: pointer;
+const StyledLikeWrapper = styled.span`
+  padding-top: 15px;
+  color: ${({ liked }) => liked ? '#1fcc1b' : '#5c97bc'};
+  &:hover{
+    color: #ef885d;
+    cursor: pointer;
+  }
   font-size: 14px;
-  display: flex;
+  display: inline-block;
+  align-items: center;
+`
+
+const StyledDeleteWrapper = styled.span`
+  padding-top: 15px;
+  margin-left: 10px;
+  color: #5c97bc;
+  &:hover{
+    color: #ef885d;
+    cursor: pointer;
+  }
+  font-size: 14px;
+  display: inline-block;
   align-items: center;
 `
 
@@ -79,10 +95,19 @@ const IconWrapper = styled.div`
   color: #5c97bc;
 `
 
+const DeletedNotice = styled.div`
+  background-color: hsl(124.6, 47.4%, 48.4%);
+  padding: 15px 20px;
+  color: #FFF;
+  font-size: 14px;
+  margin-bottom:2rem;
+`
+
 class FundationCommentCard extends Component {
   state = {
     liked: false,
-    likes: null
+    likes: null,
+    deleted: false
   }
 
   componentDidMount () {
@@ -116,29 +141,64 @@ class FundationCommentCard extends Component {
       })
   }
 
+  handleDelete = (commentId) => () => {
+    fetch(`${API_URL}/api/v1/documents/${this.props.project}/comments/${commentId}`, {
+      headers: {
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
+        'Content-Type': 'application/json'
+      },
+      method: 'DELETE'
+    })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            deleted: true
+          }
+        })
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
+
   render () {
-    const { comment } = this.props
+    const { comment, canDelete } = this.props
+    const { deleted } = this.state
     const isAuthor = comment.user.roles.includes('accountable')
     return (
-      <StyledCommentItem>
-        <UserAvatar id={comment.user._id} />
-        <TextWrapper>
-          <Username>{comment.user.fullname}</Username>
-          <ChargeWrapper>
-            {isAuthor &&
-              <IconWrapper>
-                <Icon icon={checkCircle} />
-              </IconWrapper>
-            }
-            <Charge>{(comment.user.fields && comment.user.fields.occupation) ? comment.user.fields.occupation : '' }</Charge>
-          </ChargeWrapper>
-          <Comment>{comment.content}</Comment>
-          <Date>{`Hace ${comment.when}`}</Date>
-          <StyledLikeWrapper liked={this.state.liked} onClick={this.handleLike}>
-            <Icon icon={thumbsUp} style={{ marginRight: '5px' }} /> { this.state.likes }
-          </StyledLikeWrapper>
-        </TextWrapper>
-      </StyledCommentItem>
+      <div>
+        { !deleted
+          ? <StyledCommentItem>
+            <UserAvatar id={comment.user._id} />
+            <TextWrapper>
+              <Username>{comment.user.fullname}</Username>
+              <ChargeWrapper>
+                {isAuthor &&
+                <IconWrapper>
+                  <Icon icon={checkCircle} />
+                </IconWrapper>
+                }
+                <Charge>{(comment.user.fields && comment.user.fields.occupation) ? comment.user.fields.occupation : '' }</Charge>
+              </ChargeWrapper>
+              <Comment>{comment.content}</Comment>
+              <Date>{`Hace ${comment.when}`}</Date>
+              <div>
+                <StyledLikeWrapper liked={this.state.liked} onClick={this.handleLike}>
+                  <Icon icon={thumbsUp} style={{ marginRight: '5px' }} />{ this.state.likes }
+                </StyledLikeWrapper>
+                { canDelete &&
+                <StyledDeleteWrapper onClick={this.handleDelete(comment._id)}>
+                  <Icon icon={trash2} style={{ marginRight: '5px' }} />Eliminar
+                </StyledDeleteWrapper>
+                }
+              </div>
+            </TextWrapper>
+          </StyledCommentItem>
+          : <DeletedNotice>
+            <Icon icon={check} style={{ marginRight: '5px' }} /> <Icon icon={trash2} style={{ marginRight: '5px' }} />El comentario ha sido borrado correctamente
+          </DeletedNotice>
+        }
+      </div>
     )
   }
 }
@@ -146,7 +206,8 @@ class FundationCommentCard extends Component {
 FundationCommentCard.propTypes = {
   comment: PropTypes.object.isRequired,
   authContext: PropTypes.object.isRequired,
-  project: PropTypes.string.isRequired
+  project: PropTypes.string.isRequired,
+  canDelete: PropTypes.bool.isRequired
 }
 
 export default WithUserContext(FundationCommentCard)

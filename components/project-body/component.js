@@ -14,7 +14,9 @@ const ProjectBodyContainer = styled.div`
   flex-direction:column;
   margin-right:auto;
   margin-left:auto;
-  padding:5% 20% 5% 10%;
+  // padding:5% 20% 0% 10%;
+  padding: 3% 20% 0% 3.5%;
+  
   @media (max-width:769px){
     padding:5% 0px;
   }
@@ -59,13 +61,16 @@ const ProjectBody = ({ project }) => (
                 youtubeId={project.currentVersion.content.youtubeId}
                 setNewFields={setNewFields} />
             }
-            <ProjectVideo
-              isAuthor={isAuthor}
-              editMode={editMode}
-              projectId={project._id}
-              youtubeId={editedYoutubeId ? newYoutubeId : project.currentVersion.content.youtubeId}
-              editedYoutubeId={editedYoutubeId}
-              setYoutubeId={setYoutubeId} />
+            {
+              project.currentVersion.content.youtubeId &&
+              <ProjectVideo
+                isAuthor={isAuthor}
+                editMode={editMode}
+                projectId={project._id}
+                youtubeId={editedYoutubeId ? newYoutubeId : project.currentVersion.content.youtubeId}
+                editedYoutubeId={editedYoutubeId}
+                setYoutubeId={setYoutubeId} />
+            }
             <FundationContainer
               isAuthor={isAuthor}
               editMode={editMode}

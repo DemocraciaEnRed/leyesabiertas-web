@@ -1,6 +1,18 @@
 import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet, injectGlobal } from 'styled-components'
+import getConfig from 'next/config'
+
+const { publicRuntimeConfig: {
+  API_URL,
+  NODE_ENV,
+  REALM,
+  AUTH_SERVER_URL,
+  SSL_REQUIRED,
+  RESOURCE,
+  PUBLIC_CLIENT,
+  CONFIDENTIAL_PORT
+} } = getConfig()
 
 injectGlobal`
   @font-face {
@@ -111,8 +123,14 @@ export default class MyDocument extends Document {
           <meta name='viewport' content='width=device-width, initial-scale=1' />
           <meta charSet='utf-8' />
           {this.props.styleTags}
-          <script async src='https://www.googletagmanager.com/gtag/js?id=UA-109170776-3' />
-          <script dangerouslySetInnerHTML={{ __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-109170776-3');` }} />
+          {
+            NODE_ENV === 'production' &&
+            <script async src='https://www.googletagmanager.com/gtag/js?id=UA-109170776-3' />
+          }
+          {
+            NODE_ENV === 'production' &&
+            <script dangerouslySetInnerHTML={{ __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-109170776-3');` }} />
+          }
         </Head>
         <body>
           <Main />

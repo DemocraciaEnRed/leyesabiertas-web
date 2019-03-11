@@ -57,7 +57,7 @@ class ProjectFields extends Component {
       title,
       imageCover,
       youtubeId,
-      youtubeURL: 'https://www.youtube.com/watch?v=' + youtubeId,
+      youtubeURL: youtubeId ? 'https://www.youtube.com/watch?v=' + youtubeId : '',
       closingDate: new Date(closingDate).toISOString().split('T')[0]
     }, () => this.props.setNewFields(this.getBodyPayload()))
   }
@@ -134,7 +134,7 @@ class ProjectFields extends Component {
             name='closingDate'
             onChange={this.handleInputChange} />
           { this.state.closingDate
-            ? <SpanOk>La fecha de cierre será el: {this.state.closingDate}<br/>NOTA: El documento se cerrará automáticamente llegada la fecha de cierre</SpanOk>
+            ? <SpanOk>La fecha de cierre será el: {this.state.closingDate}<br />NOTA: El documento se cerrará automáticamente llegada la fecha de cierre</SpanOk>
             : <SpanDanger>Debe definir una fecha de cierre</SpanDanger>
           }
         </ProfileLabel>
@@ -143,7 +143,7 @@ class ProjectFields extends Component {
           <InputField
             type='text'
             name='youtubeURL'
-            value={this.state.youtubeURL}
+            value={this.state.youtubeURL || ''}
             onChange={this.handleInputChangeYoutube} />
           {!this.state.youtubeId && <SpanOk>Link invalido o vacio (El proyecto se publicará sin video)</SpanOk>
           }

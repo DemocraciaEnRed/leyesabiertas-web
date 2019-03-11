@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Editor } from 'slate-react'
 import { Value } from 'slate'
-import ProjectTextEdit from '../../components/project-text-edit'
 import getConfig from 'next/config'
+import ProjectTextEdit from '../../components/project-text-edit'
 
-const { publicRuntimeConfig: { API_URL }} = getConfig()
+const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const StyledEditorWrapper = styled.div`
   width: 100%;
-  margin-top: 48px;
+  margin-top: 3em;
   .editor {
     max-width: 700px;
     span {
@@ -30,7 +30,7 @@ const H2 = styled.h2`
   color: #5c97bc;
   padding-bottom:4rem;`
 
-  const P = styled.p`
+const P = styled.p`
   font-size: 18px;
   line-height: 1.94;
   padding-bottom:3rem;

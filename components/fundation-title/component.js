@@ -10,11 +10,15 @@ const StyledSubtitle = styled.h2`
   margin-top: 4.7rem;
 `
 
+const container = styled.div`
+  width: 100%;
+`
+
 export default ({ title, isClosed }) => (
-  <div>
+  <container>
     <StyledSubtitle closed={isClosed}>
       {isClosed ? 'Finalizó el periodo para hacer aportes' : 'Resumen de la propuesta'}
     </StyledSubtitle>
     <ProjectTitle>{ title }</ProjectTitle>
-  </div>
+  </container>
 )
