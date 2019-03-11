@@ -4,6 +4,7 @@ import { Editor, findDOMRange } from 'slate-react'
 import { Value, KeyUtils, Range, Change, Mark } from 'slate'
 import { getVisibleSelectionRect } from 'get-selection-range'
 import fetch from 'isomorphic-unfetch'
+import getConfig from 'next/config'
 import WithUserContext from '../with-user-context/component'
 import CommentsGrid from '../comments-grid/component'
 import EditorTitle from '../../elements/editor-title/component'
@@ -12,14 +13,14 @@ import ProjectTextEdit from '../../components/project-text-edit'
 import ProjectTextComment from '../../components/project-text-comment'
 import ProjectTextCreateComment from '../../components/project-text-create-comment'
 import ArticlesSubtitle from '../articles-subtitle/component'
-import getConfig from 'next/config'
 
-const { publicRuntimeConfig: { API_URL }} = getConfig()
+const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const StyledEditorWrapper = styled.div`
   width: 90%;
   padding: 0 8%;
   margin-top: 48px;
+  margin-bottom: 180px;
   position: relative;
   .editor {
     margin-top:4rem;
