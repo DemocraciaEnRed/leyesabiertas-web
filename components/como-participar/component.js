@@ -21,8 +21,8 @@ export default () => (
         Una propuesta de ley es el <strong>estado anterior al proyecto de ley</strong> que será presentado para debate en la Cámara.
       </StaticInfoP>
       <StaticInfoP>
-        Los diputados y su equipo analizarán los <strong>aportes</strong> realizados por la ciudadanía en la propuesta y a partir de esto realizarán los cambios que consideren necesarios para la
-confección de la versión final.
+        Los diputados analizarán los <strong>aportes</strong> realizados por la ciudadanía en la propuesta y a partir de esto realizarán los cambios que consideren necesarios para la
+ versión final del texto.
       </StaticInfoP>
       <StaticInfoBold>
         ¿Qué entendemos por aporte?
@@ -30,7 +30,7 @@ confección de la versión final.
       <StaticInfoP>A través de esta plataforma, la ciudadanía puede hacer <strong>comentarios generales</strong>, para dar su opinión o postura general sobre la propuesta de ley. Además, puede realizar aportes puntuales seleccionando una parte específica del texto y haciendo un <strong>aporte particular</strong>.
       </StaticInfoP>
       <StaticInfoP>
-        Los diputados y su equipo analizarán los <strong>aportes</strong>. En la medida en se realicen cambios a la propuesta original se generarán nuevas versiones de la propuesta. Así, las y los usuarios cuyos aportes fueran incorporados, serán colaboradores en la redacción de la propuesta.
+        Los diputados analizarán los <strong>aportes</strong>. En la medida en se realicen cambios a la propuesta original se generarán nuevas versiones de la propuesta. Así, las y los usuarios cuyos aportes fueran incorporados, serán colaboradores en la redacción de la propuesta.
       </StaticInfoP>
       <StaticInfoP>Para más detalles sobre las funcionalidades básicas de esta plataforma descargue/consulte el MANUAL DE USUARIO</StaticInfoP>
     </ComoParticiparWrapper>

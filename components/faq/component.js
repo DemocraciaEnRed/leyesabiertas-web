@@ -27,7 +27,7 @@ export default () => (
         ¿Los diputados y las diputadas leen los comentarios?
       </StaticInfoBold>
       <StaticInfoP>
-      Si, los diputados y las diputadas junto a sus equipos de trabajo involucrados en la plataforma administran y moderan sus propuestas. Leen y analizan los comentarios para realizar cambios que consideran necesarios para mejorar la propuesta de ley.
+      Si, los diputados y las diputadas administran y moderan sus propuestas. Leen y analizan los comentarios para realizar cambios que consideran necesarios para mejorar la propuesta de ley.
       </StaticInfoP>
     </StyledDiv>
     <StyledDiv>
@@ -51,7 +51,7 @@ export default () => (
         ¿Cómo se miden los aportes?
       </StaticInfoBold>
       <StaticInfoP>
-      Los diputados y las diputadas con sus equipos leerán los comentarios y sugerencias. A medida que el proyecto avanza seleccionarán como aportes los comentarios tenidos en cuenta a la hora de efectuar modificaciones para una nueva versión del futuro proyecto.
+      Los diputados y las diputadas leerán los comentarios y sugerencias. A medida que el proyecto avanza seleccionarán como aportes los comentarios tenidos en cuenta a la hora de efectuar modificaciones para una nueva versión del futuro proyecto.
       </StaticInfoP>
     </StyledDiv>
     <StyledDiv>

@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Icon from 'react-icons-kit'
+import { download } from 'react-icons-kit/feather/download'
 import StaticInfoWrapper from '../../elements/static-info-wrapper/component'
 import StaticInfoNav from '../../elements/static-info-nav/component'
 import StaticInfoButton from '../../elements/static-info-button/component'
@@ -61,6 +63,9 @@ const StaticInfo = (props) => (
             {button.name}
           </StaticInfoButton>
         ))}
+        <StaticInfoButton onClick={() => window.open('/static/files/congreso_manual_de_usuario.pdf', '_blank')}>
+          <Icon icon={download} size={16} /> Manual de usuario
+        </StaticInfoButton>
       </StaticInfoNav>
     </StaticInfoWrapper>
   </StyledStaticInfo>

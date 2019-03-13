@@ -7,7 +7,10 @@ const StaticInfoButton = styled.button`
   text-align: left;
   padding: 15px;
   color: #454246;
-
+  &:hover{
+    cursor: pointer;
+    color: #5c97bc;
+  }
   &:not(:last-child)  {
     border-bottom: solid 1px #dae1e7;
   }
