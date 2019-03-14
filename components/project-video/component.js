@@ -5,9 +5,11 @@ import styled from 'styled-components'
 
 const StyledResponsiveVideo = styled.div`
   overflow:hidden;
+  // padding-bottom: 56.25%;
   padding-bottom: 56.25%;
   position:relative;
   height:0;
+  margin-top: 30px;
 `
 
 const StyledIframe = styled.iframe`
@@ -19,7 +21,6 @@ const StyledIframe = styled.iframe`
 `
 
 class ProjectVideo extends Component {
-
   render () {
     const { youtubeId } = this.props
     return (
