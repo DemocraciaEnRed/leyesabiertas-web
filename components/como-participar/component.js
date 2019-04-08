@@ -24,7 +24,7 @@ export default () => (
         ¿Cómo funciona?
       </StaticInfoBold>
       <StaticInfoP>
-      Los Diputados suben <strong>propuestas de ley</strong> para que puedan ser enriquecidas: se pueden hacer aportes, comentarios y sugerencias
+        Los Diputados suben <strong>propuestas y proyectos de ley</strong> para que puedan ser enriquecidas: se pueden hacer aportes, comentarios y sugerencias
       </StaticInfoP>
       <StaticInfoBold>
         ¿Qué es una <em>propuesta</em>?

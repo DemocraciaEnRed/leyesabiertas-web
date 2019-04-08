@@ -16,7 +16,7 @@ export default () => (
         ¿Qué es?
       </StaticInfoBold>
       <StaticInfoP>
-        <strong>El Portal de Leyes Abiertas</strong> es una <strong>plataforma de elaboración colaborativa de normas</strong> donde los diputados ponen a disposición de la ciudadanía sus propuestas de ley para incorporar nuevos puntos de vista a sus iniciativas. El objetivo de la plataforma es enriquecer las propuestas de ley y generar un nuevo espacio de comunicación con los ciudadanos, que permita enriquecer el debate parlamentario.
+        <strong>El Portal de Leyes Abiertas</strong> es una <strong>plataforma de elaboración colaborativa de normas</strong> donde los diputados ponen a disposición de la ciudadanía sus propuestas y proyectos de ley para incorporar nuevos puntos de vista a sus iniciativas. El objetivo de la plataforma es enriquecer las propuestas de ley y generar un nuevo espacio de comunicación con los ciudadanos, que permita enriquecer el debate parlamentario.
       </StaticInfoP>
     </StyledDiv>
     <StyledDiv>

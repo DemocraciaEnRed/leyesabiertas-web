@@ -27,7 +27,7 @@ export default () => (
         ¿Los diputados y las diputadas leen los comentarios?
       </StaticInfoBold>
       <StaticInfoP>
-      Si, los diputados y las diputadas administran y moderan sus propuestas. Leen y analizan los comentarios para realizar cambios que consideran necesarios para mejorar la propuesta de ley.
+      Si, los diputados y las diputadas administran y moderan sus propuestas y proyectos de ley. Leen y analizan los comentarios para realizar cambios que consideran necesarios para mejorar la propuesta de ley.
       </StaticInfoP>
     </StyledDiv>
     <StyledDiv>
@@ -59,7 +59,7 @@ export default () => (
         ¿Me puedo contactar con el diputado? ¿Cómo?
       </StaticInfoBold>
       <StaticInfoP>
-      A través de los medios publicados por el sitio web oficial de la H. Cámara de Diputados: <u><a rel='noopener noreferrer' target='_blank' href='https://www.diputados.gov.ar/diputados/listadip.html'>https://www.diputados.gov.ar/diputados/listadip.html</a></u>
+        A través de los medios publicados por el sitio web oficial de la H. Cámara de Diputados: <u><a rel='noopener noreferrer' target='_blank' href='https://www.diputados.gob.ar/diputados/listadip.html'>https://www.diputados.gob.ar/diputados/listadip.html</a></u>
       </StaticInfoP>
     </StyledDiv>
     <StyledDiv>
