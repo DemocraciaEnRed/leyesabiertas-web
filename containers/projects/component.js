@@ -9,7 +9,7 @@ import SubtitleH3 from '../../elements/subtitle-h3/component'
 import Button from '../../elements/button/component'
 import getConfig from 'next/config'
 
-const { publicRuntimeConfig: { API_URL }} = getConfig()
+const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const Grid = styled.div`
   width: 100%;
@@ -25,40 +25,140 @@ const Grid = styled.div`
   }
 `
 
+const OptionChoice = styled.div`
+display: inline-block;
+margin: 0 5px;
+font-size: 1.4rem;
+padding: 5px 8px;
+border-radius: 4px;
+border: 1px solid #2c4c61
+cursor: pointer
+color: #2c4c61;
+&:hover{
+  background-color: #2c4c61;
+  color: #FFF
+}
+&:first-child{
+  margin-left: 0;
+}
+&:last-child{
+  margin-right: 0;
+}
+&.disabled{
+  color: #777;
+  border-color: #777;
+}
+`
+const Options = styled.div`
+  
+`
+const OptionLabel = styled.div`
+font-size: 1.4rem;
+color: #2c4c61;
+display: inline-block;
+padding: 5px 8px;
+&:first-child{
+  margin-left: 0;
+  padding-left: 0;
+}
+`
+
 class Projects extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
-      projects: null,
-      page: 1,
-      noMore: false
+      projects: [],
+      projectsFiltered: [],
+      // page: 1,
+      // noMore: false,
+      query: {
+        created: 'DESC',
+        limit: 100,
+      },
+      filter: {
+        closed: null
+      }
     }
   }
 
-  async componentDidMount () {
+  createQuery = (sort) => {
+    let theQuery = '?' +
+      Object.keys(sort).map(function (key) {
+        return encodeURIComponent(key) + '=' +
+          encodeURIComponent(sort[key])
+      }).join('&');
+    console.log(theQuery)
+    return theQuery
+  }
+
+  async getDocuments () {
     try {
-      const projects = await (await fetch(`${API_URL}/api/v1/documents`)).json()
+      let query = this.createQuery(this.state.query);
+      const projects = await (await fetch(`${API_URL}/api/v1/documents${query}`)).json()
+      const projectsFiltered = projects.results.filter((p) => {
+        if (this.state.filter.closed !== null) {
+          return (this.state.filter.closed === p.closed) && p
+        }
+        return p
+      })
       this.setState({
-        projects: projects.results
+        projects: projects.results,
+        projectsFiltered: projectsFiltered
       })
     } catch (error) {
       console.error(error)
     }
   }
 
-  render () {
+  async componentDidMount() {
+    this.getDocuments()
+  }
+
+  toggleSort = (parameter, value) => {
+    let newQuery = this.state.query
+    newQuery[parameter] = value
+    this.setState({
+      projects: [],
+      query: newQuery
+    }, () => {
+      this.getDocuments()
+    })
+  }
+
+  toggleFilter = (parameter, value) => {
+    let newFilter = this.state.filter
+    newFilter[parameter] = value
+    this.setState({
+      projects: [],
+      filter: newFilter
+    }, () => {
+      this.getDocuments()
+    })
+  }
+
+  render() {
     const {
-      projects,
-      noMore
+      projectsFiltered,
+      query,
+      filter
     } = this.state
     return (
       <Section id='projects'>
         <TitleH2>Propuestas de ley abiertas para la co-creación.</TitleH2>
-        <SubtitleH3>Estas son las propuestas disponibles para leer, comentar y hacer aportes . ¡Ayude a mejorarlas!</SubtitleH3>
-        { projects &&
+        <SubtitleH3>Estas son las propuestas y proyectos de ley disponibles para leer, comentar y hacer aportes . ¡Ayude a mejorarlas!</SubtitleH3>
+        <Options>
+          <OptionLabel>Ordenar</OptionLabel>
+          {query.created === 'ASC' && <OptionChoice onClick={() => this.toggleSort('created', 'DESC')}>Fecha de creación <b>ASC</b></OptionChoice>}
+          {query.created === 'DESC' && <OptionChoice onClick={() => this.toggleSort('created', 'ASC')}>Fecha de creación <b>DESC</b></OptionChoice>}
+          <OptionLabel>Filtrar</OptionLabel>
+          {filter.closed === null && <OptionChoice className='disabled' onClick={() => this.toggleFilter('closed', true)}>Aportes</OptionChoice>}
+          {filter.closed === true && <OptionChoice onClick={() => this.toggleFilter('closed', false)}>Aportes <b>ABIERTOS</b></OptionChoice>}
+          {filter.closed === false && <OptionChoice onClick={() => this.toggleFilter('closed', null)}>Aportes <b>FINALIZADOS</b></OptionChoice>}
+        </Options>
+        {projectsFiltered &&
           <Fragment>
             <Grid>
-              { projects.map((p, i) => (
+              {projectsFiltered.map((p, i) => (
                 <Card project={p} key={i} />
               ))}
             </Grid>
