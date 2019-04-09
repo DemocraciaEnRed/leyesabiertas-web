@@ -29,7 +29,7 @@ const Participate = (props) => {
       <ParticipateContainer>
         <ParticipateItem>
           <ParticipateTextbox number={'1'} action={'Infórmese'} />
-          <ParticipateP text={'Ingrese y lea las propuestas de ley abiertas a la co-creación.'} />
+          <ParticipateP text={'Ingrese y lea las propuestas y proyectos de ley abiertas a la co-creación.'} />
         </ParticipateItem>
         <ParticipateItem>
           <ParticipateTextbox number={'2'} action={'Participe'} />

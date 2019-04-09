@@ -126,6 +126,18 @@ class ProjectComments extends Component {
     })
   }
 
+  canDelete = (comment) => {
+    const { authContext, project } = this.props
+    if (project.author._id === (authContext.user && authContext.user._id)) {
+    // Is the author of the project?
+      return true
+    } else if (comment.user._id === (authContext.user && authContext.user._id)) {
+    // Is the author of the comment?
+      return true
+    }
+    return false
+  }
+
   render () {
     const { authContext, project } = this.props
     const { comments } = this.state
@@ -135,7 +147,7 @@ class ProjectComments extends Component {
         <StyledSubtitle>Espacio abierto para comentarios generales.</StyledSubtitle>
         { comments && comments.map((comment) => (
           <FundationCommentCard
-            canDelete={project.author._id === (authContext.user && authContext.user._id)}
+            canDelete={this.canDelete(comment)}
             comment={comment}
             key={comment._id}
             project={project._id} />

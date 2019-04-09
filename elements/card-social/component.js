@@ -18,10 +18,11 @@ margin:0px 20px 0px 20px;
 box-sizing:border-box;
 `
 const CommentaryItems = styled.div`
-padding-bottom:1.3rem;
+padding-bottom: 1rem;
 text-transform:uppercase;
 display: flex;
 align-items: center;
+margin: 0 auto;
 `
 
 const CommentaryIcon = styled.div`
@@ -33,27 +34,32 @@ const CommentaryIcon = styled.div`
 `
 
 const LimitDate = styled.div`
-font-size:1.2rem;
+font-size:1.1rem;
+background-color: #ef885d;
+color: #FFF;
+padding: 3px 6px;
+border-radius: 4px;
+margin: 0 auto;
 `
 const Span = styled.span`
   font-family: var(--bold);
   margin: 0 0.5rem 0 1rem;
 `
-const Social = ({ commentaries, limitDate }) => (
+const Social = ({ commentaries, closed }) => (
   <Wrapper>
     <CommentaryItems>
       <CommentaryIcon />
       <Span> {commentaries}</Span> {commentaries === 1 ? ' Comentario' : ' Comentarios'}
     </CommentaryItems>
-    {limitDate &&
-      <LimitDate><span>Aportes habilitados hasta: </span>{limitDate}</LimitDate>
+    {closed &&
+      <LimitDate>Finalizó el periodo de aportes</LimitDate>
     }
   </Wrapper>
 )
 
 Social.propTypes = {
   commentaries: PropTypes.number,
-  limitDate: PropTypes.string
+  closed: PropTypes.bool
 }
 
 export default Social
