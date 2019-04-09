@@ -152,8 +152,8 @@ class Projects extends Component {
           {query.created === 'DESC' && <OptionChoice onClick={() => this.toggleSort('created', 'ASC')}>Fecha de creación <b>DESC</b></OptionChoice>}
           <OptionLabel>Filtrar</OptionLabel>
           {filter.closed === null && <OptionChoice className='disabled' onClick={() => this.toggleFilter('closed', true)}>Aportes</OptionChoice>}
-          {filter.closed === true && <OptionChoice onClick={() => this.toggleFilter('closed', false)}>Aportes <b>ABIERTOS</b></OptionChoice>}
-          {filter.closed === false && <OptionChoice onClick={() => this.toggleFilter('closed', null)}>Aportes <b>FINALIZADOS</b></OptionChoice>}
+          {filter.closed === true && <OptionChoice onClick={() => this.toggleFilter('closed', false)}>Aportes <b>FINALIZADOS</b></OptionChoice>}
+          {filter.closed === false && <OptionChoice onClick={() => this.toggleFilter('closed', null)}>Aportes <b>ABIERTOS</b></OptionChoice>}
         </Options>
         {projectsFiltered &&
           <Fragment>
