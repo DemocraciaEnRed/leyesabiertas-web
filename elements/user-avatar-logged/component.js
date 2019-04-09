@@ -12,7 +12,7 @@ display:flex;
 align-items:flex-start;
 text-align:left;
 width:296px;
-margin-bottom:2rem;
+margin-bottom:1rem;
 `
 const Avatar = styled.div`
   width: 40px;
@@ -34,7 +34,7 @@ const Subtitle = styled.div`
   font-size: 12px;
   text-transform:uppercase;
   display:flex;
-  margin-top:1rem;
+  margin-top:0.2rem;
   align-items:center;
 
 `
@@ -47,7 +47,7 @@ justify-content:space-between;
 `
 
 const IconWrapper = styled.div`
-  padding-right:.5rem;`
+  padding-right:.3rem;`
 
 const UserAvatar = ({ userId, name, subtitle }) => (
   <Wrapper>

@@ -203,7 +203,7 @@ class commentCard extends Component {
           <UserAvatar
             userId={this.props.comment.user._id}
             name={this.props.comment.user.fullname}
-            party={this.props.comment.user.party ? this.props.comment.user.party : (this.props.comment.user.occupation ? this.props.comment.user.occupation : '')} />
+            party={this.props.comment.user.party ? this.props.comment.user.party : (this.props.comment.user.fields ? this.props.comment.user.fields.occupation : '')} />
           <p>{this.props.comment.content}</p>
           <ArticlesContext.Consumer>
             {
@@ -276,7 +276,7 @@ class commentCard extends Component {
         <UserAvatar
           userId={this.props.comment.user._id}
           name={this.props.comment.user.fullname}
-          party={this.props.comment.user.party ? this.props.comment.user.party : (this.props.comment.user.occupation ? this.props.comment.user.occupation : '')} />
+          party={this.props.comment.user.party ? this.props.comment.user.party : (this.props.comment.user.fields ? this.props.comment.user.fields.occupation : '')} />
           <StyledNoticeDeleted>
           <Icon size="16" icon={trash2} style={{ marginRight: '4px' }} /> El comentario ha sido eliminado
           </StyledNoticeDeleted>

@@ -11,12 +11,19 @@ import ProjectCreationDate from '../../elements/project-creation-date/component'
 
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
+const ReplySection = styled.div`
+  margin-left: 0.5rem;
+  border-left: 1px solid #5c97bc;
+`
+
 const ReplyText = styled.p`
   font-size: 1.2em !important;
   line-height: 1.5em !important;
-  padding: 0.5em 1em;
-  margin-left: 1em;
-  margin-top: 2.3em;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  border-left: 1px solid #5c97bc;
+  margin-left: 0.5rem;
+  white-space: pre-wrap;
 `
 
 const AutorName = styled.span`
@@ -27,17 +34,16 @@ const AutorName = styled.span`
 
 const InputBox = styled.textarea`
   width: 95%;
-  font-size: 1.4em !important;
-  font-size: 14px;
-  line-height: 1.57rem;
+  font-size: 1.2rem;
   color: #181818;
-  line-height: 1.5em !important;
-  resize: none;
-  padding: 0.5em 1em;
+  line-height: 1.6rem !important;
+  padding: 0.7rem 0;
   margin-left: 1em;
-  margin-top: 0.5em;
-  resize: none;
-  border: none;
+  border: 1px solid #dae1e7;
+  border-left: none;
+  border-right: none; 
+  min-height: 60px;
+  resize: vertical;
 `
 
 const ActionButton = styled.div`
@@ -46,7 +52,7 @@ const ActionButton = styled.div`
   // padding: 0.7rem;
   width: 95%;
   font-size: 1.4rem;
-  margin: 1em 1em 7.7em;
+  margin: 1rem 1rem;
   cursor: pointer;
   text-align: right;
   // background-color: #5c97bc;
@@ -55,8 +61,9 @@ const ActionButton = styled.div`
 `
 const ReplyButton = styled.div`
   color: #5c97bc;
-  margin-top: 1.5em;
-  margin-bottom: 3.3em;
+  margin: 1rem 0;
+  text-align:right;
+  // margin-bottom: 3.3em;
   font-size: 1.4rem;
   cursor: pointer;
 `
@@ -127,13 +134,13 @@ class CommentReply extends Component {
     })
   }
 
-  dismissAlert = () => (e) => {
+  dismissAlert = () => {
     this.setState({
       showAlert: false
     })
   }
 
-  showReplyInput = () => (e) => {
+  showReplyInput = () => {
     this.setState({
       showInput: true
     })
@@ -151,10 +158,11 @@ class CommentReply extends Component {
         { reply && !showInput &&
         <ReplyText>
           <UserAvatar
+            style={{marginBottom: '0px !important', backgroundColor: 'red'}}
             userId={project.author._id}
             name={project.author.fullname}
             subtitle={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
-          <br />{reply}</ReplyText>
+          {reply}</ReplyText>
         }
         { !showInput && isAuthor &&
         <ReplyButton onClick={this.showReplyInput}>
@@ -166,11 +174,14 @@ class CommentReply extends Component {
           <Fragment>
             <ReplyText>
               <UserAvatar
+                style={{ marginBottom: '0px !important', backgroundColor: 'red' }}
                 userId={project.author._id}
                 name={project.author.fullname}
                 subtitle={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
             </ReplyText>
+            <ReplySection>
             <InputBox value={this.state.inputText} onChange={this.handleChange} placeholder={'Ingrese su respuesta'} />
+            </ReplySection>
             {
               isLoading
                 ? <Loading><Icon icon={clockO} style={{ display: 'inline-block' }} />&nbsp;&nbsp;Enviando...</Loading>
