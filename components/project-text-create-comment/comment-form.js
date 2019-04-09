@@ -133,7 +133,7 @@ const Close = styled.button`
 `
 
 class CommentForm extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       value: '',
@@ -145,7 +145,7 @@ class CommentForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange (event) {
+  handleChange(event) {
     this.setState({ value: event.target.value })
   }
 
@@ -215,7 +215,7 @@ class CommentForm extends Component {
       .finally(() => { this.turnOffStatus() })
   }
 
-  render () {
+  render() {
     return (
       <Fragment>
         {!this.state.status
@@ -237,13 +237,13 @@ class CommentForm extends Component {
 
           : <CommentStatus style={{ top: this.props.top }} color={this.state.error}>
             <IconDiv color={this.state.error}>
-              {!this.state.error ? <Icon icon={checkCircleO} /> : <Icon icon={timesCircleO} /> }
+              {!this.state.error ? <Icon icon={checkCircleO} /> : <Icon icon={timesCircleO} />}
             </IconDiv>
 
             <TextDiv>
               <Close onClick={this.props.handleClose}>&times;</Close>
               <TextTitle>{!this.state.error ? 'Gracias por tu aporte' : 'Ha ocurrido un error'}</TextTitle>
-              <Text>{!this.state.error ? 'Su comentario ha sido enviado al diputado y sus asesores.' : 'Lo sentimos. Por favor intente nuevamente más tarde.' }</Text>
+              <Text>{!this.state.error ? 'Su comentario ha sido enviado al diputado y sus asesores.' : 'Lo sentimos. Por favor intente nuevamente más tarde.'}</Text>
             </TextDiv>
           </CommentStatus>
         }
