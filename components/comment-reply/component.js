@@ -127,13 +127,13 @@ class CommentReply extends Component {
     })
   }
 
-  dismissAlert = () => {
+  dismissAlert = () => (e) => {
     this.setState({
       showAlert: false
     })
   }
 
-  showReplyInput = () => {
+  showReplyInput = () => (e) => {
     this.setState({
       showInput: true
     })

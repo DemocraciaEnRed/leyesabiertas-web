@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Icon from 'react-icons-kit'
 import { thumbsUp, trash2 } from 'react-icons-kit/feather'
 import { checkCircle } from 'react-icons-kit/fa/checkCircle'
+import { times } from 'react-icons-kit/fa/times'
 import { check } from 'react-icons-kit/fa/check'
 import getConfig from 'next/config'
 import WithUserContext from '../../components/with-user-context/component'
@@ -83,6 +84,14 @@ const StyledDeleteWrapper = styled.span`
   display: inline-block;
   align-items: center;
 `
+const StyledErrorWrapper = styled.span`
+  padding-top: 15px;
+  margin-left: 10px;
+  color: #bf3019;
+  font-size: 14px;
+  display: inline-block;
+  align-items: center;
+`
 
 const ChargeWrapper = styled.div`
   display: flex;
@@ -107,10 +116,11 @@ class FundationCommentCard extends Component {
   state = {
     liked: false,
     likes: null,
-    deleted: false
+    deleted: false,
+    errorDelete: false
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.setState({
       liked: this.props.comment.isLiked,
       likes: this.props.comment.likes
@@ -150,46 +160,59 @@ class FundationCommentCard extends Component {
       method: 'DELETE'
     })
       .then((res) => {
-        this.setState((prevState) => {
-          return {
-            deleted: true
-          }
-        })
+        if (res.ok) {
+          this.setState((prevState) => {
+            return {
+              deleted: true
+            }
+          })
+        } else {
+          this.setState((prevState) => {
+            return {
+              errorDelete: true
+            }
+          })
+        }
       })
       .catch((err) => {
         console.error(err)
       })
   }
 
-  render () {
+  render() {
     const { comment, canDelete } = this.props
-    const { deleted } = this.state
+    const { deleted, errorDelete } = this.state
     const isAuthor = comment.user.roles.includes('accountable')
     return (
       <div>
-        { !deleted
+        {!deleted
           ? <StyledCommentItem>
             <UserAvatar id={comment.user._id} />
             <TextWrapper>
               <Username>{comment.user.fullname}</Username>
               <ChargeWrapper>
                 {isAuthor &&
-                <IconWrapper>
-                  <Icon icon={checkCircle} />
-                </IconWrapper>
+                  <IconWrapper>
+                    <Icon icon={checkCircle} />
+                  </IconWrapper>
                 }
-                <Charge>{(comment.user.fields && comment.user.fields.occupation) ? comment.user.fields.occupation : '' }</Charge>
+                <Charge>{(comment.user.fields && comment.user.fields.occupation) ? comment.user.fields.occupation : ''}</Charge>
               </ChargeWrapper>
               <Comment>{comment.content}</Comment>
               <Date>{`Hace ${comment.when}`}</Date>
               <div>
                 <StyledLikeWrapper liked={this.state.liked} onClick={this.handleLike}>
-                  <Icon icon={thumbsUp} style={{ marginRight: '5px' }} />{ this.state.likes }
+                  <Icon icon={thumbsUp} style={{ marginRight: '5px' }} />{this.state.likes}
                 </StyledLikeWrapper>
-                { canDelete &&
-                <StyledDeleteWrapper onClick={this.handleDelete(comment._id)}>
-                  <Icon icon={trash2} style={{ marginRight: '5px' }} />Eliminar
+                {canDelete && !errorDelete &&
+                  <StyledDeleteWrapper onClick={this.handleDelete(comment._id)}>
+                    <Icon icon={trash2} style={{ marginRight: '5px' }} />Eliminar
                 </StyledDeleteWrapper>
+                }
+                {canDelete && errorDelete &&
+                  <StyledErrorWrapper>
+                    <Icon icon={times} style={{ marginRight: '5px' }} />Error al eliminar comentario
+                  </StyledErrorWrapper>
                 }
               </div>
             </TextWrapper>
