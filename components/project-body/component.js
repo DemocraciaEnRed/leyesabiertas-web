@@ -8,7 +8,7 @@ import ProjectFields from '../../components/project-fields/component'
 import { ArticlesContext } from '../../containers/user-project-container/component'
 
 const ProjectBodyContainer = styled.div`
-  min-height: 383px;
+  // min-height: 383px;
   width:90%;
   display: flex;
   flex-direction:column;
@@ -59,6 +59,7 @@ const ProjectBody = ({ project }) => (
                 closingDate={project.currentVersion.content.closingDate}
                 imageCover={project.currentVersion.content.imageCover}
                 youtubeId={project.currentVersion.content.youtubeId}
+                closure={project.currentVersion.content.closure}
                 setNewFields={setNewFields} />
             }
             {
@@ -75,7 +76,8 @@ const ProjectBody = ({ project }) => (
               isAuthor={isAuthor}
               editMode={editMode}
               id={project._id}
-              value={project.currentVersion.content.fundation} />
+              value={project.currentVersion.content.fundation}
+              closure={project.currentVersion.content.closure} />
           </div>
         )
       }

@@ -10,14 +10,30 @@ const { publicRuntimeConfig: { API_URL } } = getConfig()
 const StyledEditorWrapper = styled.div`
   width: 100%;
   margin-top: 3em;
-  .editor {
-    max-width: 700px;
+  // .editor {
+  //   max-width: 700px;
     span {
       font-size: 1.8rem;
       line-height: 1.89;
       color: #203340;
     }
   }
+`
+const FinalWords = styled.div`
+  padding-top: 30px
+  border-top: 1px solid #dae1e7;
+`
+const FinalWordsTitle = styled.h1`
+  color: #5c97bc;
+  font-size: 3rem;
+  margin-bottom: 10px;
+`
+const FinalWordsParagraphs = styled.div`
+  white-space: pre-wrap;
+  margin: 15px 0;
+  font-size: 1.5rem;
+  line-height: 2.2rem;
+  font-style: italic;
 `
 
 const H2 = styled.h2`
@@ -58,10 +74,13 @@ export default class extends Component {
   }
 
   render () {
+    const { closure } = this.props
     if (!this.state.value) return null
     let plugins = []
     plugins.push(ProjectTextEdit({ id: this.props.id, field: 'fundation', isAuthor: this.props.isAuthor }))
     return (
+      <div>
+        
       <StyledEditorWrapper>
         <Editor
           plugins={plugins}
@@ -70,6 +89,13 @@ export default class extends Component {
           value={this.state.value}
           spellCheck={false} />
       </StyledEditorWrapper>
+        {closure && 
+        <FinalWords>
+          <FinalWordsTitle>Palabras de cierre</FinalWordsTitle>
+          <FinalWordsParagraphs>{closure}</FinalWordsParagraphs>
+        </FinalWords>
+        }
+      </div>
     )
   }
 }

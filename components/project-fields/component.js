@@ -19,6 +19,22 @@ const InputField = styled.input`
     background-color: #f7f7f7
   }
 `
+const TextareaField = styled.textarea`
+  width: 100%;
+  min-height: 250px;
+  border: solid 1px #dae1e7;
+  background-color: #ffffff;
+  font-size: 1.4rem;
+  line-height: 2.1rem;
+  color: #203340;
+  margin-top: 10px;
+  padding: 14px;
+  &:read-only,
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #f7f7f7
+  }
+`
 
 const SpanOk = styled.span`
   color: #808181;
@@ -43,7 +59,8 @@ class ProjectFields extends Component {
     closingDate: null,
     imageCover: null,
     youtubeId: null,
-    youtubeURL: null
+    youtubeURL: null,
+    closure: null,
   }
 
   componentDidMount () {
@@ -51,14 +68,16 @@ class ProjectFields extends Component {
       title,
       closingDate,
       imageCover,
-      youtubeId
+      youtubeId,
+      closure
     } = this.props
     this.setState({
       title,
       imageCover,
       youtubeId,
       youtubeURL: youtubeId ? 'https://www.youtube.com/watch?v=' + youtubeId : '',
-      closingDate: new Date(closingDate).toISOString().split('T')[0]
+      closingDate: new Date(closingDate).toISOString().split('T')[0],
+      closure: closure || null
     }, () => this.props.setNewFields(this.getBodyPayload()))
   }
 
@@ -67,7 +86,8 @@ class ProjectFields extends Component {
       title: this.state.title,
       imageCover: this.state.imageCover,
       closingDate: new Date(this.state.closingDate).toISOString(),
-      youtubeId: this.state.youtubeId
+      youtubeId: this.state.youtubeId,
+      closure: this.state.closure
     }
   }
 
@@ -147,6 +167,15 @@ class ProjectFields extends Component {
             onChange={this.handleInputChangeYoutube} />
           {!this.state.youtubeId && <SpanOk>Link invalido o vacio (El proyecto se publicará sin video)</SpanOk>
           }
+        </ProfileLabel>
+        <ProfileLabel>
+          Palabras de cierre
+          <TextareaField
+            value={this.state.closure}
+            name='closure'
+            onChange={this.handleInputChange}
+            placeholder='Escriba aquí el texto'  />
+          <SpanOk>NOTA: Las palabras de cierre solo serán visibles luego de la fecha de cierre</SpanOk>
         </ProfileLabel>
       </EditField>
     )
