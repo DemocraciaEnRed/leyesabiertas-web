@@ -1,4 +1,14 @@
+
 # Changelog
+
+#### 1.2.1
+
+- Cambiado colores por defecto
+- Aportes en una propuesta cerrada solo se veran si los hay (>0)
+- Las palabras finales se ven si esta efectivamente cerrada la propuesta
+- Cambio de texto
+- Cambio de los valores de un proyecto por defecto
+- Nuevo background 
 
 #### 1.0.9
 - Cambiado fundamentacion a "Resumen de la propuesta"
