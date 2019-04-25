@@ -23,32 +23,35 @@ export default ({ contributors, contributions, contextualComments }) => (
     <ClosedProposalMessage>Agradecemos a cada uno de los ciudadanos que compartieron sus aportes y comentarios a esta propuesta de ley. <br /> A continuación podrá ver los detalles y el resumen de la co-creación de esta propuesta de ley.</ClosedProposalMessage>
     <ClosedProposalData>
       <DashboardBarItem>
-        <BarTitle>Aportes</BarTitle>
+        <BarTitle>Comentarios</BarTitle>
         <DashboardBarTextContainer>
-          <ActivityIcon img={'/static/assets/cha-rect-star.svg'} />
-          <BarActivitySubtitle number={contributions}>
-            comentarios marcados como aportes
+          <ActivityIcon img={'/static/assets/group-3.svg'} small={true} />
+          <BarActivitySubtitle number={contextualComments}>
+            El total de comentarios
           </BarActivitySubtitle>
         </DashboardBarTextContainer>
       </DashboardBarItem>
       <DashboardBarItem>
         <BarTitle>Participantes</BarTitle>
         <DashboardBarTextContainer>
-          <ActivityIcon img={'/static/assets/citizen-icon.svg'} />
+          <ActivityIcon img={'/static/assets/citizen-icon.svg'} small={true} />
           <BarActivitySubtitle number={contributors}>
-            Total de participantes en la propuesta
+            El total de participantes
           </BarActivitySubtitle>
         </DashboardBarTextContainer>
       </DashboardBarItem>
-      <DashboardBarItem>
-        <BarTitle>Comentarios</BarTitle>
-        <DashboardBarTextContainer>
-          <ActivityIcon img={'/static/assets/group-3.svg'} />
-          <BarActivitySubtitle number={contextualComments}>
-            Total de comentarios en contexto
-          </BarActivitySubtitle>
-        </DashboardBarTextContainer>
-      </DashboardBarItem>
+      { 
+        (contributions) > 0 &&
+        <DashboardBarItem>
+          <BarTitle>Aportes</BarTitle>
+          <DashboardBarTextContainer>
+            <ActivityIcon img={'/static/assets/cha-rect-star.svg'} small={true} />
+            <BarActivitySubtitle number={contributions}>
+              comentarios marcados como aportes
+            </BarActivitySubtitle>
+          </DashboardBarTextContainer>
+        </DashboardBarItem>
+      }
     </ClosedProposalData>
   </ClosedProposalWrapper>
 )

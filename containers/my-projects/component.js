@@ -39,8 +39,8 @@ const newDocument = {
   'customForm': 'project-form',
   'content': {
     'title': 'Mi nuevo proyecto',
-    'imageCover': 'https://placeimg.com/1000/350/nature',
-    'youtubeId': 'P6lefqnqgSg',
+    'imageCover': null,
+    'youtubeId': 'r9hZuc72C48',
     'fundation': {
       'object': 'value',
       'document': {
