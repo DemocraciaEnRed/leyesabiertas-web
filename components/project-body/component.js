@@ -77,7 +77,8 @@ const ProjectBody = ({ project }) => (
               editMode={editMode}
               id={project._id}
               value={project.currentVersion.content.fundation}
-              closure={project.currentVersion.content.closure} />
+              closure={project.currentVersion.content.closure}
+              closed={project.closed} />
           </div>
         )
       }

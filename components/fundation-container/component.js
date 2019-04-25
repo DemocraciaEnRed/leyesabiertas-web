@@ -53,17 +53,17 @@ const P = styled.p`
   color: #203340;`
 
 export default class extends Component {
- state = {
-   value: null
- }
+  state = {
+    value: null
+  }
 
- componentDidMount () {
-   if (this.props.value) {
-     this.setState({
-       value: Value.fromJSON(this.props.value)
-     })
-   }
- }
+  componentDidMount() {
+    if (this.props.value) {
+      this.setState({
+        value: Value.fromJSON(this.props.value)
+      })
+    }
+  }
 
   onChange = async (change) => {
     if (this.props.isAuthor && this.props.editMode) {
@@ -73,27 +73,27 @@ export default class extends Component {
     }
   }
 
-  render () {
-    const { closure } = this.props
+  render() {
+    const { closure, closed } = this.props
     if (!this.state.value) return null
     let plugins = []
     plugins.push(ProjectTextEdit({ id: this.props.id, field: 'fundation', isAuthor: this.props.isAuthor }))
     return (
       <div>
-        
-      <StyledEditorWrapper>
-        <Editor
-          plugins={plugins}
-          onChange={this.onChange}
-          className='editor'
-          value={this.state.value}
-          spellCheck={false} />
-      </StyledEditorWrapper>
-        {closure && 
-        <FinalWords>
-          <FinalWordsTitle>Palabras de cierre</FinalWordsTitle>
-          <FinalWordsParagraphs>{closure}</FinalWordsParagraphs>
-        </FinalWords>
+
+        <StyledEditorWrapper>
+          <Editor
+            plugins={plugins}
+            onChange={this.onChange}
+            className='editor'
+            value={this.state.value}
+            spellCheck={false} />
+        </StyledEditorWrapper>
+        {closure && closed &&
+          <FinalWords>
+            <FinalWordsTitle>Palabras de cierre</FinalWordsTitle>
+            <FinalWordsParagraphs>{closure}</FinalWordsParagraphs>
+          </FinalWords>
         }
       </div>
     )
