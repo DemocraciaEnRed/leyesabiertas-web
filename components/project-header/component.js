@@ -20,7 +20,7 @@ import SharerSocial from '../../elements/sharer-social/component'
 const ProjectHeaderContainer = styled.div`
   min-height: 383px;
   width:100%;
-  background-color: #a4cee8;
+  background-color: #1b95ba;
   background-image: url('${(props) => props.img}');
   background-size: cover;
   background-position: center;

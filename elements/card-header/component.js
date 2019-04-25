@@ -6,7 +6,7 @@ import { eyeSlash } from 'react-icons-kit/fa/eyeSlash'
 const Wrapper = styled.div`
 width: 368px;
 height: 126px;
-background-color: #a4cee8;
+background-color: #1b95ba;
 background-image: url('${(props) => props.img}');
 overflow:hidden;
 background-size: cover;
