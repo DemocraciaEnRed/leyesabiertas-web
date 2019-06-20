@@ -8,13 +8,17 @@ const StyledHero = styled.div`
   height: 350px;
   background-image: url('/static/assets/background-hero.jpg');
   background-repeat: no-repeat;
-  background-position: right 0px bottom 42%;
-  background-size: 130%;
+    background-position: right 0px bottom 42%;
+  background-size: 120%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   padding: 0 7rem;
+  @media (max-width: 700px) {
+    background-position: 46% center;
+    background-size: cover;
+  }
 `
 
 const Hero = () => (
