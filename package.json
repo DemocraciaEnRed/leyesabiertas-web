@@ -1,6 +1,6 @@
 {
   "name": "congreso",
-  "version": "1.0.5",
+  "version": "1.3.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -41,10 +41,5 @@
   "devDependencies": {
     "eslint": "^5.4.0",
     "eslint-config-democracyos": "^2.0.2"
-  },
-  "now": {
-    "name": "colegis",
-    "alias": "colegis-test",
-    "dotenv": true
   }
 }
