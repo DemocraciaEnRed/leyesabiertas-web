@@ -1,6 +1,20 @@
 
 # Changelog
 
+### 1.3.0
+
+- DERLA-63 Actualizado manual de usuario 
+- DERLA-57 Ahora al agregar un comentario el focus queda en el cuadro d…
+- FIX en hero por el cover
+- DERLA-60 Agregado el video tutorial al portal en la home
+- DERLA-59 Desde el perfil de diputados, cuando está logueado, no se ven los iconos para compartir en redes, solo se ve los botones de editar y publicar
+- DERLA-27 Agregado react-datepicker que mejora la experiencia de elegir el dia de cierre
+- Update del package.json por razones de seguridad
+
+Compatible con:
+- `leyesabiertas-core:1.3.0`
+- `leyesabiertas-web:1.3.0`
+
 #### 1.2.1
 
 - Cambiado colores por defecto
