@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const StyledDiv = styled.div`
   display: flex;
   align-items: flex-end;
-  padding: 0 1.5rem 0 0rem !important;
+  // padding: 0 1.5rem 0 0rem !important;
 `
 
 const StyledClosingDate = styled.p`

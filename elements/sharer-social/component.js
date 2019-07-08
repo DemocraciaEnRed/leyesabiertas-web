@@ -5,8 +5,8 @@ import SocialIcon from '../../elements/social-icon/component'
 const SocialWrapper = styled.div`
   display:flex;
   flex-direction:column;
-  width:6.7rem;
-  margin-left:auto;
+  // width:6.7rem;
+  // margin-left:auto;
   @media(max-width:700px){
     margin-left:0px;
   }
@@ -20,6 +20,7 @@ const SocialSpan = styled.span`
   font-family:var(--bold);
   color:#4a5d68;
   margin-bottom:1rem;
+  text-align: center;
   `
 export default ({ id }) => {
   const socialLinksUrl = (window.location.origin + '/propuesta?id=' + id)

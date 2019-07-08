@@ -133,7 +133,7 @@ const Close = styled.button`
 `
 
 class CommentForm extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       value: '',
@@ -145,7 +145,7 @@ class CommentForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange(event) {
+  handleChange (event) {
     this.setState({ value: event.target.value })
   }
 
@@ -203,7 +203,6 @@ class CommentForm extends Component {
         decoration.mark.data.id = res._id
         const decorations = this.props.editor.value.decorations.push(decoration)
         this.props.editor.setDecorations(decorations)
-
         this.setState({
           value: '',
           status: true
@@ -215,7 +214,7 @@ class CommentForm extends Component {
       .finally(() => { this.turnOffStatus() })
   }
 
-  render() {
+  render () {
     return (
       <Fragment>
         {!this.state.status

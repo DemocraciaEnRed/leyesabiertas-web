@@ -9,7 +9,7 @@ const StyledIcon = styled.div`
   background-image: url('${(props) => props.img}');
   background-size: cover;
   background-position: center;
-  margin-right: 1.5rem;
+  margin: 0 5px;
 `
 
 const SocialIcon = ({ img, link }) => (

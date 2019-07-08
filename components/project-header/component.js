@@ -36,7 +36,7 @@ const TopBarWrapper = styled.div`
     flex-wrap:wrap;
   }
   min-height:60px;
-  justify-content:space-between;
+  justify-content:flex-start;
   width: 100%;
   margin-right: 3%;
   & > div {
@@ -80,7 +80,7 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
         {section === '/articulado' && !project.closed && !isAuthor && project.commentsCount &&
           <ArticlesCommentsCounter commentsCount={project.commentsCount} />
         }
-        {!isAuthor && <SharerSocial id={project._id} /> }
+        <SharerSocial id={project._id} />
         <ProjectEditMode />
         {isAuthor &&
         <TogglePublish project={project} isPublished={isPublished} setPublish={setPublish} togglePublish={togglePublish} />
