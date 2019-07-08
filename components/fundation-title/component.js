@@ -15,10 +15,10 @@ const container = styled.div`
 `
 
 export default ({ title, isClosed }) => (
-  <container>
+  <div>
     <StyledSubtitle closed={isClosed}>
       {isClosed ? 'Finalizó el periodo para hacer aportes' : 'Resumen de la propuesta'}
     </StyledSubtitle>
     <ProjectTitle>{ title }</ProjectTitle>
-  </container>
+  </div>
 )
