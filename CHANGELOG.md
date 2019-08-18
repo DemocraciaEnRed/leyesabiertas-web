@@ -7,7 +7,13 @@
 - DERLA-66 Fix en el handleResolve de un comentario que no estaba parseando bien el id del comentario
 - DERLA-39 Agregar focus al abrirse el componente para hacer un comentario
 - DERLA-67 Fix en el calculo de la posicion el "Agregar comentario" se estaba posicionando incorrectamente
-- DERLA-33 Poder navegar por las versiones historicas del documento
+- DERLA-33 Nuevo feature: Poder navegar por las versiones historicas del documento
+
+Compatible con:
+- `leyesabiertas-core:1.4.0`
+- `leyesabiertas-web:1.3.0`
+
+
 ### 1.3.0
 
 - DERLA-63 Actualizado manual de usuario 
