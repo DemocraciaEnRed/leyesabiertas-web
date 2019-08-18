@@ -88,7 +88,7 @@ UserAvatar.propTypes = {
   userId: PropTypes.string,
   party: PropTypes.string,
   badge: PropTypes.bool,
-  updatedAt: PropTypes.updatedAt
+  updatedAt: PropTypes.string
 }
 
 export default UserAvatar

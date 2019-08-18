@@ -52,7 +52,6 @@ justify-content:space-between;
 const IconWrapper = styled.div`
   padding-right:.5rem;`
 
- 
 const UserAvatar = ({ userId, name, party, badge }) => (
   <Wrapper>
     <Link href={{ pathname: '/userprofile', query: { id: userId } }}>
@@ -63,7 +62,7 @@ const UserAvatar = ({ userId, name, party, badge }) => (
         <Name>{name}</Name>
       </Link>
       <Party>
-        { badge && <IconWrapper><Icon icon={checkCircle} /></IconWrapper>}
+        {badge && <IconWrapper><Icon icon={checkCircle} /></IconWrapper>}
         <p>{party}</p>
       </Party>
     </TextWrapper>

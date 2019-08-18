@@ -18,6 +18,11 @@ const ProjectBreadcrumb = ({ title, id, section }) => (
           <BreadcrumbItem isActive={section === '/articulado'}>Articulado de la propuesta</BreadcrumbItem>
         </Link>
       }
+      { section === '/versiones' &&
+        <Link href={`/versiones?id=${id}`}>
+          <BreadcrumbItem isActive={section === '/articulado'}>Versiones</BreadcrumbItem>
+        </Link>
+      }
     </BreadcrumbWrapper>
   </BreadcrumbNav>
 )

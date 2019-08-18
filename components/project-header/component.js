@@ -70,6 +70,7 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
           name={project.author.fullname}
           party={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
         <ProjectVersionData
+          project={project._id}
           version={project.currentVersion.version}
           createdAt={project.currentVersion.createdAt} />
         {!project.closed

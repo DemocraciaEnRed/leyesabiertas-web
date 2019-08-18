@@ -12,13 +12,13 @@ const CounterWrapper = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  position: absolute;
+  position: fixed;
   z-index: 100;
 
   &::after {
     content: '';
     display: block;
-    position: absolute;
+    position: fixed;
     border-top: 5px solid;
     border-top-color: #ffffff;
     border-right: 5px solid transparent;

@@ -5,6 +5,7 @@ import ProjectHeader from '../../components/project-header/component'
 import ProjectBody from '../../components/project-body/component'
 import ProjectComments from '../../components/project-comments/component'
 import UserEditor from '../../components/user-editor/component'
+import Versiones from '../versiones/component'
 
 const ArticlesContext = createContext({
   withComments: true,
@@ -47,7 +48,7 @@ export default class extends Component {
   togglePublish = () => this.setState({ isPublished: !this.state.isPublished })
   setPublish = (isPublished) => this.setState({ isPublished: isPublished })
 
-  render () {
+  render() {
     const { project, section, fetchDocument } = this.props
     const { withComments, isPublished } = this.state
     if (!project) return null
@@ -78,25 +79,31 @@ export default class extends Component {
             contextualCommentsCount={project.contextualCommentsCount}
             contributionsCount={project.contributionsCount} />
           {this.props.section === '/propuesta' &&
-          <Fragment>
-            <ProjectBody project={project.document} />
-            <ProjectComments project={project.document} />
-          </Fragment>
+            <Fragment>
+              <ProjectBody project={project.document} />
+              <ProjectComments project={project.document} />
+            </Fragment>
           }
           {this.props.section === '/articulado' &&
-          <Fragment>
-            <ModeBar>
-              <ModeButton withComments={false}>Vista lectura</ModeButton>
-              <ModeButton withComments >Vista con comentarios</ModeButton>
-            </ModeBar>
-            <UserEditor
-              value={project.document.currentVersion.content.articles}
-              isAuthor={isAuthor}
-              editMode={this.state.editMode}
-              withComments={withComments}
-              id={project.document._id}
-              isClosed={project.document.closed} />
-          </Fragment>
+            <Fragment>
+              <ModeBar>
+                <ModeButton withComments={false}>Vista lectura</ModeButton>
+                <ModeButton withComments >Vista con comentarios</ModeButton>
+              </ModeBar>
+              <UserEditor
+                value={project.document.currentVersion.content.articles}
+                isAuthor={isAuthor}
+                editMode={this.state.editMode}
+                withComments={withComments}
+                id={project.document._id}
+                isClosed={project.document.closed} />
+            </Fragment>
+          }
+          {this.props.section === '/versiones' &&
+            <Fragment>
+              <Versiones
+                project={project.document} />
+            </Fragment>
           }
         </ArticlesContext.Provider>
       </div>
