@@ -34,6 +34,9 @@ export default class AddCommentWrapper extends Component {
     this.props.editor.setDecorations(decorations)
     decoration.mark.data = {}
     this.decoration = decoration
+    // this.setState({
+    //   showAddComment:false
+    // })
   }
 
   onSelect = () => {
@@ -41,18 +44,18 @@ export default class AddCommentWrapper extends Component {
 
     if (rect && rect.width > 0 && !this.state.showToolbar) {
       const containerBound = this.editor.current.getBoundingClientRect()
-      const {
-        left: containerBoundLeft,
-        top: containerBoundTop
-      } = containerBound
+      // const {
+      //   left: containerBound.left ,
+      //   top: containerBound.top
+      // } = containerBound
       const left =
-        rect.left +
-        rect.width / 2 -
-        containerBoundLeft -
-        150 / 2
+        (rect.left +
+        (rect.width / 2)) -
+        containerBound.left
+      console.log(rect)
       const top =
         rect.top -
-        containerBoundTop + 70
+        containerBound.top + 70
       this.setState({
         showAddComment: true,
         left: left,

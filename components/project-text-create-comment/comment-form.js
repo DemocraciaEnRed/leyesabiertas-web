@@ -57,7 +57,7 @@ const CommentFormContent = styled.div`
   padding-top:2rem;
 `
 const CommentFormHeader = styled.div`
-  height: 40px;
+  padding: 5px
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   background-color: #5c97bc;
@@ -229,7 +229,8 @@ class CommentForm extends Component {
               <CommentText
                 placeholder='Agregue su comentario aquí'
                 value={this.state.value}
-                onChange={this.handleChange} />
+                onChange={this.handleChange}
+                autoFocus />
             </CommentFormContent>
             <CommentFormFooter onClick={this.handleSubmit}>Enviar comentario</CommentFormFooter>
           </CommentFormContainer>
