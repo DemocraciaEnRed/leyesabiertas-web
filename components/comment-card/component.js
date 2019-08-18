@@ -167,7 +167,7 @@ class commentCard extends Component {
 
   handleResolved = (projectId) => () => {
     this.setState({ resolved: true })
-    fetch(`${API_URL}/api/v1/documents/${projectId}/comments/{this.props.comment._id}/resolve`, {
+    fetch(`${API_URL}/api/v1/documents/${projectId}/comments/${this.props.comment._id}/resolve`, {
       headers: {
         Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
