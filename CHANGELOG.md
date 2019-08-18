@@ -1,6 +1,11 @@
 
 # Changelog
 
+### 1.4.0
+
+- DERLA-64 Posible fix de el hover en el contador de comentarios en una mark del articulado
+- DERLA-66 Fix en el handleResolve de un comentario que no estaba parseando bien el id del comentario
+
 ### 1.3.0
 
 - DERLA-63 Actualizado manual de usuario 

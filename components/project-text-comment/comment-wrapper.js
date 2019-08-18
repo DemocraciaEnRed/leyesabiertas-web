@@ -6,6 +6,8 @@ export default class CommentCounterWrapper extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      mouseTop: 0,
+      mouseLeft: 0,
       top: 0,
       left: 0,
       ids: []
@@ -16,11 +18,18 @@ export default class CommentCounterWrapper extends Component {
       if (this.state.ids.length > 0) this.props.onClick(this.state.ids, this.state.top)
     }
 
-    updateMousePosition = (e) => {
+    _onMouseMove (e) {
+      // this.setState({
+      //   top: e.pageY - top,
+      //   left: e.pageX - 100
+      // })
+      //====================
       const top = this.props.isClosed ? 1100 : 830
       this.setState({
         top: e.pageY - top,
-        left: e.pageX - 100
+        left: e.pageX - 100,
+        mouseTop: e.screenY - 180,
+        mouseLeft: e.screenX - 100
       })
     }
 
@@ -41,7 +50,7 @@ export default class CommentCounterWrapper extends Component {
     }
 
     render () {
-      const { ids, top, left } = this.state
+      const { ids, top, left, mouseTop, mouseLeft } = this.state
       const context = {
         removeId: this.removeId,
         addId: this.addId
@@ -54,12 +63,12 @@ export default class CommentCounterWrapper extends Component {
             count > 0 &&
               <CommentCounter
                 count={count}
-                top={top}
-                left={left} />
+                top={mouseTop}
+                left={mouseLeft} />
           }
           <div
             onClick={this.handeOnClick}
-            onMouseMove={this.updateMousePosition}>
+            onMouseMove={this._onMouseMove.bind(this)}>
             <CommentCounterContext.Provider value={context}>
               {this.props.children}
             </CommentCounterContext.Provider>

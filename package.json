@@ -1,6 +1,6 @@
 {
   "name": "congreso",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DemocraciaEnRed/congreso.git"
+    "url": "git+https://github.com/DemocraciaEnRed/leyesabiertas-web.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DemocraciaEnRed/congreso/issues"
+    "url": "https://github.com/DemocraciaEnRed/leyesabiertas-web/issues"
   },
-  "homepage": "https://github.com/DemocraciaEnRed/congreso#readme",
+  "homepage": "https://github.com/DemocraciaEnRed/leyesabiertas-web#readme",
   "dependencies": {
     "dotenv": "^6.2.0",
     "get-selection-range": "^0.1.0",
