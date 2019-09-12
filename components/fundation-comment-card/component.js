@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Icon from 'react-icons-kit'
-import { thumbsUp, trash2 } from 'react-icons-kit/feather'
+import { thumbsUp, trash2, cornerRightDown } from 'react-icons-kit/feather'
 import { checkCircle } from 'react-icons-kit/fa/checkCircle'
 import { times } from 'react-icons-kit/fa/times'
 import { check } from 'react-icons-kit/fa/check'
 import getConfig from 'next/config'
 import WithUserContext from '../../components/with-user-context/component'
-
+import ReplyFundationComment from './replyFundationComment'
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const StyledCommentItem = styled.div`
@@ -84,6 +84,18 @@ const StyledDeleteWrapper = styled.span`
   display: inline-block;
   align-items: center;
 `
+const StyledReplyWrapper = styled.span`
+  padding-top: 15px;
+  margin-left: 10px;
+  color: #5c97bc;
+  &:hover{
+    color: blue;
+    cursor: pointer;
+  }
+  font-size: 14px;
+  display: inline-block;
+  align-items: center;
+`
 const StyledErrorWrapper = styled.span`
   padding-top: 15px;
   margin-left: 10px;
@@ -117,7 +129,9 @@ class FundationCommentCard extends Component {
     liked: false,
     likes: null,
     deleted: false,
-    errorDelete: false
+    errorDelete: false,
+    showReply: false,
+    showOptions: true
   }
 
   componentDidMount() {
@@ -131,7 +145,7 @@ class FundationCommentCard extends Component {
     if (!this.props.authContext.authenticated) {
       window.location = this.props.authContext.keycloak.createRegisterUrl()
     }
-    fetch(`${API_URL}/api/v1/documents/${this.props.project}/comments/${this.props.comment._id}/like`, {
+    fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments/${this.props.comment._id}/like`, {
       headers: {
         Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
@@ -152,7 +166,7 @@ class FundationCommentCard extends Component {
   }
 
   handleDelete = (commentId) => () => {
-    fetch(`${API_URL}/api/v1/documents/${this.props.project}/comments/${commentId}`, {
+    fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments/${commentId}`, {
       headers: {
         Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
@@ -179,9 +193,27 @@ class FundationCommentCard extends Component {
       })
   }
 
+  handleReply = () => {
+    this.setState((prevState) => {
+      return {
+        showOptions: false,
+        showReply: true
+      }
+    })
+  }
+  
+  replySent = () => {
+    this.setState((prevState) => {
+      return {
+        showOptions: true,
+        showReply: false
+      }
+    })
+  }
+
   render() {
-    const { comment, canDelete } = this.props
-    const { deleted, errorDelete } = this.state
+    const { comment, canDelete, canReply, project } = this.props
+    const { deleted, errorDelete, showOptions, showReply } = this.state
     const isAuthor = comment.user.roles.includes('accountable')
     return (
       <div>
@@ -200,21 +232,27 @@ class FundationCommentCard extends Component {
               </ChargeWrapper>
               <Comment>{comment.content}</Comment>
               <Date>{`Hace ${comment.when}`}</Date>
-              <div>
+              { showOptions && <div>
                 <StyledLikeWrapper liked={this.state.liked} onClick={this.handleLike}>
                   <Icon icon={thumbsUp} style={{ marginRight: '5px' }} />{this.state.likes}
                 </StyledLikeWrapper>
+                {canReply &&
+                  <StyledReplyWrapper onClick={this.handleReply}>
+                    <Icon icon={cornerRightDown} style={{ marginRight: '5px' }} />Responder
+                  </StyledReplyWrapper>
+                }
                 {canDelete && !errorDelete &&
                   <StyledDeleteWrapper onClick={this.handleDelete(comment._id)}>
                     <Icon icon={trash2} style={{ marginRight: '5px' }} />Eliminar
-                </StyledDeleteWrapper>
+                  </StyledDeleteWrapper>
                 }
                 {canDelete && errorDelete &&
                   <StyledErrorWrapper>
                     <Icon icon={times} style={{ marginRight: '5px' }} />Error al eliminar comentario
                   </StyledErrorWrapper>
                 }
-              </div>
+              </div>}
+              <ReplyFundationComment isAuthor={canReply} showInputForm={showReply} reply={this.props.comment.reply} comment={this.props.comment._id} token={this.props.authContext.keycloak.token} project={project} attachReply={this.props.attachReply} replySent={this.replySent} />
             </TextWrapper>
           </StyledCommentItem>
           : <DeletedNotice>
@@ -229,8 +267,10 @@ class FundationCommentCard extends Component {
 FundationCommentCard.propTypes = {
   comment: PropTypes.object.isRequired,
   authContext: PropTypes.object.isRequired,
-  project: PropTypes.string.isRequired,
-  canDelete: PropTypes.bool.isRequired
+  project: PropTypes.object.isRequired,
+  canDelete: PropTypes.bool.isRequired,
+  canReply: PropTypes.bool.isRequired,
+  attachReply: PropTypes.func.isRequired
 }
 
 export default WithUserContext(FundationCommentCard)

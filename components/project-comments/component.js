@@ -50,7 +50,7 @@ class ProjectComments extends Component {
     error: null
   }
 
-  async componentDidMount () {
+  async componentDidMount() {
     try {
       const results = await (await fetch(`${API_URL}/api/v1/documents/${this.props.project._id}/comments?field=fundation`, {
         'headers': {
@@ -129,28 +129,52 @@ class ProjectComments extends Component {
   canDelete = (comment) => {
     const { authContext, project } = this.props
     if (project.author._id === (authContext.user && authContext.user._id)) {
-    // Is the author of the project?
+      // Is the author of the project?
       return true
     } else if (comment.user._id === (authContext.user && authContext.user._id)) {
-    // Is the author of the comment?
+      // Is the author of the comment?
       return true
     }
     return false
   }
 
-  render () {
+  canReply = () => {
+    const { authContext, project } = this.props
+    if (project.author._id === (authContext.user && authContext.user._id)) {
+      // Is the author of the project?
+      return true
+    }
+    return false
+  }
+
+  attachReply = async (commentId, reply) => {
+    let updatedComments = this.state.comments.map((comment) => {
+      if (comment._id === commentId) {
+        comment.reply = reply
+        return comment
+      }
+      return comment
+    })
+    this.setState({
+      comments: updatedComments
+    })
+  }
+
+  render() {
     const { authContext, project } = this.props
     const { comments } = this.state
     return (
       <StyledProjectComments>
         <StyledTitle>Comentarios</StyledTitle>
         <StyledSubtitle>Espacio abierto para comentarios generales.</StyledSubtitle>
-        { comments && comments.map((comment) => (
+        {comments && comments.map((comment) => (
           <FundationCommentCard
             canDelete={this.canDelete(comment)}
+            canReply={this.canReply()}
             comment={comment}
             key={comment._id}
-            project={project._id} />
+            project={project}
+            attachReply={this.attachReply} />
         ))}
         {!project.closed &&
           <FundationCommentForm
