@@ -49,7 +49,7 @@ const Social = ({ commentaries, closed }) => (
   <Wrapper>
     <CommentaryItems>
       <CommentaryIcon />
-      <Span> {commentaries}</Span> {commentaries === 1 ? ' Comentario' : ' Comentarios'}
+      <Span> {commentaries}</Span> {commentaries === 1 ? ' Aporte' : ' Aportes'}
     </CommentaryItems>
     {closed &&
       <LimitDate>Finalizó el periodo de aportes</LimitDate>

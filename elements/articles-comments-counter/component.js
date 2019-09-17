@@ -29,7 +29,7 @@ const StyledCommentsCounter = styled.div`
 const ArticlesCommentsCounter = ({ commentsCount }) => (
   <StyledCommentsCounter>
     <StyledNumber>{commentsCount}</StyledNumber>
-    <StyledText>comentarios de ciudadanos</StyledText>
+    <StyledText>aportes de ciudadanos</StyledText>
   </StyledCommentsCounter>
 )
 

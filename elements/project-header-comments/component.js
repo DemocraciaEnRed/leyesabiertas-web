@@ -31,7 +31,7 @@ const BarActivitySubtitle = ({ number, itemStyle }) => (
   <StyledBarSubtitle>
     <Span>{number}</Span>
     <ItemStyle>
-      {number === 1 ? 'comentario' : 'comentarios'} de usuarios
+      {number === 1 ? 'aportes' : 'aportes'} de usuarios
     </ItemStyle>
   </StyledBarSubtitle>
 )

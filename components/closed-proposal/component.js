@@ -23,11 +23,11 @@ export default ({ contributors, contributions, contextualComments }) => (
     <ClosedProposalMessage>Agradecemos a cada uno de los ciudadanos que compartieron sus aportes y comentarios a esta propuesta de ley. <br /> A continuación podrá ver los detalles y el resumen de la co-creación de esta propuesta de ley.</ClosedProposalMessage>
     <ClosedProposalData>
       <DashboardBarItem>
-        <BarTitle>Comentarios</BarTitle>
+        <BarTitle>Aportes</BarTitle>
         <DashboardBarTextContainer>
           <ActivityIcon img={'/static/assets/group-3.svg'} small={true} />
           <BarActivitySubtitle number={contextualComments}>
-            El total de comentarios
+            El total de aportes
           </BarActivitySubtitle>
         </DashboardBarTextContainer>
       </DashboardBarItem>
@@ -43,11 +43,11 @@ export default ({ contributors, contributions, contextualComments }) => (
       { 
         (contributions) > 0 &&
         <DashboardBarItem>
-          <BarTitle>Aportes</BarTitle>
+          <BarTitle>Aportes Destacados</BarTitle>
           <DashboardBarTextContainer>
             <ActivityIcon img={'/static/assets/cha-rect-star.svg'} small={true} />
             <BarActivitySubtitle number={contributions}>
-              comentarios marcados como aportes
+              aportes marcados como destacados
             </BarActivitySubtitle>
           </DashboardBarTextContainer>
         </DashboardBarItem>

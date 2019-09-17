@@ -145,15 +145,15 @@ class Projects extends Component {
     return (
       <Section id='projects'>
         <TitleH2>Propuestas de ley abiertas para la co-creación.</TitleH2>
-        <SubtitleH3>Estas son las propuestas y proyectos de ley disponibles para leer, comentar y hacer aportes . ¡Ayude a mejorarlas!</SubtitleH3>
+        <SubtitleH3>Estas son las propuestas y proyectos de ley disponibles para leer y aportar . ¡Ayude a mejorarlas!</SubtitleH3>
         <Options>
           <OptionLabel>Ordenar</OptionLabel>
           {query.created === 'ASC' && <OptionChoice onClick={() => this.toggleSort('created', 'DESC')}>Fecha de creación <b>ASC</b></OptionChoice>}
           {query.created === 'DESC' && <OptionChoice onClick={() => this.toggleSort('created', 'ASC')}>Fecha de creación <b>DESC</b></OptionChoice>}
           <OptionLabel>Filtrar</OptionLabel>
-          {filter.closed === null && <OptionChoice className='disabled' onClick={() => this.toggleFilter('closed', true)}>Aportes</OptionChoice>}
-          {filter.closed === true && <OptionChoice onClick={() => this.toggleFilter('closed', false)}>Aportes <b>FINALIZADOS</b></OptionChoice>}
-          {filter.closed === false && <OptionChoice onClick={() => this.toggleFilter('closed', null)}>Aportes <b>ABIERTOS</b></OptionChoice>}
+          {filter.closed === null && <OptionChoice className='disabled' onClick={() => this.toggleFilter('closed', true)}>Por periodo</OptionChoice>}
+          {filter.closed === true && <OptionChoice onClick={() => this.toggleFilter('closed', false)}>Periodo <b>FINALIZADOS</b></OptionChoice>}
+          {filter.closed === false && <OptionChoice onClick={() => this.toggleFilter('closed', null)}>Periodo <b>ABIERTOS</b></OptionChoice>}
         </Options>
         {projectsFiltered &&
           <Fragment>
