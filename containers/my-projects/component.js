@@ -10,22 +10,15 @@ import WithUserContext from '../../components/with-user-context/component'
 import TitleH2 from '../../elements/title-h2/component'
 import Alert from '../../elements/alert/component'
 import getConfig from 'next/config'
+import Masonry from 'react-masonry-component';
 
-const { publicRuntimeConfig: { API_URL }} = getConfig()
+const { publicRuntimeConfig: { API_URL } } = getConfig()
 
-const Grid = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 4.8rem 0 1.6rem;
-  > div {
-    margin-bottom: 56px;
-  }
-  @media (max-width: 1400px) {
-    justify-content: space-around;
-  }
-`
+const masonryOptions = {
+  transitionDuration: 0
+};
+
+
 const getClosingDate = () => {
   let closingDate = new Date()
   closingDate.setDate(closingDate.getDate() + 30)
@@ -200,7 +193,7 @@ const newDocument = {
 }
 
 class MyProjects extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       projects: null,
@@ -267,62 +260,63 @@ class MyProjects extends Component {
       })
   }
 
-dismissAlert = () => {
-  this.setState({
-    showAlert: false
-  })
-}
-
-async componentDidMount () {
-  if (!this.props.authContext.keycloak) return
-  if (!this.props.authContext.keycloak.authenticated && !this.props.authContext.user) return
-  if (!this.props.userId || this.props.userId === this.props.authContext.user._id) {
-    this.fetchProjects(this.props.authContext.keycloak.token)
+  dismissAlert = () => {
+    this.setState({
+      showAlert: false
+    })
   }
-}
 
-async componentWillUpdate (props) {
-  if (!props.authContext.keycloak) return
-  if (!props.authContext.keycloak.authenticated && !props.authContext.user) return
-  if (props === this.props) return
-  if (!props.userId || props.userId === props.authContext.user._id) {
-    this.fetchProjects(props.authContext.keycloak.token)
-  }
-}
-
-render () {
-  const {
-    projects,
-    isLoading
-  } = this.state
-  if (this.props.authContext.user) {
-    if (this.props.authContext.isAuthor) {
-      return (
-        <Section id='projects' noMargin >
-          <TitleH2>Mis propuestas</TitleH2>
-          { projects &&
-          <Fragment>
-            <Grid>
-              { projects.map((p, i) => (
-                <Card project={p} key={i} />
-              ))}
-
-              <CardNewProject create={this.createProject} loading={isLoading} />
-            </Grid>
-            {
-              this.state.showAlert &&
-              <Alert status={this.state.alertStatus} dismissAlert={this.dismissAlert}>
-                {this.state.alertText}
-              </Alert>
-            }
-          </Fragment>
-          }
-        </Section>
-      )
+  async componentDidMount() {
+    if (!this.props.authContext.keycloak) return
+    if (!this.props.authContext.keycloak.authenticated && !this.props.authContext.user) return
+    if (!this.props.userId || this.props.userId === this.props.authContext.user._id) {
+      this.fetchProjects(this.props.authContext.keycloak.token)
     }
   }
-  return null
-}
+
+  async componentWillUpdate(props) {
+    if (!props.authContext.keycloak) return
+    if (!props.authContext.keycloak.authenticated && !props.authContext.user) return
+    if (props === this.props) return
+    if (!props.userId || props.userId === props.authContext.user._id) {
+      this.fetchProjects(props.authContext.keycloak.token)
+    }
+  }
+
+  render() {
+    const {
+      projects,
+      isLoading
+    } = this.state
+    if (this.props.authContext.user) {
+      if (this.props.authContext.isAuthor) {
+        return (
+          <Section id='projects' noMargin >
+            <TitleH2>Mis propuestas</TitleH2>
+            {projects &&
+              <Fragment>
+                <Masonry
+                  style={{ width: '100%', margin: '4.8rem 0 1.6rem' }}
+                  options={masonryOptions}>
+                  {projects.map((p, i) => (
+                    <Card project={p} key={i} />
+                  ))}
+                  <CardNewProject create={this.createProject} loading={isLoading} />
+                </Masonry>
+                {
+                  this.state.showAlert &&
+                  <Alert status={this.state.alertStatus} dismissAlert={this.dismissAlert}>
+                    {this.state.alertText}
+                  </Alert>
+                }
+              </Fragment>
+            }
+          </Section>
+        )
+      }
+    }
+    return null
+  }
 }
 
 export default WithUserContext(MyProjects)

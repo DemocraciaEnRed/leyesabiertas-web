@@ -8,22 +8,14 @@ import TitleH2 from '../../elements/title-h2/component'
 import SubtitleH3 from '../../elements/subtitle-h3/component'
 import Button from '../../elements/button/component'
 import getConfig from 'next/config'
+import Masonry from 'react-masonry-component';
 
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
-const Grid = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 4.8rem 0 1.6rem;
-  > div {
-    margin-bottom: 56px;
-  }
-  @media (max-width: 1400px) {
-    justify-content: space-around;
-  }
-`
+const masonryOptions = {
+  transitionDuration: 0
+};
+
 
 const OptionChoice = styled.div`
 display: inline-block;
@@ -91,7 +83,7 @@ class Projects extends Component {
     return theQuery
   }
 
-  async getDocuments () {
+  async getDocuments() {
     try {
       let query = this.createQuery(this.state.query);
       const projects = await (await fetch(`${API_URL}/api/v1/documents${query}`)).json()
@@ -157,11 +149,13 @@ class Projects extends Component {
         </Options>
         {projectsFiltered &&
           <Fragment>
-            <Grid>
+            <Masonry
+              style={{ width: '100%', margin: '4.8rem 0 1.6rem' }}
+              options={masonryOptions}>
               {projectsFiltered.map((p, i) => (
                 <Card project={p} key={i} />
               ))}
-            </Grid>
+            </Masonry>
           </Fragment>
         }
       </Section>

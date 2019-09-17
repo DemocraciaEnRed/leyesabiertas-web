@@ -1,6 +1,14 @@
 
 # Changelog
 
+### 1.5.0
+
+- DERLA-75 Agregado support a las tarjetas de los proyectos para soportar textos largos y agregado Masonry para que funcione mejor en grilla
+
+Compatible con:
+- `leyesabiertas-core:1.5.0`
+- `leyesabiertas-web:1.3.0`
+
 ### 1.4.0
 
 - DERLA-64 Posible fix de el hover en el contador de comentarios en una mark del articulado
