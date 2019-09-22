@@ -4,10 +4,11 @@
 ### 1.5.0
 
 - DERLA-75 Agregado support a las tarjetas de los proyectos para soportar textos largos y agregado Masonry para que funcione mejor en grilla
+- DERLA-71 - Cambiado el metoDO GET /documents.  Ya no se utiliza el paginado de mongoose sino que se hace casero.   Por defecto los proyectos vienen primero abiertos, luego cerrados (querystring = page, limit, closed(null,false,true), created(ASC,DESC))
 
 Compatible con:
 - `leyesabiertas-core:1.5.0`
-- `leyesabiertas-web:1.3.0`
+- `leyesabiertas-notifier:1.5.0`
 
 ### 1.4.0
 
@@ -19,7 +20,7 @@ Compatible con:
 
 Compatible con:
 - `leyesabiertas-core:1.4.0`
-- `leyesabiertas-web:1.3.0`
+- `leyesabiertas-notifier:1.3.0`
 
 
 ### 1.3.0
@@ -34,7 +35,7 @@ Compatible con:
 
 Compatible con:
 - `leyesabiertas-core:1.3.0`
-- `leyesabiertas-web:1.3.0`
+- `leyesabiertas-notifier:1.3.0`
 
 #### 1.2.1
 
