@@ -18,7 +18,7 @@ export default () => (
         <a href='mailto:leyesabiertas@hcdn.gob.ar'>leyesabiertas@hcdn.gob.ar</a>.
       </StaticInfoP>
       <StaticInfoP>
-        (+5411) 4127-7100 int. 5091
+        (+5411) 6075-7100 int. 5091
       </StaticInfoP>
     </StyledDiv>
   </section>
