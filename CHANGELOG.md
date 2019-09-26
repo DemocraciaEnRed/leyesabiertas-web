@@ -3,8 +3,9 @@
 
 ### 1.5.0
 
+- DERLA-72 Se cambio las menciones de “comentarios” por "aportes” y “aportes” por “aportes destacados”.
 - DERLA-75 Agregado support a las tarjetas de los proyectos para soportar textos largos y agregado Masonry para que funcione mejor en grilla
-- DERLA-71 - Cambiado el metoDO GET /documents.  Ya no se utiliza el paginado de mongoose sino que se hace casero.   Por defecto los proyectos vienen primero abiertos, luego cerrados (querystring = page, limit, closed(null,false,true), created(ASC,DESC))
+- DERLA-71 - Cambiado el metodo GET /documents.  Ya no se utiliza el paginado de mongoose sino que se hace casero.   Por defecto los proyectos vienen primero abiertos, luego cerrados (querystring = page, limit, closed(null,false,true), created(ASC,DESC))
 - Cambiado el telefono (Footer descripcion de la HCDN)
 
 Compatible con:
