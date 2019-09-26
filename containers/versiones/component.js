@@ -242,16 +242,16 @@ class Versiones extends Component {
         }
         <ContributionsListWrapper>
           {!isLoading ? <div>
-            <ContributionsTitle>Contribuciones</ContributionsTitle>
+            <ContributionsTitle>Aportes destacados</ContributionsTitle>
             {selectedVersion > 1 ?
-              <ContributionsSubtitle>Las siguientes contribuciones son aportes hechos en la versión {selectedVersion - 1} para la construcción de la versión {selectedVersion}</ContributionsSubtitle>
+              <ContributionsSubtitle>Las siguientes contribuciones son aportes que fueron destacados hechos en la versión {selectedVersion - 1} para la construcción de la versión {selectedVersion}</ContributionsSubtitle>
               : <ContributionsSubtitle>NOTA: La versión {selectedVersion} es el articulado original, sin contribuciones de los ciudadanos.</ContributionsSubtitle>
             }
           </div> : null}
           {!isLoading ?
             currentContributions.length > 0 ? currentContributions.map((c) => {
               return <ContributionCard project={project._id} comment={c} key={c._id} canDelete={false} />
-            }) : <RegularNotice>Sin contribuciones</RegularNotice>
+            }) : <RegularNotice>Sin aportes destacados</RegularNotice>
             : null
           }
         </ContributionsListWrapper>

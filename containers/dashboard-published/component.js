@@ -15,12 +15,10 @@ const Grid = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 4.8rem 0 1.6rem;
-  > div {
-    margin-bottom: 56px;
-  }
-  @media (max-width: 1400px) {
-    justify-content: space-around;
-  }
+
+    // @media (max-width: 1400px) {
+    //   justify-content: space-around;
+    // }
 `
 const Section = styled.section`
   padding: 8.4rem 7%;

@@ -25,7 +25,7 @@ const StyledHero = styled.div`
 const Hero = () => (
   <StyledHero>
     <HeroTitle>Plataforma de Participación Ciudadana en Propuestas de Ley</HeroTitle>
-    <HeroSubtitle>¡Participe haciendo comentarios y sugerencias para co-crear mejores leyes!</HeroSubtitle>
+    <HeroSubtitle>¡Participe haciendo aportes para co-crear mejores leyes!</HeroSubtitle>
     <HeroVideo youtubeId='r9hZuc72C48' />
   </StyledHero>
 )

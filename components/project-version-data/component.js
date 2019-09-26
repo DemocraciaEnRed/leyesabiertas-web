@@ -27,7 +27,7 @@ const ProjectVersionData = ({ project, version, createdAt }) => (
     <ProjectVersion version={version} />
     <ProjectCreationDate createdAt={formatDate(createdAt)} />
     <MoreLink >
-      <Link href={{ pathname: '/versiones', query: { id: project } }}>Todas las versiones</Link>
+      <Link href={{ pathname: '/versiones', query: { id: project } }}>Todas las versiones ➔</Link>
     </MoreLink>
   </StyledProjectVersionData>
 )

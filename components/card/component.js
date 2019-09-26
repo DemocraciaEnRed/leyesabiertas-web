@@ -7,24 +7,28 @@ import CardContent from '../../elements/card-content/component'
 import CardSocial from '../../elements/card-social/component'
 
 const CardContainer = styled.div`
-width: 370px;
-height: 340px;
-box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
+margin: 0 1% 30px;
+width: 31%;
+box-shadow: 0 4px 20px 0 rgba(0,0,0,0.05);
 background-color: #ffffff;
 border: solid 1px #e9e9e9;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
 background: #fff;
 box-sizing: border-box;
 cursor: pointer;
-margin-bottom: 2rem;
+display: block;
+position: relative;
+@media (max-width: 1100px) {
+  width: 48%;
+  }
+@media (max-width: 760px) {
+  width: 100%;
+  }
 `
 
 const Card = ({ project }) => (
-  <Link href={{ pathname: '/propuesta', query: { id: project._id } }}>
-    <a>
-      <CardContainer>
+  <CardContainer>
+    <Link href={{ pathname: '/propuesta', query: { id: project._id } }}>
+      <a>
         <CardHeader img={project.currentVersion.content.imageCover} published={project.published} />
         <CardContent
           title={project.currentVersion.content.title}
@@ -34,9 +38,9 @@ const Card = ({ project }) => (
           party={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
         <CardSocial commentaries={project.commentsCount}
           closed={project.closed} />
-      </CardContainer>
-    </a>
-  </Link>
+      </a>
+    </Link>
+  </CardContainer>
 )
 
 Card.propTypes = {

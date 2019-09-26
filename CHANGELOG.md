@@ -1,6 +1,17 @@
 
 # Changelog
 
+### 1.5.0
+
+- DERLA-72 Se cambio las menciones de “comentarios” por "aportes” y “aportes” por “aportes destacados”.
+- DERLA-75 Agregado support a las tarjetas de los proyectos para soportar textos largos y agregado Masonry para que funcione mejor en grilla
+- DERLA-71 - Cambiado el metodo GET /documents.  Ya no se utiliza el paginado de mongoose sino que se hace casero.   Por defecto los proyectos vienen primero abiertos, luego cerrados (querystring = page, limit, closed(null,false,true), created(ASC,DESC))
+- Cambiado el telefono (Footer descripcion de la HCDN)
+
+Compatible con:
+- `leyesabiertas-core:1.5.0`
+- `leyesabiertas-notifier:1.5.0`
+
 ### 1.4.0
 
 - DERLA-64 Posible fix de el hover en el contador de comentarios en una mark del articulado
@@ -11,7 +22,7 @@
 
 Compatible con:
 - `leyesabiertas-core:1.4.0`
-- `leyesabiertas-web:1.3.0`
+- `leyesabiertas-notifier:1.3.0`
 
 
 ### 1.3.0
@@ -26,7 +37,7 @@ Compatible con:
 
 Compatible con:
 - `leyesabiertas-core:1.3.0`
-- `leyesabiertas-web:1.3.0`
+- `leyesabiertas-notifier:1.3.0`
 
 #### 1.2.1
 

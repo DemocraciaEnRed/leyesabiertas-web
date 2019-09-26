@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Icon from 'react-icons-kit/Icon'
 import { eyeSlash } from 'react-icons-kit/fa/eyeSlash'
 const Wrapper = styled.div`
-width: 368px;
+width: 100%;
 height: 126px;
 background-color: #1b95ba;
 background-image: url('${(props) => props.img}');
