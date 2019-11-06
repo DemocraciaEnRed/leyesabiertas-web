@@ -33,7 +33,8 @@ const newDocument = {
   'content': {
     'title': 'Mi nuevo proyecto',
     'imageCover': null,
-    'youtubeId': 'r9hZuc72C48',
+    'youtubeId': null,
+    'customVideoId': null,
     'fundation': {
       'object': 'value',
       'document': {

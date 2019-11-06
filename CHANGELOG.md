@@ -1,6 +1,12 @@
 
 # Changelog
 
+### 1.6.0
+
+- DERLA-74 Se cambio el reproductor de video de youtube para poder utilizar VideoJS y obtener los videos del servidor de streaming de la HCDN. Se utiliza `customVideoId`. `youtubeId` aun se mantiene activo por razones de retro-compatibilidad con los datos.
+- DERLA-77 Actualizado el manual de Usuario
+- DERLA-78 Algunos cambios de labels que tenian errores de ortografia
+
 ### 1.5.0
 
 - DERLA-72 Se cambio las menciones de “comentarios” por "aportes” y “aportes” por “aportes destacados”.

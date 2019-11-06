@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import FundationContainer from '../fundation-container/component'
 import ProjectVideo from '../project-video/component'
+import ProjectCustomVideo from '../project-custom-video/component'
 import ProjectLinkArticulate from '../../components/project-link-articulate/component'
 import ProjectFields from '../../components/project-fields/component'
 import { ArticlesContext } from '../../containers/user-project-container/component'
@@ -46,6 +47,7 @@ const BoldP = styled.p`
   font-family:var(--bold);
 `
 
+
 const ProjectBody = ({ project }) => (
   <ProjectBodyContainer>
     <ProjectLinkArticulate id={project._id} />
@@ -59,6 +61,7 @@ const ProjectBody = ({ project }) => (
                 closingDate={project.currentVersion.content.closingDate}
                 imageCover={project.currentVersion.content.imageCover}
                 youtubeId={project.currentVersion.content.youtubeId}
+                customVideoId={project.currentVersion.content.customVideoId}
                 closure={project.currentVersion.content.closure}
                 setNewFields={setNewFields} />
             }
@@ -71,6 +74,10 @@ const ProjectBody = ({ project }) => (
                 youtubeId={editedYoutubeId ? newYoutubeId : project.currentVersion.content.youtubeId}
                 editedYoutubeId={editedYoutubeId}
                 setYoutubeId={setYoutubeId} />
+            }
+            {
+              project.currentVersion.content.customVideoId &&
+            <ProjectCustomVideo videoId={project.currentVersion.content.customVideoId} />
             }
             <FundationContainer
               isAuthor={isAuthor}
