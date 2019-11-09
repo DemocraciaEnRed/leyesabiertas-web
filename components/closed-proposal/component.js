@@ -12,7 +12,7 @@ import ClosedProposalWrapper from '../../elements/closed-proposal-wrapper/compon
 
 const ClosedProposalData = styled.div`
   display: flex;
-  margin-top: 30px;
+  margin-top: 10px;
   @media (max-width: 700px) {
     flex-direction: column;
   }
