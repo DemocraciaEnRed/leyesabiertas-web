@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ArticlesContext } from '../../containers/user-project-container/component'
+// import { ArticlesContext } from '../../containers/user-project-container/component'
+import Link from 'next/link'
 
-const StyledModeButton = styled.button`
+const StyledLinkButton = styled.button`
   border: none;
   padding: 14px;
   margin-right: 20px;
@@ -19,14 +20,13 @@ const StyledModeButton = styled.button`
   }
 `
 
-const ModeButton = (props) => (
-  <ArticlesContext.Consumer>
-    {({ withComments, switchComments }) => (
-      <StyledModeButton
-        onClick={switchComments(!withComments)}
-        {...props} />
-    )}
-  </ArticlesContext.Consumer>
+const ModeBarLinkButton = (props) => (
+  <Link href={props.href}>
+    <StyledLinkButton {...props}>
+      {props.children}
+    </StyledLinkButton>
+  </Link>
+
 )
 
-export default ModeButton
+export default ModeBarLinkButton

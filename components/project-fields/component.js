@@ -823,6 +823,7 @@ class ProjectFields extends Component {
     closingDate: null,
     imageCover: null,
     youtubeId: null,
+    customVideoId: null,
     youtubeURL: null,
     closure: null,
   }
@@ -833,6 +834,7 @@ class ProjectFields extends Component {
       closingDate,
       imageCover,
       youtubeId,
+      customVideoId,
       closure
     } = this.props
     this.setState({
@@ -840,6 +842,7 @@ class ProjectFields extends Component {
       imageCover,
       youtubeId,
       youtubeURL: youtubeId ? 'https://www.youtube.com/watch?v=' + youtubeId : '',
+      customVideoId: customVideoId || null,
       closingDate: new Date(closingDate.split('T')[0].replace(/-/g, '\/')),
       closure: closure || null
     }, () => this.props.setNewFields(this.getBodyPayload()))
@@ -854,6 +857,7 @@ class ProjectFields extends Component {
       imageCover: this.state.imageCover,
       closingDate: new Date(this.state.closingDate).toISOString(),
       youtubeId: this.state.youtubeId,
+      customVideoId: this.state.customVideoId,
       closure: this.state.closure
     }
   }
@@ -938,6 +942,17 @@ class ProjectFields extends Component {
             ? <SpanOk>La fecha de cierre será el: {new Date(this.state.closingDate).toISOString().split('T')[0]}<br />NOTA: El documento se cerrará automáticamente llegada la fecha de cierre</SpanOk>
             : <SpanDanger>Debe definir una fecha de cierre</SpanDanger>
           }
+        </ProfileLabel>
+        <ProfileLabel>
+          Ingrese el link del video (Reproductor oficial HCDN) (Opcional)
+          <InputField
+            type='text'
+            name='customVideoId'
+            value={this.state.customVideoId}
+            onChange={this.handleInputChange} />
+          {!this.state.customVideoId && <SpanOk>Link invalido o vacio (El proyecto se publicará sin video)</SpanOk>
+          }
+          <SpanOk>NOTA: Ingrese solamente el dominio del video, sin "https://", que termina hasta ".mp4". (Ej: argos.hcdn.gob.ar/DMPARL/tutorial.mp4)</SpanOk>
         </ProfileLabel>
         <ProfileLabel>
           Ingrese el link del video de Youtube (Opcional)

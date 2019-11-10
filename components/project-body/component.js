@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import FundationContainer from '../fundation-container/component'
 import ProjectVideo from '../project-video/component'
+import ProjectCustomVideo from '../project-custom-video/component'
 import ProjectLinkArticulate from '../../components/project-link-articulate/component'
 import ProjectFields from '../../components/project-fields/component'
 import { ArticlesContext } from '../../containers/user-project-container/component'
@@ -15,7 +16,7 @@ const ProjectBodyContainer = styled.div`
   margin-right:auto;
   margin-left:auto;
   // padding:5% 20% 0% 10%;
-  padding: 3% 20% 0% 3.5%;
+  padding: 15px 20% 0% 3.5%;
   
   @media (max-width:769px){
     padding:5% 0px;
@@ -46,9 +47,9 @@ const BoldP = styled.p`
   font-family:var(--bold);
 `
 
+
 const ProjectBody = ({ project }) => (
   <ProjectBodyContainer>
-    <ProjectLinkArticulate id={project._id} />
     <ArticlesContext.Consumer>
       {
         ({ isAuthor, editMode, setYoutubeId, editedYoutubeId, newYoutubeId, setNewFields }) => (
@@ -59,6 +60,7 @@ const ProjectBody = ({ project }) => (
                 closingDate={project.currentVersion.content.closingDate}
                 imageCover={project.currentVersion.content.imageCover}
                 youtubeId={project.currentVersion.content.youtubeId}
+                customVideoId={project.currentVersion.content.customVideoId}
                 closure={project.currentVersion.content.closure}
                 setNewFields={setNewFields} />
             }
@@ -72,6 +74,10 @@ const ProjectBody = ({ project }) => (
                 editedYoutubeId={editedYoutubeId}
                 setYoutubeId={setYoutubeId} />
             }
+            {
+              project.currentVersion.content.customVideoId &&
+            <ProjectCustomVideo videoId={project.currentVersion.content.customVideoId} />
+            }
             <FundationContainer
               isAuthor={isAuthor}
               editMode={editMode}
@@ -83,6 +89,7 @@ const ProjectBody = ({ project }) => (
         )
       }
     </ArticlesContext.Consumer>
+    <ProjectLinkArticulate closed={project.closed} id={project._id} />
   </ProjectBodyContainer>
 )
 

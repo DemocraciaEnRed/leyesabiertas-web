@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const StyledModeBar = styled.nav`
   margin-left: auto;
   margin-right: auto;
-  margin-top: 37px;
+  margin-top: 10px;
   width: 90%;
   height: 45px;
   background: #FFF;

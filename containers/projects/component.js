@@ -229,7 +229,7 @@ class Projects extends Component {
         }
         {
           !loading && !loadMoreAvailable  &&
-          <MessagePaginator>No hay mas propuestas de leyes</MessagePaginator>
+          <MessagePaginator>No hay más propuestas de leyes</MessagePaginator>
         }
       </Section>
     )

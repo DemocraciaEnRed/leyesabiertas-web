@@ -33,7 +33,8 @@ const newDocument = {
   'content': {
     'title': 'Mi nuevo proyecto',
     'imageCover': null,
-    'youtubeId': 'r9hZuc72C48',
+    'youtubeId': null,
+    'customVideoId': null,
     'fundation': {
       'object': 'value',
       'document': {
@@ -208,7 +209,7 @@ class MyProjects extends Component {
 
   fetchProjects = async (token) => {
     try {
-      const projects = await (await fetch(`${API_URL}/api/v1/documents/my-documents`, {
+      const projects = await (await fetch(`${API_URL}/api/v1/documents/my-documents?limit=100`, {
         'headers': {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token

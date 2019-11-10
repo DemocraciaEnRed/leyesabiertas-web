@@ -26,7 +26,7 @@ const Hero = () => (
   <StyledHero>
     <HeroTitle>Plataforma de Participación Ciudadana en Propuestas de Ley</HeroTitle>
     <HeroSubtitle>¡Participe haciendo aportes para co-crear mejores leyes!</HeroSubtitle>
-    <HeroVideo youtubeId='r9hZuc72C48' />
+    <HeroVideo video='argos.hcdn.gob.ar/DMPARL/tutorial.mp4' />
   </StyledHero>
 )
 

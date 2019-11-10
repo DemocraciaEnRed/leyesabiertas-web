@@ -105,6 +105,7 @@ injectGlobal`
     cursor: pointer;
     text-decoration: none;
   }
+)
 `
 
 export default class MyDocument extends Document {
@@ -135,6 +136,7 @@ export default class MyDocument extends Document {
           <link rel='icon' type='image/png' sizes='32x32' href='/static/favicon-32x32.png' />
           <link rel='icon' type='image/png' sizes='16x16' href='/static/favicon-16x16.png' />
           <link rel='icon' type='image/png' sizes='16x16' href='/static/favicon.ico' /> 
+          <link rel='stylesheet' href='/static/assets/video-js.min.css' /> 
         </Head>
         <body>
           <Main />

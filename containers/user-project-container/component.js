@@ -1,11 +1,16 @@
 import React, { Component, Fragment, createContext } from 'react'
+import Icon from 'react-icons-kit'
+import { checkSquareO } from 'react-icons-kit/fa/checkSquareO'
+import { squareO } from 'react-icons-kit/fa/squareO'
 import ModeBar from '../../components/mode-bar/component'
 import ModeButton from '../../elements/mode-button/component'
+import ModeBarLinkButton from '../../elements/mode-bar-link-button/component'
 import ProjectHeader from '../../components/project-header/component'
 import ProjectBody from '../../components/project-body/component'
 import ProjectComments from '../../components/project-comments/component'
 import UserEditor from '../../components/user-editor/component'
 import Versiones from '../versiones/component'
+
 
 const ArticlesContext = createContext({
   withComments: true,
@@ -80,6 +85,11 @@ export default class extends Component {
             contributionsCount={project.contributionsCount} />
           {this.props.section === '/propuesta' &&
             <Fragment>
+              <ModeBar>
+                <ModeBarLinkButton active>Fundamentacion</ModeBarLinkButton>
+                <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project.document._id } }}>Articulos</ModeBarLinkButton>
+                {/* <ModeBarLinkButton onClick={this.switchComments(false)} href={{ pathname: '/articulado', query: { id: project.document._id } }}>Articulado </ModeBarLinkButton> */}
+              </ModeBar>
               <ProjectBody project={project.document} />
               <ProjectComments project={project.document} />
             </Fragment>
@@ -87,8 +97,13 @@ export default class extends Component {
           {this.props.section === '/articulado' &&
             <Fragment>
               <ModeBar>
-                <ModeButton withComments={false}>Vista lectura</ModeButton>
-                <ModeButton withComments >Vista con comentarios</ModeButton>
+                <ModeBarLinkButton href={{ pathname: '/propuesta', query: { id: project.document._id } }}>Fundamentacion</ModeBarLinkButton>
+                <ModeBarLinkButton active>Articulos</ModeBarLinkButton>
+                {/* <ModeButton withComments>Articulado</ModeButton> */}
+                <ModeButton>
+                  {withComments ? <Icon icon={squareO} size={20} /> : <Icon icon={checkSquareO} size={20} />}&nbsp;
+                  Modo lectura
+                </ModeButton>
               </ModeBar>
               <UserEditor
                 value={project.document.currentVersion.content.articles}

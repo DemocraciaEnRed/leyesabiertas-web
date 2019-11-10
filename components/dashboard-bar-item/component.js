@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 const StyledItem = styled.div` 
   padding:1rem 3rem;
   box-sizing:border-box;
-  margin-bottom: 5rem;
+  margin-bottom: 1rem;
 `
 
 StyledItem.propTypes = {
