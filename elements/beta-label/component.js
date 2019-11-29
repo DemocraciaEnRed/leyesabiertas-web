@@ -31,7 +31,7 @@ const Version = styled.span`
   font-family: var(--bold);
   text-transform: uppercase;
   position: absolute;
-  left: 90px;
+  left: 70px;
   display: none;
 `
 
@@ -45,7 +45,7 @@ const BetaLabel = () => (
   <BetaLabelContainer>
     <Link href='/info?section=sobre-el-sitio'>
       <a>
-        <Label>Versión beta
+        <Label>Versión
           <Version className='version'>{version}</Version>
         </Label>
       </a>

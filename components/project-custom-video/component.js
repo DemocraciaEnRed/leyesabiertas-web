@@ -50,9 +50,9 @@ export default class ProjectCustomVideo extends React.Component {
     return (
       <StyledResponsiveVideo>
         <div data-vjs-player>
-          <video ref={node => this.videoNode = node} className="video-js vjs-16-9" />
+          <video ref={node => this.videoNode = node} className="video-js vjs-16-9 vjs-big-play-centered" />
         </div>
-</StyledResponsiveVideo>
+      </StyledResponsiveVideo>
     )
   }
 }
