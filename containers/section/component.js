@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 const StyledSection = styled.section`
     margin-left: ${(props) => props.noMargin ? '0em' : '5em'};
-    padding: 8.4rem 4.3rem;
+    padding: 40px 70px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -14,6 +14,9 @@ const StyledSection = styled.section`
     > h2 {
         color: #2c4c61;
       }
+    }
+    @media (max-width:700px){
+      padding: 35px 20px;
     }
 `
 

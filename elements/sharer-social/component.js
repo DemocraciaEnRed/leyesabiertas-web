@@ -5,15 +5,36 @@ import SocialIcon from '../../elements/social-icon/component'
 const SocialWrapper = styled.div`
   display:flex;
   flex-direction:column;
-  // width:6.7rem;
-  // margin-left:auto;
+  flex: 0 0 auto;
+  padding-right: 15px
+  border-right: 1px solid #CACACA;
+  margin-right: 15px
   @media(max-width:700px){
-    margin-left:0px;
+    padding-right: 0px;
+    border-right: 0px;
+    margin-right: 0;
+    padding-left: 10px
+    border-left: 1px solid #CACACA;
+    margin-left: 10px;
   }
+  & > a:first-child {
+  margin-bottom: 2px;
+  }
+  & > a > div {
+    height: 25px;
+    width: 25px;
+  }
+  max-height: 60px;
 `
+
+// const SocialIconWrapper = styled.div`
+//   display: flex;
+//   flex: 0 0 auto;
+//   flex-direction: row;
+// `
+
 const IconWrapper = styled.div`
-  display:flex;
-  justify-content:space-between;`
+  `
 
 const SocialSpan = styled.span`
   font-size:1.6rem;
@@ -28,19 +49,17 @@ export default ({ id }) => {
 
   return (
     <SocialWrapper>
-      <SocialSpan>Compartir</SocialSpan>
-      <IconWrapper>
+      {/* <SocialSpan>Compartir</SocialSpan> */}
         <SocialIcon
           img={'/static/assets/facebook-icon.svg'}
           link={`http://www.facebook.com/sharer.php?u=${socialLinksUrl}`}
           target={'_blank'}
-          rel={'noopener noreferrer'} />
-
+          rel={'noopener noreferrer'}
+        />
         <SocialIcon img={'/static/assets/twitter-icon.svg'}
           link={`http://twitter.com/share?text=${twitterText}&url=${socialLinksUrl}`}
           target={'_blank'}
           rel={'noopener noreferrer'} />
-      </IconWrapper>
     </SocialWrapper>
   )
 }

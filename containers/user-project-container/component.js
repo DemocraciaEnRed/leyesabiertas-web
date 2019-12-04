@@ -82,29 +82,18 @@ export default class extends Component {
             isAuthor={isAuthor}
             contributorsCount={project.contributorsCount}
             contextualCommentsCount={project.contextualCommentsCount}
-            contributionsCount={project.contributionsCount} />
+            contributionsCount={project.contributionsCount}
+            currentSection={this.props.section}
+            withComments={withComments}
+             />
           {this.props.section === '/propuesta' &&
             <Fragment>
-              <ModeBar>
-                <ModeBarLinkButton active>Fundamentacion</ModeBarLinkButton>
-                <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project.document._id } }}>Articulos</ModeBarLinkButton>
-                {/* <ModeBarLinkButton onClick={this.switchComments(false)} href={{ pathname: '/articulado', query: { id: project.document._id } }}>Articulado </ModeBarLinkButton> */}
-              </ModeBar>
               <ProjectBody project={project.document} />
               <ProjectComments project={project.document} />
             </Fragment>
           }
           {this.props.section === '/articulado' &&
             <Fragment>
-              <ModeBar>
-                <ModeBarLinkButton href={{ pathname: '/propuesta', query: { id: project.document._id } }}>Fundamentacion</ModeBarLinkButton>
-                <ModeBarLinkButton active>Articulos</ModeBarLinkButton>
-                {/* <ModeButton withComments>Articulado</ModeButton> */}
-                <ModeButton>
-                  {withComments ? <Icon icon={squareO} size={20} /> : <Icon icon={checkSquareO} size={20} />}&nbsp;
-                  Modo lectura
-                </ModeButton>
-              </ModeBar>
               <UserEditor
                 value={project.document.currentVersion.content.articles}
                 isAuthor={isAuthor}

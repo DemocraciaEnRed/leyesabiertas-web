@@ -12,31 +12,31 @@ import ClosedProposalWrapper from '../../elements/closed-proposal-wrapper/compon
 
 const ClosedProposalData = styled.div`
   display: flex;
-  margin-top: 10px;
-  @media (max-width: 700px) {
-    flex-direction: column;
-  }
+  flex-direction: row;
+  flex-wrap: wrap;
+  // margin-top: 10px;
+  // @media (max-width: 700px) {
+  //   flex-direction: column;
+  // }
 `
 
 export default ({ contributors, contributions, contextualComments }) => (
   <ClosedProposalWrapper>
-    <ClosedProposalMessage>Agradecemos a cada uno de los ciudadanos que compartieron sus aportes y comentarios a esta propuesta de ley. <br /> A continuación podrá ver los detalles y el resumen de la co-creación de esta propuesta de ley.</ClosedProposalMessage>
+    <ClosedProposalMessage>Agradecemos a cada uno de los ciudadanos que compartieron sus aportes y comentarios a esta propuesta de ley. A continuación podrá ver los detalles y el resumen de la co-creación de esta propuesta de ley.</ClosedProposalMessage>
     <ClosedProposalData>
       <DashboardBarItem>
-        <BarTitle>Aportes</BarTitle>
         <DashboardBarTextContainer>
           <ActivityIcon img={'/static/assets/group-3.svg'} small={true} />
           <BarActivitySubtitle number={contextualComments}>
-            El total de aportes
+            Aportes
           </BarActivitySubtitle>
         </DashboardBarTextContainer>
       </DashboardBarItem>
       <DashboardBarItem>
-        <BarTitle>Participantes</BarTitle>
         <DashboardBarTextContainer>
           <ActivityIcon img={'/static/assets/citizen-icon.svg'} small={true} />
           <BarActivitySubtitle number={contributors}>
-            El total de participantes
+            Participantes
           </BarActivitySubtitle>
         </DashboardBarTextContainer>
       </DashboardBarItem>
@@ -47,7 +47,7 @@ export default ({ contributors, contributions, contextualComments }) => (
           <DashboardBarTextContainer>
             <ActivityIcon img={'/static/assets/cha-rect-star.svg'} small={true} />
             <BarActivitySubtitle number={contributions}>
-              aportes marcados como destacados
+              Aportes destacados
             </BarActivitySubtitle>
           </DashboardBarTextContainer>
         </DashboardBarItem>

@@ -33,9 +33,10 @@ const StyledEditorWrapper = styled.div`
     }
     span {
       font-size: 1.8rem;
-      line-height: 1.89;
+      // line-height: 1.89;
       color: #203340;
-      padding: 6.5px 0px;
+      // padding: 6.5px 0px;
+      padding: 2.5px 0px;
     }
   }
 `

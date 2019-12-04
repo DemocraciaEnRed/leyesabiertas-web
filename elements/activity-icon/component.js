@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const StyledIcon = styled.div`
-  width: ${(props) => props.small ? '4rem' : '8.6rem'};
-  height: ${(props) => props.small ? '3.8rem' : '8rem'};
+  width: ${(props) => props.small ? '25px' : '45px'};
+  height: ${(props) => props.small ? '25px' : '45px'};
   background-image: url('${(props) => props.img}');
   background-size: contain;
   background-repeat: no-repeat;
-  margin-right: 2rem;
+  margin-right: 15px;
 `
 
 const ActivityIcon = ({ img, size }) => (

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 const DashboardBarTextContainer = styled.div`
   display: flex;
-  margin-top: 2rem;
+  margin-top: 1rem;
 `
 
 DashboardBarTextContainer.propTypes = {
