@@ -11,7 +11,10 @@ import TitleH2 from '../../elements/title-h2/component'
 import Alert from '../../elements/alert/component'
 import getConfig from 'next/config'
 import Masonry from 'react-masonry-component';
-
+import ProjectTableItem from '../../components/project-table-item/component'
+import { clockO } from 'react-icons-kit/fa'
+import Icon from 'react-icons-kit'
+import { plus } from 'react-icons-kit/feather'
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const masonryOptions = {
@@ -193,6 +196,66 @@ const newDocument = {
   }
 }
 
+const ProjectsTable = styled.table`
+  width: 100%;
+  margin: 20px 0;
+`
+const ProjectsTableHead = styled.thead`
+  
+`
+const ProjectsTableBody = styled.tbody`
+  
+`
+const ProjectsTableRow = styled.tr`
+  
+`
+const ProjectsTableCell = styled.td`
+  padding: 5px 2px;
+  font-size: 13px;
+  text-align: ${(props) => props.centered ? 'center' : 'left'};
+  border-bottom: 1px solid #cacaca;
+  & > a{
+    color: #5c97bc
+  }
+  & > a:hover{
+    color: red;
+  }
+`
+const ProjectsTableHeader = styled.th`
+  font-family: var(--medium);
+  font-size: 16px;
+  color: #2c4c61;
+  text-align: ${(props) => props.centered ? 'center' : 'left'};
+  width: ${(props) => `${props.width}px` || 'auto'};
+  border-bottom: 1px solid #CACACA;
+  padding: 2px 5px;
+`
+
+const ButtonTable = styled.div`
+  padding: 5px 20px;
+  margin: 10px auto;
+  width: 80%;
+  border: 1px solid #5c97bc;
+  border-radius: 5px;
+  color: #5c97bc;
+  font-size: 17px;
+  &:hover {
+    background-color: #5c97bc;
+    color: #FFF;
+    cursor: pointer;
+    font-family: var(--medium);
+  }
+`
+const ButtonTableDisabled = styled.div`
+  padding: 5px 20px;
+  margin: 10px auto;
+  width: 80%;
+  border: 1px solid #868686;
+  border-radius: 5px;
+  color: #868686;
+  font-size: 17px;
+`
+
 class MyProjects extends Component {
   constructor(props) {
     super(props)
@@ -209,7 +272,7 @@ class MyProjects extends Component {
 
   fetchProjects = async (token) => {
     try {
-      const projects = await (await fetch(`${API_URL}/api/v1/documents/my-documents?limit=100`, {
+      const projects = await (await fetch(`${API_URL}/api/v1/documents/my-documents?limit=100&created=DESC`, {
         'headers': {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token
@@ -293,24 +356,36 @@ class MyProjects extends Component {
       if (this.props.authContext.isAuthor) {
         return (
           <Section id='projects' noMargin >
-            <TitleH2>Mis propuestas</TitleH2>
-            {projects &&
-              <Fragment>
-                <Masonry
-                  style={{ width: '100%', margin: '4.8rem 0 1.6rem' }}
-                  options={masonryOptions}>
-                  {projects.map((p, i) => (
-                    <Card project={p} key={i} />
-                  ))}
-                  <CardNewProject create={this.createProject} loading={isLoading} />
-                </Masonry>
-                {
-                  this.state.showAlert &&
-                  <Alert status={this.state.alertStatus} dismissAlert={this.dismissAlert}>
-                    {this.state.alertText}
-                  </Alert>
-                }
-              </Fragment>
+            <TitleH2>Mis proyectos</TitleH2>
+            <ProjectsTable>
+              <ProjectsTableHead>
+                <ProjectsTableRow>
+                  <ProjectsTableHeader>Nombre</ProjectsTableHeader>
+                  <ProjectsTableHeader centered>Status</ProjectsTableHeader>
+                  <ProjectsTableHeader width={120} centered>Aportes</ProjectsTableHeader>
+                  <ProjectsTableHeader width={120} centered>Fecha creación</ProjectsTableHeader>
+                  <ProjectsTableHeader width={120} centered>Fecha de cierre</ProjectsTableHeader>
+                  <ProjectsTableHeader width={120} centered>Acciones</ProjectsTableHeader>
+                </ProjectsTableRow>
+              </ProjectsTableHead>
+              <ProjectsTableBody>
+                <ProjectsTableRow>
+                  <ProjectsTableCell centered colSpan={6}>
+                    {
+                      isLoading
+                        ? <ButtonTableDisabled><Icon icon={clockO} size={20} />Creando nuevo proyecto.. espere</ButtonTableDisabled> :
+                        <ButtonTable onClick={this.createProject}><Icon icon={plus} size={20} />Agregar un nuevo proyecto</ButtonTable>
+                    }
+                  </ProjectsTableCell>
+                </ProjectsTableRow>
+                {projects && projects.map((p, i) => <ProjectTableItem project={p} key={i} />)}
+              </ProjectsTableBody>
+            </ProjectsTable>
+            {
+              this.state.showAlert &&
+              <Alert status={this.state.alertStatus} dismissAlert={this.dismissAlert}>
+                {this.state.alertText}
+              </Alert>
             }
           </Section>
         )

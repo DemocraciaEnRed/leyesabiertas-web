@@ -38,9 +38,9 @@ export default ({ project, isPublished, setPublish, togglePublish }) => (
   <ClosedProposalWrapper>
     <Row>
       <ItemTitle>
-        Editar
+        Modo edición
       </ItemTitle>
-      <ProjectToggleEdit/>
+      <ProjectToggleEdit />
     </Row>
     <Row>
       <ItemTitle>
