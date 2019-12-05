@@ -5,7 +5,7 @@ import { CommentCounterContext } from './index'
 
 const StyledCommentSpan = styled.span`
   background-color: white;
-  background-color: rgba(92, 151, 188, .4);
+  background-color: rgba(239, 136, 93, .25);
   cursor:pointer;
 `
 
