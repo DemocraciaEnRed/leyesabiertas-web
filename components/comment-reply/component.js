@@ -12,7 +12,7 @@ import ProjectCreationDate from '../../elements/project-creation-date/component'
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const ReplySection = styled.div`
-  margin-left: 0.5rem;
+  margin-left: 15px;
   border-left: 1px solid #5c97bc;
 `
 
@@ -20,9 +20,13 @@ const ReplyText = styled.p`
   font-size: 1.2em !important;
   line-height: 1.5em !important;
   padding: 0.5rem 1rem;
-  margin-top: 1rem;
+  // margin-top: 1rem;
   border-left: 1px solid #5c97bc;
-  margin-left: 0.5rem;
+  
+  margin-left: 15px;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+
   white-space: pre-wrap;
 `
 
@@ -38,7 +42,7 @@ const InputBox = styled.textarea`
   color: #181818;
   line-height: 1.6rem !important;
   padding: 0.7rem 0;
-  margin-left: 1em;
+  margin-left: 15px !important;
   border: 1px solid #dae1e7;
   border-left: none;
   border-right: none; 
@@ -61,7 +65,7 @@ const ActionButton = styled.div`
 `
 const ReplyButton = styled.div`
   color: #5c97bc;
-  margin: 1rem 0;
+  // margin: 1rem 0;
   text-align:right;
   // margin-bottom: 3.3em;
   font-size: 1.4rem;
@@ -76,6 +80,7 @@ const Loading = styled.div`
   text-align: right;
   color: #000;
 `
+
 
 class CommentReply extends Component {
   constructor (props) {

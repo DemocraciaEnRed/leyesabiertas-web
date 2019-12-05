@@ -122,7 +122,6 @@ class Projects extends Component {
       }).join('&');
     console.log(theQuery)
     return theQuery
-
   }
 
   async getDocuments() {

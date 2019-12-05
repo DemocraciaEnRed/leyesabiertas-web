@@ -30,6 +30,7 @@ const Avatar = styled.div`
   background-size: cover;
   background-position: center;
   cursor: pointer;
+  border: 1px solid #CACACA;
 `
 const Name = styled.div`
 color: #2d4b5e;

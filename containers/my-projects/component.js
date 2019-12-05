@@ -229,16 +229,17 @@ const ProjectsTableHeader = styled.th`
   width: ${(props) => `${props.width}px` || 'auto'};
   border-bottom: 1px solid #CACACA;
   padding: 2px 5px;
+  ${(props) => props.hiddenMobile && '@media(max-width:700px){display: none;}'}
 `
 
 const ButtonTable = styled.div`
   padding: 5px 20px;
-  margin: 10px auto;
-  width: 80%;
+  margin: 10px;
   border: 1px solid #5c97bc;
   border-radius: 5px;
   color: #5c97bc;
   font-size: 17px;
+  text-align: center;
   &:hover {
     background-color: #5c97bc;
     color: #FFF;
@@ -248,38 +249,110 @@ const ButtonTable = styled.div`
 `
 const ButtonTableDisabled = styled.div`
   padding: 5px 20px;
-  margin: 10px auto;
-  width: 80%;
+  margin: 10px;
+  // width: 80%;
   border: 1px solid #868686;
   border-radius: 5px;
   color: #868686;
   font-size: 17px;
 `
 
+const LoadMoreButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
+
+const LoadMoreButton = styled.div`
+  margin: 0 auto;
+  font-size: 2.2 rem;
+  padding: 5px 25px;
+  border-radius: 4px;
+  border: 1px solid #2c4c61
+  cursor: pointer
+  color: #2c4c61;
+  &:hover{
+    background-color: #2c4c61;
+    color: #FFF
+  }
+  &:first-child{
+    margin-left: 0;
+  }
+  &:last-child{
+    margin-right: 0;
+  }
+  &.disabled{
+    color: #777;
+    border-color: #777;
+  }
+`
+const MessagePaginator = styled.div`
+  font-size: 2.5rem;
+  color: #454246;
+  font-family: var(--bold);
+  text-align: center;
+  width: 100%;
+`
+
 class MyProjects extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      projects: null,
+      projects: [],
       page: 1,
       noMore: false,
       showAlert: false,
       alertText: null,
       alertType: null,
-      isLoading: false
+      isLoading: false,
+      fetching: true,
+      fetchMoreAvailable: false,
+      query: {
+        created: 'DESC',
+        limit: 12,
+        page: 1,
+      }
     }
+  }
+
+  async getDocuments() {
+    try {
+      this.setState({
+        fetching: true
+      }, () => this.fetchProjects(this.props.authContext.keycloak.token))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  createQuery = (sort) => {
+    let theQuery = '?' +
+      Object.keys(sort).map(function (key) {
+        return encodeURIComponent(key) + '=' +
+          encodeURIComponent(sort[key])
+      }).join('&');
+    console.log(theQuery)
+    return theQuery
   }
 
   fetchProjects = async (token) => {
     try {
-      const projects = await (await fetch(`${API_URL}/api/v1/documents/my-documents?limit=100&created=DESC`, {
+      let query = this.createQuery(this.state.query);
+      const projects = await (await fetch(`${API_URL}/api/v1/documents/my-documents?${query}`, {
         'headers': {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token
         }
       })).json()
-      this.setState({
-        projects: projects.results
+      this.setState((prevState) => {
+        let query = prevState.query
+        query.page = projects.pagination.page + 1
+        return {
+          projects: prevState.projects.concat(projects.results),
+          fetchMoreAvailable: projects.pagination.page < projects.pagination.pages,
+          query: query,
+          fetching: false
+        }
       })
     } catch (error) {
       console.error(error)
@@ -350,26 +423,33 @@ class MyProjects extends Component {
   render() {
     const {
       projects,
-      isLoading
+      isLoading,
+      fetching,
+      fetchMoreAvailable
     } = this.state
     if (this.props.authContext.user) {
       if (this.props.authContext.isAuthor) {
         return (
           <Section id='projects' noMargin >
             <TitleH2>Mis proyectos</TitleH2>
+            {
+                      isLoading
+                        ? <ButtonTableDisabled><Icon icon={clockO} size={20} />&nbsp;&nbsp;Creando nuevo proyecto... Espere unos segundos...</ButtonTableDisabled> :
+                        <ButtonTable onClick={this.createProject}><Icon icon={plus} size={20} />&nbsp;&nbsp;Agregar un nuevo proyecto</ButtonTable>
+                    }
             <ProjectsTable>
               <ProjectsTableHead>
                 <ProjectsTableRow>
                   <ProjectsTableHeader>Nombre</ProjectsTableHeader>
-                  <ProjectsTableHeader centered>Status</ProjectsTableHeader>
-                  <ProjectsTableHeader width={120} centered>Aportes</ProjectsTableHeader>
-                  <ProjectsTableHeader width={120} centered>Fecha creación</ProjectsTableHeader>
-                  <ProjectsTableHeader width={120} centered>Fecha de cierre</ProjectsTableHeader>
-                  <ProjectsTableHeader width={120} centered>Acciones</ProjectsTableHeader>
+                  <ProjectsTableHeader hiddenMobile centered>Status</ProjectsTableHeader>
+                  <ProjectsTableHeader width={120} hiddenMobile centered>Aportes</ProjectsTableHeader>
+                  <ProjectsTableHeader width={120} hiddenMobile centered>Fecha creación</ProjectsTableHeader>
+                  <ProjectsTableHeader width={120} hiddenMobile centered>Fecha de cierre</ProjectsTableHeader>
+                  <ProjectsTableHeader width={120} hiddenMobile centered>Acciones</ProjectsTableHeader>
                 </ProjectsTableRow>
               </ProjectsTableHead>
               <ProjectsTableBody>
-                <ProjectsTableRow>
+                {/* <ProjectsTableRow>
                   <ProjectsTableCell centered colSpan={6}>
                     {
                       isLoading
@@ -377,7 +457,7 @@ class MyProjects extends Component {
                         <ButtonTable onClick={this.createProject}><Icon icon={plus} size={20} />Agregar un nuevo proyecto</ButtonTable>
                     }
                   </ProjectsTableCell>
-                </ProjectsTableRow>
+                </ProjectsTableRow> */}
                 {projects && projects.map((p, i) => <ProjectTableItem project={p} key={i} />)}
               </ProjectsTableBody>
             </ProjectsTable>
@@ -386,6 +466,18 @@ class MyProjects extends Component {
               <Alert status={this.state.alertStatus} dismissAlert={this.dismissAlert}>
                 {this.state.alertText}
               </Alert>
+            }
+            {
+              !fetching && fetchMoreAvailable && <LoadMoreButtonContainer>
+                <LoadMoreButton onClick={() => this.getDocuments()}>Cargar más</LoadMoreButton>
+              </LoadMoreButtonContainer>
+            }
+            {
+              fetching && <MessagePaginator>Cargando...</MessagePaginator>
+            }
+            {
+              !fetching && !fetchMoreAvailable &&
+              <MessagePaginator>No hay más propuestas de leyes</MessagePaginator>
             }
           </Section>
         )

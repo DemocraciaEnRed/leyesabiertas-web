@@ -34,7 +34,7 @@ const ProjectHeaderVersion = ({ project, version }) => (
   <StyledDiv>
     <ProjectHeaderVersionTitle>Versión: {version}</ProjectHeaderVersionTitle>
     <ProjectHeaderVersionLink>
-      <Link href={{ pathname: '/versiones', query: { id: project } }}>Ver versiones ➔</Link>
+      <Link href={{ pathname: '/versiones', query: { id: project } }}>Versiones ➔</Link>
     </ProjectHeaderVersionLink>
   </StyledDiv>
 )

@@ -48,6 +48,7 @@ const ProjectsTableCell = styled.td`
   & > a:hover{
     color: red;
   }
+  ${(props) => props.hiddenMobile && '@media(max-width:700px){display: none;}'}
 `
 
 const ProjectTitle = styled.p`
@@ -59,10 +60,24 @@ const ProjectTitle = styled.p`
   & > a:hover{
     color: #363760;
   }
+  @media(max-width:700px){
+    font-size: 13px;
+  }
 `
 const WithIcon = styled.p`
   display: flex
   color: ${(props) => props.color};
+`
+const MobileDetailWithIcon = styled.span`
+  color: ${(props) => props.color};
+`
+const MobileDetail = styled.p`
+  display: none;
+  @media(max-width:700px){
+  margin: 3px 0px 0px;
+    display: block;
+    font-size: 10px;
+  }
 `
 
 const formatDate = (createdAt) => {
@@ -75,24 +90,33 @@ export default ({ project }) => (
       <ProjectTitle>
         <Link href={{ pathname: '/propuesta', query: { id: project._id } }}>{project.currentVersion.content.title}</Link>
       </ProjectTitle>
+      <MobileDetail>
+        <MobileDetailWithIcon color={project.closed ? 'inherit' : 'green'}>{project.closed ? <Icon icon={timesCircle} size={12} /> : <Icon icon={checkCircle} size={12} /> }&nbsp;&nbsp;{project.closed ? 'Cerrado' : 'Abierto'}</MobileDetailWithIcon>&nbsp;&nbsp;-&nbsp;&nbsp;
+        <MobileDetailWithIcon color={project.published ? 'inherit' : 'purple'}>{project.published ? <Icon icon={eye} size={12} /> : <Icon icon={lowVision} size={12} /> }&nbsp;&nbsp;{project.published ? 'Publico' : 'Oculto'}</MobileDetailWithIcon>&nbsp;&nbsp;-&nbsp;&nbsp;
+        {project.commentsCount} Aport{project.commentsCount > 1 ? 'es' : 'e'}&nbsp;&nbsp;-&nbsp;&nbsp;
+        {project.currentVersion.version} {project.currentVersion.version > 1 ? 'Versiones' : 'Versión'}
+        <br/>
+        Fecha de creación: {formatDate(project.createdAt)}&nbsp;&nbsp;-&nbsp;&nbsp;
+        Fecha de cierre: {formatDate(project.currentVersion.content.closingDate)}
+      </MobileDetail>
     </ProjectsTableCell>
-    <ProjectsTableCell centered>
+    <ProjectsTableCell  hiddenMobile centered>
       <WithIcon color={project.closed ? 'inherit' : 'green'}>{project.closed ? <Icon icon={timesCircle} size={15} /> : <Icon icon={checkCircle} size={15} /> }&nbsp;&nbsp;{project.closed ? 'Cerrado' : 'Abierto'}</WithIcon>
       <WithIcon color={project.published ? 'inherit' : 'purple'}>{project.published ? <Icon icon={eye} size={15} /> : <Icon icon={lowVision} size={15} /> }&nbsp;&nbsp;{project.published ? 'Publico' : 'Oculto'}</WithIcon>
     </ProjectsTableCell>
-    <ProjectsTableCell centered>
+    <ProjectsTableCell  hiddenMobile centered>
       <p>
         {project.commentsCount} Aport{project.commentsCount > 1 ? 'es' : 'e'}
       </p>
       <p>{project.currentVersion.version} {project.currentVersion.version > 1 ? 'Versiones' : 'Versión'}</p>
     </ProjectsTableCell>
-    <ProjectsTableCell centered>
+    <ProjectsTableCell  hiddenMobile centered>
       {formatDate(project.createdAt)}
     </ProjectsTableCell>
-    <ProjectsTableCell centered>
+    <ProjectsTableCell  hiddenMobile centered>
       {formatDate(project.currentVersion.content.closingDate)}
     </ProjectsTableCell>
-    <ProjectsTableCell centered>
+    <ProjectsTableCell  hiddenMobile centered>
       <Link href={{ pathname: '/propuesta', query: { id: project._id } }}>Ir al proyecto ➔</Link>
     </ProjectsTableCell>
   </ProjectsTableRow>
