@@ -43,7 +43,6 @@ export default ({ contributors, contributions, contextualComments }) => (
       { 
         (contributions) > 0 &&
         <DashboardBarItem>
-          <BarTitle>Aportes Destacados</BarTitle>
           <DashboardBarTextContainer>
             <ActivityIcon img={'/static/assets/cha-rect-star.svg'} small={true} />
             <BarActivitySubtitle number={contributions}>

@@ -30,13 +30,13 @@ const ProjectStatus = ({ closed }) => {
   if (!closed) {
     return (
       <OpenContainer>
-        Se aceptan aportes
+        Abierto para aportes
       </OpenContainer>
     )
   }
   return (
     <ClosedContainer>
-      Finalizó el periodo de aportes
+      Finalizó el periodo para aportes
     </ClosedContainer>
   )
 }
