@@ -3,15 +3,19 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const ProjectTitle = styled.h1`
-  font-size: 6rem;
-  font-family: var(--bold);
-  line-height: 1.08;
+  font-size: 4.2rem;
+  font-family: var(--regular);
+  line-height: 4.5rem;
   color: #203340;
-  align-self: flex-end;
+  letter-spacing: -2px;
+  width: 100%;
   @media(max-width:700px){
-    align-self: flex-start;
+    font-size: 3rem;
+    line-height: 3.5rem;
   }
-  padding-top:4rem;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  // border-bottom: 1px solid #CACACA;
 `
 ProjectTitle.propTypes = {
   children: PropTypes.string.isRequired

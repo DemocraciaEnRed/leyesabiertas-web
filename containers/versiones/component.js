@@ -108,7 +108,7 @@ const CustomTitle = styled.h1`
   font-size: 2.4rem;
   font-weight: 700;
   color: #2c4c61;
-  margin: 2.1rem 0;
+  margin-bottom: 1.5rem;
 `
 
 const ContributionsTitle = styled.h1`

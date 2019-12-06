@@ -15,9 +15,6 @@ const Wrapper = styled.div`
   border-left: 1px solid #CACACA;
   margin-left: 15px;
   min-width: 125px;
-  @media (max-width:700px){
-    display: none;
-  }
 `
 // const ToggleItem = styled.div`
 //   font-size:12px;
@@ -99,29 +96,22 @@ const ToggleClick = styled.span`
 
 `
 
-const ProjectEditMode = () => (
+const ProjectEditModeMobile = () => (
   <ArticlesContext.Consumer>
     {
       ({ isAuthor, editMode, toggleEditMode }) => isAuthor &&
-        <Wrapper>
-          <Label>Modo edición</Label>
-          {/* <div>
-            <ToggleItem onClick={toggleEditMode}>
-              <StyledCheck type='checkbox' />
-              <ItemOn>{ editMode ? 'Activado' : 'Desactivado' }</ItemOn>
-              <ItemOff>Desactivado</ItemOff>
-            </ToggleItem>
-          </div> */}
+        <div>
           <ToggleClick onClick={toggleEditMode}>
             {
-              editMode ? <Icon icon={toggleFilled} size={40} style={{ color: 'green' }} /> : <Icon icon={toggle} size={40} style={{ color: '#4a5d84' }} />
-            } {
               editMode ? 'Activado' : 'Desactivado'
+            }&nbsp;&nbsp;
+            {
+              editMode ? <Icon icon={toggleFilled} size={30} style={{ color: 'green' }} /> : <Icon icon={toggle} size={30} style={{ color: '#4a5d84' }} />
             }
           </ToggleClick>
-        </Wrapper>
+        </div>
     }
   </ArticlesContext.Consumer>
 )
 
-export default ProjectEditMode
+export default ProjectEditModeMobile

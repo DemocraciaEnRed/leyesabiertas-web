@@ -14,16 +14,22 @@ const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const StyledCommentCard = styled.div`
   width: 300px;
-  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
-  border: solid 1px #dae1e7;
+  // box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
+  border-bottom: solid 3px #dae1e7;
   background-color: #ffffff;
-  margin-bottom: 27px;
-  padding: 23px 18px 18px;
+  // margin-bottom: 27px;
+  &:last-child{
+    border-bottom: 0;
+  }
+  padding: 12px 15px;
   > p {
     width: 270px;
-    font-size: 1.4rem;
-    line-height: 1.57;
+    font-size: 13px;
+    line-height: 1.3;
     color: #181818;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    text-align: justify;
   }
 `
 const StyledLikeWrapper = styled.div`

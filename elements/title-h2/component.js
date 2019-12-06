@@ -7,6 +7,7 @@ const Title = styled.h2`
   font-size: 3rem;
   color: var(--black);
   padding:10 10 10 0;
+  margin-bottom: 10px;
 `
 
 const TitleH2 = (props) => (

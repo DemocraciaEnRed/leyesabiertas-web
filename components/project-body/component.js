@@ -27,7 +27,12 @@ const P = styled.p`
   font-size: 18px;
   line-height: 1.94;
   padding-bottom:3rem;
-  color: #203340;`
+  color: #203340;
+  @media (max-width: 700px) {
+    // font-size: 18px;
+    // line-height: 1.3;
+  }
+  `
 
 const H2 = styled.h2`
   font-size: 24px;

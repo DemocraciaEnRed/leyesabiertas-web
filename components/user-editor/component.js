@@ -26,16 +26,20 @@ const StyledEditorWrapper = styled.div`
     margin-top:4rem;
     max-width: 74%;
     @media (max-width: 1024px) {
-    max-width:60%;
-  }
+      max-width:60%;
+    }
     @media (max-width: 700px) {
       max-width:100%;
     }
     span {
       font-size: 1.8rem;
       line-height: 1.89;
+      @media (max-width: 700px) {
+      // line-height: 1.89;
+      }
       color: #203340;
-      padding: 6.5px 0px;
+      // padding: 6.5px 0px;
+      padding: 4.5px 0px;
     }
   }
 `
@@ -144,6 +148,12 @@ class UserEditor extends Component {
       return { activeComments: ids }
     })
   }
+  closeCommentsGrid = () => {
+    this.setState({
+      // activeComments: null,
+      top: null
+    })
+  }
 
   editorLoad = (editor) => { this.editor = editor }
 
@@ -165,7 +175,8 @@ class UserEditor extends Component {
             removeComment={this.removeComment}
             top={this.state.top}
             attachReply={this.attachReply}
-            updateComments={this.fetchComments} />
+            updateComments={this.fetchComments}
+            closeCommentsGrid={this.closeCommentsGrid} />
         }
         { !this.props.isClosed &&
           <ArticlesSubtitle authenticated={this.props.authContext.authenticated} editMode={this.props.editMode} />

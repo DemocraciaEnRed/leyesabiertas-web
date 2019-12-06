@@ -122,7 +122,6 @@ class Projects extends Component {
       }).join('&');
     console.log(theQuery)
     return theQuery
-
   }
 
   async getDocuments() {
@@ -196,7 +195,7 @@ class Projects extends Component {
       loading
     } = this.state
     return (
-      <Section id='projects'>
+      <Section id='projects' noMargin>
         <TitleH2>Propuestas de ley abiertas para la co-creación.</TitleH2>
         <SubtitleH3>Estas son las propuestas y proyectos de ley disponibles para leer y aportar . ¡Ayude a mejorarlas!</SubtitleH3>
         <Options>

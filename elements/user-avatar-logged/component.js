@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 display:flex;
 align-items:flex-start;
 text-align:left;
-width:296px;
+width:100%;
 margin-bottom:1rem;
 `
 const Avatar = styled.div`
@@ -22,6 +22,7 @@ const Avatar = styled.div`
   background-image: url('${(props) => props.userId ? `${API_URL}/api/v1/users/${props.userId}/avatar` : '/static/assets/userdefault.png'}');
   background-size: cover;
   background-position: center;
+  border: 1px solid #CACACA;
 `
 const Name = styled.div`
   font-size: 1.4rem;

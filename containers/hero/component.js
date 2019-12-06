@@ -20,6 +20,9 @@ const StyledHero = styled.div`
     background-position: 46% center;
     background-size: cover;
   }
+  @media (max-width:700px){
+      padding: 0 20px;
+    }
 `
 
 const Hero = () => (
