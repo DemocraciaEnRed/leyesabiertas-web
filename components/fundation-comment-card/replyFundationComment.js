@@ -78,7 +78,7 @@ const Loading = styled.div`
 `
 
 class ReplyFundationComment extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       inputText: props.reply || null,
@@ -92,9 +92,14 @@ class ReplyFundationComment extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  componentDidUpdate (prevProps) {
-    if(prevProps.showInputForm !== this.props.showInputForm) {
-      this.setState({showInput: this.props.showInputForm});
+  componentDidUpdate(prevProps) {
+    if (prevProps.showInputForm !== this.props.showInputForm) {
+      this.setState({ showInput: this.props.showInputForm }, () => {
+        // setTimeout(() => {
+        //   console.log(this.replyTextarea)
+        //   this.replyTextarea.current.focus()
+        // }, 600);
+      });
     }
   }
 
@@ -154,23 +159,23 @@ class ReplyFundationComment extends Component {
     })
   }
 
-  handleChange (event) {
+  handleChange(event) {
     this.setState({ inputText: event.target.value })
   }
 
-  render () {
+  render() {
     let { reply, project, isAuthor } = this.props
     let { showInput, inputText, isLoading, sent } = this.state
     return (
       <Fragment>
-        { reply && !showInput &&
-        <ReplyText>
-          <UserAvatar
-            style={{marginBottom: '0px !important', backgroundColor: 'red'}}
-            userId={project.author._id}
-            name={project.author.fullname}
-            subtitle={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
-          {reply}</ReplyText>
+        {reply && !showInput &&
+          <ReplyText>
+            <UserAvatar
+              style={{ marginBottom: '0px !important', backgroundColor: 'red' }}
+              userId={project.author._id}
+              name={project.author.fullname}
+              subtitle={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
+            {reply}</ReplyText>
         }
         {
           showInput && isAuthor &&
@@ -183,7 +188,7 @@ class ReplyFundationComment extends Component {
                 subtitle={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
             </ReplyText>
             <ReplySection>
-              <InputBox value={this.state.inputText} onChange={this.handleChange} placeholder={'Ingrese su respuesta'} />
+              <InputBox value={this.state.inputText} onChange={this.handleChange} placeholder={'Ingrese su respuesta'} autoFocus />
             </ReplySection>
             {
               isLoading
