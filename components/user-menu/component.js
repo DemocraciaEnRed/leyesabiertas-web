@@ -18,7 +18,7 @@ const StyledUl = styled.ul`
   align-content: space-between;
   flex-wrap: wrap;
   right: 1;
-  margin-top:42px;
+  margin-top:50px;
   margin-left:20px;
   position: absolute;
   z-index: 99;
@@ -33,7 +33,7 @@ const StyledUl = styled.ul`
     top: -13px;
     bottom: auto;
     left: auto;
-    right: 9px;
+    right: 0px;
     border-width: 0 13px 13px;
   }
   :after{ 
@@ -46,7 +46,7 @@ const StyledUl = styled.ul`
     top: -12px;
     bottom: auto;
     left: auto;
-    right: 9px;
+    right: 0px;
     border-width: 0 13px 13px;
     }
 `

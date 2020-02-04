@@ -24,7 +24,7 @@ const Avatar = styled.div`
 `
 const Name = styled.div`
 color: #2d4b5e;
-font-size: 1.4rem;
+font-size: 1.6rem;
 font-family:var(--bold);
 `
 const Party = styled.div`
@@ -32,7 +32,7 @@ font-size:1.2rem;
 color: #5c97bc;
 text-transform:uppercase;
 display:flex;
-margin-top:.7rem;
+margin-top:0px;
 align-items:center;
 
 `
@@ -41,7 +41,7 @@ height:35px;
 @media (max-width: 760px) {
     height:25px;
   }
-margin-top:0px;
+margin-top:5px;
 padding-left:10px;
 display:flex;
 flex-direction:column;
@@ -51,7 +51,7 @@ justify-content:space-between;
   }
 `
 const Arrow = styled.i`
-  margin:0px 0px 0px 15px;
+  margin:10px 0px 0px 8px;
   border: solid #4a5d68;
   border-width: 0 2px 2px 0;
   display: inline-block;
