@@ -954,7 +954,7 @@ class ProjectFields extends Component {
           }
           <SpanOk>NOTA: Ingrese solamente el dominio del video, sin "https://", que termina hasta ".mp4". (Ej: argos.hcdn.gob.ar/DMPARL/tutorial.mp4)</SpanOk>
         </ProfileLabel>
-        <ProfileLabel>
+        {/* <ProfileLabel>
           Ingrese el link del video de Youtube (Opcional)
           <InputField
             type='text'
@@ -963,7 +963,7 @@ class ProjectFields extends Component {
             onChange={this.handleInputChangeYoutube} />
           {!this.state.youtubeId && <SpanOk>Link invalido o vacio (El proyecto se publicará sin video)</SpanOk>
           }
-        </ProfileLabel>
+        </ProfileLabel> */}
         <ProfileLabel>
           Palabras de cierre
           <TextareaField
