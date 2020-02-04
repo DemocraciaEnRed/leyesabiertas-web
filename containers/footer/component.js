@@ -14,7 +14,7 @@ const FooterWrapper = styled.footer`
 const Footer = () => (
   <FooterWrapper>
     <FooterTextWrapper>
-      <P><strong>Honorable Cámara de Diputados de la Nación Argentina</strong> | Congreso de la Nación Argentina | Av. Rivadavia 1864 | Ciudad Autónoma de Bs. As. (C.P. C1033AAV) | (54-11) 4127-7100</P>
+      <P><strong>Honorable Cámara de Diputados de la Nación Argentina</strong> | Congreso de la Nación Argentina | Av. Rivadavia 1864 | Ciudad Autónoma de Bs. As. (C.P. C1033AAV) | (54-11) 6075-7100</P>
       <P>Nota: La información contenida en este sitio es de dominio público y puede ser utilizada libremente. Se solicita citar la fuente.</P>
     </FooterTextWrapper>
   </FooterWrapper>
