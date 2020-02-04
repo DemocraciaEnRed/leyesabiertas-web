@@ -13,7 +13,7 @@ import { ArticlesContext } from '../../containers/user-project-container/compone
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const StyledCommentCard = styled.div`
-  width: 300px;
+  width: 100%;
   // box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
   border-bottom: solid 3px #dae1e7;
   background-color: #ffffff;
@@ -23,7 +23,7 @@ const StyledCommentCard = styled.div`
   }
   padding: 12px 15px;
   > p {
-    width: 270px;
+    width: 100%;
     font-size: 13px;
     line-height: 1.3;
     color: #181818;
