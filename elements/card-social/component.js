@@ -34,12 +34,14 @@ const CommentaryIcon = styled.div`
 `
 
 const LimitDate = styled.div`
-font-size:1.1rem;
-background-color: #ef885d;
-color: #FFF;
-padding: 3px 6px;
-border-radius: 4px;
-margin: 0 auto;
+  font-size: 11px;
+  color: white;
+  background-color: #ef885d;
+  padding: 4px 15px;
+  text-transform: uppercase;
+  font-family: var(--medium);
+  border-radius: 2px;
+  margin: 0 auto;
 `
 const Span = styled.span`
   font-family: var(--bold);
@@ -52,7 +54,7 @@ const Social = ({ commentaries, closed }) => (
       <Span> {commentaries}</Span> {commentaries === 1 ? ' Aporte' : ' Aportes'}
     </CommentaryItems>
     {closed &&
-      <LimitDate>Finalizó el periodo de aportes</LimitDate>
+      <LimitDate>Finalizó el periodo para aportes</LimitDate>
     }
   </Wrapper>
 )

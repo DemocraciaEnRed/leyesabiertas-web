@@ -15,6 +15,8 @@ const StyledCommentsGrid = styled.div`
   overflow-y: scroll;
   z-index: 1;
   background-color: #FFF;
+  min-width: 300px;
+  width: 33%;
   ${(props) => !props.show && 'display: none;'}
 `
 const CloseGrid = styled.div`

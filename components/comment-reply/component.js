@@ -185,7 +185,7 @@ class CommentReply extends Component {
                 subtitle={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
             </ReplyText>
             <ReplySection>
-            <InputBox value={this.state.inputText} onChange={this.handleChange} placeholder={'Ingrese su respuesta'} />
+            <InputBox value={this.state.inputText} onChange={this.handleChange} placeholder={'Ingrese su respuesta'} autoFocus />
             </ReplySection>
             {
               isLoading
