@@ -118,19 +118,19 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
       {currentSection === '/propuesta' &&
         <ModeBar>
           <ModeBarLinkButton active>Presentación</ModeBarLinkButton>
-          <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project._id } }}>Articulos</ModeBarLinkButton>
+          <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project._id } }}>Artículos</ModeBarLinkButton>
         </ModeBar>
       }
       {currentSection === '/versiones' &&
         <ModeBar>
           <ModeBarLinkButton href={{ pathname: '/propuesta', query: { id: project._id } }}>Presentación</ModeBarLinkButton>
-          <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project._id } }}>Articulos</ModeBarLinkButton>
+          <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project._id } }}>Artículos</ModeBarLinkButton>
         </ModeBar>
       }
       {currentSection === '/articulado' &&
         <ModeBar>
           <ModeBarLinkButton href={{ pathname: '/propuesta', query: { id: project._id } }}>Presentación</ModeBarLinkButton>
-          <ModeBarLinkButton active>Articulos</ModeBarLinkButton>
+          <ModeBarLinkButton active>Artículos</ModeBarLinkButton>
           <ModeButton>
             {withComments ? <Icon icon={squareO} size={20} /> : <Icon icon={checkSquareO} size={20} />}&nbsp;
             Modo lectura

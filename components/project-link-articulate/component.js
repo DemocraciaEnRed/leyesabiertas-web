@@ -46,7 +46,7 @@ const styledButton = (props) => (
       <TheArrow>
         <Icon icon={arrowRight} size={30} />
       </TheArrow>
-      { props.closed ? 'Conozca los articulos de la propuesta' : 'Contribuya dejando sus aportes en los articulos de la propuesta'}
+      { props.closed ? 'Conozca los artículos de la propuesta' : 'Contribuya dejando sus aportes en los artículos de la propuesta'}
     </StyledButton>
   </Link>
 )

@@ -3,6 +3,15 @@
 
 ### 1.7.1
 
+- Arreglados unos typos
+
+Compatible con:
+- `leyesabiertas-core:1.7.1`
+- `leyesabiertas-notifier:1.7.2`
+
+
+### 1.7.1
+
 - Mejorado el grid visual de los comentarios del articulado. Ahora se adapta de mejor forma al tamaño de la pantalla.
 - Cambiado el numero del telefono de diputados en el footer
 - Correcciones ortograficas
