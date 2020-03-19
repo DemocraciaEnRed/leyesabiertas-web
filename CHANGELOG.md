@@ -1,7 +1,7 @@
 
 # Changelog
 
-### 1.7.1
+### 1.7.2
 
 - Arreglados unos typos
 
