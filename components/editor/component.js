@@ -68,7 +68,7 @@ class UserEditor extends Component {
 
   onSelect = (e) => {
     const selection = this.state.value.selection.toJSON()
-    if (selection.isFocused && (selection.anchor.offset !== selection.focus.offset) & !this.state.showAddComment) {
+    if (selection.isFocused && (selection.anchor.offset !== selection.focus.offset) && !this.state.showAddComment) {
       const s = findDOMRange(this.state.value.selection).getBoundingClientRect()
       this.setState({
         showAddComment: true,
