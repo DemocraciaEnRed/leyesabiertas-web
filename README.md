@@ -11,8 +11,6 @@ Para saber mas del conjunto de modulos que compone leyes abiertas, hace [click a
 
 ## Setup leyesabiertas-web
 
-
-
 > #### ⚠️ NOTAS IMPORTANTES
 > 
 > El siguiente conjunto de sistemas requiere de:
