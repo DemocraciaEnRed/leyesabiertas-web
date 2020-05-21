@@ -80,4 +80,4 @@ In file `containers/app-wrapper/component.js`, change line 75
 
 ## Licencia
 
-El siguiente repositorio es un desarrollo de codigo abierto bajo la licencia GNU General Public License v3.0. Pueden acceder a la haciendo [/LICENSE](click aqui).
+El siguiente repositorio es un desarrollo de codigo abierto bajo la licencia GNU General Public License v3.0. Pueden acceder a la haciendo [click aqui](./LICENSE).
