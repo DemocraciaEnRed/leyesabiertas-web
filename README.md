@@ -14,9 +14,12 @@ Para saber mas del conjunto de modulos que compone leyes abiertas, hace [click a
 > #### ⚠️ NOTAS IMPORTANTES
 > 
 > El siguiente conjunto de sistemas requiere de:
-> - Keycloak 4.x.x o 6.x.x
+> - Mongo3.6
+> - Keycloak 4.4.x o 6.0.x
 > 
-> Keycloak es un sistema open source de identificación y gestión de acceso de usuarios. Es un sistema complejo y para fines de testing, en [Democracia en Red](https://democraciaenred.org) sabemos que la instalacion de Keycloak puede ser un bloqueo para intenciones de testing. Para eso, comunicate con nosotros y podemos ayudarte a hacer el setup y utilizar nuestro Keycloak de Democracia en Red. Envianos un correo electronico en [it@democraciaenred.org](mailto:it@democraciaenred.org) o contactanos a través de nuestro [Twitter](https://twitter.com/fundacionDER).
+> Sobre Mongo3.6, es necesario que instales mongo 3.6 en tu computadora, con una base de datos llamada "leyesabiertas". No hace falta crear alguna collection, eso lo hace la app en inicio.
+> 
+> Keycloak es un sistema open source de identificación y gestión de acceso de usuarios. Es un sistema complejo y para fines de testing, en [Democracia en Red](https://democraciaenred.org) sabemos que la instalacion de Keycloak puede ser un bloqueo para intenciones de testing. Para eso, comunicate con nosotros y podemos ayudarte a hacer el setup y utilizar nuestro Keycloak de Democracia en Red. Envianos un correo electronico en [mailto:it@democraciaenred.org](it@democraciaenred.org) o contactanos a través de nuestro [Twitter](https://twitter.com/fundacionDER).
 
 Ir a la carpeta del repo y instalar las dependencias.
 
