@@ -4,6 +4,9 @@ import DatePicker from  "react-datepicker";
 import es from 'date-fns/locale/es';
 import ProfileLabel from '../../elements/profile-label/component'
 import EditorTitle from '../../elements/editor-title/component'
+import { WithContext as ReactTags } from 'react-tag-input'
+import getConfig from 'next/config'
+const { publicRuntimeConfig: { API_URL } } = getConfig()
 injectGlobal`
 //--------------------------------------
 
@@ -814,7 +817,7 @@ const SpanDanger = styled.span`
 const EditField = styled.div`
   border: 1px solid #dae1e7;
   padding: 2.5em 2.5em 1em;
-  margin-bottom: 2em;  
+  margin-bottom: 2em;
 `
 
 class ProjectFields extends Component {
@@ -858,7 +861,8 @@ class ProjectFields extends Component {
       closingDate: new Date(this.state.closingDate).toISOString(),
       youtubeId: this.state.youtubeId,
       customVideoId: this.state.customVideoId,
-      closure: this.state.closure
+      closure: this.state.closure,
+      tags: this.state.tags
     }
   }
 
@@ -901,6 +905,14 @@ class ProjectFields extends Component {
     }, () => {
       this.parseVideoId()
     })
+  }
+
+  handleInputChangeEtiquetas = (tags) => {
+    const name = 'tags'
+    const value = tags
+    this.setState({
+      [name]: value
+    }, () => this.props.setNewFields(this.getBodyPayload()))
   }
 
   render() {
@@ -973,9 +985,165 @@ class ProjectFields extends Component {
             placeholder='Escriba aquí el texto' />
           <SpanOk>NOTA: Las palabras de cierre solo serán visibles luego de la fecha de cierre</SpanOk>
         </ProfileLabel>
+        <ProfileLabel>
+          Etiquetas
+          <EtiquetasInput onChange={this.handleInputChangeEtiquetas} />
+        </ProfileLabel>
       </EditField>
     )
   }
 }
+
+injectGlobal`
+/* https://github.com/prakhar1989/react-tags/blob/master/example/reactTags.css */
+/* Example Styles for React Tags*/
+div.ReactTags__tags {
+    position: relative;
+}
+
+/* Styles for the input */
+div.ReactTags__tagInput {
+    width: 200px;
+    border-radius: 2px;
+    display: inline-block;
+}
+div.ReactTags__tagInput input.ReactTags__tagInputField,
+div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
+    height: 31px;
+    margin: 0;
+    font-size: 12px;
+    width: 100%;
+    border: 1px solid #eee;
+}
+
+/* Styles for selected tags */
+div.ReactTags__selected span.ReactTags__tag {
+    border: 1px solid #ddd;
+    background: #eee;
+    font-size: 12px;
+    display: inline-block;
+    padding: 5px;
+    margin: 0 5px;
+    border-radius: 2px;
+}
+div.ReactTags__selected a.ReactTags__remove {
+    color: #aaa;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+/* Styles for suggestions */
+div.ReactTags__suggestions {
+    position: absolute;
+    z-index: 1;
+}
+div.ReactTags__suggestions ul {
+    list-style-type: none;
+    box-shadow: .05em .01em .5em rgba(0,0,0,.2);
+    background: white;
+    width: 200px;
+}
+div.ReactTags__suggestions li {
+    border-bottom: 1px solid #ddd;
+    padding: 5px 10px;
+    margin: 0;
+}
+div.ReactTags__suggestions li mark {
+    text-decoration: underline;
+    background: none;
+    font-weight: 600;
+}
+div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
+    background: #b7cfe0;
+    cursor: pointer;
+}
+`
+const KeyCodes = {
+  comma: 188,
+  enter: 13,
+};
+const delimiters = [KeyCodes.comma, KeyCodes.enter];
+class EtiquetasInput extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      tags: [
+        { id: 'Economía y finanzas', text: 'Economía y finanzas' },
+        { id: 'Comercio', text: 'Comercio' },
+       ],
+      suggestions: []
+    };
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleAddition = this.handleAddition.bind(this);
+    this.handleDrag = this.handleDrag.bind(this);
+  }
+
+  handleDelete(i) {
+    const { tags } = this.state;
+    this.setState({
+      tags: tags.filter((tag, index) => index !== i),
+    }, this.onTagsChange);
+  }
+
+  handleAddition(tag) {
+    this.setState(state => ({ tags: [...state.tags, tag] }), this.onTagsChange);
+  }
+
+  handleDrag(tag, currPos, newPos) {
+    const tags = [...this.state.tags];
+    const newTags = tags.slice();
+
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+
+    // re-render
+    this.setState({ tags: newTags });
+  }
+
+  async componentWillMount() {
+    await this.fetchEtiquetas()
+  }
+
+  onTagsChange(){
+    this.props.onChange(this.state.tags)
+  }
+
+  fetchEtiquetas = async () => {
+    try {
+      const results = await (await fetch(`${API_URL}/api/v1/document-tags`, {
+        'headers': {
+          'Content-Type': 'application/json'
+        }
+      })).json()
+      this.setState({
+        suggestions: results.results.map(documentTag => { return { id: documentTag._id, text: documentTag.name } })
+      })
+    } catch (err) {
+      console.error(err)
+      this.setState({
+        suggestions: []
+      })
+    }
+  }
+
+  render() {
+    const { tags, suggestions } = this.state;
+    // React-Tags - https://www.npmjs.com/package/react-tag-input
+    return (
+      <ReactTags
+        placeholder='Agregar categoría'
+        tags={tags}
+        suggestions={suggestions}
+        handleDelete={this.handleDelete}
+        handleAddition={this.handleAddition}
+        handleDrag={this.handleDrag}
+        delimiters={delimiters}
+        autofocus={false}
+        allowDeleteFromEmptyInput={false} />
+    )
+  }
+}
+
 
 export default ProjectFields
