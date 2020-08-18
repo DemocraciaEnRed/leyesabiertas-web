@@ -10,6 +10,7 @@ import ProjectBody from '../../components/project-body/component'
 import ProjectComments from '../../components/project-comments/component'
 import UserEditor from '../../components/user-editor/component'
 import Versiones from '../versiones/component'
+import ProjectTags from '../../components/project-tags/component'
 
 
 const ArticlesContext = createContext({
@@ -89,6 +90,7 @@ export default class extends Component {
           {this.props.section === '/propuesta' &&
             <Fragment>
               <ProjectBody project={project.document} />
+              <ProjectTags project={project.document} />
               <ProjectComments project={project.document} />
             </Fragment>
           }
