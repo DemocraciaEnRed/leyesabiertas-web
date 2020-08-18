@@ -17,7 +17,7 @@ const ProjectBodyContainer = styled.div`
   margin-left:auto;
   // padding:5% 20% 0% 10%;
   padding: 15px 20% 0% 3.5%;
-  
+
   @media (max-width:769px){
     padding:5% 0px;
   }
@@ -67,6 +67,7 @@ const ProjectBody = ({ project }) => (
                 youtubeId={project.currentVersion.content.youtubeId}
                 customVideoId={project.currentVersion.content.customVideoId}
                 closure={project.currentVersion.content.closure}
+                tags={project.currentVersion.content.tags}
                 setNewFields={setNewFields} />
             }
             {

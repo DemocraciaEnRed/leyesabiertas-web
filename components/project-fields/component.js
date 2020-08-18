@@ -5,8 +5,7 @@ import es from 'date-fns/locale/es';
 import ProfileLabel from '../../elements/profile-label/component'
 import EditorTitle from '../../elements/editor-title/component'
 import { WithContext as ReactTags } from 'react-tag-input'
-import getConfig from 'next/config'
-const { publicRuntimeConfig: { API_URL } } = getConfig()
+import WithDocumentTagsContext from '../../components/document-tags-context/component'
 injectGlobal`
 //--------------------------------------
 
@@ -829,6 +828,8 @@ class ProjectFields extends Component {
     customVideoId: null,
     youtubeURL: null,
     closure: null,
+    tags: [],
+    allTags: []
   }
 
   componentDidMount() {
@@ -838,8 +839,10 @@ class ProjectFields extends Component {
       imageCover,
       youtubeId,
       customVideoId,
-      closure
+      closure,
+      tags
     } = this.props
+
     this.setState({
       title,
       imageCover,
@@ -847,8 +850,19 @@ class ProjectFields extends Component {
       youtubeURL: youtubeId ? 'https://www.youtube.com/watch?v=' + youtubeId : '',
       customVideoId: customVideoId || null,
       closingDate: new Date(closingDate.split('T')[0].replace(/-/g, '\/')),
-      closure: closure || null
-    }, () => this.props.setNewFields(this.getBodyPayload()))
+      closure: closure || null,
+      tags
+    }, () => {
+      this.props.setNewFields(this.getBodyPayload())
+
+      this.props.fetchDocumentTags().then(documentTags => {
+        const parsedTags = documentTags.map(documentTag => ({ id: documentTag._id, text: documentTag.name }))
+        this.setState({
+          allTags: parsedTags
+        })
+      })
+    })
+
     console.log(new Date(closingDate))
     console.log(new Date(Date.parse(closingDate)))
     console.log(closingDate)
@@ -874,7 +888,6 @@ class ProjectFields extends Component {
     }, () => this.props.setNewFields(this.getBodyPayload()))
   }
   handleDateChange = (date) => {
-    console.log(date)
     console.log(date)
     this.setState({
       closingDate: date.toISOString().split('T')[0].replace(/-/g, '\/')
@@ -907,15 +920,26 @@ class ProjectFields extends Component {
     })
   }
 
-  handleInputChangeEtiquetas = (tags) => {
-    const name = 'tags'
-    const value = tags
+  handleEtiquetasDelete = (i) => {
+    const { tags } = this.state;
     this.setState({
-      [name]: value
+      tags: tags.filter((tag, index) => index !== i),
     }, () => this.props.setNewFields(this.getBodyPayload()))
   }
 
+  handleEtiquetasAddition = (tag) => {
+    if (this.state.tags.length >= 5) return
+    this.setState(state => ({ tags: [...state.tags, tag.id] }), () => this.props.setNewFields(this.getBodyPayload()))
+  }
+
   render() {
+    const tagsLoaded = this.state.allTags.length > 0
+    let tags;
+    if (!tagsLoaded)
+      tags = []
+    else
+      tags = this.state.tags.map(tagId => this.state.allTags.find(tag => tag.id == tagId)).filter(t => t != undefined)
+
     return (
       <EditField>
         <EditorTitle>Datos del proyecto</EditorTitle>
@@ -987,7 +1011,20 @@ class ProjectFields extends Component {
         </ProfileLabel>
         <ProfileLabel>
           Etiquetas
-          <EtiquetasInput onChange={this.handleInputChangeEtiquetas} />
+          {/* React-Tags - https://www.npmjs.com/package/react-tag-input */}
+          {tagsLoaded &&
+            <ReactTags
+              placeholder='Agregar categoría'
+              tags={tags}
+              suggestions={this.state.allTags}
+              handleDelete={this.handleEtiquetasDelete}
+              handleAddition={this.handleEtiquetasAddition}
+              delimiters={delimiters}
+              autofocus={false}
+              allowDeleteFromEmptyInput={false}
+              allowDragDrop={false} />
+          }
+          <SpanOk>Como máximo se aceptan 5 etiquetas</SpanOk>
         </ProfileLabel>
       </EditField>
     )
@@ -1063,87 +1100,6 @@ const KeyCodes = {
   enter: 13,
 };
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
-class EtiquetasInput extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      tags: [
-        { id: 'Economía y finanzas', text: 'Economía y finanzas' },
-        { id: 'Comercio', text: 'Comercio' },
-       ],
-      suggestions: []
-    };
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleAddition = this.handleAddition.bind(this);
-    this.handleDrag = this.handleDrag.bind(this);
-  }
-
-  handleDelete(i) {
-    const { tags } = this.state;
-    this.setState({
-      tags: tags.filter((tag, index) => index !== i),
-    }, this.onTagsChange);
-  }
-
-  handleAddition(tag) {
-    this.setState(state => ({ tags: [...state.tags, tag] }), this.onTagsChange);
-  }
-
-  handleDrag(tag, currPos, newPos) {
-    const tags = [...this.state.tags];
-    const newTags = tags.slice();
-
-    newTags.splice(currPos, 1);
-    newTags.splice(newPos, 0, tag);
-
-    // re-render
-    this.setState({ tags: newTags });
-  }
-
-  async componentWillMount() {
-    await this.fetchEtiquetas()
-  }
-
-  onTagsChange(){
-    this.props.onChange(this.state.tags)
-  }
-
-  fetchEtiquetas = async () => {
-    try {
-      const results = await (await fetch(`${API_URL}/api/v1/document-tags`, {
-        'headers': {
-          'Content-Type': 'application/json'
-        }
-      })).json()
-      this.setState({
-        suggestions: results.results.map(documentTag => { return { id: documentTag._id, text: documentTag.name } })
-      })
-    } catch (err) {
-      console.error(err)
-      this.setState({
-        suggestions: []
-      })
-    }
-  }
-
-  render() {
-    const { tags, suggestions } = this.state;
-    // React-Tags - https://www.npmjs.com/package/react-tag-input
-    return (
-      <ReactTags
-        placeholder='Agregar categoría'
-        tags={tags}
-        suggestions={suggestions}
-        handleDelete={this.handleDelete}
-        handleAddition={this.handleAddition}
-        handleDrag={this.handleDrag}
-        delimiters={delimiters}
-        autofocus={false}
-        allowDeleteFromEmptyInput={false} />
-    )
-  }
-}
 
 
-export default ProjectFields
+export default WithDocumentTagsContext(ProjectFields)
