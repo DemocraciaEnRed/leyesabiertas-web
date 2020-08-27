@@ -12,7 +12,9 @@ import ProfileLabel from '../../elements/profile-label/component'
 import ProfileInput from '../../elements/profile-input/component'
 import ProfileSelect from '../../elements/profile-select/component'
 import ProfileButtonWrapper from '../../elements/profile-button-wrapper/component'
+import ProfileTags from '../../elements/profile-tags/component'
 import SubmitInput from '../../elements/submit-input/component'
+import WithDocumentTagsContext from '../../components/document-tags-context/component'
 
 const ButtonLink = styled.button`
   background-color: #5c97bc;
@@ -26,6 +28,11 @@ const ButtonLink = styled.button`
   margin: 1em 0 0;
 `
 
+const InputErrorSpan = styled.span`
+  color: red;
+  font-size: 1.2rem;
+`
+
 const genderOptions = [
   { 'name': '', 'value': '' },
   { 'name': 'Masculino', 'value': 'Masculino' },
@@ -34,7 +41,7 @@ const genderOptions = [
   { 'name': 'Prefiero no especificar', 'value': 'Prefiero no especificar' }
 ]
 
-export default class Profile extends Component {
+class Profile extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     isOwner: PropTypes.bool.isRequired,
@@ -49,7 +56,14 @@ export default class Profile extends Component {
     birthday: '',
     province: '',
     editMode: false,
-    files: []
+    files: [],
+    allTags: [],
+    tags: [],
+    tagsMaxReached: false
+  }
+
+  async componentWillMount () {
+    this.setState({ allTags: await this.props.fetchDocumentTags() })
   }
 
   componentDidMount () {
@@ -59,7 +73,8 @@ export default class Profile extends Component {
       gender: user.fields && user.fields.gender ? user.fields.gender : '',
       party: user.fields && user.fields.party ? user.fields.party : '',
       birthday: user.fields && user.fields.birthday ? user.fields.birthday : '',
-      province: user.fields && user.fields.province ? user.fields.province : ''
+      province: user.fields && user.fields.province ? user.fields.province : '',
+      tags: user.fields && user.fields.tags ? user.fields.tags : []
     })
   }
 
@@ -85,7 +100,9 @@ export default class Profile extends Component {
       gender: user.fields && user.fields.gender ? user.fields.gender : '',
       party: user.fields && user.fields.party ? user.fields.party : '',
       birthday: user.fields && user.fields.birthday ? user.fields.birthday : '',
-      province: user.fields && user.fields.province ? user.fields.province : ''
+      province: user.fields && user.fields.province ? user.fields.province : '',
+      tags: user.fields && user.fields.tags ? user.fields.tags : [],
+      tagsMaxReached: false
     })
   }
 
@@ -98,6 +115,21 @@ export default class Profile extends Component {
     })
   }
 
+  handleTagClick = (tag) => {
+    if (this.state.tagsMaxReached)
+      this.setState({tagsMaxReached: false})
+
+    const clickedTagId = tag._id
+    if (this.state.tags.includes(clickedTagId))
+      this.setState((prevState) => ({tags: prevState.tags.filter(tagId => tagId != clickedTagId)}))
+    else {
+      if (this.state.tags.length == 6)
+        this.setState({tagsMaxReached: true})
+      else
+        this.setState((prevState) => ({tags: prevState.tags.concat(clickedTagId)}))
+    }
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
     const newData = {
@@ -106,7 +138,8 @@ export default class Profile extends Component {
         gender: this.state.gender || '',
         birthday: this.state.birthday || '',
         province: this.state.province || '',
-        party: this.state.party || ''
+        party: this.state.party || '',
+        tags: this.state.tags || ''
       }
     }
     if (this.state.avatar) {
@@ -188,6 +221,20 @@ export default class Profile extends Component {
                 </ProfileLabel>
                 : null
               }
+              { isOwner && user.roles.includes('accountable')
+                ? <ProfileLabel htmlFor='tags'>
+          Etiquetas de interés
+          {this.state.tagsMaxReached &&
+            <InputErrorSpan>Se pueden elegir hasta 6 etiquetas de interés</InputErrorSpan>
+          }
+                  <ProfileTags
+                    name='tags'
+                    allTags={this.state.allTags}
+                    tags={this.state.tags}
+                    onTagClick={this.handleTagClick} />
+                </ProfileLabel>
+                : null
+              }
               <ProfileButtonWrapper>
                 <SubmitInput
                   type='submit'
@@ -200,3 +247,5 @@ export default class Profile extends Component {
     )
   }
 }
+
+export default WithDocumentTagsContext(Profile)
