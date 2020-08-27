@@ -62,8 +62,8 @@ class NavBar extends Component {
             </LoggedUserBar>
           ) : (
             <UserBar>
-              <Button onClick={this.props.authContext.login}>Iniciar sesión</Button>
-              <Button primary onClick={this.props.authContext.register}>Registrarse</Button>
+              <Button primary bigger onClick={this.props.authContext.login}>Ingresar</Button>
+              {/*<Button primary onClick={this.props.authContext.register}>Registrarse</Button>*/}
             </UserBar>
           )}
         { !this.props.authContext.authenticated && this.state.showTooltip &&
