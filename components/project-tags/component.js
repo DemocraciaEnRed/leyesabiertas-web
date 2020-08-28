@@ -15,7 +15,7 @@ const ProjectTagsContainer = styled.div`
   // padding:5% 20% 0% 10%;
   padding: 15px 20% 0% 3.5%;
   margin-bottom: 20px;
-  
+
   @media (max-width:769px){
     padding:5% 0px;
   }
@@ -46,13 +46,14 @@ class ProjectTags extends Component {
   render() {
     const { project } = this.props
     const { allTags } = this.state
+    const projectTags = project.currentVersion.content.tags || []
     return (
       <ProjectTagsContainer>
-        { allTags.length > 0 &&
+        { allTags.length > 0 && projectTags.length > 0 &&
           <ArticlesContext.Consumer>
             {
               ({ isAuthor, editMode, setYoutubeId, editedYoutubeId, newYoutubeId, setNewFields }) => (
-                project.currentVersion.content.tags.map(tagId =>
+                projectTags.map(tagId =>
                   <ProjectTag key={tagId}>
                     { allTags.find(documentTag => documentTag._id == tagId).name }
                   </ProjectTag>
