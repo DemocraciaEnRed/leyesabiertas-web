@@ -57,7 +57,7 @@ export default class extends Component {
   render() {
     const { project, section, fetchDocument } = this.props
     const { withComments, isPublished } = this.state
-    if (!project) return null
+    if (!project || !project.document) return null
     const { isAuthor } = project
     return (
       <div className='user-container'>

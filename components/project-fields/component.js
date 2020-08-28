@@ -851,7 +851,7 @@ class ProjectFields extends Component {
       customVideoId: customVideoId || null,
       closingDate: new Date(closingDate.split('T')[0].replace(/-/g, '\/')),
       closure: closure || null,
-      tags
+      tags: tags || []
     }, () => {
       this.props.setNewFields(this.getBodyPayload())
 
