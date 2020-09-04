@@ -9,6 +9,7 @@ import SubtitleH3 from '../../elements/subtitle-h3/component'
 import Button from '../../elements/button/component'
 import getConfig from 'next/config'
 import Masonry from 'react-masonry-component';
+import TagsSelect from '../../elements/tags-select/component.js'
 
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
@@ -42,7 +43,7 @@ color: #2c4c61;
 }
 `
 const Options = styled.div`
-  
+
 `
 const OptionLabel = styled.div`
 font-size: 1.4rem;
@@ -107,6 +108,7 @@ class Projects extends Component {
         limit: 10,
         page: 1,
         closed: null,
+        tag: null
       },
       // filter: {
       //   closed: null
@@ -206,6 +208,8 @@ class Projects extends Component {
           {query.closed === null && <OptionChoice className='disabled' onClick={() => this.toggleSort('closed', true)}>Por periodo</OptionChoice>}
           {query.closed === true && <OptionChoice onClick={() => this.toggleSort('closed', false)}>Periodo <b>FINALIZADOS</b></OptionChoice>}
           {query.closed === false && <OptionChoice onClick={() => this.toggleSort('closed', null)}>Periodo <b>ABIERTOS</b></OptionChoice>}
+          <OptionLabel>Por etiqueta</OptionLabel>
+          <TagsSelect onTagChange={(tagId) => this.toggleSort('tag', tagId)} />
         </Options>
         {projects &&
           <Fragment>
