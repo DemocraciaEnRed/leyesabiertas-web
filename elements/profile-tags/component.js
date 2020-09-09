@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const WrapperDiv = styled.div`
-  width: 350px;
+  width: ${(props) => props.width || '350px'};
   margin-top: 10px;
   font-size: 1.4rem;
   line-height: 2.5rem;
@@ -22,6 +22,7 @@ const ChipDiv = styled.div`
   margin-bottom: 5px;
   margin-right: 3px;
   margin-left: 3px;
+  cursor: pointer
 
   &.selected {
     background-color: #5c97bc;
@@ -45,7 +46,8 @@ const ProfileTags = (props) => (
 ProfileTags.propTypes = {
   allTags: PropTypes.array.isRequired,
   tags: PropTypes.array.isRequired,
-  onTagClick: PropTypes.func.isRequired
+  onTagClick: PropTypes.func.isRequired,
+  width: PropTypes.string
 }
 
 export default ProfileTags

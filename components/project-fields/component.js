@@ -4,8 +4,8 @@ import DatePicker from  "react-datepicker";
 import es from 'date-fns/locale/es';
 import ProfileLabel from '../../elements/profile-label/component'
 import EditorTitle from '../../elements/editor-title/component'
-import { WithContext as ReactTags } from 'react-tag-input'
 import WithDocumentTagsContext from '../../components/document-tags-context/component'
+import ProfileTags from '../../elements/profile-tags/component'
 injectGlobal`
 //--------------------------------------
 
@@ -829,7 +829,8 @@ class ProjectFields extends Component {
     youtubeURL: null,
     closure: null,
     tags: [],
-    allTags: []
+    allTags: [],
+    tagsMaxReached: false
   }
 
   componentDidMount() {
@@ -920,16 +921,20 @@ class ProjectFields extends Component {
     })
   }
 
-  handleEtiquetasDelete = (i) => {
-    const { tags } = this.state;
-    this.setState({
-      tags: tags.filter((tag, index) => index !== i),
-    }, () => this.props.setNewFields(this.getBodyPayload()))
-  }
+  handleTagClick = (tag) => {
+    if (this.state.tagsMaxReached)
+      this.setState({tagsMaxReached: false})
 
-  handleEtiquetasAddition = (tag) => {
-    if (this.state.tags.length >= 5) return
-    this.setState(state => ({ tags: [...state.tags, tag.id] }), () => this.props.setNewFields(this.getBodyPayload()))
+    const clickedTagId = tag._id
+    const callback = () => this.props.setNewFields(this.getBodyPayload())
+    if (this.state.tags.includes(clickedTagId))
+      this.setState((prevState) => ({tags: prevState.tags.filter(tagId => tagId != clickedTagId)}), callback)
+    else {
+      if (this.state.tags.length == 5)
+        this.setState({tagsMaxReached: true})
+      else
+        this.setState((prevState) => ({tags: prevState.tags.concat(clickedTagId)}), callback)
+    }
   }
 
   render() {
@@ -1011,95 +1016,22 @@ class ProjectFields extends Component {
         </ProfileLabel>
         <ProfileLabel>
           Etiquetas
-          {/* React-Tags - https://www.npmjs.com/package/react-tag-input */}
+
           {tagsLoaded &&
-            <ReactTags
-              placeholder='Agregar categoría'
-              tags={tags}
-              suggestions={this.state.allTags}
-              handleDelete={this.handleEtiquetasDelete}
-              handleAddition={this.handleEtiquetasAddition}
-              delimiters={delimiters}
-              autofocus={false}
-              allowDeleteFromEmptyInput={false}
-              allowDragDrop={false} />
+            <ProfileTags
+              name='tags'
+              allTags={this.state.allTags.map(t => ({_id: t.id, name: t.text}))}
+              tags={tags.map(t => t.id)}
+              onTagClick={this.handleTagClick}
+              width='auto' />
           }
-          <SpanOk>Como máximo se aceptan 5 etiquetas</SpanOk>
+          <SpanOk>
+            Como máximo se aceptan 5 etiquetas.
+          </SpanOk>
         </ProfileLabel>
       </EditField>
     )
   }
 }
-
-injectGlobal`
-/* https://github.com/prakhar1989/react-tags/blob/master/example/reactTags.css */
-/* Example Styles for React Tags*/
-div.ReactTags__tags {
-    position: relative;
-}
-
-/* Styles for the input */
-div.ReactTags__tagInput {
-    width: 200px;
-    border-radius: 2px;
-    display: inline-block;
-}
-div.ReactTags__tagInput input.ReactTags__tagInputField,
-div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
-    height: 31px;
-    margin: 0;
-    font-size: 12px;
-    width: 100%;
-    border: 1px solid #eee;
-}
-
-/* Styles for selected tags */
-div.ReactTags__selected span.ReactTags__tag {
-    border: 1px solid #ddd;
-    background: #eee;
-    font-size: 12px;
-    display: inline-block;
-    padding: 5px;
-    margin: 0 5px;
-    border-radius: 2px;
-}
-div.ReactTags__selected a.ReactTags__remove {
-    color: #aaa;
-    margin-left: 5px;
-    cursor: pointer;
-}
-
-/* Styles for suggestions */
-div.ReactTags__suggestions {
-    position: absolute;
-    z-index: 1;
-}
-div.ReactTags__suggestions ul {
-    list-style-type: none;
-    box-shadow: .05em .01em .5em rgba(0,0,0,.2);
-    background: white;
-    width: 200px;
-}
-div.ReactTags__suggestions li {
-    border-bottom: 1px solid #ddd;
-    padding: 5px 10px;
-    margin: 0;
-}
-div.ReactTags__suggestions li mark {
-    text-decoration: underline;
-    background: none;
-    font-weight: 600;
-}
-div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
-    background: #b7cfe0;
-    cursor: pointer;
-}
-`
-const KeyCodes = {
-  comma: 188,
-  enter: 13,
-};
-const delimiters = [KeyCodes.comma, KeyCodes.enter];
-
 
 export default WithDocumentTagsContext(ProjectFields)

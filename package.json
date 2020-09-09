@@ -39,7 +39,6 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-select": "^3.1.0",
-    "react-tag-input": "^6.4.3",
     "slate": "0.43.0",
     "slate-react": "0.20.1",
     "styled-components": "^3.4.10",
