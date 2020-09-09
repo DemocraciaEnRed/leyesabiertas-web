@@ -221,20 +221,17 @@ class Profile extends Component {
                 </ProfileLabel>
                 : null
               }
-              { isOwner && user.roles.includes('accountable')
-                ? <ProfileLabel htmlFor='tags'>
+              <ProfileLabel htmlFor='tags'>
           Etiquetas de interés
           {this.state.tagsMaxReached &&
             <InputErrorSpan>Se pueden elegir hasta 6 etiquetas de interés</InputErrorSpan>
           }
-                  <ProfileTags
-                    name='tags'
-                    allTags={this.state.allTags}
-                    tags={this.state.tags}
-                    onTagClick={this.handleTagClick} />
-                </ProfileLabel>
-                : null
-              }
+                <ProfileTags
+                  name='tags'
+                  allTags={this.state.allTags}
+                  tags={this.state.tags}
+                  onTagClick={this.handleTagClick} />
+              </ProfileLabel>
               <ProfileButtonWrapper>
                 <SubmitInput
                   type='submit'
