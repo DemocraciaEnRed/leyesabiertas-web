@@ -130,7 +130,7 @@ class Profile extends Component {
     }
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault()
     const newData = {
       fields: {
@@ -145,7 +145,7 @@ class Profile extends Component {
     if (this.state.avatar) {
       newData.avatar = this.state.avatar
     }
-    this.props.onSubmit(newData)
+    await this.props.onSubmit(newData)
     this.setState({
       editMode: !this.state.editMode
     })

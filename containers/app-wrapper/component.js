@@ -40,6 +40,12 @@ export default class extends Component {
   //   })
   // }
 
+  setStateAsync = (state) => {
+    return new Promise((resolve) => {
+      this.setState(state, resolve)
+    });
+  }
+
   updateMe = async (newProfile) => {
     const updatedUser = await (await fetch(`${API_URL}/api/v1/users`, {
       'method': 'PUT',
@@ -52,7 +58,7 @@ export default class extends Component {
     if (!updatedUser) {
       throw Error()
     }
-    this.setState({
+    await this.setStateAsync({
       user: updatedUser
     })
     return updatedUser
