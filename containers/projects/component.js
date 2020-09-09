@@ -50,6 +50,7 @@ font-size: 1.4rem;
 color: #2c4c61;
 display: inline-block;
 padding: 5px 8px;
+font-weight: ${(props) => props.isTitle ? 'bold' : 'normal'};
 &:first-child{
   margin-left: 0;
   padding-left: 0;
@@ -201,13 +202,15 @@ class Projects extends Component {
         <TitleH2>Propuestas de ley abiertas para la co-creación.</TitleH2>
         <SubtitleH3>Estas son las propuestas y proyectos de ley disponibles para leer y aportar . ¡Ayude a mejorarlas!</SubtitleH3>
         <Options>
-          <OptionLabel>Ordenar</OptionLabel>
-          {query.created === 'ASC' && <OptionChoice onClick={() => this.toggleSort('created', 'DESC')}>Fecha de creación <b>ASC</b></OptionChoice>}
-          {query.created === 'DESC' && <OptionChoice onClick={() => this.toggleSort('created', 'ASC')}>Fecha de creación <b>DESC</b></OptionChoice>}
-          <OptionLabel>Filtrar</OptionLabel>
-          {query.closed === null && <OptionChoice className='disabled' onClick={() => this.toggleSort('closed', true)}>Por periodo</OptionChoice>}
-          {query.closed === true && <OptionChoice onClick={() => this.toggleSort('closed', false)}>Periodo <b>FINALIZADOS</b></OptionChoice>}
-          {query.closed === false && <OptionChoice onClick={() => this.toggleSort('closed', null)}>Periodo <b>ABIERTOS</b></OptionChoice>}
+          <OptionLabel isTitle>Ordenar:</OptionLabel>
+          {query.created === 'ASC' && <OptionChoice onClick={() => this.toggleSort('created', 'DESC')}>Más antiguas</OptionChoice>}
+          {query.created === 'DESC' && <OptionChoice onClick={() => this.toggleSort('created', 'ASC')}>Más recientes</OptionChoice>}
+          <OptionLabel></OptionLabel>
+          <OptionLabel isTitle>Filtrar:</OptionLabel>
+          <OptionLabel>Por estado</OptionLabel>
+          {query.closed === null && <OptionChoice onClick={() => this.toggleSort('closed', true)}>TODOS</OptionChoice>}
+          {query.closed === true && <OptionChoice onClick={() => this.toggleSort('closed', false)}>FINALIZADOS</OptionChoice>}
+          {query.closed === false && <OptionChoice onClick={() => this.toggleSort('closed', null)}>ABIERTOS</OptionChoice>}
           <OptionLabel>Por etiqueta</OptionLabel>
           <TagsSelect onTagChange={(tagId) => this.toggleSort('tag', tagId)} />
         </Options>
