@@ -67,10 +67,6 @@ class Profile extends Component {
   }
 
   componentDidMount () {
-    this.loadUserFields()
-  }
-
-  loadUserFields = () => {
     const { user } = this.props
     this.setState({
       occupation: user.fields && user.fields.occupation ? user.fields.occupation : '',
@@ -150,7 +146,6 @@ class Profile extends Component {
       newData.avatar = this.state.avatar
     }
     await this.props.onSubmit(newData)
-    this.loadUserFields()
     this.setState({
       editMode: !this.state.editMode
     })
