@@ -28,8 +28,11 @@ export default class extends Component {
     return (await fetch(`${API_URL}/api/v1/users/me`, {
       'headers': {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      }
+        'Authorization': 'Bearer ' + token,
+        'Pragma': 'no-cache',
+        'Cache-Control': 'no-cache'
+      },
+      cache: 'no-store'
     })).json()
   }
 
