@@ -254,6 +254,20 @@ const ButtonTable = styled.div`
     cursor: pointer;
     font-family: var(--medium);
   }
+  &[disabled]{
+    cursor: not-allowed;
+    color: #999;
+    border-color: #999;
+  }
+  &[disabled]:hover,
+  &[disabled]:active,
+  &[disabled]:focus {
+    background-color: #eee;
+    color: #999;
+    border-color: #999;
+    font-weight: normal;
+    font-family: unset;
+  }
 `
 const ButtonTableDisabled = styled.div`
   padding: 5px 20px;
@@ -475,7 +489,12 @@ class MyProjects extends Component {
                   ? <ButtonTableDisabled float='left'><Icon icon={clockO} size={20} />&nbsp;&nbsp;Creando nuevo proyecto... Espere unos segundos...</ButtonTableDisabled>
                   : <ButtonTable onClick={this.createProject} float='left'><Icon icon={plus} size={20} />&nbsp;&nbsp;Agregar un nuevo proyecto</ButtonTable>
               }
-              <ButtonTable onClick={this.downloadXls} float='right'><Icon icon={download} size={20} />&nbsp;&nbsp;Descargar excel</ButtonTable>
+              <ButtonTable
+                onClick={this.downloadXls}
+                float='right'
+                disabled={projects || !projects.length}>
+                <Icon icon={download} size={20} />&nbsp;&nbsp;Descargar excel
+              </ButtonTable>
             </ButtonsBar>
             <ProjectsTable>
               <ProjectsTableHead>
