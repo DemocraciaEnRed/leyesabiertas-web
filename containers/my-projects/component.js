@@ -14,7 +14,7 @@ import Masonry from 'react-masonry-component';
 import ProjectTableItem from '../../components/project-table-item/component'
 import { clockO } from 'react-icons-kit/fa'
 import Icon from 'react-icons-kit'
-import { plus } from 'react-icons-kit/feather'
+import { plus, download } from 'react-icons-kit/feather'
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const masonryOptions = {
@@ -201,13 +201,13 @@ const ProjectsTable = styled.table`
   margin: 20px 0;
 `
 const ProjectsTableHead = styled.thead`
-  
+
 `
 const ProjectsTableBody = styled.tbody`
-  
+
 `
 const ProjectsTableRow = styled.tr`
-  
+
 `
 const ProjectsTableCell = styled.td`
   padding: 5px 2px;
@@ -232,6 +232,10 @@ const ProjectsTableHeader = styled.th`
   ${(props) => props.hiddenMobile && '@media(max-width:700px){display: none;}'}
 `
 
+const ButtonsBar = styled.div`
+  width: 100%
+`
+
 const ButtonTable = styled.div`
   padding: 5px 20px;
   margin: 10px;
@@ -240,6 +244,10 @@ const ButtonTable = styled.div`
   color: #5c97bc;
   font-size: 17px;
   text-align: center;
+  float: ${(props) => props.float || 'none'};
+  @media (max-width: 700px) {
+    float: none;
+  }
   &:hover {
     background-color: #5c97bc;
     color: #FFF;
@@ -255,6 +263,10 @@ const ButtonTableDisabled = styled.div`
   border-radius: 5px;
   color: #868686;
   font-size: 17px;
+  float: ${(props) => props.float || 'none'};
+  @media (max-width: 700px) {
+    float: none;
+  }
 `
 
 const LoadMoreButtonContainer = styled.div`
@@ -420,6 +432,31 @@ class MyProjects extends Component {
     }
   }
 
+  downloadXls = async () => {
+    try {
+      const result = await fetch(`${API_URL}/api/v1/documents/my-documents/export-xls`,{
+        headers: {
+          Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
+          'Content-Type': 'application/json',
+          'Content-Disposition': 'attachment; filename="filename.xls"'
+        }
+      })
+      const blob = await result.blob()
+
+      // Download API Files With React & Fetch - https://medium.com/yellowcode/download-api-files-with-react-fetch-393e4dae0d9e
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'Proyectos.xls');  // 3. Append to html page
+      document.body.appendChild(link);  // 4. Force download
+      link.click();  // 5. Clean up and remove the link
+      link.parentNode.removeChild(link);
+
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   render() {
     const {
       projects,
@@ -432,11 +469,14 @@ class MyProjects extends Component {
         return (
           <Section id='projects' noMargin >
             <TitleH2>Mis proyectos</TitleH2>
-            {
-                      isLoading
-                        ? <ButtonTableDisabled><Icon icon={clockO} size={20} />&nbsp;&nbsp;Creando nuevo proyecto... Espere unos segundos...</ButtonTableDisabled> :
-                        <ButtonTable onClick={this.createProject}><Icon icon={plus} size={20} />&nbsp;&nbsp;Agregar un nuevo proyecto</ButtonTable>
-                    }
+            <ButtonsBar>
+              {
+                isLoading
+                  ? <ButtonTableDisabled float='left'><Icon icon={clockO} size={20} />&nbsp;&nbsp;Creando nuevo proyecto... Espere unos segundos...</ButtonTableDisabled>
+                  : <ButtonTable onClick={this.createProject} float='left'><Icon icon={plus} size={20} />&nbsp;&nbsp;Agregar un nuevo proyecto</ButtonTable>
+              }
+              <ButtonTable onClick={this.downloadXls} float='right'><Icon icon={download} size={20} />&nbsp;&nbsp;Descargar excel</ButtonTable>
+            </ButtonsBar>
             <ProjectsTable>
               <ProjectsTableHead>
                 <ProjectsTableRow>

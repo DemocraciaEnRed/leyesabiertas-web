@@ -116,37 +116,12 @@ class UserProfile extends Component {
     })
   }
 
-  downloadXls = async () => {
-    try {
-      const result = await fetch(`${API_URL}/api/v1/documents/my-documents/export-xls`,{
-        headers: {
-          Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
-          'Content-Type': 'application/json',
-          'Content-Disposition': 'attachment; filename="filename.xls"'
-        }
-      })
-      const blob = await result.blob()
-
-      // Download API Files With React & Fetch - https://medium.com/yellowcode/download-api-files-with-react-fetch-393e4dae0d9e
-      const url = window.URL.createObjectURL(new Blob([blob]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'Proyectos.xls');  // 3. Append to html page
-      document.body.appendChild(link);  // 4. Force download
-      link.click();  // 5. Clean up and remove the link
-      link.parentNode.removeChild(link);
-
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
   render () {
     const { user, isOwner } = this.state
     return (
       <Fragment>
         {user &&
-          <Profile user={user} isOwner={isOwner} onSubmit={this.updateProfile} downloadXls={this.downloadXls} />
+          <Profile user={user} isOwner={isOwner} onSubmit={this.updateProfile}/>
         }
         {
           this.state.showAlert &&
