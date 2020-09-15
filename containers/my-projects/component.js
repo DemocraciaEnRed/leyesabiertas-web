@@ -480,6 +480,7 @@ class MyProjects extends Component {
     } = this.state
     if (this.props.authContext.user) {
       if (this.props.authContext.isAuthor) {
+        const hasProjects = projects && projects.length
         return (
           <Section id='projects' noMargin >
             <TitleH2>Mis proyectos</TitleH2>
@@ -490,9 +491,9 @@ class MyProjects extends Component {
                   : <ButtonTable onClick={this.createProject} float='left'><Icon icon={plus} size={20} />&nbsp;&nbsp;Agregar un nuevo proyecto</ButtonTable>
               }
               <ButtonTable
-                onClick={this.downloadXls}
+                onClick={hasProjects && this.downloadXls}
                 float='right'
-                disabled={projects || !projects.length}>
+                disabled={!hasProjects}>
                 <Icon icon={download} size={20} />&nbsp;&nbsp;Descargar excel
               </ButtonTable>
             </ButtonsBar>
