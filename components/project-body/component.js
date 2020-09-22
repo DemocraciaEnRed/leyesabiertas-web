@@ -68,6 +68,7 @@ const ProjectBody = ({ project }) => (
                 customVideoId={project.currentVersion.content.customVideoId}
                 closure={project.currentVersion.content.closure}
                 tags={project.currentVersion.content.tags}
+                tagsNotification={project.currentVersion.content.tagsNotification}
                 setNewFields={setNewFields} />
             }
             {

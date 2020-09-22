@@ -8,7 +8,8 @@ const WrapperDiv = styled.div`
   font-size: 1.4rem;
   line-height: 2.5rem;
   color: #203340;
-  padding: 0 14px;
+  /*padding: 0 14px;*/
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: start;

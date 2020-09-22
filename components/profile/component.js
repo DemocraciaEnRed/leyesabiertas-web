@@ -16,6 +16,18 @@ import ProfileTags from '../../elements/profile-tags/component'
 import SubmitInput from '../../elements/submit-input/component'
 import WithDocumentTagsContext from '../../components/document-tags-context/component'
 
+const TagsNotificationCheckboxDiv = styled.div`
+  width: 350px;
+  display: flex;
+  line-height: 15px;
+  margin-top: 3px;
+  font-size:13px;
+  & > input {
+    margin-right: 7px;
+    margin-bottom: auto;
+  }
+`
+
 const ButtonLink = styled.button`
   background-color: #5c97bc;
   font-size: 1.2rem;
@@ -59,7 +71,8 @@ class Profile extends Component {
     files: [],
     allTags: [],
     tags: [],
-    tagsMaxReached: false
+    tagsMaxReached: false,
+    tagsNotification: ''
   }
 
   async componentWillMount () {
@@ -74,7 +87,8 @@ class Profile extends Component {
       party: user.fields && user.fields.party ? user.fields.party : '',
       birthday: user.fields && user.fields.birthday ? user.fields.birthday : '',
       province: user.fields && user.fields.province ? user.fields.province : '',
-      tags: user.fields && user.fields.tags ? user.fields.tags : []
+      tags: user.fields && user.fields.tags ? user.fields.tags : [],
+      tagsNotification: user.fields && user.fields.tagsNotification ? user.fields.tagsNotification : ''
     })
   }
 
@@ -102,7 +116,8 @@ class Profile extends Component {
       birthday: user.fields && user.fields.birthday ? user.fields.birthday : '',
       province: user.fields && user.fields.province ? user.fields.province : '',
       tags: user.fields && user.fields.tags ? user.fields.tags : [],
-      tagsMaxReached: false
+      tagsMaxReached: false,
+      tagsNotification: user.fields && user.fields.tagsNotification ? user.fields.tagsNotification : ''
     })
   }
 
@@ -139,7 +154,8 @@ class Profile extends Component {
         birthday: this.state.birthday || '',
         province: this.state.province || '',
         party: this.state.party || '',
-        tags: this.state.tags || ''
+        tags: this.state.tags || '',
+        tagsNotification: this.state.tagsNotification || ''
       }
     }
     if (this.state.avatar) {
@@ -151,6 +167,15 @@ class Profile extends Component {
     })
     jump(-1000)
   }
+
+  toggleTagsCheckboxChange = () => {
+    this.setState(({ tagsNotification }) => (
+      {
+        tagsNotification: !tagsNotification,
+      }
+    ));
+  }
+
 
   render () {
     const { user, isOwner, isLoading } = this.props
@@ -223,6 +248,14 @@ class Profile extends Component {
               }
               <ProfileLabel htmlFor='tags'>
           Etiquetas de interés
+            <TagsNotificationCheckboxDiv>
+              <input
+                type="checkbox"
+                name='tagsNotification'
+                checked={this.state.tagsNotification}
+                onChange={this.toggleTagsCheckboxChange} />
+              Deseo recibir notificaciones de futuros proyectos asociados a mis etiquetas de interés
+            </TagsNotificationCheckboxDiv>
           {this.state.tagsMaxReached &&
             <InputErrorSpan>Se pueden elegir hasta 6 etiquetas de interés</InputErrorSpan>
           }
