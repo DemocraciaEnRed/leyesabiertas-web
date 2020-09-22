@@ -894,8 +894,7 @@ class ProjectFields extends Component {
       customVideoId: this.state.customVideoId,
       closure: this.state.closure,
       tags: this.state.tags,
-      sendTagsNotification: this.state.sendTagsNotification,
-      publishedMailSent: this.state.publishedMailSent
+      sendTagsNotification: this.state.sendTagsNotification
     }
   }
 
