@@ -6,6 +6,7 @@ import ProfileLabel from '../../elements/profile-label/component'
 import EditorTitle from '../../elements/editor-title/component'
 import WithDocumentTagsContext from '../../components/document-tags-context/component'
 import ProfileTags from '../../elements/profile-tags/component'
+
 injectGlobal`
 //--------------------------------------
 
@@ -819,6 +820,15 @@ const EditField = styled.div`
   margin-bottom: 2em;
 `
 
+const TagsNotificationCheckboxDiv = styled.div`
+  margin-top: 0.8em;
+  /*color: ${props => props.publishedMailSent ? '#666' : 'inherit'}*/
+  & > input {
+    position: relative;
+    top: 2px;
+  }
+`
+
 class ProjectFields extends Component {
   state = {
     title: null,
@@ -830,7 +840,9 @@ class ProjectFields extends Component {
     closure: null,
     tags: [],
     allTags: [],
-    tagsMaxReached: false
+    tagsMaxReached: false,
+    sendTagsNotification: null,
+    publishedMailSent: null
   }
 
   componentDidMount() {
@@ -841,7 +853,9 @@ class ProjectFields extends Component {
       youtubeId,
       customVideoId,
       closure,
-      tags
+      tags,
+      sendTagsNotification,
+      publishedMailSent
     } = this.props
 
     this.setState({
@@ -852,7 +866,9 @@ class ProjectFields extends Component {
       customVideoId: customVideoId || null,
       closingDate: new Date(closingDate.split('T')[0].replace(/-/g, '\/')),
       closure: closure || null,
-      tags: tags || []
+      tags: tags || [],
+      sendTagsNotification,
+      publishedMailSent
     }, () => {
       this.props.setNewFields(this.getBodyPayload())
 
@@ -877,7 +893,9 @@ class ProjectFields extends Component {
       youtubeId: this.state.youtubeId,
       customVideoId: this.state.customVideoId,
       closure: this.state.closure,
-      tags: this.state.tags
+      tags: this.state.tags,
+      sendTagsNotification: this.state.sendTagsNotification,
+      publishedMailSent: this.state.publishedMailSent
     }
   }
 
@@ -935,6 +953,14 @@ class ProjectFields extends Component {
       else
         this.setState((prevState) => ({tags: prevState.tags.concat(clickedTagId)}), callback)
     }
+  }
+
+  toggleTagsNotificationCheckbox = () => {
+    this.setState(({ sendTagsNotification }) => (
+      {
+        sendTagsNotification: !sendTagsNotification,
+      }
+    ), () => this.props.setNewFields(this.getBodyPayload()));
   }
 
   render() {
@@ -1027,6 +1053,26 @@ class ProjectFields extends Component {
           }
           <SpanOk>
             Como máximo se aceptan 5 etiquetas.
+          </SpanOk>
+        </ProfileLabel>
+        <ProfileLabel>
+          Notificación de proyecto publicado
+          <TagsNotificationCheckboxDiv publishedMailSent={this.state.publishedMailSent}>
+            { !this.state.publishedMailSent &&
+              <input
+                type="checkbox"
+                name='sendTagsNotification'
+                checked={this.state.sendTagsNotification}
+                onChange={this.toggleTagsNotificationCheckbox} />
+            }
+            { !this.state.publishedMailSent ?
+              <span>&nbsp;&nbsp;Enviar notificación a usuarios/as interesados/as</span>
+            :
+              <span>&nbsp;&nbsp;Ya se ha enviado la notificación a usuarios/as interesados/as</span>
+            }
+          </TagsNotificationCheckboxDiv>
+          <SpanOk>
+             Los mails se enviarán una vez que publiques el proyecto. Esto se puede hacer <b>una sola vez</b>.
           </SpanOk>
         </ProfileLabel>
       </EditField>
