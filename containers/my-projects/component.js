@@ -38,6 +38,7 @@ const newDocument = {
     'imageCover': null,
     'youtubeId': null,
     'customVideoId': null,
+    'sendTagsNotification': true,
     'fundation': {
       'object': 'value',
       'document': {
