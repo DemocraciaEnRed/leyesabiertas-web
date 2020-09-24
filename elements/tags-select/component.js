@@ -8,6 +8,7 @@ import Select from 'react-select';
 const WrapperDiv = styled.div`
   display: inline-block
   width: 200px
+  font-size: 1.4rem
 `
 
 class TagsSelect extends Component {
