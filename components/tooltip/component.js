@@ -65,7 +65,7 @@ class Tooltip extends Component {
   }
 
   hideTooltip = () => {
-    localStorage.setItem('hide-tooltips', true)
+    localStorage.setItem(this.props.localStorageHideKey, true)
     this.setState({
       showTooltip: false
     })

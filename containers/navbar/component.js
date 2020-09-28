@@ -27,7 +27,8 @@ class NavBar extends Component {
 
     this.state = {
       menu: false,
-      showTooltip: false
+      showTooltip: false,
+      showTagsTooltip: false
     }
   }
 
@@ -36,6 +37,13 @@ class NavBar extends Component {
     if (window.location.pathname === '/articulado' && !this.props.authContext.authenticated && !hideTooltips) {
       this.setState({
         showTooltip: true
+      })
+    }
+
+    const hideTagsTooltip = localStorage.getItem('hide-tagstooltips') || false
+    if (!hideTagsTooltip){
+      this.setState({
+        showTagsTooltip: true
       })
     }
   }
@@ -48,6 +56,11 @@ class NavBar extends Component {
 
   render () {
     if (!this.props.authContext) return null
+
+    let hasTags;
+    try { hasTags = this.props.authContext.user.fields.tags.length > 0 }
+    catch (e) { hasTags = false }
+
     return (
       <StyledNav>
         <BetaLabel />
@@ -67,9 +80,14 @@ class NavBar extends Component {
             </UserBar>
           )}
         { !this.props.authContext.authenticated && this.state.showTooltip &&
-          <Tooltip top={'110px'} right={'20px'}>
+          <Tooltip top={'110px'} right={'20px'} localStorageHideKey='hide-tooltips'>
             Para agregar aportes debe estar registrado.
             Ingrese a la sección y complete el formulario
+          </Tooltip>
+        }
+        { this.props.authContext.authenticated && !hasTags && this.state.showTagsTooltip &&
+          <Tooltip top={'110px'} right={'20px'} localStorageHideKey='hide-tagstooltips'>
+            ¡Complete su perfil con los temas que le interesan!
           </Tooltip>
         }
       </StyledNav>
