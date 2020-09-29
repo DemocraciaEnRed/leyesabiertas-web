@@ -48,6 +48,7 @@ const StyledStaticInfo = styled.div`
   justify-content: center;
   background-image: url('/static/assets/header-background.jpg');
   background-repeat: no-repeat;
+  background-size: cover;
 `
 
 const StaticInfo = (props) => (
