@@ -23,6 +23,7 @@ const Footer = () => (
       <Link href='/info?section=contacto'><a>Contacto</a></Link>
       <Link href='/info?section=faq'><a>Preguntas Frecuentes</a></Link>
       <Link href='/terminos-y-condiciones'><a>Términos y condiciones</a></Link>
+      <Link href='/politicas-de-privacidad'><a>Políticas de privacidad</a></Link>
     </FooterBar>
     <SocialBar>
       <SocialIcon
