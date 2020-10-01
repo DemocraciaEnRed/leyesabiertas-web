@@ -495,7 +495,7 @@ class MyProjects extends Component {
                 onClick={hasProjects && this.downloadXls}
                 float='right'
                 disabled={!hasProjects}>
-                <Icon icon={download} size={20} />&nbsp;&nbsp;Descargar excel
+                <Icon icon={download} size={20} />&nbsp;&nbsp;Descargar info. de participantes
               </ButtonTable>
             </ButtonsBar>
             <ProjectsTable>
