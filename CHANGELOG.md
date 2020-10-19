@@ -1,6 +1,29 @@
 
 # Changelog
 
+### 1.8.0
+
+Listado de cambios hasta el momento:
+
+1. Inclusión de etiquetas en la plataforma:
+    * En el menú “Mi perfil” de usuarios no diputados ahora hay un campo nuevo “Etiquetas de interés”
+    * En la carga y edición de proyectos se agregó el campo “Etiquetas” al final del formulario
+    * En la página de inicio, en los filtros de proyectos, ahora se puede filtrar por etiquetas
+    * Si los usuarios no tienen ninguna etiqueta asignada se les muestra un aviso
+    * Nota: los usuarios y proyectos previos a esta actualización no tendrán asignados ninguna etiqueta
+2. Mejoras en el inicio de sesión:
+    * Se sacó el botón de “Registrarse” y se dejó únicamente el de “Ingresar” (que antes decía “Iniciar sesión”) en todo el sitio web
+    * Se sacó el botón de “Iniciar sesión” y se resaltó la sección que invita a registrarse en el formulario de inicio de sesión
+3. Nuevo botón de descarga de excel de los proyectos propios, con sus comentarios y aportes, desde el perfil de usuario	
+4. Mejoras de diseño en los filtros de proyectos en la página de inicio
+5. Nueva funcionalidad de enviar notificaciones a usuarixs interesadxs al publicar proyecto. Y opción en el perfil de usuario para elegir si recibir estas notificaciones o no.
+6. Se arregló un error de que en algunos navegadores, bajo ciertas condiciones, no se guardaban bien las modificaciones del perfil de usuario
+
+Compatible con:
+* `leyesabiertas-core:1.8.0`
+* `leyesabiertas-notifier:1.8.0`
+* `leyesabiertas-keycloak:1.0.8`
+
 ### 1.7.2
 
 - Arreglados unos typos
