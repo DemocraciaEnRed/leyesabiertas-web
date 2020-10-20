@@ -452,8 +452,7 @@ class MyProjects extends Component {
       const result = await fetch(`${API_URL}/api/v1/documents/my-documents/export-xls`,{
         headers: {
           Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
-          'Content-Type': 'application/json',
-          'Content-Disposition': 'attachment; filename="filename.xls"'
+          'Content-Type': 'application/json'
         }
       })
       const blob = await result.blob()
@@ -462,7 +461,7 @@ class MyProjects extends Component {
       const url = window.URL.createObjectURL(new Blob([blob]));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', 'Proyectos.xls');  // 3. Append to html page
+      link.setAttribute('download', 'Proyectos.xlsx');  // 3. Append to html page
       document.body.appendChild(link);  // 4. Force download
       link.click();  // 5. Clean up and remove the link
       link.parentNode.removeChild(link);
