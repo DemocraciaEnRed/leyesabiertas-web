@@ -1,6 +1,16 @@
 
 # Changelog
 
+### 1.8.1
+
+* Cambiado la extension de excel de xls a xlsx
+
+Compatible con:
+* `leyesabiertas-core:1.8.1`
+* `leyesabiertas-notifier:1.8.0`
+* `leyesabiertas-keycloak:1.8.0`
+
+
 ### 1.8.0
 
 Listado de cambios hasta el momento:
