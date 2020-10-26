@@ -24,6 +24,7 @@ import ProjectStatus from '../../elements/project-status/component'
 import ModeBar from '../../components/mode-bar/component'
 import ModeButton from '../../elements/mode-button/component'
 import ModeBarLinkButton from '../../elements/mode-bar-link-button/component'
+import ModeBarApoyarButton from '../../elements/mode-bar-apoyar-button/component'
 import ProjectMobileTools from "../project-mobile-tools/component"
 
 const ProjectHeaderContainer = styled.div`
@@ -119,18 +120,21 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
         <ModeBar>
           <ModeBarLinkButton active>Presentación</ModeBarLinkButton>
           <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project._id } }}>Artículos</ModeBarLinkButton>
+          <ModeBarApoyarButton project={project} />
         </ModeBar>
       }
       {currentSection === '/versiones' &&
         <ModeBar>
           <ModeBarLinkButton href={{ pathname: '/propuesta', query: { id: project._id } }}>Presentación</ModeBarLinkButton>
           <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project._id } }}>Artículos</ModeBarLinkButton>
+          <ModeBarApoyarButton project={project} />
         </ModeBar>
       }
       {currentSection === '/articulado' &&
         <ModeBar>
           <ModeBarLinkButton href={{ pathname: '/propuesta', query: { id: project._id } }}>Presentación</ModeBarLinkButton>
           <ModeBarLinkButton active>Artículos</ModeBarLinkButton>
+          <ModeBarApoyarButton project={project} />
           <ModeButton>
             {withComments ? <Icon icon={squareO} size={20} /> : <Icon icon={checkSquareO} size={20} />}&nbsp;
             Modo lectura
