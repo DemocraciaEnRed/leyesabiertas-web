@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import ApoyarFormulario from '../../components/apoyar-formulario/component'
+import getConfig from 'next/config'
+const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const StyledButton = styled.button`
   border: none;
@@ -44,17 +46,21 @@ const WrapperDiv = styled.div`
 `
 
 const ModeBarApoyarButton = (props) => {
-  // react hook
+  // react hooks
   const [showFormulario, setShowFormulario] = useState(false);
 
   function toggleFormulario() {
     setShowFormulario(!showFormulario)
   }
 
+  const { project } = props
+
+  if (!project) return null
+
   return <WrapperDiv>
     <StyledButton {...props} onClick={toggleFormulario}>
       <img src={`${'/static/assets/apoyar-icon.svg'}`} />
-      <Text>Quiero Apoyar<TextCount> ({props.project._id&&200})</TextCount></Text>
+      <Text>Quiero Apoyar<TextCount> ({project._id&&200})</TextCount></Text>
     </StyledButton>
     <ApoyarFormulario {...props} show={showFormulario} toggleFormulario={toggleFormulario }/>
   </WrapperDiv>
