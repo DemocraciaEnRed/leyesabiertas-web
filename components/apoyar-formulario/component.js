@@ -212,7 +212,7 @@ class ApoyarFormulario extends Component {
     return (
       <Container onSubmit={this.handleSubmit}>
         <MobileCloseButton onClick={toggleFormulario}>CERRAR ✖</MobileCloseButton>
-        { isApoyando ?
+        { !isApoyando ?
           <Fragment>
             <ApoyosSpan>{ project._id && '200' } personas</ApoyosSpan> están apoyando la propuesta<br />
             ¿Querés apoyarla también?
