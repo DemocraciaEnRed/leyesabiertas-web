@@ -60,9 +60,9 @@ const ApoyarButton = styled.button`
     margin-right: 5px;
   }
 `
-const MobileCloseButton = styled.button`
+const MobileCloseButton = styled.div`
+  width: 65px;
   margin-left: auto;
-  margin-right: 10px;
   margin-bottom: 7px;
   background-color: transparent;
   border: none;
@@ -121,17 +121,7 @@ class ApoyarFormulario extends Component {
     this.emailInput = this.emailInput.bind(this)
     this.captchaInput = this.captchaInput.bind(this)
 
-    this.inputKeyPress = this.inputKeyPress.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-
-  }
-
-  inputKeyPress(e){
-    // por algún motivo al apretar enter se cerraba el form
-    if (e.key == "Enter"){
-      e.stopPropagation()
-      e.preventDefault()
-    }
   }
 
   nombreApellidoInput(e) { this.setState({ nombre_apellido: e.target.value }) }
@@ -186,8 +176,8 @@ class ApoyarFormulario extends Component {
     })
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.show && !this.props.authContext.authenticated && !this.state.svg) {
+  componentWillMount() {
+    if (!this.props.authContext.authenticated && !this.state.svg) {
       fetch(`${API_URL}/api/v1/documents/captcha-data`)
         .then(r => r.json())
         .then(j => this.setState({svg: j.img, token: j.token}))
@@ -196,10 +186,10 @@ class ApoyarFormulario extends Component {
 
   render () {
     const { authenticated, user } = this.props.authContext
-    const { project, show, toggleFormulario } = this.props
+    const { project, toggleFormulario } = this.props
     const { svg, success } = this.state
 
-    if (!project || !show) return null
+    if (!project) return null
 
     return (
       <Container onSubmit={this.handleSubmit}>
@@ -212,11 +202,11 @@ class ApoyarFormulario extends Component {
               <Fragment>
                 <Label>
                   <span>Nombre y Apellido</span>
-                  <input name="nombre_apellido" required value={this.state.nombre_apellido} onChange={this.nombreApellidoInput} onKeyPress={this.inputKeyPress} />
+                  <input name="nombre_apellido" required value={this.state.nombre_apellido} onChange={this.nombreApellidoInput} />
                 </Label>
                 <Label>
                   <span>Email</span>
-                  <input name="email" type="email" required value={this.state.email} onChange={this.emailInput} onKeyPress={this.inputKeyPress} />
+                  <input name="email" type="email" required value={this.state.email} onChange={this.emailInput} />
                 </Label>
                 <CaptchaGroup>
                   <CaptchaTitle>Validá que no sos un robot:</CaptchaTitle>
@@ -225,7 +215,7 @@ class ApoyarFormulario extends Component {
                     :
                     <span>Cargando imagen...</span>
                   }
-                  <input type='text' maxlength='4' name="captcha" required value={this.state.captcha} onChange={this.captchaInput} onKeyPress={this.inputKeyPress} />
+                  <input type='text' maxlength='4' name="captcha" required value={this.state.captcha} onChange={this.captchaInput} />
                 </CaptchaGroup>
               </Fragment>
             }
