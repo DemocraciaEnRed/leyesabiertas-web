@@ -108,6 +108,7 @@ const ApoyandoGroup = styled.div`
   flex-direction: column;
   img {
     margin-bottom: 18px;
+    height: 40px;
   }
 `
 
