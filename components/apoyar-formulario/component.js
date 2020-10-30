@@ -48,6 +48,7 @@ const ApoyosSpan = styled.span`
 const ApoyarButton = styled.button`
   width: 100%
   padding: 13px 0;
+  margin-top: 20px;
   background-color: #6f78e6
   color: white
   font-weight: bold
@@ -81,7 +82,6 @@ const CaptchaGroup = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  padding-bottom: 20px;
   img {
     padding-bottom: 5px;
   }
@@ -102,10 +102,28 @@ const ErrorSpan = styled.span`
   padding-bottom: 5px;
 `
 
+const ApoyandoGroup = styled.div`
+  text-align: center
+  display: flex;
+  flex-direction: column;
+  img {
+    margin-bottom: 18px;
+  }
+`
+
+const ApoyandoSpan = styled.span`
+  font-weight: bold;
+  margin-bottom: 8px;
+`
+
+const ApoyandoPersonasSpan = styled.span`
+  color: #6f78e6
+  font-weight: bold;
+`
 
 class ApoyarFormulario extends Component {
   state = {
-    success: false,
+    isApoyando: false,
     formError: null,
     svg: null,
     token: null,
@@ -163,7 +181,7 @@ class ApoyarFormulario extends Component {
       body: JSON.stringify(body)
     }).then(async (res) => {
       if (res.status == 200){
-        this.setState({formError: null, success: true})
+        this.setState({formError: null, isApoyando: true})
       }else{
         let err
         try {
@@ -187,14 +205,14 @@ class ApoyarFormulario extends Component {
   render () {
     const { authenticated, user } = this.props.authContext
     const { project, toggleFormulario } = this.props
-    const { svg, success } = this.state
+    const { svg, isApoyando } = this.state
 
     if (!project) return null
 
     return (
       <Container onSubmit={this.handleSubmit}>
         <MobileCloseButton onClick={toggleFormulario}>CERRAR ✖</MobileCloseButton>
-        { !success ?
+        { isApoyando ?
           <Fragment>
             <ApoyosSpan>{ project._id && '200' } personas</ApoyosSpan> están apoyando la propuesta<br />
             ¿Querés apoyarla también?
@@ -225,7 +243,12 @@ class ApoyarFormulario extends Component {
             <ApoyarButton><img src={`${'/static/assets/apoyar-icon.svg'}`} />Quiero apoyar la propuesta</ApoyarButton>
           </Fragment>
         :
-          <span>¡Ya estás apoyando la propuesta!</span>
+          <ApoyandoGroup>
+            <img src={`${'/static/assets/corazon.svg'}`} />
+            <ApoyandoSpan>¡Ya estás apoyando la propuesta!</ApoyandoSpan>
+            <ApoyandoPersonasSpan>{ project._id && '200' } personas y vos</ApoyandoPersonasSpan>
+            <span>Están apoyando la propuesta</span>
+          </ApoyandoGroup>
         }
       </Container>
     )
