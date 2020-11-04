@@ -48,9 +48,14 @@ const WrapperDiv = styled.div`
 const ModeBarApoyarButton = (props) => {
   // react hooks
   const [showFormulario, setShowFormulario] = useState(false);
+  const [isAnonApoyando, setisAnonApoyando] = useState(false);
 
   function toggleFormulario() {
     setShowFormulario(!showFormulario)
+  }
+
+  function apoyoAnonExitoso() {
+    setisAnonApoyando(true)
   }
 
   const { project } = props
@@ -61,10 +66,18 @@ const ModeBarApoyarButton = (props) => {
     <StyledButton {...props} onClick={toggleFormulario}>
       <img src={`${'/static/assets/apoyar-icon.svg'}`} />
       <Text>
-        {project.userIsApoyado?'Apoyando':'Quiero Apoyar'}<TextCount> ({ project.apoyosCount || 0 })</TextCount>
+        { project.userIsApoyado || isAnonApoyando ? 'Apoyando' : 'Quiero Apoyar' }
+        <TextCount> ({ project.apoyosCount || 0 })</TextCount>
       </Text>
     </StyledButton>
-    { showFormulario && <ApoyarFormulario {...props} toggleFormulario={toggleFormulario }/> }
+    { showFormulario &&
+      <ApoyarFormulario
+        {...props}
+        toggleFormulario={toggleFormulario}
+        isAnonApoyando={isAnonApoyando}
+        apoyoAnonExitoso={apoyoAnonExitoso}
+        />
+    }
   </WrapperDiv>
 }
 

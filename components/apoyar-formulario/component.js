@@ -124,7 +124,6 @@ const ApoyandoPersonasSpan = styled.span`
 
 class ApoyarFormulario extends Component {
   state = {
-    isApoyando: false,
     formError: null,
     svg: null,
     token: null,
@@ -150,36 +149,15 @@ class ApoyarFormulario extends Component {
   handleSubmit(e){
     e.preventDefault()
 
-    const { authenticated, keycloak } = this.props.authContext
-    const { project } = this.props
-
-    let url
-    let headers = { 'Content-Type': 'application/json' }
-    let body
-
-    if (authenticated && keycloak && keycloak.token){
-      url = `${API_URL}/api/v1/documents/${project._id}/apoyar`
-      Object.assign(headers, {
-        Authorization: `Bearer ${keycloak.token}`
-      })
-      body = {}
-    } else {
-      url = `${API_URL}/api/v1/documents/${project._id}/apoyar-anon`
-      body = {
-        token: this.state.token,
-        nombre_apellido: this.state.nombre_apellido,
-        email: this.state.email,
-        captcha: this.state.captcha,
-      }
-    }
-
-    fetch(url, {
-      headers,
-      method: 'POST',
-      body: JSON.stringify(body)
+    this.props.apoyarProyecto(!this.props.authContext.authenticated && {
+      token: this.state.token,
+      nombre_apellido: this.state.nombre_apellido,
+      email: this.state.email,
+      captcha: this.state.captcha,
     }).then(async (res) => {
       if (res.status == 200){
-        this.setState({formError: null, isApoyando: true})
+        this.setState({formError: null})
+        this.props.apoyoAnonExitoso()
       }else{
         let err
         try {
@@ -202,15 +180,15 @@ class ApoyarFormulario extends Component {
 
   render () {
     const { authenticated, user } = this.props.authContext
-    const { project, toggleFormulario } = this.props
-    const { svg, isApoyando } = this.state
+    const { project, toggleFormulario, isAnonApoyando } = this.props
+    const { svg } = this.state
 
     if (!project) return null
 
     return (
       <Container onSubmit={this.handleSubmit}>
         <MobileCloseButton onClick={toggleFormulario}>CERRAR ✖</MobileCloseButton>
-        { !isApoyando && !project.userIsApoyado ?
+        { !isAnonApoyando && !project.userIsApoyado ?
           <Fragment>
             <ApoyosSpan>{ project.apoyosCount || 0 } personas</ApoyosSpan> están apoyando la propuesta<br />
             ¿Querés apoyarla también?
@@ -242,8 +220,12 @@ class ApoyarFormulario extends Component {
           <ApoyandoGroup>
             <img src={`${'/static/assets/corazon.svg'}`} />
             <ApoyandoSpan>¡Ya estás apoyando la propuesta!</ApoyandoSpan>
-            <ApoyandoPersonasSpan>{ project.apoyosCount || 0 } personas y vos</ApoyandoPersonasSpan>
-            <span>Están apoyando la propuesta</span>
+            {project.apoyosCount > 1 &&
+              <Fragment>
+                <ApoyandoPersonasSpan>{ project.apoyosCount-1 } personas y vos</ApoyandoPersonasSpan>
+                <span>Están apoyando la propuesta</span>
+              </Fragment>
+            }
           </ApoyandoGroup>
         }
       </Container>

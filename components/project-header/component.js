@@ -73,7 +73,7 @@ const TopBarWrapper = styled.div`
   // }
   `
 
-const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, togglePublish, contextualCommentsCount, contributionsCount, contributorsCount, currentSection, withComments }) => (
+const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, togglePublish, contextualCommentsCount, contributionsCount, contributorsCount, currentSection, withComments, apoyarProyecto }) => (
 
   <ProjectHeaderContainer img={project.currentVersion.content.imageCover}>
     <ProjectBreadcrumb
@@ -120,21 +120,21 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
         <ModeBar>
           <ModeBarLinkButton active>Presentación</ModeBarLinkButton>
           <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project._id } }}>Artículos</ModeBarLinkButton>
-          <ModeBarApoyarButton project={project} />
+          <ModeBarApoyarButton project={project} apoyarProyecto={apoyarProyecto} />
         </ModeBar>
       }
       {currentSection === '/versiones' &&
         <ModeBar>
           <ModeBarLinkButton href={{ pathname: '/propuesta', query: { id: project._id } }}>Presentación</ModeBarLinkButton>
           <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project._id } }}>Artículos</ModeBarLinkButton>
-          <ModeBarApoyarButton project={project} />
+          <ModeBarApoyarButton project={project} apoyarProyecto={apoyarProyecto} />
         </ModeBar>
       }
       {currentSection === '/articulado' &&
         <ModeBar>
           <ModeBarLinkButton href={{ pathname: '/propuesta', query: { id: project._id } }}>Presentación</ModeBarLinkButton>
           <ModeBarLinkButton active>Artículos</ModeBarLinkButton>
-          <ModeBarApoyarButton project={project} />
+          <ModeBarApoyarButton project={project} apoyarProyecto={apoyarProyecto} />
           <ModeButton>
             {withComments ? <Icon icon={squareO} size={20} /> : <Icon icon={checkSquareO} size={20} />}&nbsp;
             Modo lectura

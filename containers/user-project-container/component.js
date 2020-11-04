@@ -55,7 +55,7 @@ export default class extends Component {
   setPublish = (isPublished) => this.setState({ isPublished: isPublished })
 
   render() {
-    const { project, section, fetchDocument } = this.props
+    const { project, section, fetchDocument, apoyarProyecto } = this.props
     const { withComments, isPublished } = this.state
     if (!project || !project.document) return null
     const { isAuthor } = project
@@ -86,7 +86,9 @@ export default class extends Component {
             contributionsCount={project.contributionsCount}
             currentSection={this.props.section}
             withComments={withComments}
+            apoyarProyecto={apoyarProyecto}
              />
+
           {this.props.section === '/propuesta' &&
             <Fragment>
               <ProjectBody project={project.document} />
