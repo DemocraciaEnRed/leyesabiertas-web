@@ -21,16 +21,19 @@ const CommentaryItems = styled.div`
 padding-bottom: 1rem;
 text-transform:uppercase;
 display: flex;
-align-items: center;
-margin: 0 auto;
+width: 100%;
+justify-content: space-evenly;
 `
 
 const CommentaryIcon = styled.div`
   width: 18px;
   height: 17px;
-  background-image: url(${'/static/assets/comment-icon.svg'});
+  background-image: url(${(props) => `/static/assets/${props.icon}`});
   background-size: cover;
   background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  top: 3px;
 `
 
 const LimitDate = styled.div`
@@ -45,13 +48,19 @@ const LimitDate = styled.div`
 `
 const Span = styled.span`
   font-family: var(--bold);
-  margin: 0 0.5rem 0 1rem;
+  margin: 0 0.2rem 0 0.3rem;
 `
-const Social = ({ commentaries, closed }) => (
+const Social = ({ commentaries, closed, apoyosCount }) => (
   <Wrapper>
     <CommentaryItems>
-      <CommentaryIcon />
-      <Span> {commentaries}</Span> {commentaries === 1 ? ' Aporte' : ' Aportes'}
+      <div>
+        <CommentaryIcon icon='comment-icon.svg' />
+        <Span> {commentaries}</Span> {commentaries === 1 ? ' Aporte' : ' Aportes'}
+      </div>
+      <div>
+        <CommentaryIcon icon='apoyar-icon-azul.svg' />
+        <Span> {apoyosCount}</Span> {apoyosCount === 1 ? ' Apoyo' : ' Apoyos'}
+      </div>
     </CommentaryItems>
     {closed &&
       <LimitDate>Finalizó el periodo para aportes</LimitDate>

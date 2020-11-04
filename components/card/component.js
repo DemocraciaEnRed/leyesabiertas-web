@@ -38,7 +38,8 @@ const Card = ({ project }) => (
           hasImage={!!project.currentVersion.content.imageCover}
           party={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
         <CardSocial commentaries={project.commentsCount}
-          closed={project.closed} />
+          closed={project.closed}
+          apoyosCount={project.apoyosCount} />
       </a>
     </Link>
   </CardContainer>
