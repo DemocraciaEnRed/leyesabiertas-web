@@ -60,7 +60,9 @@ const ModeBarApoyarButton = (props) => {
   return <WrapperDiv>
     <StyledButton {...props} onClick={toggleFormulario}>
       <img src={`${'/static/assets/apoyar-icon.svg'}`} />
-      <Text>Quiero Apoyar<TextCount> ({project._id&&200})</TextCount></Text>
+      <Text>
+        {project.userIsApoyado?'Apoyando':'Quiero Apoyar'}<TextCount> ({ project.apoyosCount || 0 })</TextCount>
+      </Text>
     </StyledButton>
     { showFormulario && <ApoyarFormulario {...props} toggleFormulario={toggleFormulario }/> }
   </WrapperDiv>

@@ -48,7 +48,6 @@ const ApoyosSpan = styled.span`
 const ApoyarButton = styled.button`
   width: 100%
   padding: 13px 0;
-  margin-top: 20px;
   background-color: #6f78e6
   color: white
   font-weight: bold
@@ -100,6 +99,7 @@ const ErrorSpan = styled.span`
   display: block;
   color:red
   padding-bottom: 5px;
+  margin-top: 20px;
 `
 
 const ApoyandoGroup = styled.div`
@@ -165,9 +165,6 @@ class ApoyarFormulario extends Component {
       body = {}
     } else {
       url = `${API_URL}/api/v1/documents/${project._id}/apoyar-anon`
-      Object.assign(headers, {
-        credentials: "include"
-      })
       body = {
         token: this.state.token,
         nombre_apellido: this.state.nombre_apellido,
@@ -213,9 +210,9 @@ class ApoyarFormulario extends Component {
     return (
       <Container onSubmit={this.handleSubmit}>
         <MobileCloseButton onClick={toggleFormulario}>CERRAR ✖</MobileCloseButton>
-        { !isApoyando ?
+        { !isApoyando && !project.userIsApoyado ?
           <Fragment>
-            <ApoyosSpan>{ project._id && '200' } personas</ApoyosSpan> están apoyando la propuesta<br />
+            <ApoyosSpan>{ project.apoyosCount || 0 } personas</ApoyosSpan> están apoyando la propuesta<br />
             ¿Querés apoyarla también?
             { !authenticated &&
               <Fragment>
@@ -238,16 +235,14 @@ class ApoyarFormulario extends Component {
                 </CaptchaGroup>
               </Fragment>
             }
-            { this.state.formError &&
-              <ErrorSpan>{this.state.formError}</ErrorSpan>
-            }
+            <ErrorSpan>{this.state.formError}</ErrorSpan>
             <ApoyarButton><img src={`${'/static/assets/apoyar-icon.svg'}`} />Quiero apoyar la propuesta</ApoyarButton>
           </Fragment>
         :
           <ApoyandoGroup>
             <img src={`${'/static/assets/corazon.svg'}`} />
             <ApoyandoSpan>¡Ya estás apoyando la propuesta!</ApoyandoSpan>
-            <ApoyandoPersonasSpan>{ project._id && '200' } personas y vos</ApoyandoPersonasSpan>
+            <ApoyandoPersonasSpan>{ project.apoyosCount || 0 } personas y vos</ApoyandoPersonasSpan>
             <span>Están apoyando la propuesta</span>
           </ApoyandoGroup>
         }
