@@ -42,8 +42,6 @@ export default () => {
 
   // mount event
   useEffect(() => {
-    fetch(`${API_URL}/api/v1/documents`).then(r => r.json()).then(j => setProjects(j.results))
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const v = urlParams.get('v');
@@ -51,11 +49,14 @@ export default () => {
     fetch(`${API_URL}/api/v1/documents/apoyo-anon-validar/${v}`)
       .then(r => r.json())
       .then(j => {
-        if (j.error)
+        if (j.error){
           setIsValidado(false)
-        else {
-          setProject(j.document)
+          fetch(`${API_URL}/api/v1/documents`).then(r => r.json()).then(j => setProjects(j.results))
+        }else {
+          let rProject = j.document
+          setProject(rProject)
           setIsValidado(true)
+          fetch(`${API_URL}/api/v1/documents`).then(r => r.json()).then(j => setProjects(j.results.filter(d => d._id != rProject._id)))
         }
       })
   }, [])
