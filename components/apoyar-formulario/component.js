@@ -205,7 +205,7 @@ class ApoyarFormulario extends Component {
             <img src={`${'/static/assets/corazon.svg'}`} />
             <ApoyandoSpan>¡Gracias!</ApoyandoSpan>
             <Fragment>
-              <span>Le hemos enviado un mail a su casilla para validar su apoyo</span>
+              <span>Enviamos un mail a su casilla para validar su apoyo</span>
             </Fragment>
           </ApoyandoGroup>
         }
