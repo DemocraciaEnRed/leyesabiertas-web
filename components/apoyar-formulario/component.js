@@ -149,7 +149,9 @@ class ApoyarFormulario extends Component {
   handleSubmit(e){
     e.preventDefault()
 
-    this.props.apoyarProyecto(!this.props.authContext.authenticated && {
+    const { authenticated } = this.props.authContext
+
+    this.props.apoyarProyecto(authenticated && {
       token: this.state.token,
       nombre_apellido: this.state.nombre_apellido,
       email: this.state.email,
@@ -157,7 +159,8 @@ class ApoyarFormulario extends Component {
     }).then(async (res) => {
       if (res.status == 200){
         this.setState({formError: null})
-        this.props.apoyoAnonExitoso()
+        if (!authenticated)
+          this.props.apoyoAnonExitoso()
       }else{
         let err
         try {
@@ -185,16 +188,18 @@ class ApoyarFormulario extends Component {
 
     if (!project) return null
 
+    const apoyosMinusOne = project.apoyosCount-1
+
     return (
       <Container onSubmit={this.handleSubmit}>
         <MobileCloseButton onClick={toggleFormulario}>CERRAR ✖</MobileCloseButton>
         { project.userIsApoyado &&
           <ApoyandoGroup>
             <img src={`${'/static/assets/corazon.svg'}`} />
-            <ApoyandoSpan>¡Ya estás apoyando la propuesta!</ApoyandoSpan>
+            <ApoyandoSpan>¡Ya estás apoyando esta propuesta!</ApoyandoSpan>
             {project.apoyosCount > 1 &&
               <Fragment>
-                <ApoyandoPersonasSpan>{ project.apoyosCount-1 } personas y vos</ApoyandoPersonasSpan>
+                <ApoyandoPersonasSpan>{ apoyosMinusOne } {apoyosMinusOne == 1 ? 'persona' : 'personas'} y vos</ApoyandoPersonasSpan>
                 <span>Están apoyando la propuesta</span>
               </Fragment>
             }
