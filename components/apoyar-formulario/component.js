@@ -57,10 +57,13 @@ const ApoyarButton = styled.button`
   font-weight: bold
   border: none
   :focus {outline:0;}
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   img{
     position: relative;
-    top: 5px;
+    top: 1px;
     margin-right: 5px;
   }
 `
