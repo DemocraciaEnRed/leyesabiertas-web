@@ -67,7 +67,7 @@ const ApoyarButton = styled.button`
     margin-right: 5px;
   }
 `
-const MobileCloseButton = styled.div`
+const CloseButton = styled.div`
   width: 65px;
   margin-left: auto;
   margin-bottom: 7px;
@@ -76,10 +76,9 @@ const MobileCloseButton = styled.div`
   color: #960c0c;
   cursor: pointer;
   font-weight: bold;
-  font-size: 1.7rem;
-  display: none
+  font-size: 1.3rem;
   @media(max-width:700px){
-    display: block
+    font-size: 1.7rem;
   }
 `
 
@@ -145,6 +144,7 @@ class ApoyarFormulario extends Component {
     this.nombreApellidoInput = this.nombreApellidoInput.bind(this)
     this.emailInput = this.emailInput.bind(this)
     this.captchaInput = this.captchaInput.bind(this)
+    this.closeClick = this.closeClick.bind(this)
 
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -180,6 +180,13 @@ class ApoyarFormulario extends Component {
     })
   }
 
+  closeClick(){
+    const hideApoyarForm = localStorage.getItem('hide-apoyar-form') || false
+    if (!hideApoyarForm)
+      localStorage.setItem('hide-apoyar-form', true)
+    this.props.toggleFormulario()
+  }
+
   componentWillMount() {
     if (!this.props.authContext.authenticated && !this.state.svg) {
       fetch(`${API_URL}/api/v1/documents/captcha-data`)
@@ -190,7 +197,7 @@ class ApoyarFormulario extends Component {
 
   render () {
     const { authenticated, user } = this.props.authContext
-    const { project, toggleFormulario, hasAnonApoyado } = this.props
+    const { project, hasAnonApoyado } = this.props
     const { svg } = this.state
 
     if (!project) return null
@@ -199,7 +206,7 @@ class ApoyarFormulario extends Component {
 
     return (
       <Container onSubmit={this.handleSubmit}>
-        <MobileCloseButton onClick={toggleFormulario}>CERRAR ✖</MobileCloseButton>
+        <CloseButton onClick={this.closeClick}>CERRAR ✖</CloseButton>
         { project.userIsApoyado &&
           <ApoyandoGroup>
             <img src={`${'/static/assets/corazon.svg'}`} />

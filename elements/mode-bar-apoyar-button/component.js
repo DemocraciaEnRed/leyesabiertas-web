@@ -47,7 +47,7 @@ const WrapperDiv = styled.div`
 
 const ModeBarApoyarButton = (props) => {
   // react hooks
-  const [showFormulario, setShowFormulario] = useState(false);
+  const [showFormulario, setShowFormulario] = useState(localStorage.getItem('hide-apoyar-form') ? false : true);
   const [hasAnonApoyado, setHasAnonApoyado] = useState(false);
 
   function toggleFormulario() {
