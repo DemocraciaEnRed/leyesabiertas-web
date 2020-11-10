@@ -26,6 +26,10 @@ const Container = styled.form`
     left: 0;
     width: 100%;
   }
+
+  input {
+    padding: 5px;
+  }
 `
 
 const Label = styled.label`
