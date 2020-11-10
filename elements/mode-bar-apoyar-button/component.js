@@ -12,7 +12,7 @@ const StyledButton = styled.button`
   color: ${(props) => props.active ? '#4a5d68' : '#FFF'};
   background-color: ${(props) => props.active ? 'white' : '#5c97bc'};
   font-family: ${(props) => props.active ? 'var(--bold)' : 'var(--regular)'};
-  cursor: pointer;
+  cursor: ${(props) => props.project && !props.project.closed ? 'pointer' : 'auto'};
   font-weight: bold;
   :hover{}
   @media(max-width:700px){
@@ -63,10 +63,12 @@ const ModeBarApoyarButton = (props) => {
   if (!project) return null
 
   return <WrapperDiv>
-    <StyledButton {...props} onClick={toggleFormulario}>
+    <StyledButton {...props} onClick={!project.closed && toggleFormulario}>
       <img src={`${'/static/assets/apoyar-icon.svg'}`} />
       <Text>
-        { project.userIsApoyado ? 'Apoyando' : 'Quiero Apoyar' }
+        { project.closed ? 'Apoyos' :
+          (project.userIsApoyado ? 'Apoyando' : 'Quiero Apoyar')
+        }
         <TextCount> ({ project.apoyosCount || 0 })</TextCount>
       </Text>
     </StyledButton>
