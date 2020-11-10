@@ -151,7 +151,7 @@ class ApoyarFormulario extends Component {
 
     const { authenticated } = this.props.authContext
 
-    this.props.apoyarProyecto(authenticated && {
+    this.props.apoyarProyecto(!authenticated && {
       token: this.state.token,
       nombre_apellido: this.state.nombre_apellido,
       email: this.state.email,
