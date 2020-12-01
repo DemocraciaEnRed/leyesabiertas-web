@@ -75,7 +75,8 @@ const TopBarWrapper = styled.div`
 
 const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, togglePublish, contextualCommentsCount, contributionsCount, contributorsCount, currentSection, withComments, apoyarProyecto }) => (
 
-  <ProjectHeaderContainer img={project.currentVersion.content.imageCover}>
+  // <ProjectHeaderContainer img={project.currentVersion.content.imageCover}>
+  <ProjectHeaderContainer img='/static/assets/images/trama-default.jpg'>
     <ProjectBreadcrumb
       title={project.currentVersion.content.title}
       id={project._id}

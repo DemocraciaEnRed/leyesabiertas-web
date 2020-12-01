@@ -10,6 +10,7 @@ import Button from '../../elements/button/component'
 import getConfig from 'next/config'
 import Masonry from 'react-masonry-component';
 import TagsSelect from '../../elements/tags-select/component.js'
+import WithDocumentTagsContext from '../../components/document-tags-context/component'
 
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
@@ -114,6 +115,7 @@ class Projects extends Component {
       // filter: {
       //   closed: null
       // }
+      tags: []
     }
   }
 
@@ -160,6 +162,15 @@ class Projects extends Component {
     })
   }
 
+  async componentWillMount () {
+    this.setState({
+      tags: (await this.props.fetchDocumentTags()).map(
+        tag => ({ value: tag._id, label: tag.name, key: tag.key })
+      )
+    })
+  }
+
+
   async componentDidMount() {
     this.getDocuments()
   }
@@ -195,7 +206,8 @@ class Projects extends Component {
       projects,
       query,
       loadMoreAvailable,
-      loading
+      loading,
+      tags
     } = this.state
     return (
       <Section id='projects' noMargin>
@@ -220,7 +232,7 @@ class Projects extends Component {
               style={{ width: '100%', margin: '4.8rem 0 1.6rem' }}
               options={masonryOptions}>
               {projects.map((p, i) => (
-                <Card project={p} key={i} />
+                <Card project={p} key={i} tags={tags} />
               ))}
             </Masonry>
           </Fragment>
@@ -242,4 +254,4 @@ class Projects extends Component {
   }
 }
 
-export default Projects
+export default WithDocumentTagsContext(Projects)

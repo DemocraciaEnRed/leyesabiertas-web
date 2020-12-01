@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import CardHeader from '../../elements/card-header/component'
 import CardContent from '../../elements/card-content/component'
 import CardSocial from '../../elements/card-social/component'
+import WithDocumentTagsContext from '../../components/document-tags-context/component'
 
 const CardContainer = styled.div`
 margin: 0 1% 30px;
@@ -25,17 +26,19 @@ position: relative;
   }
 `
 
-const Card = ({ project }) => (
+const Card = ({ project, tags }) => (
   <CardContainer>
     <Link href={{ pathname: '/propuesta', query: { id: project._id } }}>
       <a>
-        <CardHeader img={project.currentVersion.content.imageCover} published={project.published} />
+        {/* <CardHeader img={project.currentVersion.content.imageCover} published={project.published} /> */}
+        <CardHeader img={`/static/assets/images/${tags && project.currentVersion.content.tags && project.currentVersion.content.tags.length > 0 ? tags.find(x => project.currentVersion.content.tags[0] == x.value).key : 'trama-default'}.jpg`} published={project.published} />
         <CardContent
           title={project.currentVersion.content.title}
           authorId={project.author._id}
           userId={project.author._id}
           name={project.author.fullname}
-          hasImage={!!project.currentVersion.content.imageCover}
+          // hasImage={!!project.currentVersion.content.imageCover}
+          hasImage={project.currentVersion.content.tags && project.currentVersion.content.tags.length > 0}
           party={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
         <CardSocial commentaries={project.commentsCount}
           closed={project.closed}
@@ -49,4 +52,4 @@ Card.propTypes = {
   project: PropTypes.object.isRequired
 }
 
-export default Card
+export default WithDocumentTagsContext(Card)
