@@ -253,7 +253,6 @@ const ButtonTable = styled.div`
     background-color: #5c97bc;
     color: #FFF;
     cursor: pointer;
-    font-family: var(--medium);
   }
   &[disabled]{
     cursor: not-allowed;
@@ -471,6 +470,30 @@ class MyProjects extends Component {
     }
   }
 
+  downloadApoyos = async () => {
+    try {
+      const result = await fetch(`${API_URL}/api/v1/documents/my-documents/export-apoyos-xls`,{
+        headers: {
+          Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      const blob = await result.blob()
+
+      // Download API Files With React & Fetch - https://medium.com/yellowcode/download-api-files-with-react-fetch-393e4dae0d9e
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'Apoyos.xlsx');  // 3. Append to html page
+      document.body.appendChild(link);  // 4. Force download
+      link.click();  // 5. Clean up and remove the link
+      link.parentNode.removeChild(link);
+
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   render() {
     const {
       projects,
@@ -496,15 +519,22 @@ class MyProjects extends Component {
                 disabled={!hasProjects}>
                 <Icon icon={download} size={20} />&nbsp;&nbsp;Descargar info. de participantes
               </ButtonTable>
+              <ButtonTable
+                onClick={hasProjects && this.downloadApoyos}
+                float='right'
+                disabled={!hasProjects}>
+                <Icon icon={download} size={20} />&nbsp;&nbsp;Descargar apoyos
+              </ButtonTable>
             </ButtonsBar>
             <ProjectsTable>
               <ProjectsTableHead>
                 <ProjectsTableRow>
                   <ProjectsTableHeader>Nombre</ProjectsTableHeader>
                   <ProjectsTableHeader hiddenMobile centered>Status</ProjectsTableHeader>
-                  <ProjectsTableHeader width={120} hiddenMobile centered>Aportes</ProjectsTableHeader>
-                  <ProjectsTableHeader width={120} hiddenMobile centered>Fecha creación</ProjectsTableHeader>
-                  <ProjectsTableHeader width={120} hiddenMobile centered>Fecha de cierre</ProjectsTableHeader>
+                  <ProjectsTableHeader width={100} hiddenMobile centered>Aportes</ProjectsTableHeader>
+                  <ProjectsTableHeader width={100} hiddenMobile centered>Apoyos</ProjectsTableHeader>
+                  <ProjectsTableHeader width={100} hiddenMobile centered>Fecha creación</ProjectsTableHeader>
+                  <ProjectsTableHeader width={100} hiddenMobile centered>Fecha de cierre</ProjectsTableHeader>
                   <ProjectsTableHeader width={120} hiddenMobile centered>Acciones</ProjectsTableHeader>
                 </ProjectsTableRow>
               </ProjectsTableHead>

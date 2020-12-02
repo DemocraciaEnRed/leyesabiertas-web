@@ -982,14 +982,14 @@ class ProjectFields extends Component {
             onChange={this.handleInputChange}
             placeholder='Hacer uso correcto de mayúsculas y minúsculas' />
         </ProfileLabel>
-        <ProfileLabel>
+        {/* <ProfileLabel>
           Ingrese la URL para la imagen de encabezado:
           <InputField
             type='text'
             value={this.state.imageCover}
             name='imageCover'
             onChange={this.handleInputChange} />
-        </ProfileLabel>
+        </ProfileLabel> */}
         <ProfileLabel>
           Fecha de cierre del proyecto:
           {/* <InputField

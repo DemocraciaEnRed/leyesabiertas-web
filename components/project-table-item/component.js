@@ -94,7 +94,8 @@ export default ({ project }) => (
         <MobileDetailWithIcon color={project.closed ? 'inherit' : 'green'}>{project.closed ? <Icon icon={timesCircle} size={12} /> : <Icon icon={checkCircle} size={12} /> }&nbsp;&nbsp;{project.closed ? 'Cerrado' : 'Abierto'}</MobileDetailWithIcon>&nbsp;&nbsp;-&nbsp;&nbsp;
         <MobileDetailWithIcon color={project.published ? 'inherit' : 'purple'}>{project.published ? <Icon icon={eye} size={12} /> : <Icon icon={lowVision} size={12} /> }&nbsp;&nbsp;{project.published ? 'Publico' : 'Oculto'}</MobileDetailWithIcon>&nbsp;&nbsp;-&nbsp;&nbsp;
         {project.commentsCount} Aport{project.commentsCount > 1 ? 'es' : 'e'}&nbsp;&nbsp;-&nbsp;&nbsp;
-        {project.currentVersion.version} {project.currentVersion.version > 1 ? 'Versiones' : 'Versión'}
+        {project.currentVersion.version} {project.currentVersion.version > 1 ? 'Versiones' : 'Versión'}&nbsp;&nbsp;-&nbsp;&nbsp;
+        {project.apoyosCount} Apoyo{project.apoyosCount != 1 && 's'}
         <br/>
         Fecha de creación: {formatDate(project.createdAt)}&nbsp;&nbsp;-&nbsp;&nbsp;
         Fecha de cierre: {formatDate(project.currentVersion.content.closingDate)}
@@ -109,6 +110,11 @@ export default ({ project }) => (
         {project.commentsCount} Aport{project.commentsCount > 1 ? 'es' : 'e'}
       </p>
       <p>{project.currentVersion.version} {project.currentVersion.version > 1 ? 'Versiones' : 'Versión'}</p>
+    </ProjectsTableCell>
+    <ProjectsTableCell  hiddenMobile centered>
+      <p>
+        {project.apoyosCount} Apoyo{project.apoyosCount != 1 && 's'}
+      </p>
     </ProjectsTableCell>
     <ProjectsTableCell  hiddenMobile centered>
       {formatDate(project.createdAt)}

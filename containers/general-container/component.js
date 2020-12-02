@@ -54,6 +54,46 @@ class GeneralContainer extends Component {
     }
   }
 
+  apoyarProyecto = async (anonData) => {
+    // anonData == {token, nombre_apellido, email, captcha}
+    const { authenticated, keycloak } = this.props.authContext
+    const { project } = this.state
+
+    if (!project)
+      return
+
+    let projectId = project.document._id
+    let url
+    let headers = { 'Content-Type': 'application/json' }
+    let body
+
+    if (authenticated && keycloak && keycloak.token){
+      url = `${API_URL}/api/v1/documents/${projectId}/apoyar`
+      Object.assign(headers, {
+        Authorization: `Bearer ${keycloak.token}`
+      })
+      body = {}
+    } else {
+      url = `${API_URL}/api/v1/documents/${projectId}/apoyar-anon`
+      body = {
+        token: anonData.token,
+        nombre_apellido: anonData.nombre_apellido,
+        email: anonData.email,
+        captcha: anonData.captcha,
+      }
+    }
+
+    return fetch(url, {
+      headers,
+      method: 'POST',
+      body: JSON.stringify(body)
+    }).then(async (res) => {
+      if (res.status == 200)
+        this.fetchDocument(projectId, keycloak && keycloak.token)
+      return res
+    })
+  }
+
   render () {
     return (
       <Wrapper>
@@ -61,7 +101,12 @@ class GeneralContainer extends Component {
           <NavBar />
           <SecondaryNavbar />
         </div>
-        <UserProjectContainer project={this.state.project} section={this.props.path} fetchDocument={this.fetchDocument} />
+        <UserProjectContainer
+          project={this.state.project}
+          section={this.props.path}
+          fetchDocument={this.fetchDocument}
+          apoyarProyecto={this.apoyarProyecto}
+          />
         <Footer />
       </Wrapper>
     )

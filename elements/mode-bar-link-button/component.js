@@ -17,6 +17,9 @@ const StyledLinkButton = styled.button`
     color: #FFF;
     font-family: var(--bold);
   }
+  @media(max-width:700px){
+    padding: 10px 9px;
+  }
 `
 
 const ModeBarLinkButton = (props) => (
