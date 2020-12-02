@@ -1,6 +1,39 @@
 
 # Changelog
 
+### 1.9.0
+
+1. Nueva funcion: Apoyar un proyecto. Ahora se puede apoyar un proyecto, como usuario registrado o como anonimo (con la necesidad de ingresar la informacion, un captcha, y una validacion por email)
+2. Se agrega la posibilida de que en el perfil del diputada/o se pueda descargar la planilla con un listado de la informacion de quienes apoyaron los proyectos
+3. Cambios visuales: Ahora los header de las cards de los proyectos tendrán una imagen de -LA PRIMERA- etiqueta/categoria elegida en el formulario del proyecto. En el caso de que no existiera, se pondrá una imagen estandar
+
+Listado de cambios:
+
+- Agregado campo "apoyos" en Documents como array de strings (emails)
+- Agregado campo "apoyosCount" en las apis que devuelven Documents (para mostrar en tarjetas de home y dentro del proyecto)
+- Se implementó un método de captcha para apoyos externos
+- Se desarrollo un circuito de validación de apoyo externo (usuarix no registradx) por email usando tabla de tokens
+- Al apoyar, se valida que ese mail no haya apoyado ya una vez
+- Al apoyar, se valida que ese mail no tenga un token de validación vigente (creado en las últimas 48hs)
+- Verificacion del captcha! (svg-captcha https://www.npmjs.com/package/svg-captcha)
+- Usuarix no registradxs: Al poner mail y nombre se le avisa a lx usuarix de que va a recibir un mail para validar
+- Se genera token de un solo uso (que "caduque" a las 48hs) para validar voto
+- Se crea la tabla apoyoTokens con campos: token, fecha creación, email
+- El token se generará como uuid v4 (https://www.npmjs.com/package/uuid)
+- En el script init borraran los token más viejos que de 48hs
+- Enviar mail (desde notifier) con link con el token en la url para validar el voto
+- Cuando alguien X entré a validar el token, se verifica que este en el rango de 48hs (sino se avisa que ya expiró), y si lo está se registra un apoyo a nombre del mail del token y se borra el token
+- Para apoyos internos (usuarix registradx) simplemente registrar el apoyo y ya
+- Se agrega la posibilidad de descargar un excel con todos los apoyos registrados en los proyectos.
+- Se quito el campo de URL de la imagen, dado que no va a ser mas utlilzado
+- Ahora las etiquetas cuentan con una "key", importante para coordinar con que imagen mostrar en el header de la card del proyecto
+- Ahora para monitores mas grandes-largos (2K/4K) se muestran 4 columnas de cards de proyectos en la home
+
+Compatible con:
+* `leyesabiertas-core:1.9.0`
+* `leyesabiertas-notifier:1.9.0`
+* `leyesabiertas-keycloak:1.0.8`
+
 ### 1.8.0
 
 Listado de cambios hasta el momento:
