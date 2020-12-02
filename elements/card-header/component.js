@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Icon from 'react-icons-kit/Icon'
 import { eyeSlash } from 'react-icons-kit/fa/eyeSlash'
+
 const Wrapper = styled.div`
 width: 100%;
 height: 126px;
@@ -12,6 +13,11 @@ overflow:hidden;
 background-size: cover;
 background-position: center;
 // position: relative;
+`
+
+const CoverImage = styled.img`
+  width: 100%;
+  //max-height:126px;
 `
 
 const Label = styled.span`
@@ -33,11 +39,20 @@ const Label = styled.span`
   bottom: 7px
 `
 
-const CardHeader = ({ img, published }) => (
+const CardHeader = ({ hasImage, img, published }) => {
+  if(hasImage) {
+    return (
+    <div>
+      <CoverImage src={img}></CoverImage>
+    </div>
+    )
+  } 
+  return (
   <Wrapper img={img}>
     { !published && <Label><Icon icon={eyeSlash} style={{ verticalAlign: 'text-bottom', marginRight: '5px' }} size={14} />Oculto</Label>}
   </Wrapper>
 )
+}
 
 CardHeader.propTypes = {
   img: PropTypes.string,

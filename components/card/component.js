@@ -9,7 +9,7 @@ import WithDocumentTagsContext from '../../components/document-tags-context/comp
 
 const CardContainer = styled.div`
 margin: 0 1% 30px;
-width: 31%;
+width: 23%;
 box-shadow: 0 4px 20px 0 rgba(0,0,0,0.05);
 background-color: #ffffff;
 border: solid 1px #e9e9e9;
@@ -18,10 +18,13 @@ box-sizing: border-box;
 cursor: pointer;
 display: block;
 position: relative;
-@media (max-width: 1100px) {
+@media (max-width: 1408px) {
+  width: 31%;
+  }
+@media (max-width: 1216px) {
   width: 48%;
   }
-@media (max-width: 760px) {
+@media (max-width: 600px) {
   width: 100%;
   }
 `
@@ -31,7 +34,7 @@ const Card = ({ project, tags }) => (
     <Link href={{ pathname: '/propuesta', query: { id: project._id } }}>
       <a>
         {/* <CardHeader img={project.currentVersion.content.imageCover} published={project.published} /> */}
-        <CardHeader img={`/static/assets/images/${tags && project.currentVersion.content.tags && project.currentVersion.content.tags.length > 0 ? tags.find(x => project.currentVersion.content.tags[0] == x.value).key : 'trama-default'}.jpg`} published={project.published} />
+        <CardHeader hasImage={project.currentVersion.content.tags && project.currentVersion.content.tags.length > 0} img={`/static/assets/images/${tags && project.currentVersion.content.tags && project.currentVersion.content.tags.length > 0 ? tags.find(x => project.currentVersion.content.tags[0] == x.value).key : 'trama-default'}.jpg`} published={project.published} />
         <CardContent
           title={project.currentVersion.content.title}
           authorId={project.author._id}
