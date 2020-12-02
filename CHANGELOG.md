@@ -30,6 +30,7 @@ Listado de cambios:
 - Ahora para monitores mas grandes-largos (2K/4K) se muestran 4 columnas de cards de proyectos en la home
 
 Compatible con:
+* `leyesabiertas-web:1.9.0`
 * `leyesabiertas-core:1.9.0`
 * `leyesabiertas-notifier:1.9.0`
 * `leyesabiertas-keycloak:1.8.0`
