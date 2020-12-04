@@ -221,11 +221,8 @@ class ApoyarFormulario extends Component {
         }
         { hasAnonApoyado &&
           <ApoyandoGroup>
-            <img src={`${'/static/assets/corazon.svg'}`} />
-            <ApoyandoSpan>¡Gracias!</ApoyandoSpan>
-            <Fragment>
-              <span>Enviamos un mail a su casilla para validar su apoyo</span>
-            </Fragment>
+            <img src={`${'/static/assets/new-email.svg'}`} />
+            <ApoyandoSpan>Revisa tu casilla de correo para validar tu apoyo</ApoyandoSpan>
           </ApoyandoGroup>
         }
         { !hasAnonApoyado && !project.userIsApoyado &&
