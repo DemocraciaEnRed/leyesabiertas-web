@@ -7,7 +7,7 @@ const StaticInfoNav = styled.nav`
   @media(max-width:700px){
     display:none;
   }
-  padding-left: 15px;
-  border-left:1px solid #dae1e7;
+  padding-right: 15px;
+  border-right:1px solid #dae1e7;
 `
 export default StaticInfoNav

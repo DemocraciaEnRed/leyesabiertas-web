@@ -13,8 +13,10 @@ const ProjectHeaderWrapper = styled.div`
   // align-items: flex-start;
   display: block;
   margin-top: 120px;
-    border-bottom: solid 1px #dae1e7;
-
+  border-bottom: solid 1px #dae1e7;
+  @media only screen and (max-width: 768px) {
+    margin-top: 0px;
+  }
   // @media (max-width: 700px) {
   //   > div{
   //     // width:300px !important;
