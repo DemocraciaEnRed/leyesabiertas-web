@@ -69,7 +69,12 @@ export default () => {
           'Validando apoyo...'
         : (
           isValidado ?
-            '¡Su apoyo ha sido validado con éxito!'
+          <div>
+            <img src={`${'/static/assets/corazon.svg'}`} />
+            <p><bold>Gracias</bold></p>
+            <p>¡Su apoyo ha sido validado con éxito!</p>
+          </div>
+            
           :
             'No se ha podido validar su apoyo'
         )
