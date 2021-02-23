@@ -54,8 +54,7 @@ const StyledStaticInfo = styled.div`
 const StaticInfo = (props) => (
   <StyledStaticInfo>
     <StaticInfoWrapper>
-      {content[props.section]}
-      <StaticInfoNav>
+    <StaticInfoNav>
         {buttons.map((button, i) => (
           <StaticInfoButton
             className={props.section === button.value ? 'active' : ''}
@@ -68,6 +67,8 @@ const StaticInfo = (props) => (
           <Icon icon={download} size={16} /> Manual de usuario
         </StaticInfoButton>
       </StaticInfoNav>
+      {content[props.section]}
+      
     </StaticInfoWrapper>
   </StyledStaticInfo>
 )

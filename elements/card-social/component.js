@@ -58,7 +58,7 @@ const Social = ({ commentaries, closed, apoyosCount }) => (
         <Span> {commentaries}</Span> {commentaries === 1 ? ' Aporte' : ' Aportes'}
       </div>
       <div>
-        <CommentaryIcon icon='apoyar-icon-azul.svg' />
+        <CommentaryIcon icon='signature.svg' />
         <Span> {apoyosCount}</Span> {apoyosCount === 1 ? ' Apoyo' : ' Apoyos'}
       </div>
     </CommentaryItems>

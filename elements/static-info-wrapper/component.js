@@ -12,7 +12,7 @@ const StaticInfoWrapper = styled.div`
   @media (min-width: 1024px) {
     > section {
       width: 90%;
-      padding-right:10%;
+      padding-left:10%;
     }
   }
 `
