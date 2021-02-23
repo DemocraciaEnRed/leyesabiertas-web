@@ -14,6 +14,7 @@ const CounterWrapper = styled.div`
   border-radius: 5px;
   position: fixed;
   z-index: 100;
+  pointer-events: none;
 
   &::after {
     content: '';
