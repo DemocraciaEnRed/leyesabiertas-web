@@ -1,6 +1,20 @@
 
 # Changelog
 
+### 1.9.2
+
+- Fixing hero container (video) con algunos atributos que react daba "warnings"
+- Agregado @react-hook/media-query al package.json
+- @mijaelcohen Fix de mouse on hover sobre una seccion del articulado, (see commit 26e30e3)
+
+Compatible con:
+
+* `leyesabiertas-web:1.9.2`
+* `leyesabiertas-core:1.9.0`
+* `leyesabiertas-notifier:1.9.0`
+* `leyesabiertas-keycloak:1.8.0`
+
+
 ### 1.9.0
 
 1. Nueva funcion: Apoyar un proyecto. Ahora se puede apoyar un proyecto, como usuario registrado o como anonimo (con la necesidad de ingresar la informacion, un captcha, y una validacion por email)
