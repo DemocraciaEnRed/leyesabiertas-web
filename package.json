@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/DemocraciaEnRed/leyesabiertas-web#readme",
   "dependencies": {
+    "@react-hook/media-query": "^1.1.1",
     "dotenv": "^6.2.0",
     "get-selection-range": "^0.1.0",
     "immutable": "^3.8.2",
