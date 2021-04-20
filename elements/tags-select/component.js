@@ -13,14 +13,15 @@ const WrapperDiv = styled.div`
 
 class TagsSelect extends Component {
   static propTypes = {
-    onTagChange: PropTypes.func.isRequired
+    onTagChange: PropTypes.func.isRequired,
+    selected : PropTypes.string,
   }
 
   state = {
     allTags: [],
     selectedOption: null,
   }
-
+  /*
   async componentWillMount () {
     this.setState({
       allTags: (await this.props.fetchDocumentTags()).map(
@@ -28,9 +29,12 @@ class TagsSelect extends Component {
       )
     })
   }
-
+  */
+  componentDidMount(){
+    let firstValue = this.props.allTags.find((tag)=>{return tag.value == this.props.selected})
+    this.setState({selectedOption: firstValue})
+  }
   handleChange = selectedOption => {
-    //console.log(`Option selected:`, selectedOption);
     this.setState(
       { selectedOption },
       () => this.props.onTagChange(selectedOption && selectedOption.value)
@@ -44,7 +48,7 @@ class TagsSelect extends Component {
           className='react-select-container'
           value={this.state.selectedOption}
           onChange={this.handleChange}
-          options={this.state.allTags}
+          options={this.props.allTags}
           isSearchable={true}
           isClearable={true}
           placeholder={'Buscar...'}
@@ -54,4 +58,5 @@ class TagsSelect extends Component {
   }
 }
 
-export default WithDocumentTagsContext(TagsSelect)
+//export default WithDocumentTagsContext(TagsSelect)
+export default TagsSelect
