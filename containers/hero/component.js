@@ -40,7 +40,7 @@ const Hero = () => {
     {/* <HeroTitle>Plataforma de Participación Ciudadana en Propuestas de Ley</HeroTitle>
     <HeroSubtitle>¡Participe haciendo aportes para co-crear mejores leyes!</HeroSubtitle>
     <HeroVideo video='argos.hcdn.gob.ar/DMPARL/tutorial.mp4' /> */}
-    <video key={isMobile} style={{}} id="videobcg" class="fill" width="100%" height="100%" preload="auto" autoplay="true" loop="loop" muted="true" volume="0" poster="/static/assets/images/thumbnail-banner-01.jpg" >
+    <video key={isMobile} style={{}} id="videobcg" className="fill" width="100%" height="100%" preload="auto" autoPlay={true} loop={true} muted={true} volume="0" poster="/static/assets/images/thumbnail-banner-01.jpg" >
         {isMobile && <source src="/static/assets/images/banner-mobile.mp4"  type="video/mp4"/> }
         {!isMobile && <><source src="/static/assets/images/banner-01.webm" type="video/webm" />
         <source src="/static/assets/images/banner-01.mp4"  type="video/mp4" /> </> }
