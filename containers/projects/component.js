@@ -240,7 +240,7 @@ class Projects extends Component {
           {query.closed === true && <OptionChoice onClick={() => this.toggleSort('closed', false)}>FINALIZADOS</OptionChoice>}
           {query.closed === false && <OptionChoice onClick={() => this.toggleSort('closed', null)}>ABIERTOS</OptionChoice>}
           <OptionLabel>Por etiqueta</OptionLabel> 
-          {tags.length > 0 && query.tag && <TagsSelect allTags={tags} selected={query.tag} onTagChange={(tagId) => this.toggleSort('tag', tagId)} />}
+          {tags.length > 0 && <TagsSelect allTags={tags} selected={query.tag} onTagChange={(tagId) => this.toggleSort('tag', tagId)} />}
         </Options>
         {projects &&
           <Fragment>
