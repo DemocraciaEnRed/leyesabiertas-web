@@ -8,6 +8,7 @@ import TitleH2 from '../../elements/title-h2/component'
 import SubtitleH3 from '../../elements/subtitle-h3/component'
 import Button from '../../elements/button/component'
 import getConfig from 'next/config'
+import router, {withRouter} from 'next/router'
 import Masonry from 'react-masonry-component';
 import TagsSelect from '../../elements/tags-select/component.js'
 import WithDocumentTagsContext from '../../components/document-tags-context/component'
@@ -96,6 +97,7 @@ width: 100%;
 `
 
 class Projects extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
@@ -125,7 +127,6 @@ class Projects extends Component {
         return encodeURIComponent(key) + '=' +
           encodeURIComponent(sort[key])
       }).join('&');
-    console.log(theQuery)
     return theQuery
   }
 
@@ -140,7 +141,12 @@ class Projects extends Component {
   }
 
   async fetchDocuments() {
-    let query = this.createQuery(this.state.query);
+    let tag = this.props.router.query.tag;
+    let currentQuery = {...this.state.query};
+    currentQuery.tag = tag;
+    
+    let query = this.createQuery(currentQuery);
+    
     const projects = await (await fetch(`${API_URL}/api/v1/documents${query}`)).json()
     // let mergedProjects = this.state.projects.concat(projects.results)
     // const projectsFiltered = mergedProjects.filter((p) => {
@@ -156,7 +162,10 @@ class Projects extends Component {
         projects: prevState.projects.concat(projects.results),
         // projectsFiltered: projects.results,
         loadMoreAvailable: projects.pagination.page < projects.pagination.pages,
-        query: query,
+        query: {
+          ...query,    
+          tag
+        },
         loading: false
       }
     })
@@ -185,6 +194,13 @@ class Projects extends Component {
     }, () => {
       this.getDocuments()
     })
+    let tag = newQuery["tag"]
+    if(tag){
+      router.push({
+        pathname: this.props.router.pathname,
+        query: {tag}
+      })
+    }
   }
 
   // toggleFilter = (parameter, value) => {
@@ -223,8 +239,8 @@ class Projects extends Component {
           {query.closed === null && <OptionChoice onClick={() => this.toggleSort('closed', true)}>TODOS</OptionChoice>}
           {query.closed === true && <OptionChoice onClick={() => this.toggleSort('closed', false)}>FINALIZADOS</OptionChoice>}
           {query.closed === false && <OptionChoice onClick={() => this.toggleSort('closed', null)}>ABIERTOS</OptionChoice>}
-          <OptionLabel>Por etiqueta</OptionLabel>
-          <TagsSelect onTagChange={(tagId) => this.toggleSort('tag', tagId)} />
+          <OptionLabel>Por etiqueta</OptionLabel> 
+          {tags.length > 0 && <TagsSelect allTags={tags} selected={query.tag} onTagChange={(tagId) => this.toggleSort('tag', tagId)} />}
         </Options>
         {projects &&
           <Fragment>
@@ -254,4 +270,4 @@ class Projects extends Component {
   }
 }
 
-export default WithDocumentTagsContext(Projects)
+export default withRouter(WithDocumentTagsContext(Projects))
