@@ -80,7 +80,9 @@ class CommentForm extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      value: ''
+      value: '',
+      disableSubmit : false,
+      messsage: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -93,6 +95,7 @@ class CommentForm extends Component {
 
   handleSubmit (event) {
     event.preventDefault()
+    this.setState({disableSubmit: true});
     fetch(`/api/v1/documents/5bb7bab09a5ac91dffa9e884/comments`, {
       method: 'POST',
       body: {
@@ -101,17 +104,24 @@ class CommentForm extends Component {
       }
     })
       .then((res) => {
-        if (res.status === 200) {
-        }
+        let message = res.status === 200 ? "Comentario enviado con exito" : "Error al enviar el comentario";
+        this.setState({
+          disableSubmit: false,
+          message
+        });
       })
       .catch((err) => {
         console.error(err)
+        this.setState({
+          disableSubmit: false,
+          message: "Error al enviar el comentario"
+        });
       })
   }
 
   render () {
     return (
-      <CommentFormContainer onSubmit={this.handleSubmit}>
+      <CommentFormContainer>
         <CommentFormHeader>Agregar comentario</CommentFormHeader>
         <CommentFormContent>
           <UserAvatarLogged
@@ -123,8 +133,9 @@ class CommentForm extends Component {
             value={this.state.value}
             onChange={this.handleChange} />
         </CommentFormContent>
-        <CommentFormFooter onClick={this.handleSubmit}>Enviar comentario </CommentFormFooter>
-
+        <CommentFormFooter disabled={disableSubmit} onClick={this.handleSubmit}>Enviar comentario </CommentFormFooter>
+        <br/>
+        <p>{message}</p>
       </CommentFormContainer>
     )
   }
