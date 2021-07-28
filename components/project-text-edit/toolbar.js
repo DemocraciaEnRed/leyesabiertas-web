@@ -6,7 +6,9 @@ import {
   BoldIcon,
   ItalicIcon,
   UnderlineIcon,
-  TitleIcon
+  TitleIcon,
+  LinkIcon,
+  UnLinkIcon
 } from './icons'
 
 const Container = styled.div`
@@ -31,6 +33,8 @@ export default class Toolbar extends Component {
         {this.renderMarkButton(BoldIcon, 'bold')}
         {this.renderMarkButton(ItalicIcon, 'italic')}
         {this.renderMarkButton(UnderlineIcon, 'underlined')}
+        {this.renderLinkButton(LinkIcon, 'link')}
+        
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {this.renderBlockButton(TitleIcon, 'title')}
       </Container>
@@ -42,7 +46,20 @@ export default class Toolbar extends Component {
       active={hasMark(this.props.editor.value, type)}
       onMouseDown={(evt) => this.handleMarkClick(evt, type)} />
   )
-
+  renderLinkButton = (Button, type) =>(
+    <Button 
+      onMouseDown={(evt)=> this.createLink(evt, type)}
+    />
+  )
+  createLink = (event) => {
+    event.preventDefault()
+    const url = window.prompt('Enter the URL of the link:')
+    if (!url) return
+    insertLink(url)
+  }
+  insertLink = (url) => {
+    console.log(this.props.editor.selection)
+  }
   handleMarkClick = (evt, type) => {
     evt.preventDefault()
     this.props.editor.toggleMark(type)
