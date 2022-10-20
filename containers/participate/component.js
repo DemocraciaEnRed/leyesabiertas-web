@@ -41,7 +41,7 @@ const Participate = (props) => {
         </ParticipateItem>
       </ParticipateContainer>
       <Link href='/info?section=como-participar'>
-        <Button primary>Conozca más</Button>
+        <Button primary>Conocé más</Button>
       </Link>
     </StyledParticipateSection>
   )
