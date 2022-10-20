@@ -27,7 +27,7 @@ export default () => (
         ¿Los diputados y las diputadas leen los comentarios?
       </StaticInfoBold>
       <StaticInfoP>
-      Si, los diputados y las diputadas administran y moderan sus propuestas y proyectos de ley. Leen y analizan los comentarios para realizar cambios que consideran necesarios para mejorar la propuesta de ley.
+      Si, los diputados y las diputadas administran y moderan sus propuestas y proyectos de ley; leen y analizan los comentarios para realizar cambios que consideran necesarios para mejorar la propuesta de ley.
       </StaticInfoP>
     </StyledDiv>
     <StyledDiv>
