@@ -11,13 +11,14 @@ import LoggedUser from '../../components/logged-user/component'
 import Notifications from '../../components/notifications-bar/component'
 import UserMenu from '../../components/user-menu/component'
 import Tooltip from '../../components/tooltip/component'
+import StyledNavbarTitle from '../../elements/styled-navbar-title/component'
 
 const StyledNav = styled.nav`
   height:12rem;
   display: flex;
-  padding:1rem 4.5%;
+  padding:1rem 6.4%;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   border-bottom:1px solid #dae1e7;
 `
 
@@ -63,7 +64,7 @@ class NavBar extends Component {
 
     return (
       <StyledNav>
-        <BetaLabel />
+        <StyledNavbarTitle />
         <NavbarLogo />
         {this.props.authContext.authenticated
           ? (
