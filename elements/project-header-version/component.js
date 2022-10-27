@@ -4,11 +4,11 @@ import styled from 'styled-components'
 import Link from 'next/link'
 
 const StyledDiv = styled.div`
-  display: block;
-  // align-items: flex-end;
-  padding-right: 15px;
-  border-right: 1px solid #CACACA;
-  margin-right: 15px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+padding:20px 30px;
+background-color: #EFEFEF;
   @media(max-width:700px){
     display: none;
   }
@@ -25,16 +25,16 @@ const ProjectHeaderVersionTitle = styled.p`
 `
 const ProjectHeaderVersionLink = styled.p`
   font-size:12px;
-  color: #5c97bc;
-  text-transform: uppercase;
+  color: #4C4C4E;
+  text-decoration:underline
   // height:35px;
 `
 
 const ProjectHeaderVersion = ({ project, version }) => (
   <StyledDiv>
-    <ProjectHeaderVersionTitle>Versión: {version}</ProjectHeaderVersionTitle>
+    <ProjectHeaderVersionTitle>Versión{version}</ProjectHeaderVersionTitle>
     <ProjectHeaderVersionLink>
-      <Link href={{ pathname: '/versiones', query: { id: project } }}>Versiones ➔</Link>
+      <Link href={{ pathname: '/versiones', query: { id: project } }}>+Versiones</Link>
     </ProjectHeaderVersionLink>
   </StyledDiv>
 )
