@@ -1,16 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import jump from 'jump.js'
 import Link from 'next/link'
 import LinkBar from '../../components/link-bar/component'
-import WithUserContext from '../../components/with-user-context/component'
-import UserBar from '../../components/user-bar/component'
-import LoggedUserBar from '../../components/logged-user-bar/component'
-import Button from '../../elements/navbar-button/component'
-import NavbarLogo from '../../elements/navbar-logo/component'
 
-
+// import NavbarLogo from '../../elements/navbar-logo/component'
 
 const SecondaryBar = styled.div`
   height:6rem;

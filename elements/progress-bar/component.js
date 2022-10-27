@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { prototype } from 'jimp'
 
 const ProgressBarWrapper = styled.div`
   margin: 0 15px;
@@ -65,7 +64,8 @@ const ProgressBar = ({ closingDate, creationDate, closed, remaining }) => (
 )
 
 ProgressBar.propTypes = {
-  total: PropTypes.number,
+  closingDate: PropTypes.string,
+  creationDate: PropTypes.string,
   closed: PropTypes.bool,
   remaining: PropTypes.number
 }

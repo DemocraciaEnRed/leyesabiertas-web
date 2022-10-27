@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import WithUserContext from '../../components/with-user-context/component'
 
 const Wrapper = styled.div`
 font-size:1.4rem;
