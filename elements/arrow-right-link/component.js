@@ -21,7 +21,7 @@ const StyledP = styled.p`
 const ArrowRightlink = () => (
   <Link href={'/info?section=acerca-de'}>
     <StyledArrowLink>
-      <StyledP>Conozca más</StyledP>
+      <StyledP>Conocé más</StyledP>
       <Icon icon={arrowRight} size={20} style={{color: '#FFF'}} />
     </StyledArrowLink>
 

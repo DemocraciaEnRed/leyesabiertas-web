@@ -506,12 +506,12 @@ class MyProjects extends Component {
         const hasProjects = projects && projects.length
         return (
           <Section id='projects' noMargin >
-            <TitleH2>Mis proyectos</TitleH2>
+            <TitleH2>Mis propuestas</TitleH2>
             <ButtonsBar>
               {
                 isLoading
                   ? <ButtonTableDisabled float='left'><Icon icon={clockO} size={20} />&nbsp;&nbsp;Creando nuevo proyecto... Espere unos segundos...</ButtonTableDisabled>
-                  : <ButtonTable onClick={this.createProject} float='left'><Icon icon={plus} size={20} />&nbsp;&nbsp;Agregar un nuevo proyecto</ButtonTable>
+                  : <ButtonTable onClick={this.createProject} float='left'><Icon icon={plus} size={20} />&nbsp;&nbsp;Agregar una nueva propuesta</ButtonTable>
               }
               <ButtonTable
                 onClick={hasProjects && this.downloadXls}

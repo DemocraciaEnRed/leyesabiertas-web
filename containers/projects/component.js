@@ -227,8 +227,8 @@ class Projects extends Component {
     } = this.state
     return (
       <Section id='projects' noMargin>
-        <TitleH2>Propuestas de ley abiertas para la co-creación.</TitleH2>
-        <SubtitleH3>Estas son las propuestas y proyectos de ley disponibles para leer y aportar . ¡Ayude a mejorarlas!</SubtitleH3>
+        <TitleH2>Propuestas de ley</TitleH2>
+        <SubtitleH3>Acá podés acceder a las propuestas de ley para leerlas, apoyarlas y hacer tus aportes. ¡Ayudanos a mejorarlas!</SubtitleH3>
         <Options>
           <OptionLabel isTitle>Ordenar:</OptionLabel>
           {query.created === 'ASC' && <OptionChoice onClick={() => this.toggleSort('created', 'DESC')}>Más antiguas</OptionChoice>}
@@ -255,7 +255,7 @@ class Projects extends Component {
         }
         {
           !loading && loadMoreAvailable && <LoadMoreButtonContainer>
-            <LoadMoreButton onClick={() => this.getDocuments()}>Cargar más</LoadMoreButton>
+            <LoadMoreButton onClick={() => this.getDocuments()}>Ver más</LoadMoreButton>
           </LoadMoreButtonContainer>
         }
         {
