@@ -3,16 +3,16 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const ProjectHeaderWrapper = styled.div`
-  width: 90%;
+  width: 95%;
   min-height: 215px;
   // padding: 3.4rem 3% 1.5rem 3%;
-  padding: 25px 30px 0;
+  padding: 25px 0 0;
   background-color: var(--white);
   // display: flex;
   // flex-wrap: wrap;
   // align-items: flex-start;
   display: block;
-  margin-top: 120px;
+  margin-top: 4%;
   border-bottom: solid 1px #dae1e7;
   @media only screen and (max-width: 768px) {
     margin-top: 0px;

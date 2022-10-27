@@ -1,64 +1,54 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import UserAvatar from '../user-avatar/component'
+import ProgressBar from '../progress-bar/component'
+import ProjectTags from '../../components/project-tags/component'
 
 const Wrapper = styled.div`
-  width: ${(props) => props.hasImage ? '100%' : '90%'};
-  margin-top: ${(props) => props.hasImage ? '0px' : '-70px'};
-  background-color:#fff;
+  width: 90%;
+  margin: auto;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
   height:autos;
-  padding:12px;
   box-sizing: border-box;
 `
-const TagTitle = styled.div`
-font-size:1.2rem;
-text-transform:uppercase;
-text-align:left;
-color:#5c97bc;
-padding-bottom:1rem;
+const Tags = styled.div`
+> * {
+    margin-bottom:0;
+    padding:20px 0 0 0
+    >*{ 
+        background:#B6D5F2;
+        color: #4C4C4E;
+        border-radius:5px;
+        font-weight: 600;
+        font-family: var(--italic);
+        padding:5px;
+        font-size:12px
+        line-height: 15px;
+        text-align: center;
+        letter-spacing: 1.1px;
+        text-transform: capitalize;
+
+    }
+}
 `
 
-const Title = styled.div`
-  font-size:2.4rem;
-  color:#000;
-  text-align:left;
-  font-family: var(--bold);
-  padding-bottom:2rem;
-`
-
-const TextWrapper = styled.div`
-`
-
-const croppedTitle = (title) => title.slice(0, 42).concat('...')
-
-const CardContent = ({ hasImage, authorId, tagTitle, title, userId, name, party }) => (
-  <Wrapper hasImage={hasImage}>
-    <TextWrapper>
-      { tagTitle &&
-        <TagTitle>{tagTitle}</TagTitle>
-      }
-      <Title>{title} </Title>
-    </TextWrapper>
-    <UserAvatar
-      userId={userId}
-      name={name}
-      party={party}
-      authorId={authorId} />
+const CardContent = ({ closingDate, closed, creationDate, tags, project }) => (
+  <Wrapper>
+    <ProgressBar closingDate={closingDate} creationDate={creationDate} closed={closed} />
+    {project.currentVersion.content.tags && <Tags>
+      <ProjectTags project={project} />
+    </Tags>}
   </Wrapper>
 )
 
 CardContent.propTypes = {
-  hasImage: PropTypes.bool,
-  title: PropTypes.string.isRequired,
-  tagTitle: PropTypes.string,
-  userId: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  party: PropTypes.string.isRequired,
-  authorId: PropTypes.string.isRequired
+  project: PropTypes.object,
+  closingDate: PropTypes.string,
+  closed: PropTypes.bool,
+  tags: PropTypes.array,
+  creationDate: PropTypes.string
 }
 
 export default CardContent

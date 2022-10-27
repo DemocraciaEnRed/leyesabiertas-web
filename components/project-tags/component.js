@@ -21,7 +21,7 @@ const ProjectTagsContainer = styled.div`
   }
 
 `
-const ProjectTag = styled.span`
+export const ProjectTag = styled.span`
   font-size: 15px;
   background-color: #eee;
   padding: 8px 15px;

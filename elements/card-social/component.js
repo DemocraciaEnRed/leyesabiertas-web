@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-height:85px;
-border-top: 1px solid #e9e9e9;
 font-size:1.4rem;
 display:flex;
 flex-direction:column;
@@ -14,7 +12,8 @@ box-sizing:border-box;
 color: #2d4b5e;
 font-size:1.6em;
 box-sizing:border-box;
-margin:0px 20px 0px 20px;
+margin:24px 5px;
+padding:0px 15px 0px 15px;
 box-sizing:border-box;
 `
 const CommentaryItems = styled.div`
@@ -48,29 +47,33 @@ const LimitDate = styled.div`
 `
 const Span = styled.span`
   font-family: var(--bold);
-  margin: 0 0.2rem 0 0.3rem;
+  color:#4C4C4E;
 `
-const Social = ({ commentaries, closed, apoyosCount }) => (
+const Contributions = styled.span`
+  font-family: var(--bold);
+  margin: 0 8px
+  color:#4C4C4E;
+`
+const Support = styled(Contributions)``
+
+const Social = ({ commentaries, apoyosCount }) => (
   <Wrapper>
     <CommentaryItems>
       <div>
-        <CommentaryIcon icon='comment-icon.svg' />
-        <Span> {commentaries}</Span> {commentaries === 1 ? ' Aporte' : ' Aportes'}
+        <Span> {commentaries}</Span> <Contributions>{commentaries === 1 ? ' Aporte' : ' Aportes'}</Contributions>
+        <CommentaryIcon icon='pencil.svg' />
       </div>
       <div>
-        <CommentaryIcon icon='signature.svg' />
-        <Span> {apoyosCount}</Span> {apoyosCount === 1 ? ' Apoyo' : ' Apoyos'}
+        <Span> {apoyosCount}</Span> <Support>{apoyosCount === 1 ? ' Apoyo' : ' Apoyos'}</Support>
+        <CommentaryIcon icon='hand-holding-heart-solid.svg' />
       </div>
     </CommentaryItems>
-    {closed &&
-      <LimitDate>Finalizó el periodo para aportes</LimitDate>
-    }
   </Wrapper>
 )
 
 Social.propTypes = {
   commentaries: PropTypes.number,
-  closed: PropTypes.bool
+  apoyosCount: PropTypes.number
 }
 
 export default Social

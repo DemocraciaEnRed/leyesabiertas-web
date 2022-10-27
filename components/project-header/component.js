@@ -30,8 +30,8 @@ import ProjectMobileTools from "../project-mobile-tools/component"
 const ProjectHeaderContainer = styled.div`
   min-height: 383px;
   width:100%;
-  background-color: #1b95ba;
-  background-image: url('${(props) => props.img}');
+  background-color: #395595;
+  //background-image: url('${(props) => props.img}');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -39,6 +39,9 @@ const ProjectHeaderContainer = styled.div`
   justify-content: center;
   align-items: flex-end;
   // display: block;
+`
+const InfoHeader = styled.div`
+margin:30px
 `
 const TopBarWrapper = styled.div`
   display: flex;
@@ -82,41 +85,43 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
       id={project._id}
       section={section} />
     <ProjectHeaderWrapper>
-      <TopBarWrapper>
-        <SharerSocial id={project._id} />
-        <UserAvatar
-          projectView
-          authorId={project.author._id}
-          userId={project.author._id}
-          name={project.author.fullname}
-          party={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
-        <ClosingDate date={project.currentVersion.content.closingDate} />
-        <ProjectHeaderVersion
+      <InfoHeader>
+        <TopBarWrapper>
+          {/* <SharerSocial id={project._id} /> */}
+          <UserAvatar
+            projectView
+            authorId={project.author._id}
+            userId={project.author._id}
+            name={project.author.fullname}
+            party={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
+          <ClosingDate closingDate={project.currentVersion.content.closingDate} closed={project.closed} creationDate={project.currentVersion.createdAt} />
+          <ArticlesCommentsCounter commentsCount={project.commentsCount} apoyosCount={project.apoyosCount} project={project._id} />
+          <ProjectHeaderVersion
+            project={project._id}
+            version={project.currentVersion.version}
+          />
+          <ProjectEditMode />
+          {isAuthor &&
+            <TogglePublish project={project} isPublished={isPublished} setPublish={setPublish} togglePublish={togglePublish} />
+          }
+        </TopBarWrapper>
+        <ProjectStatus closed={project.closed} />
+        <ProjectTitle>{project.currentVersion.content.title}</ProjectTitle>
+        {/* <ProjectSubtitle
           project={project._id}
           version={project.currentVersion.version}
-        />
-        <ArticlesCommentsCounter commentsCount={project.commentsCount} project={project._id} />
-        <ProjectEditMode />
+          createdAt={project.currentVersion.createdAt}
+          commentsCount={project.commentsCount} /> */}
         {isAuthor &&
-          <TogglePublish project={project} isPublished={isPublished} setPublish={setPublish} togglePublish={togglePublish} />
+          <ProjectMobileTools project={project} isPublished={isPublished} setPublish={setPublish} togglePublish={togglePublish} />
         }
-      </TopBarWrapper>
-      <ProjectStatus closed={project.closed} />
-      <ProjectTitle>{project.currentVersion.content.title}</ProjectTitle>
-      <ProjectSubtitle
-        project={project._id}
-        version={project.currentVersion.version}
-        createdAt={project.currentVersion.createdAt}
-        commentsCount={project.commentsCount} />
-      {isAuthor &&
-        <ProjectMobileTools project={project} isPublished={isPublished} setPublish={setPublish} togglePublish={togglePublish} />
-      }
-      {project.closed &&
-        <ClosedProposal
-          contributors={contributorsCount}
-          contributions={contributionsCount}
-          contextualComments={contextualCommentsCount} />
-      }
+        {project.closed &&
+          <ClosedProposal
+            contributors={contributorsCount}
+            contributions={contributionsCount}
+            contextualComments={contextualCommentsCount} />
+        }
+      </InfoHeader>
       {currentSection === '/propuesta' &&
         <ModeBar>
           <ModeBarLinkButton active>Presentación</ModeBarLinkButton>

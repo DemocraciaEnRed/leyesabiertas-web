@@ -55,6 +55,16 @@ injectGlobal`
     src: url('/static/fonts/Roboto/Roboto-Regular.ttf');
   }
 
+  @font-face {
+    font-family: Roboto-light;
+    src: url('/static/fonts/Roboto/Roboto-Light.ttf')
+  }
+
+  @font-face {
+    font-family: Roboto-lightItalic;
+    src: url('/static/fonts/Roboto/Roboto-LightItalic.ttf')
+  }
+
   :root {
     /* Colors */
     --white: #FFFFFF;
@@ -74,6 +84,8 @@ injectGlobal`
     --italic: 'Roboto-Italic';
     --medium: 'Roboto-Medium';
     --medium-italic: 'Roboto-MediumItalic';
+    --light: Roboto-light
+    --light-Italic: Roboto-lightItalic
 
     /*background sizes */
     --lined: calc(width/22);
@@ -121,7 +133,7 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <title>Portal de Leyes Abiertas - H. Cámara de Diputados de la Nación</title>
-          <meta name='viewport' content='width=device-width, initial-scale=1' />
+          <meta name='viewport' content='width=device-width, minimum-scale=1 ,initial-scale=1' />
           <meta charSet='utf-8' />
           {this.props.styleTags}
           {

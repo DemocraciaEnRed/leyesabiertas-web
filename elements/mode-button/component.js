@@ -4,7 +4,7 @@ import { ArticlesContext } from '../../containers/user-project-container/compone
 
 const StyledModeButton = styled.button`
   border: none;
-  padding: 9px 20px 8px;
+  padding: 9px 20px 7px;
   text-transform: uppercase;
   font-size: 1.4rem;
   color: #4a5d68;
