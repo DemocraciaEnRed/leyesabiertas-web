@@ -33,30 +33,37 @@ const Avatar = styled.div`
   border: 1px solid #CACACA;
 `
 const Name = styled.div`
-color: #2d4b5e;
+color: #6CAAE4;
 font-size: 20px;
-font-family:var(--medium);
+font-family:var(--bold);
 cursor: pointer;
 min-width:100px;
 `
 const Party = styled.div`
 font-size: 12px;
-color: #5c97bc;
+color: #7e7e7e;
 text-transform:uppercase;
 display:flex;
-margin-top:.4rem;
+margin-top:.9rem;
+
 align-items:center;
 `
 
 const TextWrapper = styled.div`
 // margin-top:3px;
-padding-left:10px;
+padding-left:20px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
 `
 const IconWrapper = styled.div`
   padding-right:.5rem;`
+
+const HrWrapper = styled.div`
+width: 65px;
+margin-top:1.1rem;
+border-top:1px solid #000;
+`
 
 const UserAvatar = ({ projectView, userId, name, party, badge }) => (
   <Wrapper projectView={projectView}>
@@ -71,6 +78,7 @@ const UserAvatar = ({ projectView, userId, name, party, badge }) => (
         {badge && <IconWrapper><Icon icon={checkCircle} /></IconWrapper>}
         <p>{party}</p>
       </Party>
+      <HrWrapper/>
     </TextWrapper>
   </Wrapper>
 )
