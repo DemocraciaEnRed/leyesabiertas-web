@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import jump from 'jump.js'
 import Link from 'next/link'
 import LinkBar from '../../components/link-bar/component'
+import router from 'next/router'
+import { hash } from 'react-icons-kit/feather'
 
 // import NavbarLogo from '../../elements/navbar-logo/component'
 
@@ -59,28 +61,39 @@ const SecondaryBar = styled.div`
 const links = [
   {
     name: 'Inicio',
-    hash: '#projects',
+    hash: '#__next',
     link: '/'
   },
   {
     name: 'Participá',
-    hash: '#participate',
-    link: '/info?section=como-participar'
+    hash: '#projects',
+    link: '/'
   },
   {
     name: 'Sobre LA',
-    hash: '#about',
+    hash: '#__next',
     link: '/info?section=acerca-de'
   }
 ]
 
-const NavbarLink = ({ name, link }) => (
-  <Link href={link}>
-    <a>
+const NavbarLink = ({ name, link, hash }) => {
+  const move = async () => {
+    await router.push(link)
+    jump(hash)
+  }
+
+  return (
+    <a onClick={() => move()}>
       { name }
     </a>
-  </Link>
-)
+  )
+}
+
+NavbarLink.propTypes = {
+  name: PropTypes.string,
+  link: PropTypes.string,
+  hash: PropTypes.string
+}
 
 const SecondaryNavbar = () => {
   const [scroll, setScroll] = useState(0)
@@ -103,7 +116,8 @@ const SecondaryNavbar = () => {
           return <NavbarLink
             key={i}
             name={li.name}
-            link={li.link} />
+            link={li.link}
+            hash={li.hash} />
         })}
       </LinkBar>
     </SecondaryBar>
