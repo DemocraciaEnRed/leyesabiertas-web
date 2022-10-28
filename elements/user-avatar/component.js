@@ -12,13 +12,14 @@ const Wrapper = styled.div`
   display:flex;
   align-items:flex-start;
   text-align:left;
-  padding-right: ${(props) => props.projectView ? '15px' : '0'};
+  padding-right: 15px;
   border-right: ${(props) => props.projectView ? '1px solid #CACACA' : '0'};
   margin-right: ${(props) => props.projectView ? '15px' : '0'};
   min-width:150px;
   @media (max-width:700px){
     border-right: 0px;
     margin-right: 0px; 
+    flex:${(props) => props.projectView && '1'};
   }
 `
 const Avatar = styled.div`

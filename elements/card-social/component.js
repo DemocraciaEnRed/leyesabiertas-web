@@ -13,16 +13,15 @@ box-sizing:border-box;
 color: #2d4b5e;
 font-size:1.6em;
 box-sizing:border-box;
-margin:24px 5px;
+margin:26px 5px;
 padding:0px 15px 0px 15px;
 box-sizing:border-box;
 `
 const CommentaryItems = styled.div`
-padding-bottom: 1rem;
 text-transform:uppercase;
 display: flex;
 width: 100%;
-justify-content: space-evenly;
+justify-content: space-around;
 `
 
 const CommentaryIcon = styled.div`
@@ -47,11 +46,11 @@ const LimitDate = styled.div`
   margin: 0 auto;
 `
 const Span = styled.span`
-  font-family: var(--bold);
+  font-family: var(--ligth);
   color:#4C4C4E;
 `
 const Contributions = styled.span`
-  font-family: var(--bold);
+  font-family: var(--ligth);
   margin: 0 8px
   color:#4C4C4E;
 `

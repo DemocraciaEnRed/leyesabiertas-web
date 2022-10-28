@@ -102,7 +102,7 @@ const SecondaryNavbar = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', (e) => handleScroll(e.target.documentElement.scrollTop))
-    window.addEventListener('resize', () => setY(document.getElementById('secondaryBar').offsetTop))
+    // window.addEventListener('resize', () => setY(document.getElementById('secondaryBar').offsetTop))
     setY(document.getElementById('secondaryBar').offsetTop)
   }, [])
 
