@@ -5,7 +5,6 @@ import ProgressBar from '../progress-bar/component'
 import ProjectTags from '../../components/project-tags/component'
 
 const Wrapper = styled.div`
-  width: 90%;
   margin: auto;
   display:flex;
   flex-direction:column;
@@ -36,10 +35,10 @@ const Tags = styled.div`
 
 const CardContent = ({ closingDate, closed, creationDate, tags, project }) => (
   <Wrapper>
-    <ProgressBar closingDate={closingDate} creationDate={creationDate} closed={closed} />
     {project.currentVersion.content.tags && <Tags>
       <ProjectTags project={project} />
     </Tags>}
+    <ProgressBar closingDate={closingDate} creationDate={creationDate} closed={closed} />
   </Wrapper>
 )
 

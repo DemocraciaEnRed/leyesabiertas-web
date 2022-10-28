@@ -3,18 +3,16 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const ProgressBarWrapper = styled.div`
-  margin: 0 15px;
   margin-top: 20px;
-  border-radius: 50px;
   background-color: #c6c8ca;
   overflow: hidden;
-  height: 20px;
+  height: 40px;
   position:relative;
 `
 
 const RemainingDays = styled.span`
   width:100%
-  font-size: 12px;
+  font-size: 14px;
   font-family: var(--bold);
   text-align: center;
   position: absolute;
@@ -28,8 +26,9 @@ const Progress = styled.div`
 background-color:#6CAAE4;
 flex:1;
 width:${(props) => props.progress}%;
-height:30px;
-transform: skewX(-10deg);
+height:40px;
+margin: 0 0 0 -6px
+transform: skewX(-15deg);
 
 }
 

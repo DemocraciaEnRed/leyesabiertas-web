@@ -16,7 +16,7 @@ const StyledSection = styled.section`
       }
     }
     @media (max-width:700px){
-      padding: 35px 20px;
+      padding: 35px 10px;
     }
 `
 

@@ -11,6 +11,9 @@ const Wrapper = styled.div`
   height:autos;
   padding:20px;
   box-sizing: border-box;
+  @media (max-width:700px){
+    width:100%;
+  }
 `
 const TagTitle = styled.div`
 margin-top:28px;
@@ -28,7 +31,10 @@ const Title = styled.div`
   text-align:left;
   font-family: var(--bold);
   padding-bottom:2rem;
-`
+  @media (max-width:700px){
+    margin-top:10px;
+  }
+  `
 
 const ClosingDate = styled.div`
   font-size:12px;
@@ -38,6 +44,17 @@ const ClosingDate = styled.div`
 `
 
 const TextWrapper = styled.div`
+@media (max-width:700px){
+  margin-left:65px;
+}
+`
+
+const HrWrapper = styled.div`
+width: 65px;
+margin-top:1.1rem;
+margin-left:65px;
+border-top:1px solid #000;
+
 `
 
 const croppedTitle = (title) => title.slice(0, 42).concat('...')
@@ -53,6 +70,7 @@ const CardHeaderContent = ({ hasImage, authorId, tagTitle, title, userId, name, 
       name={name}
       party={party}
       authorId={authorId} />
+    <HrWrapper />
     <TextWrapper>
       { tagTitle &&
         <TagTitle>{tagTitle}</TagTitle>
