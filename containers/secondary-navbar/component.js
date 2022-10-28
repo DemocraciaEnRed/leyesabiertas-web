@@ -32,7 +32,7 @@ const SecondaryBar = styled.div`
                 height:10rem;
                }
                > div {
-                width: 30%;
+                width: 32%;
                 justify-content: space-around;
               }
               `

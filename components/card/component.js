@@ -38,7 +38,7 @@ const Card = ({ project, tags }) => (
         <CardContent project={project} closed={project.closed} closingDate={project.currentVersion.content.closingDate} creationDate={project.currentVersion.createdAt} tags={project.currentVersion.content.tags} />
         <CardSocial commentaries={project.commentsCount}
           apoyosCount={project.apoyosCount}
-          project={project} />
+          apoyos={project.apoyos} />
       </a>
     </Link>
   </CardContainer>

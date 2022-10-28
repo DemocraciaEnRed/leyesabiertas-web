@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import WithUserContext from '../../components/with-user-context/component'
 
 const Wrapper = styled.div`
 font-size:1.4rem;
@@ -32,7 +33,7 @@ const CommentaryIcon = styled.div`
   background-repeat: no-repeat;
   display: inline-block;
   position: relative;
-  top: 3px;
+  top: 2px;
 `
 
 const LimitDate = styled.div`
@@ -56,24 +57,47 @@ const Contributions = styled.span`
 `
 const Support = styled(Contributions)``
 
-const Social = ({ commentaries, apoyosCount }) => (
-  <Wrapper>
-    <CommentaryItems>
-      <div>
-        <Span> {commentaries}</Span> <Contributions>{commentaries === 1 ? ' Aporte' : ' Aportes'}</Contributions>
-        <CommentaryIcon icon='pencil.svg' />
-      </div>
-      <div>
-        <Span> {apoyosCount}</Span> <Support>{apoyosCount === 1 ? ' Apoyo' : ' Apoyos'}</Support>
+const Social = ({ commentaries, apoyosCount, apoyos, authContext }) => {
+  const apoyosInner = () => {
+    if (apoyos) {
+      const apoyosId = apoyos.map((apoyo) => apoyo.userId)
+      if (authContext.user) {
+        return (
+          <span>
+            <Support>{ apoyosId.includes(authContext.user._id) ? 'apoyando' : apoyosCount === 1 ? ' Apoyo' : ' Apoyos' }</Support>
+            <CommentaryIcon icon={apoyosId.includes(authContext.user._id) ? 'check-in-a-circle-.svg' : 'hand-holding-heart-solid.svg' } />
+          </span>
+        )
+      }
+    }
+    return (
+      <span>
+        <Support>{ apoyosCount === 1 ? ' Apoyo' : ' Apoyos' }</Support>
         <CommentaryIcon icon='hand-holding-heart-solid.svg' />
-      </div>
-    </CommentaryItems>
-  </Wrapper>
-)
+      </span>
+    )
+  }
+
+  return (
+    <Wrapper>
+      <CommentaryItems>
+        <div>
+          <Span> {commentaries}</Span> <Contributions>{commentaries === 1 ? ' Aporte' : ' Aportes'}</Contributions>
+          <CommentaryIcon icon='pencil.svg' />
+        </div>
+        <div>
+          <Span> {apoyosCount}</Span> {apoyosInner()}
+        </div>
+      </CommentaryItems>
+    </Wrapper>
+  )
+}
 
 Social.propTypes = {
   commentaries: PropTypes.number,
-  apoyosCount: PropTypes.number
+  apoyosCount: PropTypes.number,
+  apoyos: PropTypes.array,
+  authContext: PropTypes.object
 }
 
-export default Social
+export default WithUserContext(Social)
