@@ -15,6 +15,8 @@ import ProjectTableItem from '../../components/project-table-item/component'
 import { clockO } from 'react-icons-kit/fa'
 import Icon from 'react-icons-kit'
 import { plus, download } from 'react-icons-kit/feather'
+import WithDocumentTagsContext from '../../components/document-tags-context/component'
+
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const masonryOptions = {
@@ -232,7 +234,12 @@ const ProjectsTableHeader = styled.th`
   padding: 2px 5px;
   ${(props) => props.hiddenMobile && '@media(max-width:700px){display: none;}'}
 `
-
+const Projects = styled.div`
+padding:0 70px 40px;
+display: flex;
+flex-direction:column;
+align-items:flex-start
+`
 const ButtonsBar = styled.div`
   width: 100%
 `
@@ -334,10 +341,13 @@ class MyProjects extends Component {
       fetching: true,
       fetchMoreAvailable: false,
       query: {
-        created: 'DESC',
-        limit: 12,
+        created: 'ASC',
+        limit: 1000,
         page: 1,
-      }
+        closed: null,
+        author: props.userId
+      },
+      tags: []
     }
   }
 
@@ -385,6 +395,37 @@ class MyProjects extends Component {
     }
   }
 
+  async getMoreDocuments() {
+    try {
+      this.setState({
+        loading: true
+      }, this.fetchDocuments()
+      )
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async fetchDocuments () {
+    let currentQuery = { ...this.state.query }
+
+    let query = this.createQuery(currentQuery)
+
+    const projects = await (await fetch(`${API_URL}/api/v1/documents${query}`)).json()
+    console.log(projects)
+
+    this.setState((prevState) => {
+      let query = prevState.query
+      query.page = projects.pagination.page + 1
+      return {
+        projects: prevState.projects.concat(projects.results),
+        // projectsFiltered: projects.results,
+        loadMoreAvailable: projects.pagination.page < projects.pagination.pages,
+        loading: false
+      }
+    })
+  }
+
   createProject = async () => {
     this.setState({
       isLoading: true
@@ -430,8 +471,14 @@ class MyProjects extends Component {
   }
 
   async componentDidMount() {
+    this.setState({
+      tags: (await this.props.fetchDocumentTags()).map(
+        tag => ({ value: tag._id, label: tag.name, key: tag.key })
+      )
+    })
     if (!this.props.authContext.keycloak) return
-    if (!this.props.authContext.keycloak.authenticated && !this.props.authContext.user) return
+    if (this.props.userId !== this.props.authContext.user._id) return this.fetchDocuments()
+    if (!this.props.authContext.keycloak.authenticated && !this.props.authContext.user) return this.fetchDocuments()
     if (!this.props.userId || this.props.userId === this.props.authContext.user._id) {
       this.fetchProjects(this.props.authContext.keycloak.token)
     }
@@ -499,82 +546,97 @@ class MyProjects extends Component {
       projects,
       isLoading,
       fetching,
-      fetchMoreAvailable
+      fetchMoreAvailable,
+      tags
     } = this.state
     if (this.props.authContext.user) {
-      if (this.props.authContext.isAuthor) {
-        const hasProjects = projects && projects.length
-        return (
-          <Section id='projects' noMargin >
-            <TitleH2>Mis propuestas</TitleH2>
-            <ButtonsBar>
+      if(this.props.authContext.user._id === this.props.userId) {
+        if (this.props.authContext.isAuthor) {
+          const hasProjects = projects && projects.length
+          return (
+            <Section id='projects' noMargin >
+              <TitleH2>Mis propuestas</TitleH2>
+              <ButtonsBar>
+                {
+                  isLoading
+                    ? <ButtonTableDisabled float='left'><Icon icon={clockO} size={20} />&nbsp;&nbsp;Creando nuevo proyecto... Espere unos segundos...</ButtonTableDisabled>
+                    : <ButtonTable onClick={this.createProject} float='left'><Icon icon={plus} size={20} />&nbsp;&nbsp;Agregar una nueva propuesta</ButtonTable>
+                }
+                <ButtonTable
+                  onClick={hasProjects && this.downloadXls}
+                  float='right'
+                  disabled={!hasProjects}>
+                  <Icon icon={download} size={20} />&nbsp;&nbsp;Descargar info. de participantes
+                </ButtonTable>
+                <ButtonTable
+                  onClick={hasProjects && this.downloadApoyos}
+                  float='right'
+                  disabled={!hasProjects}>
+                  <Icon icon={download} size={20} />&nbsp;&nbsp;Descargar apoyos
+                </ButtonTable>
+              </ButtonsBar>
+              <ProjectsTable>
+                <ProjectsTableHead>
+                  <ProjectsTableRow>
+                    <ProjectsTableHeader>Nombre</ProjectsTableHeader>
+                    <ProjectsTableHeader hiddenMobile centered>Status</ProjectsTableHeader>
+                    <ProjectsTableHeader width={100} hiddenMobile centered>Aportes</ProjectsTableHeader>
+                    <ProjectsTableHeader width={100} hiddenMobile centered>Apoyos</ProjectsTableHeader>
+                    <ProjectsTableHeader width={100} hiddenMobile centered>Fecha creación</ProjectsTableHeader>
+                    <ProjectsTableHeader width={100} hiddenMobile centered>Fecha de cierre</ProjectsTableHeader>
+                    <ProjectsTableHeader width={120} hiddenMobile centered>Acciones</ProjectsTableHeader>
+                  </ProjectsTableRow>
+                </ProjectsTableHead>
+                <ProjectsTableBody>
+                  {/* <ProjectsTableRow>
+                    <ProjectsTableCell centered colSpan={6}>
+                      {
+                        isLoading
+                          ? <ButtonTableDisabled><Icon icon={clockO} size={20} />Creando nuevo proyecto.. espere</ButtonTableDisabled> :
+                          <ButtonTable onClick={this.createProject}><Icon icon={plus} size={20} />Agregar un nuevo proyecto</ButtonTable>
+                      }
+                    </ProjectsTableCell>
+                  </ProjectsTableRow> */}
+                  {projects && projects.map((p, i) => <ProjectTableItem project={p} key={i} />)}
+                </ProjectsTableBody>
+              </ProjectsTable>
               {
-                isLoading
-                  ? <ButtonTableDisabled float='left'><Icon icon={clockO} size={20} />&nbsp;&nbsp;Creando nuevo proyecto... Espere unos segundos...</ButtonTableDisabled>
-                  : <ButtonTable onClick={this.createProject} float='left'><Icon icon={plus} size={20} />&nbsp;&nbsp;Agregar una nueva propuesta</ButtonTable>
+                this.state.showAlert &&
+                <Alert status={this.state.alertStatus} dismissAlert={this.dismissAlert}>
+                  {this.state.alertText}
+                </Alert>
               }
-              <ButtonTable
-                onClick={hasProjects && this.downloadXls}
-                float='right'
-                disabled={!hasProjects}>
-                <Icon icon={download} size={20} />&nbsp;&nbsp;Descargar info. de participantes
-              </ButtonTable>
-              <ButtonTable
-                onClick={hasProjects && this.downloadApoyos}
-                float='right'
-                disabled={!hasProjects}>
-                <Icon icon={download} size={20} />&nbsp;&nbsp;Descargar apoyos
-              </ButtonTable>
-            </ButtonsBar>
-            <ProjectsTable>
-              <ProjectsTableHead>
-                <ProjectsTableRow>
-                  <ProjectsTableHeader>Nombre</ProjectsTableHeader>
-                  <ProjectsTableHeader hiddenMobile centered>Status</ProjectsTableHeader>
-                  <ProjectsTableHeader width={100} hiddenMobile centered>Aportes</ProjectsTableHeader>
-                  <ProjectsTableHeader width={100} hiddenMobile centered>Apoyos</ProjectsTableHeader>
-                  <ProjectsTableHeader width={100} hiddenMobile centered>Fecha creación</ProjectsTableHeader>
-                  <ProjectsTableHeader width={100} hiddenMobile centered>Fecha de cierre</ProjectsTableHeader>
-                  <ProjectsTableHeader width={120} hiddenMobile centered>Acciones</ProjectsTableHeader>
-                </ProjectsTableRow>
-              </ProjectsTableHead>
-              <ProjectsTableBody>
-                {/* <ProjectsTableRow>
-                  <ProjectsTableCell centered colSpan={6}>
-                    {
-                      isLoading
-                        ? <ButtonTableDisabled><Icon icon={clockO} size={20} />Creando nuevo proyecto.. espere</ButtonTableDisabled> :
-                        <ButtonTable onClick={this.createProject}><Icon icon={plus} size={20} />Agregar un nuevo proyecto</ButtonTable>
-                    }
-                  </ProjectsTableCell>
-                </ProjectsTableRow> */}
-                {projects && projects.map((p, i) => <ProjectTableItem project={p} key={i} />)}
-              </ProjectsTableBody>
-            </ProjectsTable>
-            {
-              this.state.showAlert &&
-              <Alert status={this.state.alertStatus} dismissAlert={this.dismissAlert}>
-                {this.state.alertText}
-              </Alert>
-            }
-            {
-              !fetching && fetchMoreAvailable && <LoadMoreButtonContainer>
-                <LoadMoreButton onClick={() => this.getDocuments()}>Cargar más</LoadMoreButton>
-              </LoadMoreButtonContainer>
-            }
-            {
-              fetching && <MessagePaginator>Cargando...</MessagePaginator>
-            }
-            {
-              !fetching && !fetchMoreAvailable &&
-              <MessagePaginator>No hay más propuestas de leyes</MessagePaginator>
-            }
-          </Section>
-        )
+              {
+                !fetching && fetchMoreAvailable && <LoadMoreButtonContainer>
+                  <LoadMoreButton onClick={() => this.getDocuments()}>Cargar más</LoadMoreButton>
+                </LoadMoreButtonContainer>
+              }
+              {
+                fetching && <MessagePaginator>Cargando...</MessagePaginator>
+              }
+              {
+                !fetching && !fetchMoreAvailable &&
+                <MessagePaginator>No hay más propuestas de leyes</MessagePaginator>
+              }
+            </Section>
+          )
+        }
       }
     }
-    return null
+    if (projects && tags) {
+      return <Projects>
+        <Fragment>
+          <Masonry
+            style={{ width: '100%', margin: '4.8rem 0 1.6rem' }}
+            options={masonryOptions}>
+            {projects.map((p, i) => (
+              <Card project={p} key={i} tags={tags} />
+            ))}
+          </Masonry>
+        </Fragment>
+      </Projects>
+    }
   }
 }
 
-export default WithUserContext(MyProjects)
+export default WithUserContext(WithDocumentTagsContext(MyProjects))

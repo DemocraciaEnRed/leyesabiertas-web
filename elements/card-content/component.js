@@ -39,10 +39,14 @@ text-transform: capitalize;
 `
 
 const CardContent = ({ closingDate, closed, creationDate, tags, tagList, project }) => {
-  const tagsCards = tags.map((tag) => {
-    const tagValue = tagList.find((tagOfList) => tagOfList.value === tag)
-    return tagValue.label
-  })
+  let tagsCards = []
+  if (tags && tags.length > 0) {
+    tagsCards = tags.map((tag) => {
+      const tagValue = tagList.find((tagOfList) => tagOfList.value === tag)
+
+      return tagValue.label
+    })
+  }
   return (
     <Wrapper>
       {tagsCards.length > 0 && <Tags>
