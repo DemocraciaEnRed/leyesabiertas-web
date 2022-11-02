@@ -53,7 +53,7 @@ const HrWrapper = styled.div`
 width: 65px;
 margin-top:1.1rem;
 margin-left:65px;
-border-top:1px solid #000;
+border-top:1px solid #4C4C4E;
 
 `
 

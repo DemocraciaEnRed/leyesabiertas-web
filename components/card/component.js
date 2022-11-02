@@ -35,7 +35,13 @@ const Card = ({ project, tags }) => (
         {/* <CardHeader img={project.currentVersion.content.imageCover} published={project.published} /> */}
         {/* <CardHeader hasImage={project.currentVersion.content.tags && project.currentVersion.content.tags.length > 0} img={`/static/assets/images/${tags && project.currentVersion.content.tags && project.currentVersion.content.tags.length > 0 ? tags.find(x => project.currentVersion.content.tags[0] == x.value).key : 'trama-default'}.jpg`} published={project.published} /> */}
         <CardHeader published={project.published} project={project} />
-        <CardContent project={project} closed={project.closed} closingDate={project.currentVersion.content.closingDate} creationDate={project.currentVersion.createdAt} tags={project.currentVersion.content.tags} />
+        <CardContent
+          project={project}
+          closed={project.closed}
+          closingDate={project.currentVersion.content.closingDate}
+          creationDate={project.currentVersion.createdAt}
+          tags={project.currentVersion.content.tags}
+          tagList={tags} />
         <CardSocial commentaries={project.commentsCount}
           apoyosCount={project.apoyosCount}
           apoyos={project.apoyos} />
