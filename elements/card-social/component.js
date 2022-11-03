@@ -56,26 +56,7 @@ const Contributions = styled.span`
 `
 const Support = styled(Contributions)``
 
-const Social = ({ commentaries, apoyosCount, apoyos, authContext }) => {
-  const apoyosInner = () => {
-    if (apoyos) {
-      const apoyosId = apoyos.map((apoyo) => apoyo.userId)
-      if (authContext.user) {
-        return (
-          <span>
-            <Support>{ apoyosId.includes(authContext.user._id) ? 'apoyando' : apoyosCount === 1 ? ' Apoyo' : ' Apoyos' }</Support>
-            <CommentaryIcon icon={apoyosId.includes(authContext.user._id) ? 'check-in-a-circle-.svg' : 'hand-holding-heart-solid.svg' } />
-          </span>
-        )
-      }
-    }
-    return (
-      <span>
-        <Support>{ apoyosCount === 1 ? ' Apoyo' : ' Apoyos' }</Support>
-        <CommentaryIcon icon='hand-holding-heart-solid.svg' />
-      </span>
-    )
-  }
+const Social = ({ commentaries, apoyosCount, userIsApoyado }) => {
 
   return (
     <Wrapper>
@@ -85,7 +66,10 @@ const Social = ({ commentaries, apoyosCount, apoyos, authContext }) => {
           <CommentaryIcon icon='pencil.svg' />
         </div>
         <div>
-          <Span> {apoyosCount}</Span> {apoyosInner()}
+          <Span> {apoyosCount}</Span> <span>
+            <Support>{userIsApoyado ? 'apoyando': (apoyosCount === 1 ? ' Apoyo' : ' Apoyos' )  }</Support>
+            <CommentaryIcon icon={userIsApoyado ? 'check-in-a-circle-.svg': 'hand-holding-heart-solid.svg' } />
+          </span>
         </div>
       </CommentaryItems>
     </Wrapper>
@@ -95,8 +79,7 @@ const Social = ({ commentaries, apoyosCount, apoyos, authContext }) => {
 Social.propTypes = {
   commentaries: PropTypes.number,
   apoyosCount: PropTypes.number,
-  apoyos: PropTypes.array,
-  authContext: PropTypes.object
+  userIsApoyado: PropTypes.bool,
 }
 
-export default WithUserContext(Social)
+export default Social

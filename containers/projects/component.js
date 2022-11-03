@@ -12,6 +12,7 @@ import router, {withRouter} from 'next/router'
 import Masonry from 'react-masonry-component';
 import TagsSelect from '../../elements/tags-select/component.js'
 import WithDocumentTagsContext from '../../components/document-tags-context/component'
+import WithUserContext from '../../components/with-user-context/component'
 
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
@@ -138,6 +139,21 @@ const Icon = styled.div`
 filter:grayscale(100%) brightness(54%) sepia(100%) hue-rotate(-180deg) saturate(700%) contrast(0.8);
 }
 `
+const IconLoading = styled(Icon)`
+width:20px;
+height:20px;
+filter:grayscale(100%);
+animation: rotation 2s infinite linear;
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+`
 
 const Search = styled.input`
 display: inline-block;
@@ -222,21 +238,50 @@ class Projects extends Component {
       this.setState({
         loading: true
       }, delay(() => {
-        this.fetchDocuments()
-      }, 500))
+        this.fetchDocuments(this.props.authContext.keycloak)
+      }, 900))
     } catch (error) {
       console.error(error)
     }
   }
 
-  async fetchDocuments() {
+  async fetchDocuments(token) {
     let tag = this.props.router.query.tag;
     let currentQuery = {...this.state.query};
     currentQuery.tag = tag
     
     let query = this.createQuery(currentQuery)
-    
-    const projects = await (await fetch(`${API_URL}/api/v1/documents${query}`)).json()
+    let projects = []
+    try {
+      if (token) {
+        projects = await (await fetch(`${API_URL}/api/v1/documents${query}`, {
+          method: 'get',
+          headers: {
+            'Authorization': 'Bearer ' + token.token
+          }
+        }
+        )).json()
+      } else {
+        projects = await (await fetch(`${API_URL}/api/v1/documents${query}`)).json()
+      }
+      this.setState((prevState) => {
+        let query = prevState.query
+        query.page = projects.pagination.page + 1
+        return {
+          projects: prevState.projects.concat(projects.results),
+          // projectsFiltered: projects.results,
+          loadMoreAvailable: projects.pagination.page < projects.pagination.pages,
+          query: {
+            ...query,    
+            tag
+          },
+          loading: false
+        }
+      })
+    } catch (err) {
+      console.error(err)
+    }
+    //const projects = await (await fetch(`${API_URL}/api/v1/documents${query}`)).json()
     // let mergedProjects = this.state.projects.concat(projects.results)
     // const projectsFiltered = mergedProjects.filter((p) => {
     //   if (this.state.query.closed !== null) {
@@ -244,20 +289,7 @@ class Projects extends Component {
     //   }
     //   return p
     // })
-    this.setState((prevState) => {
-      let query = prevState.query
-      query.page = projects.pagination.page + 1
-      return {
-        projects: prevState.projects.concat(projects.results),
-        // projectsFiltered: projects.results,
-        loadMoreAvailable: projects.pagination.page < projects.pagination.pages,
-        query: {
-          ...query,    
-          tag
-        },
-        loading: false
-      }
-    })
+   
   }
 
   async componentWillMount () {
@@ -369,7 +401,7 @@ class Projects extends Component {
           </LoadMoreButtonContainer>
         }
         {
-          loading && <MessagePaginator>Cargando...</MessagePaginator>
+          loading && <MessagePaginator> <IconLoading icon='circular-bar.svg' /> Cargando...</MessagePaginator>
         }
         {
           !loading && !loadMoreAvailable  &&
@@ -380,4 +412,4 @@ class Projects extends Component {
   }
 }
 
-export default withRouter(WithDocumentTagsContext(Projects))
+export default withRouter(WithUserContext(WithDocumentTagsContext(Projects)))
