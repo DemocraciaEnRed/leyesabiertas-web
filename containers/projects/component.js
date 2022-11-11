@@ -22,26 +22,23 @@ const masonryOptions = {
 
 const OptionChoice = styled.div`
 display: inline-block;
-margin: 5px;
 font-size: 1.4rem;
-padding: 5px 8px;
-border-radius: 4px;
-border: 1px solid #2c4c61
+padding: 10px 22px;
 cursor: pointer
-color: #2c4c61;
+color: #000;
+background-color: #F1ECEA;
 &:hover{
   background-color: #2c4c61;
   color: #FFF
 }
-&:first-child{
-  margin-left: 0;
-}
-&:last-child{
-  margin-right: 0;
-}
+
 &.disabled{
   color: #777;
   border-color: #777;
+}
+&.active{
+  background-color: #567B9A;
+  color: #FFF
 }
 `
 
@@ -50,7 +47,13 @@ position:relative;
 `
 
 const OptionsSection = styled.div`
-padding-left: 5px
+`
+
+const OptionsHeader = styled.div`
+padding:  10px 22px;
+display:flex;
+justify-content: space-between;
+
 `
 const Options = styled.div`
 width:70%;
@@ -61,16 +64,21 @@ display:flex;
   justify-content: flex-end;
  }
 `
+const OptionsMenu = styled.div`
+background-color: #F1ECEA;
+display: ${(props) => props.projectState || props.projectTags || props.projectSort ? 'flex' : 'none'}; 
+flex-direction: column;
+
+`
 const OptionLabel = styled.div`
-font-size: 1.4rem;
-color: #2c4c61;
-padding: ${(props) => props.isTitle ? '8px 0' : '5px 8px'};
-font-weight: ${(props) => props.isTitle ? 'bold' : 'normal'};
-display: ${(props) => props.isTitle ? 'block' : 'inline-block'};
-&:first-child{
-  margin-left: 0;
-  padding-left: 0;
-}
+font-size: ${(props) => props.isTitle || props.isTopTitle ? '1.6rem' : '1.4rem'};
+color: ${(props) => props.isTitle || props.isTopTitle ? '#000' : '#567B9A'}; 
+padding: ${(props) =>  props.isTopTitle && '10px 20px'};
+font-weight: 'normal';
+display: ${(props) => props.isTitle || props.isTopTitle ? 'block' : 'inline-block'};
+box-shadow:${(props) => props.isTopTitle && '0px 2px 3px rgb(0 0 0 / 25%);'} ;
+
+
 `
 const LoadMoreButtonContainer = styled.div`
 width: 100%;
@@ -176,18 +184,30 @@ width:75%;
  }
 `
 const Filters = styled.div`
+width:250px;
 background:white;
 position: absolute;
-right: -195px;
+right: 0px;
 top: 50px;
 z-index: 999;
-padding: 15px
 border-radius:5px
 box-shadow: 0px 3px 4px 0px #9999996b;
 @media(max-width:700px){
   right: 0;
   left: -185px;  
 }
+`
+
+const ArrowIcon = styled.div` 
+transform:${(props) => props.projectState || props.projectTags || props.projectSort ? ' rotateZ(180deg)' : '0'};
+margin: 10px;
+  width: 18px;
+  height: 17px;
+  background-image: url(${(props) => `/static/assets/${props.icon}`});
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: all 0.5s ease-out;
+  filter: brightness(0.2);
 `
 
 let delay = (function () {
@@ -209,6 +229,9 @@ class Projects extends Component {
       filterShow:false,
       // page: 1,
       // noMore: false,
+      projectState:false,
+      projectTags:false,
+      projectSort:false,
       query: {
         created: 'SUPP',
         limit: 10,
@@ -310,6 +333,10 @@ class Projects extends Component {
     })
   }
 
+  toggleShowMenu = (menuFilter) => {
+    this.setState({[menuFilter] : !this.state[menuFilter]})
+  }
+
   toggleSort = (parameter, value) => {
     let newQuery = this.state.query
     newQuery[parameter] = value
@@ -353,8 +380,12 @@ class Projects extends Component {
       query,
       loadMoreAvailable,
       loading,
-      tags
+      tags,
+      projectState,
+      projectTags,
+      projectSort
     } = this.state
+    const currentTag = query.tag && tags.find(tag => tag.value === query.tag).label
     return (
       <Section id='projects' noMargin>
         <TitleH2>Propuestas de ley</TitleH2>
@@ -364,22 +395,50 @@ class Projects extends Component {
           <OptionsWrapper>
             <FilterButton onClick={this.handleShowFilters}>Filtrar <Icon icon='down-arrow.svg' /></FilterButton>
             <Filters style={{ display: this.state.filterShow ? 'block' : 'none' }}>
+            <OptionLabel isTopTitle>Filtrar por:</OptionLabel>
               <OptionsSection>
-                <OptionLabel>Ordenar:</OptionLabel>
-                {query.created === 'ASC' && <OptionChoice onClick={() => this.toggleSort('created', 'DESC')}> Más antiguas</OptionChoice>}
-                {query.created === 'SUPP' && <OptionChoice onClick={() => this.toggleSort('created', 'ASC')}> Más recientes</OptionChoice>}
-                {query.created === 'DESC' && <OptionChoice onClick={() => this.toggleSort('created', 'SUPP')}> Más apoyos</OptionChoice>}
+                <OptionsHeader onClick={() => this.toggleShowMenu('projectSort')}>
+                  <div>
+                  <OptionLabel isTitle>Ordenar por:</OptionLabel>
+                  <OptionLabel>{query.created === 'ASC' ? 'Más antiguos' : query.created === 'SUPP' ? 'Más apoyados' : query.created === 'DESC' && 'Más recientes' }</OptionLabel>
+                  </div>
+                  <ArrowIcon projectSort={projectSort} icon='down-arrow.svg' />
+                </OptionsHeader>
+                <OptionsMenu projectSort={projectSort}>
+
+                <OptionChoice className={query.created === 'DESC' && 'active'} onClick={() => this.toggleSort('created', 'DESC')}> Más recientes</OptionChoice>
+                <OptionChoice className={query.created === 'ASC' && 'active'} onClick={() => this.toggleSort('created', 'ASC')}> Más antiguas</OptionChoice>
+                <OptionChoice className={query.created === 'SUPP' && 'active'} onClick={() => this.toggleSort('created', 'SUPP')}> Más apoyos</OptionChoice>
+                
+                </OptionsMenu>
               </OptionsSection>
-              <OptionLabel isTitle>Filtrar por:</OptionLabel>
               <OptionsSection>
-                <OptionLabel>Estado:</OptionLabel>
-                {query.closed === null && <OptionChoice onClick={() => this.toggleSort('closed', true)}>TODOS</OptionChoice>}
-                {query.closed === true && <OptionChoice onClick={() => this.toggleSort('closed', false)}>FINALIZADOS</OptionChoice>}
-                {query.closed === false && <OptionChoice onClick={() => this.toggleSort('closed', null)}>ABIERTOS</OptionChoice>}
-              </OptionsSection>
-              <OptionsSection>
-                <OptionLabel>Etiqueta</OptionLabel>
+                
+              <OptionsHeader onClick={() => this.toggleShowMenu('projectTags')}>
+              <div>
+                <OptionLabel isTitle>Etiquetas</OptionLabel>
+                <OptionLabel>{currentTag || 'Etiqueta' }</OptionLabel>
+                </div>
+                  <ArrowIcon projectTags={projectTags} icon='down-arrow.svg' />
+              </OptionsHeader>
+                <OptionsMenu projectTags={projectTags}>
                 {tags.length > 0 && <TagsSelect allTags={tags} selected={query.tag} onTagChange={(tagId) => this.toggleSort('tag', tagId)} />}
+                </OptionsMenu>
+              </OptionsSection>
+              <OptionsSection>
+              <OptionsHeader onClick={() => this.toggleShowMenu('projectState')}>
+                <div>
+                <OptionLabel isTitle>Estados</OptionLabel>
+                <OptionLabel>{query.closed === null ? 'todos' : query.closed === true ? 'cerrados' : query.closed === false && 'abiertos' }</OptionLabel>
+                </div>
+                  <ArrowIcon projectState={projectState} icon='down-arrow.svg' />
+              </OptionsHeader>
+                <OptionsMenu projectState={projectState}>
+                {/* query.closed === null &&  */<OptionChoice className={query.closed && 'active'} onClick={() => this.toggleSort('closed', true)}>Finalizados</OptionChoice>}
+                {/* query.closed === true &&  */<OptionChoice className={query.closed === false && 'active'} onClick={() => this.toggleSort('closed', false)}>Abiertos</OptionChoice>}
+                {/* query.closed === false &&  */<OptionChoice className={query.closed === null && 'active'} onClick={() => this.toggleSort('closed', null)}>Todos</OptionChoice>}
+
+                </OptionsMenu>
               </OptionsSection>
             </Filters>
           </OptionsWrapper>
