@@ -234,6 +234,11 @@ const ProjectsTableHeader = styled.th`
   padding: 2px 5px;
   ${(props) => props.hiddenMobile && '@media(max-width:700px){display: none;}'}
 `
+
+const ProjectsNoSession = styled.div`
+padding: 40px 0
+`
+
 const Projects = styled.div`
 padding:0 70px 40px;
 display: flex;
@@ -319,6 +324,45 @@ const LoadMoreButton = styled.div`
     border-color: #777;
   }
 `
+const LoadMoreButtonNoUser = styled.div`
+margin: 0 auto;
+font-size: 2.2
+rem;
+padding: 5px 25px;
+border-radius: 4px;
+border: 1px solid #2c4c61
+cursor: pointer
+color: #2c4c61;
+&:hover{
+  background-color: #2c4c61;
+  color: #FFF
+}
+&:first-child{
+  margin-left: 0;
+}
+&:last-child{
+  margin-right: 0;
+}
+&.disabled{
+  color: #777;
+  border-color: #777;
+}
+`
+const IconLoading = styled(Icon)`
+width:20px;
+height:20px;
+filter:grayscale(100%);
+animation: rotation 2s infinite linear;
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+`
 const MessagePaginator = styled.div`
   font-size: 2.5rem;
   color: #454246;
@@ -326,6 +370,7 @@ const MessagePaginator = styled.div`
   text-align: center;
   width: 100%;
 `
+
 
 class MyProjects extends Component {
   constructor(props) {
@@ -342,7 +387,7 @@ class MyProjects extends Component {
       fetchMoreAvailable: false,
       query: {
         created: 'ASC',
-        limit: 1000,
+        limit: 10,
         page: 1,
         closed: null,
         author: props.userId
@@ -367,11 +412,11 @@ class MyProjects extends Component {
         return encodeURIComponent(key) + '=' +
           encodeURIComponent(sort[key])
       }).join('&');
-    console.log(theQuery)
+
     return theQuery
   }
 
-  fetchProjects = async (token) => {
+  fetchProjects = async (token, userId) => {
     try {
       let query = this.createQuery(this.state.query);
       const projects = await (await fetch(`${API_URL}/api/v1/documents/my-documents?${query}`, {
@@ -381,12 +426,9 @@ class MyProjects extends Component {
         }
       })).json()
       this.setState((prevState) => {
-        let query = prevState.query
-        query.page = projects.pagination.page + 1
         return {
           projects: prevState.projects.concat(projects.results),
           fetchMoreAvailable: projects.pagination.page < projects.pagination.pages,
-          query: query,
           fetching: false
         }
       })
@@ -397,10 +439,21 @@ class MyProjects extends Component {
 
   async getMoreDocuments() {
     try {
-      this.setState({
-        loading: true
-      }, this.fetchDocuments()
-      )
+      this.setState(prevState => {
+        return{
+          loading: true,
+          fetching: true,
+          query:{
+            ...prevState.query,
+            page: this.state.query.page + 1
+          }
+        }
+      },()=>{
+        if (this.props.userId && this.props.authContext.user && this.props.userId !== this.props.authContext.user._id) return this.fetchDocuments() //usuario iniciado 
+        if (!this.props.authContext.authenticated && !this.props.authContext.user) return this.fetchDocuments()
+        if(!this.props.userId || this.props.userId === this.props.authContext.user._id) return this.getDocuments();
+
+      })
     } catch (error) {
       console.error(error)
     }
@@ -408,20 +461,16 @@ class MyProjects extends Component {
 
   async fetchDocuments () {
     let currentQuery = { ...this.state.query }
-
     let query = this.createQuery(currentQuery)
-
+    console.log(currentQuery);
     const projects = await (await fetch(`${API_URL}/api/v1/documents${query}`)).json()
-    console.log(projects)
 
     this.setState((prevState) => {
-      let query = prevState.query
-      query.page = projects.pagination.page + 1
       return {
         projects: prevState.projects.concat(projects.results),
         // projectsFiltered: projects.results,
-        loadMoreAvailable: projects.pagination.page < projects.pagination.pages,
-        loading: false
+        fetchMoreAvailable: projects.pagination.page < projects.pagination.pages,
+        fetching: false
       }
     })
   }
@@ -474,12 +523,12 @@ class MyProjects extends Component {
     this.setState({
       tags: (await this.props.fetchDocumentTags()).map(
         tag => ({ value: tag._id, label: tag.name, key: tag.key })
-      )
+      ),
     })
-    if (!this.props.authContext.keycloak) return
-    if (this.props.userId !== this.props.authContext.user._id) return this.fetchDocuments()
-    if (!this.props.authContext.keycloak.authenticated && !this.props.authContext.user) return this.fetchDocuments()
-    if (!this.props.userId || this.props.userId === this.props.authContext.user._id) {
+    // if (!this.props.authContext.keycloak) return
+    if (this.props.userId && this.props.authContext.user && this.props.userId !== this.props.authContext.user._id) return this.fetchDocuments() //usuario iniciado 
+    if (!this.props.authContext.authenticated && !this.props.authContext.user) return this.fetchDocuments() // sin session
+    if (!this.props.userId || this.props.userId === this.props.authContext.user._id) { //usuario iniciado y userprofile de usuario de sesion
       this.fetchProjects(this.props.authContext.keycloak.token)
     }
   }
@@ -488,10 +537,25 @@ class MyProjects extends Component {
     if (!props.authContext.keycloak) return
     if (!props.authContext.keycloak.authenticated && !props.authContext.user) return
     if (props === this.props) return
-    if (!props.userId || props.userId === props.authContext.user._id) {
+
+    if (!props.userId || props.userId === props.authContext.user._id) {//usuario iniciado y userprofile de usuario de sesion
+      this.setState({projects:[]})
       this.fetchProjects(props.authContext.keycloak.token)
     }
   }
+
+/*   loadMore(){
+    this.setState((prevState) => {
+      return{
+      query:{
+        ...prevState,
+        page: this.state.page + 1
+      }}
+    })
+    if(!this.props.userId || this.props.userId === this.props.authContext.user._id) this.getDocuments();
+
+   
+  } */
 
   downloadXls = async () => {
     try {
@@ -550,7 +614,7 @@ class MyProjects extends Component {
       tags
     } = this.state
     if (this.props.authContext.user) {
-      if(this.props.authContext.user._id === this.props.userId) {
+      if(this.props.authContext.user._id === this.props.userId || !this.props.userId) {
         if (this.props.authContext.isAuthor) {
           const hasProjects = projects && projects.length
           return (
@@ -589,7 +653,7 @@ class MyProjects extends Component {
                 </ProjectsTableHead>
                 <ProjectsTableBody>
                   {/* <ProjectsTableRow>
-                    <ProjectsTableCell centered colSpan={6}>
+                    <ProjectsTableCell {projects && projects.map((p, i) => <ProjectTableItem project={p} key={i} />)} centered colSpan={6}>
                       {
                         isLoading
                           ? <ButtonTableDisabled><Icon icon={clockO} size={20} />Creando nuevo proyecto.. espere</ButtonTableDisabled> :
@@ -608,7 +672,7 @@ class MyProjects extends Component {
               }
               {
                 !fetching && fetchMoreAvailable && <LoadMoreButtonContainer>
-                  <LoadMoreButton onClick={() => this.getDocuments()}>Cargar más</LoadMoreButton>
+                  <LoadMoreButton onClick={() => this.getMoreDocuments()}>Cargar más</LoadMoreButton>
                 </LoadMoreButtonContainer>
               }
               {
@@ -623,8 +687,9 @@ class MyProjects extends Component {
         }
       }
     }
-    if (projects && tags) {
-      return <Projects>
+    if (this.props.userId && projects && tags) {
+      return <ProjectsNoSession>
+        <Projects>
         <Fragment>
           <Masonry
             style={{ width: '100%', margin: '4.8rem 0 1.6rem' }}
@@ -635,7 +700,22 @@ class MyProjects extends Component {
           </Masonry>
         </Fragment>
       </Projects>
+      {
+        !fetching && fetchMoreAvailable && <LoadMoreButtonContainer>
+          <LoadMoreButtonNoUser onClick={() => this.getMoreDocuments()}>Ver más</LoadMoreButtonNoUser>
+        </LoadMoreButtonContainer>
+      }
+      {
+        fetching && <MessagePaginator> Cargando...</MessagePaginator>
+      }
+      {
+        !fetching && !fetchMoreAvailable  &&
+        <MessagePaginator>No hay más propuestas de leyes</MessagePaginator>
+      }
+      
+      </ProjectsNoSession>
     }
+    return null
   }
 }
 
