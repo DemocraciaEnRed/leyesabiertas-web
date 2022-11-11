@@ -25,7 +25,86 @@ import {useMediaQuery} from '@react-hook/media-query'
 //     }
 // 
 const StyledHero = styled.div`
+position: relative;
+overflow:hidden;
+
   // min-height: 350px;
+`
+
+const BannerImg = styled.div`
+background-image: url(${props => props.srcImg});
+background-position: 0; 
+background-repeat: no-repeat;
+background-size: cover;
+@media (max-width:700px){
+  background-position: center; 
+  
+  }
+`
+
+const ContentBackground = styled.div`
+position:absolute;
+left:-111px;
+top:0;
+width:74%;
+height:102%;
+backdrop-filter: blur(5px);
+background:#ffffffbf;
+transform: skewX(-29deg);
+@media (max-width:700px){
+left:0;
+width:100%;
+transform: skewX(0deg);
+  
+}
+`
+
+const BannerContent = styled.div`
+width:65%;
+padding:50px;  
+z-index:10;
+position:relative;
+@media (max-width:700px){
+  width:100%;
+  color:#4C4C4E;
+  padding:27px
+}
+}
+`
+
+const BannerTitle = styled.div`
+font-family: var(--bold);
+font-size:4.3em;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+@media (max-width:700px){
+  text-align:center;
+}
+`
+const Hr = styled.div`
+width:15%;
+border-bottom: 3px solid #000;
+@media (max-width:700px){
+  display:none;
+}
+`
+
+const BannerSubtitles = styled.ul`
+margin-top:35px;;
+margin-left:20px
+`
+
+const Subtitle = styled.li`
+font-family: var(--bold);
+font-size:1.4em;
+margin:15px 0
+text-transform: uppercase;
+letter-spacing: 0.5px;
+@media (max-width:700px){
+  color:#4C4C4E;
+  font-size:1.5em;
+}
+
 `
 
 const Hero = () => {
@@ -40,12 +119,25 @@ const Hero = () => {
     {/* <HeroTitle>Plataforma de Participación Ciudadana en Propuestas de Ley</HeroTitle>
     <HeroSubtitle>¡Participe haciendo aportes para co-crear mejores leyes!</HeroSubtitle>
     <HeroVideo video='argos.hcdn.gob.ar/DMPARL/tutorial.mp4' /> */}
-    <video key={isMobile} style={{}} id="videobcg" className="fill" width="100%" height="100%" preload="auto" autoPlay={true} loop={true} muted={true} volume="0" poster="/static/assets/images/thumbnail-banner-01.jpg" >
+    <BannerImg srcImg="/static/assets/images/foto_banner_02.jpg">
+      <BannerContent>
+      <BannerTitle>Plataforma de leyes abiertas</BannerTitle>
+      <Hr/>
+      <BannerSubtitles>
+        <Subtitle>Recibí novedades de los proyectos en los temas de tu interes</Subtitle>
+        <Subtitle>Paticipá de la co-creación de leyes</Subtitle>
+        <Subtitle>Comentá, aportá y apoyá proyectos de ley</Subtitle>
+      </BannerSubtitles>
+
+      </BannerContent>
+      <ContentBackground />
+    </BannerImg>
+   {/*  <video key={isMobile} style={{}} id="videobcg" className="fill" width="100%" height="100%" preload="auto" autoPlay={true} loop={true} muted={true} volume="0" poster="/static/assets/images/foto_banner_01.jpg" >
         {isMobile && <source src="/static/assets/images/banner-mobile.mp4"  type="video/mp4"/> }
         {!isMobile && <><source src="/static/assets/images/banner-01.webm" type="video/webm" />
         <source src="/static/assets/images/banner-01.mp4"  type="video/mp4" /> </> }
       Sorry, your browser does not support HTML5 video.
-    </video>
+    </video> */}
   </StyledHero>)
 }
 
