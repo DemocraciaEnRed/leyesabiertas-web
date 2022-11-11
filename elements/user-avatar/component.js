@@ -35,6 +35,7 @@ const Avatar = styled.div`
   @media (max-width:700px){
     margin-bottom: -20px;
   }
+  margin-bottom:${() => window.location.pathname === '/userprofile' && '-20px;'}
 `
 const Name = styled.div`
 color: #6CAAE4;
@@ -49,7 +50,9 @@ color: #7e7e7e;
 text-transform:uppercase;
 display:flex;
 margin-top:.9rem;
-
+@media (max-width:700px){
+  font-size:10px
+}
 align-items:center;
 `
 
@@ -59,10 +62,6 @@ padding-left:20px;
 display:flex;
 flex:1;
 flex-direction:column;
-@media (max-width:700px){
-  flex-direction: row;
-}
-justify-content:space-between;
 `
 const IconWrapper = styled.div`
   padding-right:.5rem;`
@@ -76,10 +75,10 @@ const UserAvatar = ({ projectView, userId, name, party, badge }) => (
       <Link href={{ pathname: '/userprofile', query: { id: userId } }}>
         <Name>{name}</Name>
       </Link>
-      <Party>
+      {window.location.pathname !== '/userprofile' && <Party>
         {badge && <IconWrapper><Icon icon={checkCircle} /></IconWrapper>}
         <p>{party}</p>
-      </Party>
+      </Party>}
     </TextWrapper>
   </Wrapper>
 )

@@ -45,6 +45,17 @@ const LimitDate = styled.div`
   border-radius: 2px;
   margin: 0 auto;
 `
+const ContribDiv = styled.div`
+> * {
+  ${(props) => props.closed && `
+  
+  filter: brightness(2.5);
+  `}
+  
+
+}
+`
+
 const Span = styled.span`
   font-family: var(--ligth);
   color:#4C4C4E;
@@ -56,30 +67,28 @@ const Contributions = styled.span`
 `
 const Support = styled(Contributions)``
 
-const Social = ({ commentaries, apoyosCount, userIsApoyado }) => {
-
-  return (
-    <Wrapper>
-      <CommentaryItems>
-        <div>
-          <Span> {commentaries}</Span> <Contributions>{commentaries === 1 ? ' Aporte' : ' Aportes'}</Contributions>
-          <CommentaryIcon icon='pencil.svg' />
-        </div>
-        <div>
-          <Span> {apoyosCount}</Span> <span>
-            <Support>{userIsApoyado ? 'apoyando': (apoyosCount === 1 ? ' Apoyo' : ' Apoyos' )  }</Support>
-            <CommentaryIcon icon={userIsApoyado ? 'check-in-a-circle-.svg': 'hand-holding-heart-solid.svg' } />
-          </span>
-        </div>
-      </CommentaryItems>
-    </Wrapper>
-  )
-}
+const Social = ({ commentaries, apoyosCount, userIsApoyado, closed }) => (
+  <Wrapper>
+    <CommentaryItems >
+      <ContribDiv closed={closed}>
+        <Span> {commentaries}</Span> <Contributions>{commentaries === 1 ? ' Aporte' : ' Aportes'}</Contributions>
+        <CommentaryIcon icon='pencil.svg' />
+      </ContribDiv>
+      <div>
+        <Span> {apoyosCount}</Span> <span>
+          <Support>{userIsApoyado ? 'apoyando' : (apoyosCount === 1 ? ' Apoyo' : ' Apoyos' )  }</Support>
+          <CommentaryIcon icon={userIsApoyado ? 'check-in-a-circle-.svg': 'hand-holding-heart-solid.svg' } />
+        </span>
+      </div>
+    </CommentaryItems>
+  </Wrapper>
+)
 
 Social.propTypes = {
   commentaries: PropTypes.number,
   apoyosCount: PropTypes.number,
   userIsApoyado: PropTypes.bool,
+  closed: PropTypes.bool
 }
 
 export default Social

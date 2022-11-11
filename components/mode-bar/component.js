@@ -9,6 +9,8 @@ const StyledModeBar = styled.nav`
   width: 100%;
   // height: 45px;
   background: #FFF;
+  display: flex;
+  justify-content: space-between;
   // padding: 0 3%;
   // border-bottom: solid 1px #dae1e7;
   @media(max-width:700px){

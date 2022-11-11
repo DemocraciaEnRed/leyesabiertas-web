@@ -44,7 +44,8 @@ const Card = ({ project, tags }) => (
           tagList={tags} />
         <CardSocial commentaries={project.commentsCount}
           apoyosCount={project.apoyosCount}
-          userIsApoyado={project.userIsApoyado} />
+          userIsApoyado={project.userIsApoyado} 
+          closed={project.closed}/>
       </a>
     </Link>
   </CardContainer>

@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   }
 `
 const TagTitle = styled.div`
-margin-top:28px;
+margin-top:1rem;
 font-size:1.2rem;
 text-transform:uppercase;
 text-align:left;
@@ -25,7 +25,7 @@ padding-bottom:1rem;
 `
 
 const Title = styled.div`
-  margin-top:28px;
+  margin-top:1rem;
   font-size:2.7rem;
   color:#4C4C4E;
   text-align:left;

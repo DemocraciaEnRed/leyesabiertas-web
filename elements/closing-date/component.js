@@ -36,7 +36,7 @@ const ClosingDate = ({ closingDate, creationDate, closed }) => (
     <div>
       <StyledClosingDateTitle>Fecha de cierre: {formatDate(closingDate)}</StyledClosingDateTitle>
       <StyledCreationDate>Fecha de creación: {formatDate(creationDate)}</StyledCreationDate>
-      <ProgressBar closingDate={closingDate} creationDate={creationDate} closed={closed} />
+      {/* <ProgressBar closingDate={closingDate} creationDate={creationDate} closed={closed} /> */}
 
     </div>
   </StyledDiv>
