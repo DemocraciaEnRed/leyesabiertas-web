@@ -8,7 +8,7 @@ import AboutP from '../../elements/about-p/component'
 import ArrowRightLink from '../../elements/arrow-right-link/component'
 
 const StyledAbout = styled.div`
-  height:540px;
+  height:350px;
   width:90%;
   @media(max-width:700px){
     flex-direction: column;
@@ -23,7 +23,7 @@ const StyledAbout = styled.div`
 
 const About = () => (
   <StyledAbout id='about'>
-    <AboutImg img={'/static/assets/diputados-asset.jpg'} imgMobile='/static/assets/diputados-asset-mobile.jpg' />
+    <AboutImg img={'/static/assets/images/foto_acercade.jpg'} imgMobile='/static/assets/images/foto_acercade.jpg' />
     <AboutText>
       <AboutH2>Acerca de</AboutH2>
       <AboutP>El <strong>Portal de Leyes Abiertas</strong> es una plataforma de elaboración colaborativa de normas, donde las y los diputados abren a debate sus iniciativas para incorporar puntos de vista ciudadanos.</AboutP>

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const AboutH2 = styled.h2`
-  color:#fff;  
+  color: #4C4C4E;  
   font-size:4rem;
   font-family:var(--bold);
   font-style: normal;

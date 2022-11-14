@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const StyledImg = styled.div`
-  height: 540px;
+  height: 350px;
   width: 500px;
   background-color: #5c97bc;
   background-image:  url('${(props) => props.img}');
@@ -16,6 +16,8 @@ const StyledImg = styled.div`
     height: 300px;
     width: auto;
     background-image:  url('${(props) => props.imgMobile}');
+    background-position: initial;
+    
   }
 
 `

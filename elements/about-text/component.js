@@ -7,11 +7,12 @@ const StyledText = styled.div`
   padding-right: 8%;
   padding-top: 6.8rem;
   padding-bottom: 8%;
-  width: 50%;
+  width: 80%;
+  background-color: #B6D5F2;
   @media (max-width: 700px) {
     width:100%;
   }
-  height: 540px;
+  height: 350px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
