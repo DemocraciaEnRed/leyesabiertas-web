@@ -124,7 +124,7 @@ const Hero = () => {
       <BannerTitle>Plataforma de leyes abiertas</BannerTitle>
       <Hr/>
       <BannerSubtitles>
-        <Subtitle>Recibí novedades de los proyectos en los temas de tu interes</Subtitle>
+        <Subtitle>Recibí novedades de los proyectos en los temas de tu interés</Subtitle>
         <Subtitle>Paticipá de la co-creación de leyes</Subtitle>
         <Subtitle>Comentá, aportá y apoyá proyectos de ley</Subtitle>
       </BannerSubtitles>

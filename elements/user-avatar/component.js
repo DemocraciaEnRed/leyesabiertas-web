@@ -35,7 +35,7 @@ const Avatar = styled.div`
   @media (max-width:700px){
     margin-bottom: -20px;
   }
-  margin-bottom:${() => window.location.pathname === '/userprofile' && '-20px;'}
+  margin-bottom:-20px;
 `
 const Name = styled.div`
 color: #6CAAE4;
@@ -75,10 +75,10 @@ const UserAvatar = ({ projectView, userId, name, party, badge }) => (
       <Link href={{ pathname: '/userprofile', query: { id: userId } }}>
         <Name>{name}</Name>
       </Link>
-      {window.location.pathname !== '/userprofile' && <Party>
+      {/* {window.location.pathname !== '/userprofile' && <Party>
         {badge && <IconWrapper><Icon icon={checkCircle} /></IconWrapper>}
         <p>{party}</p>
-      </Party>}
+      </Party>} */}
     </TextWrapper>
   </Wrapper>
 )

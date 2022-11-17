@@ -53,7 +53,8 @@ display: flex;
 const ProgressBarWrapper = styled.div`
 width:33%
 @media(max-width:700px){
-  width:50%
+  width:50%;
+  margin-bottom: 16px;
 }
 `
 

@@ -236,7 +236,7 @@ const ProjectsTableHeader = styled.th`
 `
 
 const ProjectsNoSession = styled.div`
-padding: 40px 0
+padding: 40px 0;
 `
 
 const Projects = styled.div`
@@ -244,6 +244,9 @@ padding:0 70px 40px;
 display: flex;
 flex-direction:column;
 align-items:flex-start
+@media (max-width: 700px) {
+  padding:0 10px 0
+}
 `
 const ButtonsBar = styled.div`
   width: 100%
