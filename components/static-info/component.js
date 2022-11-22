@@ -46,9 +46,9 @@ const content = {
 const StyledStaticInfo = styled.div`
   display: flex;
   justify-content: center;
-  background-image: url('/static/assets/header-background.jpg');
+  background-image: url('/static/assets/images/fondo-sobre-la.png');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% auto;
 `
 
 const StaticInfo = (props) => (
