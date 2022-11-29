@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { ArticlesContext } from '../../containers/user-project-container/component'
-import WithDocumentTagsContext from '../../components/document-tags-context/component'
+import WithDocumentTagsContext from '../document-tags-context/component'
+import ProjectTag from '../../elements/project-tag/component'
 
 const ProjectTagsContainer = styled.div`
   // min-height: 383px;
@@ -21,13 +22,7 @@ const ProjectTagsContainer = styled.div`
   }
 
 `
-export const ProjectTag = styled.span`
-  font-size: 15px;
-  background-color: #eee;
-  padding: 8px 15px;
-  margin-bottom: 5px;
-  margin-right: 5px;
-`
+
 
 
 class ProjectTags extends Component {
@@ -47,6 +42,7 @@ class ProjectTags extends Component {
     const { project } = this.props
     const { allTags } = this.state
     const projectTags = project.currentVersion.content.tags || []
+    console.log(projectTags);
     return (
       <ProjectTagsContainer>
         { allTags.length > 0 && projectTags.length > 0 &&
@@ -55,7 +51,7 @@ class ProjectTags extends Component {
               ({ isAuthor, editMode, setYoutubeId, editedYoutubeId, newYoutubeId, setNewFields }) => (
                 projectTags.map(tagId =>
                   <ProjectTag key={tagId}>
-                    { allTags.find(documentTag => documentTag._id == tagId).name }
+                    { allTags.find(documentTag => documentTag._id == tagId) && allTags.find(documentTag => documentTag._id == tagId).name }
                   </ProjectTag>
                 )
               )

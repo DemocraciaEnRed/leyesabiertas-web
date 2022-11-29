@@ -33,9 +33,9 @@ const Avatar = styled.div`
   cursor: pointer;
   border: 1px solid #CACACA;
   @media (max-width:700px){
-    margin-bottom: -20px;
+    margin-bottom: ${(props) => !props.cardUser && `-20px`};
   }
-  margin-bottom:-20px;
+  margin-bottom:${(props) => !props.cardUser && `-20px`};
 `
 const Name = styled.div`
 color: #6CAAE4;
@@ -66,19 +66,19 @@ flex-direction:column;
 const IconWrapper = styled.div`
   padding-right:.5rem;`
 
-const UserAvatar = ({ projectView, userId, name, party, badge }) => (
+const UserAvatar = ({ projectView, userId, name, party, badge,cardUser }) => (
   <Wrapper projectView={projectView}>
     <Link href={{ pathname: '/userprofile', query: { id: userId } }}>
-      <Avatar projectView={projectView} userId={userId} />
+      <Avatar projectView={projectView} userId={userId} cardUser={cardUser}/>
     </Link>
     <TextWrapper>
       <Link href={{ pathname: '/userprofile', query: { id: userId } }}>
         <Name>{name}</Name>
       </Link>
-      {/* {window.location.pathname !== '/userprofile' && <Party>
+      {window.location.pathname === '/admin' && <Party>
         {badge && <IconWrapper><Icon icon={checkCircle} /></IconWrapper>}
         <p>{party}</p>
-      </Party>} */}
+      </Party>}
     </TextWrapper>
   </Wrapper>
 )
