@@ -465,7 +465,6 @@ class MyProjects extends Component {
   async fetchDocuments () {
     let currentQuery = { ...this.state.query }
     let query = this.createQuery(currentQuery)
-    console.log(currentQuery);
     const projects = await (await fetch(`${API_URL}/api/v1/documents${query}`)).json()
 
     this.setState((prevState) => {

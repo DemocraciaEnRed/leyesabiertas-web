@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ProgressBar from '../progress-bar/component'
+import ProjectTag from '../project-tag/component'
 
 const Wrapper = styled.div`
   margin: auto;
@@ -21,30 +22,13 @@ const Tags = styled.div`
   flex-wrap: wrap;
 `
 
-const ProjectTag = styled.div`
-margin-bottom: 5px;
-margin-right: 5px;
-background:#B6D5F2;
-color: #4C4C4E;
-border-radius:5px;
-font-weight: 600;
-font-family: var(--italic);
-padding:8px;
-font-size:12px
-line-height: 15px;
-text-align: center;
-letter-spacing: 1.1px;
-text-transform: capitalize;
-
-`
 
 const CardContent = ({ closingDate, closed, creationDate, tags, tagList, project }) => {
   let tagsCards = []
   if (tags && tags.length > 0) {
-    tagsCards = tags.map((tag) => {
+    tags.forEach((tag) => {
       const tagValue = tagList.find((tagOfList) => tagOfList.value === tag)
-
-      return tagValue.label
+      if(tagValue) tagsCards.push(tagValue.label)
     })
   }
   return (
