@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 
 const StyledAdminDrawer = styled.div`
-  width:30%;
+  width:20%;
   margin-left:auto;
   margin-right:auto;
   margin-top:2.5rem;

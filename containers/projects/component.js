@@ -13,6 +13,7 @@ import Masonry from 'react-masonry-component';
 import TagsSelect from '../../elements/tags-select/component.js'
 import WithDocumentTagsContext from '../../components/document-tags-context/component'
 import WithUserContext from '../../components/with-user-context/component'
+import Search from '../../elements/search/component'
 
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
@@ -163,26 +164,7 @@ animation: rotation 2s infinite linear;
 }
 `
 
-const Search = styled.input`
-display: inline-block;
-margin: 0 5px;
-font-size: 1.5rem;
-padding: 8px;
-border-radius: 4px;
-border: 1px solid #4C4C4E;
-width:75%;
-::placeholder{
-  font-size:1.5rem;
-}
-&.disabled{
-  color: #777;
-  border-color: #777;
-}
-@media(max-width:700px){
-  display: block;
-  width:100%;
- }
-`
+
 const Filters = styled.div`
 width:250px;
 background:white;

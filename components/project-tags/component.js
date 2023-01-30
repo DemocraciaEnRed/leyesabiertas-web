@@ -42,7 +42,6 @@ class ProjectTags extends Component {
     const { project } = this.props
     const { allTags } = this.state
     const projectTags = project.currentVersion.content.tags || []
-    console.log(projectTags);
     return (
       <ProjectTagsContainer>
         { allTags.length > 0 && projectTags.length > 0 &&

@@ -31,7 +31,7 @@ position: relative;
 
 const CardUser = ({ user }) => {
   const edit = ()=>{
-    console.log(user.fullname);
+    router.push(`/admin?section=userEdit&user=${user._id}`);
   }  
   const projects = ()=>{
     router.push(`/admin?section=projects&user=${user._id}`)

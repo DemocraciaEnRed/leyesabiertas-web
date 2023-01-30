@@ -90,7 +90,7 @@ const Usermenu = ({ logout,user }) => (
     <Li>
       <StyledA onClick={logout}>Cerrar sesión</StyledA>
     </Li>
-    {user && user.roles.includes('admin') && <Li>
+    {user && user.roles.includes('admin') &&  window.location.pathname !== '/admin' && <Li>
       <Link href={{ pathname: '/admin' }}>
         <a>
           <StyledA>Admin</StyledA>

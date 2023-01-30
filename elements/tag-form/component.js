@@ -55,7 +55,7 @@ const TagNew = (props) => {
     }
     return(
     <NewTagWrapper>
-        <TagInputLabel>agregar nueva etiqueda
+        <TagInputLabel>Agregar nueva etiqueta
 
         <TagInput type='text' value={input} onChange={(e)=>handleInput(e)}/>
         <TagButton onClick={()=> sendTag()}> agregar</TagButton>

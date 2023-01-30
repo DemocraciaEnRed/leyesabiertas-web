@@ -101,10 +101,14 @@ export default ({ project }) => (
         Fecha de cierre: {formatDate(project.currentVersion.content.closingDate)}
       </MobileDetail>
     </ProjectsTableCell>
+    
     <ProjectsTableCell  hiddenMobile centered>
       <WithIcon color={project.closed ? 'inherit' : 'green'}>{project.closed ? <Icon icon={timesCircle} size={15} /> : <Icon icon={checkCircle} size={15} /> }&nbsp;&nbsp;{project.closed ? 'Cerrado' : 'Abierto'}</WithIcon>
       <WithIcon color={project.published ? 'inherit' : 'purple'}>{project.published ? <Icon icon={eye} size={15} /> : <Icon icon={lowVision} size={15} /> }&nbsp;&nbsp;{project.published ? 'Publico' : 'Oculto'}</WithIcon>
     </ProjectsTableCell>
+    {window.location.pathname === '/admin' && <ProjectsTableCell>
+    <Link href={{ pathname: '/userprofile', query: { id: project.author._id } }}>{project.author.fullname}</Link>
+    </ProjectsTableCell>}
     <ProjectsTableCell  hiddenMobile centered>
       <p>
         {project.commentsCount} Aport{project.commentsCount > 1 ? 'es' : 'e'}

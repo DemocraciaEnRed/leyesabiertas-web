@@ -5,6 +5,7 @@ import TitleContent from '../title-content-admin/component'
 import getConfig from 'next/config'
 import { withRouter } from 'next/router'
 import ProjectTableItem from '../../components/project-table-item/component'
+import Search from '../../elements/search/component'
 
 import Card from '../card/component'
 import Masonry from 'react-masonry-component';
@@ -171,7 +172,6 @@ class ProjectsAdmin extends Component{
       let query = this.state.query
       if(this.props.router.query.user) query.author = this.props.router.query.user
       let currentQuery = this.createQuery(query);
-      console.log(currentQuery);
       const projects = await (await fetch(`${API_URL}/api/v1/documents?${currentQuery}`, {
         'headers': {
           'Content-Type': 'application/json',
@@ -181,7 +181,7 @@ class ProjectsAdmin extends Component{
       this.setState((prevState) => {
         return {
           projects: prevState.projects.concat(projects.results),
-          featchMoreAvailable: projects.pagination.page < projects.pagination.pages,
+          fetchMoreAvailable: projects.pagination.page < projects.pagination.pages,
           fetching: false
         }
       })
@@ -194,6 +194,28 @@ class ProjectsAdmin extends Component{
     this.getDocuments()
   }
 
+  getMoreDocuments(){
+    this.setState({
+      query:{
+      ...this.state.query,
+      page: this.state.query.page + 1 
+      }
+    },()=>this.getDocuments()
+  )
+}
+
+toggleSort = (parameter, value) => {
+  let newQuery = this.state.query
+  newQuery[parameter] = value
+  newQuery.page = 1
+  this.setState({
+    projects: [],
+    query: newQuery
+  }, () => {
+    this.getDocuments()
+  })
+  
+}
 
   render(){
     const {
@@ -204,12 +226,14 @@ class ProjectsAdmin extends Component{
     return(
   <StyledProjectsAdmin id='admin-projects'>
     <TitleContent>proyectos</TitleContent>
+    <Search type='text' placeholder='Buscá por nombre de la Diputada o Diputado o propuesta' onInput={(e) => this.toggleSort('textFilter', e.target.value)} />
     <Section id='projects' noMargin >
               <ProjectsTable>
                 <ProjectsTableHead>
                   <ProjectsTableRow>
                     <ProjectsTableHeader>Nombre</ProjectsTableHeader>
                     <ProjectsTableHeader hiddenMobile centered>Status</ProjectsTableHeader>
+                    {window.location.pathname === '/admin' && <ProjectsTableHeader width={100} hiddenMobile centered>Autor</ProjectsTableHeader>}
                     <ProjectsTableHeader width={100} hiddenMobile centered>Aportes</ProjectsTableHeader>
                     <ProjectsTableHeader width={100} hiddenMobile centered>Apoyos</ProjectsTableHeader>
                     <ProjectsTableHeader width={100} hiddenMobile centered>Fecha creación</ProjectsTableHeader>

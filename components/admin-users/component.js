@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import TitleContent from '../title-content-admin/component'
 import getConfig from 'next/config'
 import CardUser from '../card-users/component'
-
+import Search from '../../elements/search/component'
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const StyledUsersAdmin = styled.div`
@@ -15,6 +15,7 @@ width:100%
 const Content = styled.div`
 display:flex;
 flex-wrap: wrap;
+margin: 20px 0
 `
 
 const LoadMoreButtonContainer = styled.div`
@@ -55,6 +56,8 @@ color: #2c4c61;
 }
 `
 
+
+
 class UsersAdmin extends Component{
   state = {
     usersList:[],
@@ -80,7 +83,6 @@ class UsersAdmin extends Component{
   }
 
   getMoreUsers = ()=> {
-    console.log(this.state.query)
     try{
       this.setState({
           query:{
@@ -109,12 +111,26 @@ class UsersAdmin extends Component{
       })
     }
     
+    toggleSort = (parameter, value) => {
+      let newQuery = this.state.query
+      newQuery[parameter] = value
+      newQuery.page = 1
+      this.setState({
+        usersList: [],
+        query: newQuery
+      }, () => {
+        this.fetchUsers()
+      })
+      
+    }
   
   render(){
     const { usersList, fetching, fetchMoreAvailable } = this.state
   return(
   <StyledUsersAdmin id='admin-users'>
     <TitleContent>users</TitleContent>
+    <Search type='text' placeholder='Buscá por nombre de la Diputada o Diputado' onInput={(e) => this.toggleSort('search', e.target.value)} />
+
     <Content>
     {usersList && usersList.map((user, idx) => 
       <CardUser key={idx} user={user} />

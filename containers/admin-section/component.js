@@ -7,6 +7,7 @@ import BarActivitySubtitle from '../../elements/dashboard-bar-subtitle/component
 import TagsAdmin from '../../components/admin-tags/component'
 import ProjectsAdmin from '../../components/admin-projects/component'
 import UsersAdmin from '../../components/admin-users/component'
+import UserEdit from '../../components/admin-edit-user/component'
 
 const StyledAdminSection = styled.div`
 width:70%;
@@ -27,7 +28,8 @@ const AdminSection = (props) => {
   const content = {
     'tags':<TagsAdmin token={props.token}/>,
     'projects':<ProjectsAdmin token={props.token}/>,
-    'users':<UsersAdmin token={props.token}/>
+    'users':<UsersAdmin token={props.token}/>,
+    'userEdit':<UserEdit token={props.token}/>
   
   }
     return(
