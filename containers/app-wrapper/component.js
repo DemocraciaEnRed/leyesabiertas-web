@@ -81,7 +81,7 @@ export default class extends Component {
     Keycloak = require('keycloak-js')
     const keycloak = await Keycloak(keycloakOptions)
     try {
-      const authenticated = await keycloak.init({ onLoad: 'check-sso', promiseType: 'native' })
+      const authenticated = await keycloak.init({ onLoad: 'check-sso', promiseType: 'native', checkLoginIframe: false })
       const isAuthor = authenticated ? await keycloak.hasRealmRole('accountable') : false
       const profile = authenticated && await keycloak.loadUserInfo()
       const user = authenticated ? await this.fetchMe(keycloak.token) : null

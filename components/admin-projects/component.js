@@ -1,16 +1,195 @@
 import React, { Component, Fragment } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import Router from 'next/router'
 import TitleContent from '../title-content-admin/component'
 import getConfig from 'next/config'
 import { withRouter } from 'next/router'
+import WithUserContext from '../../components/with-user-context/component'
 import ProjectTableItem from '../../components/project-table-item/component'
 import Search from '../../elements/search/component'
+import { clockO } from 'react-icons-kit/fa'
+import { plus } from 'react-icons-kit/feather'
 
 import Card from '../card/component'
 import Masonry from 'react-masonry-component';
 
 const { publicRuntimeConfig: { API_URL } } = getConfig()
+
+const getClosingDate = () => {
+  let closingDate = new Date()
+  closingDate.setDate(closingDate.getDate() + 30)
+  closingDate.setHours(0, 0, 0, 0)
+  return closingDate.toISOString()
+}
+
+const newDocument = {
+  'published': false,
+  'closed': false,
+  'customForm': 'project-form',
+  'content': {
+    'title': 'Mi nuevo proyecto',
+    'imageCover': null,
+    'youtubeId': null,
+    'customVideoId': null,
+    'sendTagsNotification': true,
+    'fundation': {
+      'object': 'value',
+      'document': {
+        'object': 'document',
+        'data': {
+        },
+        'nodes': [
+          {
+            'object': 'block',
+            'type': 'paragraph',
+            'data': {
+            },
+            'nodes': [
+              {
+                'object': 'text',
+                'leaves': [
+                  {
+                    'object': 'leaf',
+                    'text': 'Esta sección es un espacio para redactar un texto que sirve para presentar el proyecto, explicar el contexto (de donde surge, su importancia, etc.), e invitar la ciudadanía a participar. Es muy importante mencionar qué tipo de aportes ciudadanos se esperan. El proyecto tiene que estar explicado de manera muy simple, la redacción debe ser fácil de entender.',
+                    'marks': [
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    'articles': {
+      'object': 'value',
+      'document': {
+        'object': 'document',
+        'data': {
+        },
+        'nodes': [
+          {
+            'object': 'block',
+            'type': 'title',
+            'data': {
+            },
+            'nodes': [
+              {
+                'object': 'text',
+                'leaves': [
+                  {
+                    'object': 'leaf',
+                    'text': 'Art. 1º.',
+                    'marks': [
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            'object': 'block',
+            'type': 'paragraph',
+            'data': {
+            },
+            'nodes': [
+              {
+                'object': 'text',
+                'leaves': [
+                  {
+                    'object': 'leaf',
+                    'text': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed purus justo. Nam tempus ligula nec est scelerisque aliquet. Phasellus pretium rhoncus pharetra. Duis dapibus felis neque.',
+                    'marks': [
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            'object': 'block',
+            'type': 'title',
+            'data': {
+            },
+            'nodes': [
+              {
+                'object': 'text',
+                'leaves': [
+                  {
+                    'object': 'leaf',
+                    'text': 'Art. 2°.',
+                    'marks': [
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            'object': 'block',
+            'type': 'paragraph',
+            'data': {
+            },
+            'nodes': [
+              {
+                'object': 'text',
+                'leaves': [
+                  {
+                    'object': 'leaf',
+                    'text': 'Fusce elementum posuere dolor id mattis. Sed magna arcu, rutrum eu pellentesque nec, feugiat sit amet lorem. Fusce volutpat, dolor a pretium fermentum, felis justo rhoncus nisl, vel mollis est diam mollis nisl. Sed aliquet erat sed ipsum lacinia, feugiat interdum ante pulvinar. Integer ut consectetur velit.',
+                    'marks': [
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            'object': 'block',
+            'type': 'title',
+            'data': {
+            },
+            'nodes': [
+              {
+                'object': 'text',
+                'leaves': [
+                  {
+                    'object': 'leaf',
+                    'text': 'Art. 3°.',
+                    'marks': [
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            'object': 'block',
+            'type': 'paragraph',
+            'data': {
+            },
+            'nodes': [
+              {
+                'object': 'text',
+                'leaves': [
+                  {
+                    'object': 'leaf',
+                    'text': 'In id neque posuere, dictum arcu vitae, euismod nulla. Integer eu euismod ipsum. In aliquet nisl mi, nec vulputate urna hendrerit eu. Integer in mi at quam luctus posuere. Integer magna sem, viverra non ultrices vitae, varius in mi.',
+                    'marks': [
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    'closure': null,
+    'closingDate': getClosingDate()
+  }
+}
 
 const StyledProjectsAdmin = styled.div`
  
@@ -125,6 +304,53 @@ const ProjectsTableHeader = styled.th`
   ${(props) => props.hiddenMobile && '@media(max-width:700px){display: none;}'}
 `
 
+const ButtonTable = styled.div`
+  padding: 5px 20px;
+  margin: 10px;
+  border: 1px solid #5c97bc;
+  border-radius: 5px;
+  color: #5c97bc;
+  font-size: 17px;
+  text-align: center;
+  float: ${(props) => props.float || 'none'};
+  @media (max-width: 700px) {
+    float: none;
+  }
+  &:hover {
+    background-color: #5c97bc;
+    color: #FFF;
+    cursor: pointer;
+  }
+  &[disabled]{
+    cursor: not-allowed;
+    color: #999;
+    border-color: #999;
+  }
+  &[disabled]:hover,
+  &[disabled]:active,
+  &[disabled]:focus {
+    background-color: #eee;
+    color: #999;
+    border-color: #999;
+    font-weight: normal;
+    font-family: unset;
+  }
+`
+
+const ButtonTableDisabled = styled.div`
+  padding: 5px 20px;
+  margin: 10px;
+  // width: 80%;
+  border: 1px solid #868686;
+  border-radius: 5px;
+  color: #868686;
+  font-size: 17px;
+  float: ${(props) => props.float || 'none'};
+  @media (max-width: 700px) {
+    float: none;
+  }
+`
+
 
 class ProjectsAdmin extends Component{
   state={
@@ -194,6 +420,8 @@ class ProjectsAdmin extends Component{
     this.getDocuments()
   }
 
+  
+
   getMoreDocuments(){
     this.setState({
       query:{
@@ -217,15 +445,62 @@ toggleSort = (parameter, value) => {
   
 }
 
+  createProject = async () => {
+  this.setState({
+    isLoading: true
+  })
+  fetch(`${API_URL}/api/v1/documents`, {
+    'method': 'POST',
+    'headers': {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.props.authContext.keycloak.token
+    },
+    'body': JSON.stringify(newDocument)
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Forbidden')
+      }
+      return res.json()
+    })
+    .then((content) => {
+      Router.push({
+        pathname: '/propuesta',
+        query: {
+          id: content._id
+        }
+      })
+    })
+    .catch((err) => {
+      this.setState({
+        menu: false,
+        showAlert: true,
+        isLoading: false,
+        alertStatus: 'error',
+        alertText: 'Ocurrió un error al crear una nueva propuesta (¿Limite alcanzado?)'
+      })
+      console.error(err)
+    })
+  }
+
   render(){
     const {
     projects,
     fetchMoreAvailable,
+    isLoading,
     fetching
   } = this.state
     return(
   <StyledProjectsAdmin id='admin-projects'>
-    <TitleContent>proyectos</TitleContent>
+    <TitleContent>
+      proyectos
+      {
+      isLoading
+        ? <ButtonTableDisabled float="right"><Icon icon={clockO} size={20} />&nbsp;&nbsp;Creando nuevo proyecto... Espere unos segundos...</ButtonTableDisabled>
+        : <ButtonTable onClick={this.createProject} float="right"><Icon icon={plus} size={20} />&nbsp;&nbsp;Agregar una nueva propuesta</ButtonTable>
+      }          
+    </TitleContent>
+    
     <Search type='text' placeholder='Buscá por nombre de la Diputada o Diputado o propuesta' onInput={(e) => this.toggleSort('textFilter', e.target.value)} />
     <Section id='projects' noMargin >
               <ProjectsTable>
@@ -274,4 +549,6 @@ toggleSort = (parameter, value) => {
 ProjectsAdmin.propTypes = {
 }
 
-export default withRouter(ProjectsAdmin)
+// export default withRouter(ProjectsAdmin)
+
+export default WithUserContext(withRouter(ProjectsAdmin))

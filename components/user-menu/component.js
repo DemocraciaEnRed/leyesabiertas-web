@@ -82,6 +82,13 @@ const Usermenu = ({ logout,user }) => (
         </a>
       </Link>
     </Li>
+    {user && user.roles.includes('admin') &&  <Li>
+      <Link href={{ pathname: '/admin' }}>
+        <a>
+          <StyledA>Admin</StyledA>
+        </a>
+      </Link>
+    </Li>}    
     {/* { isAuthor &&
     <Li>
       <StyledA onClick={create}>Nueva propuesta</StyledA>
@@ -90,13 +97,7 @@ const Usermenu = ({ logout,user }) => (
     <Li>
       <StyledA onClick={logout}>Cerrar sesión</StyledA>
     </Li>
-    {user && user.roles.includes('admin') &&  window.location.pathname !== '/admin' && <Li>
-      <Link href={{ pathname: '/admin' }}>
-        <a>
-          <StyledA>Admin</StyledA>
-        </a>
-      </Link>
-    </Li>}
+    
   </StyledUl>
 )
 

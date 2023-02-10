@@ -36,7 +36,7 @@ border-bottom: solid 1px #dae1e7;
 
 const buttons = [
     {
-        'name': 'Tags',
+        'name': 'Etiquetas',
         'value': 'tags'
     },
     {
