@@ -91,7 +91,7 @@ export default class extends Component {
 
           {this.props.section === '/propuesta' &&
             <Fragment>
-              <ProjectBody project={project.document} />
+              <ProjectBody project={project.document} isAdmin={this.props.isAdmin} />
               <ProjectTags project={project.document} />
               <ProjectComments project={project.document} />
             </Fragment>

@@ -53,7 +53,7 @@ const BoldP = styled.p`
 `
 
 
-const ProjectBody = ({ project }) => (
+const ProjectBody = ({ project, isAdmin }) => (
   <ProjectBodyContainer>
     <ArticlesContext.Consumer>
       {
@@ -62,6 +62,7 @@ const ProjectBody = ({ project }) => (
             {isAuthor && editMode &&
               <ProjectFields
                 title={project.currentVersion.content.title}
+                author={project.author._id}
                 closingDate={project.currentVersion.content.closingDate}
                 imageCover={project.currentVersion.content.imageCover}
                 youtubeId={project.currentVersion.content.youtubeId}
@@ -70,7 +71,9 @@ const ProjectBody = ({ project }) => (
                 tags={project.currentVersion.content.tags}
                 sendTagsNotification={project.currentVersion.content.sendTagsNotification}
                 publishedMailSent={project.publishedMailSent}
-                setNewFields={setNewFields} />
+                setNewFields={setNewFields} 
+                isAdmin={isAdmin}
+                />
             }
             {
               project.currentVersion.content.youtubeId &&

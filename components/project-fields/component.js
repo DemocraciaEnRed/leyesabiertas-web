@@ -7,6 +7,10 @@ import EditorTitle from '../../elements/editor-title/component'
 import WithDocumentTagsContext from '../../components/document-tags-context/component'
 import ProfileTags from '../../elements/profile-tags/component'
 
+
+import getConfig from 'next/config'
+const { publicRuntimeConfig: { API_URL } } = getConfig()
+
 injectGlobal`
 //--------------------------------------
 
@@ -786,6 +790,17 @@ const InputField = styled.input`
     background-color: #f7f7f7
   }
 `
+const SelectField = styled.select`
+  width: 100%;
+  height: 40px;
+  border: solid 1px #dae1e7;
+  background-color: #ffffff;
+  font-size: 1.4rem;
+  line-height: 1.5rem;
+  color: #203340;
+`
+
+
 const TextareaField = styled.textarea`
   width: 100%;
   min-height: 250px;
@@ -854,6 +869,9 @@ const LabelOptionSource = styled.label`
 class ProjectFields extends Component {
   state = {
     title: null,
+    author: null,
+    usersList: [],
+    fetchingUsers: false,
     closingDate: null,
     imageCover: null,
     youtubeId: null,
@@ -870,9 +888,20 @@ class ProjectFields extends Component {
     videoSource:null
   }
 
+
+  fetchUsers = async () => {
+      this.setState({fetchingUsers: true})
+      const users = await (await fetch(`${API_URL}/api/v1/users`)).json()
+      this.setState({
+        usersList: users.results.sort((a, b) => (a.surnames - b.surnames)),
+        fetchingUsers:false,
+      })
+    }
+
   componentDidMount() {
     let {
       title,
+      author,
       closingDate,
       imageCover,
       youtubeId,
@@ -883,8 +912,13 @@ class ProjectFields extends Component {
       publishedMailSent
     } = this.props
 
+    if (this.props.isAdmin) {
+      this.fetchUsers();
+    }
+
     this.setState({
       title,
+      author,
       imageCover,
       youtubeId,
       youtubeURL: youtubeId ? 'https://www.youtube.com/watch?v=' + youtubeId : '',
@@ -916,6 +950,7 @@ class ProjectFields extends Component {
   getBodyPayload = () => {
     return {
       title: this.state.title,
+      author: this.state.author,
       imageCover: this.state.imageCover,
       closingDate: new Date(this.state.closingDate).toISOString(),
       youtubeId: this.state.youtubeId,
@@ -1043,6 +1078,15 @@ class ProjectFields extends Component {
             onChange={this.handleInputChange}
             placeholder='Hacer uso correcto de mayúsculas y minúsculas' />
         </ProfileLabel>
+        {this.props.isAdmin && <ProfileLabel>
+          Autor/a:
+          <SelectField
+            value={this.state.author}
+            name='author'
+            onChange={this.handleInputChange}>
+              {this.state.usersList.map((u, i) => <option key={i} value={u._id}>{u.surnames}, {u.names}</option>)}
+          </SelectField>
+        </ProfileLabel>}
         {/* <ProfileLabel>
           Ingrese la URL para la imagen de encabezado:
           <InputField
