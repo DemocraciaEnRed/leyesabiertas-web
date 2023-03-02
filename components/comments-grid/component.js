@@ -5,7 +5,7 @@ import Icon from 'react-icons-kit'
 import {timesCircle} from 'react-icons-kit/fa/timesCircle'
 const StyledCommentsGrid = styled.div`
   position: fixed;
-  top: 0;
+  top: 8rem;
   right: 0;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,10 @@ const StyledCommentsGrid = styled.div`
   min-width: 300px;
   width: 33%;
   ${(props) => !props.show && 'display: none;'}
-`
+  @media (max-width:700px){
+    top:10rem;
+  }
+  `
 const CloseGrid = styled.div`
   padding: 7px;
   font-size: 12px;
