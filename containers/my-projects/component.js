@@ -617,7 +617,7 @@ class MyProjects extends Component {
     } = this.state
     if (this.props.authContext.user) {
       if(this.props.authContext.user._id === this.props.userId || !this.props.userId) {
-        if (this.props.authContext.isAuthor) {
+        if (this.props.authContext.isAuthor || this.props.authContext.isAdmin) {
           const hasProjects = projects && projects.length
           return (
             <Section id='projects' noMargin >

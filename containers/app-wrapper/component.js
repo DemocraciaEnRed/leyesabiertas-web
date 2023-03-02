@@ -85,12 +85,14 @@ export default class extends Component {
       const isAuthor = authenticated ? await keycloak.hasRealmRole('accountable') : false
       const profile = authenticated && await keycloak.loadUserInfo()
       const user = authenticated ? await this.fetchMe(keycloak.token) : null
+      const isAdmin =authenticated ? await keycloak.hasRealmRole('admin') : false
       this.setState({
         keycloak: keycloak,
         authenticated: authenticated,
         isAuthor: isAuthor,
         profile: profile,
         user: user,
+        isAdmin,
         login: keycloak.login,
         register: keycloak.register,
         logout: keycloak.logout
