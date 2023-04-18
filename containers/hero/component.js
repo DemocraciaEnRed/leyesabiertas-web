@@ -33,7 +33,7 @@ overflow:hidden;
 
 const BannerImg = styled.div`
 background-image: url(${props => props.srcImg});
-background-position: 0; 
+background-position: center; 
 background-repeat: no-repeat;
 background-size: cover;
 @media (max-width:700px){
@@ -44,36 +44,35 @@ background-size: cover;
 
 const ContentBackground = styled.div`
 position:absolute;
-left:-111px;
 top:0;
-width:74%;
+width:100%;
 height:102%;
 backdrop-filter: blur(5px);
 background:#ffffffbf;
-transform: skewX(-29deg);
+/* transform: skewX(-29deg);
 @media (max-width:700px){
 left:0;
 width:100%;
 transform: skewX(0deg);
   
-}
+} */
 `
 
 const BannerContent = styled.div`
-width:65%;
-padding:50px;  
+
+padding:50px 80px;  
 z-index:10;
 position:relative;
+color:#4C4C4E
 @media (max-width:700px){
   width:100%;
-  color:#4C4C4E;
   padding:27px
 }
 }
 `
 
 const BannerTitle = styled.div`
-font-family: var(--bold);
+font-family: var(--medium);
 font-size:4.3em;
 text-transform: uppercase;
 letter-spacing: 0.5px;
@@ -81,13 +80,7 @@ letter-spacing: 0.5px;
   text-align:center;
 }
 `
-const Hr = styled.div`
-width:15%;
-border-bottom: 3px solid #000;
-@media (max-width:700px){
-  display:none;
-}
-`
+
 
 const BannerSubtitles = styled.ul`
 margin-top:35px;;
@@ -95,11 +88,11 @@ margin-left:20px
 `
 
 const Subtitle = styled.li`
-font-family: var(--bold);
 font-size:1.4em;
 margin:15px 0
 text-transform: uppercase;
 letter-spacing: 0.5px;
+font-family: var(--light);
 @media (max-width:700px){
   color:#4C4C4E;
   font-size:1.5em;
@@ -122,7 +115,6 @@ const Hero = () => {
     <BannerImg srcImg="/static/assets/images/foto_banner_02.jpg">
       <BannerContent>
       <BannerTitle>Plataforma de leyes abiertas</BannerTitle>
-      <Hr/>
       <BannerSubtitles>
         <Subtitle>Recibí novedades de los proyectos en los temas de tu interés</Subtitle>
         <Subtitle>Paticipá de la co-creación de leyes</Subtitle>

@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 const NavbarStyledButton = styled.button`
-  max-width: 130px;
   height: 22px;
   font-size: ${(props) => props.bigger ? '1.6rem' : '1.4rem'};
   color: #5c97bc;
@@ -12,6 +11,15 @@ const NavbarStyledButton = styled.button`
   cursor: pointer;
   background:#fff;
   color: ${(props) => props.primary ? '#5c97bc' : '#4a5d68'};
+  @media(max-width:760px){
+    height:auto;
+    padding:0
+    font-size: 2.6rem;
+    font-family:var(--bold);
+    width:100%
+    padding: 12px 0 10px 48px
+    text-align: start
+   }
 
 `
 

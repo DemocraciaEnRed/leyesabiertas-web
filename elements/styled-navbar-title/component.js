@@ -5,7 +5,8 @@ const StyledSecondaryNavbarTitle = styled.h2`
   font-size: 2rem;
   margin-top:auto
   color: #101a21;
-  width:33%;
+  width:33.33%;
+  margin-bottom:auto;
   @media (max-width: 640px) {
     font-size: 1.5rem;
   }

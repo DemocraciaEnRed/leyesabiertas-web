@@ -8,18 +8,52 @@ const Wrapper = styled.div`
   align-items:center;
   list-style:none;
   padding-left:0;
-  > a {
-    color: #203340;
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1.6rem;
-    &:last-child{
-      padding-right:0px;
+  white-space: nowrap;
+  @media(max-width:928px){
+    flex-direction: column;
+   
+  }
+  @media(max-width:760px){
+    flex-direction: column;
+    font-size: 2.6rem;
+    align-items: flex-start;
+    width:100%
+  }
+  > div {
+    @media(max-width:760px){
+      border-bottom: 1px solid #D6D6D6;
+      width:100%;
+      display: flex;
+      justify-content: space-between
+      align-items:center
+      flex-wrap: wrap;
+
     }
-    @media (max-width:760px){
-      :first-child{
-        height:40px;
+      > a {
+       color: #203340;
+       display: inline-block;
+       padding: 10px 20px;
+       font-size: 1.6rem;
+       flex-grow: 1
+       @media(max-width:928px){
+        flex-direction: column;
+        padding-left: 0;
+       
       }
+       @media(max-width:760px){
+         font-size: 2.6rem;
+         padding-left: 48px;
+         padding-bottom: 12px
+   
+        }
+       &:last-child{
+         padding-right:0px;
+       }
+
+     }
+     > i {
+      padding-right:16px
+      cursor:pointer
     }
   }
 `

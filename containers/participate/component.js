@@ -19,6 +19,7 @@ const StyledParticipateSection = styled.section`
   flex-direction: column;
   align-items: center;
   box-sizing:border-box;
+  background-color: #F7F7F7;
 `
 
 const Participate = (props) => {

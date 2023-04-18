@@ -19,6 +19,7 @@ display:flex;
 padding:30px;
 justify-content:center;
 align-items:strech;
+flex-wrap:wrap
 `
 class Admin extends Component {
   state = {
@@ -73,8 +74,8 @@ class Admin extends Component {
   render(){
     return(<div>
       <NavBar />
-      {/* <DashboardBar /> */}
-    <SecondaryNavbar />
+      {/* <DashboardBar /> 
+    <SecondaryNavbar />*/}
       {this.props.authContext.keycloak && <AdminContainer>
           <AdminDrawer 
           changeSection={this.changeSection} />

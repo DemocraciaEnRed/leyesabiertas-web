@@ -17,7 +17,10 @@ margin-top:2.5rem;
 margin-bottom:2.5rem;
 display:flex;
 padding:16px;
-//background:blue;
+@media (max-width: 700px) {
+  width:100%;
+  margin-top:1.5rem;
+
 }
 
 `

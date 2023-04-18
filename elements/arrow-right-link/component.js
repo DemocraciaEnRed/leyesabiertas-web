@@ -13,16 +13,19 @@ const StyledArrowLink = styled.div`
 
 `
 const StyledP = styled.p`
-  color: #4C4C4E;
+text-align:center;
+  padding: 8px 16px;
+  color: #4C7394;
   font-size:1.6rem;
-  width:11rem;
+  width:13rem;
   cursor:pointer;
+  border-radius:5px;
+  border:1px solid #4C7394
 `
 const ArrowRightlink = () => (
   <Link href={'/info?section=acerca-de'}>
     <StyledArrowLink>
       <StyledP>Conocé más</StyledP>
-      <Icon icon={arrowRight} size={20} style={{color: ' #4C4C4E'}} />
     </StyledArrowLink>
 
   </Link>

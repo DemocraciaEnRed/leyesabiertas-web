@@ -10,7 +10,7 @@ export default class extends Component {
     return (
       <div>
         <NavBar />
-        <SecondaryNavbar />
+        {/* <SecondaryNavbar /> */}
         <ValidarApoyo />
         <SecondaryFooter />
         <Footer />

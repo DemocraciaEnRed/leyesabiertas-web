@@ -12,7 +12,6 @@ import StaticInfoButton from '../../elements/static-info-button/component'
 const StyledStaticInfo = styled.div`
   display: flex;
   justify-content: center;
-  background-image: url('/static/assets/header-background.jpg');
   background-repeat: no-repeat;
 `
 const buttons = [
@@ -28,7 +27,7 @@ const scroll = (target) => (e) => {
 
 export default () => (
   <StyledStaticInfo>
-    <StaticInfoWrapper>
+    <StaticInfoWrapper style={{marginTop:'0', width:'100%'}}>
       <section>
         <StaticInfoTitle>
       Políticas de privacidad

@@ -21,6 +21,20 @@ const masonryOptions = {
   transitionDuration: 0
 }
 
+const MasonryStyled = styled(Masonry)`
+&:after{
+  display: ${(props) => props.cover ? 'block':'none'};
+  content:" ";
+  position:absolute;
+  width:100%;
+  height:100%
+  top: -10px;
+  z-index:995;
+  backdrop-filter: blur(3px);
+}
+
+`
+
 const OptionChoice = styled.div`
 display: inline-block;
 font-size: 1.4rem;
@@ -57,10 +71,10 @@ justify-content: space-between;
 
 `
 const Options = styled.div`
-width:70%;
+width:100%;
 display:flex;
+padding-left: 1%
 @media(max-width:700px){
-  width:100%;
   flex-wrap: wrap;
   justify-content: flex-end;
  }
@@ -179,6 +193,20 @@ box-shadow: 0px 3px 4px 0px #9999996b;
   left: -185px;  
 }
 `
+
+
+
+const SubH3 = styled.div`
+font-size: 1.4rem;
+color: #101a21;
+padding:0 1%;
+line-height: 3.5;
+`
+const CustomSearch = styled(Search)`
+margin:0
+flex:auto
+`
+
 
 const ArrowIcon = styled.div` 
 transform:${(props) => props.projectState || props.projectTags || props.projectSort ? ' rotateZ(180deg)' : '0'};
@@ -340,6 +368,7 @@ class Projects extends Component {
         pathname: this.props.router.pathname
       })
     }
+    this.handleShowFilters()
   }
 
   // toggleFilter = (parameter, value) => {
@@ -370,10 +399,10 @@ class Projects extends Component {
     const currentTag = query.tag && tags.find(tag => tag.value === query.tag).label
     return (
       <Section id='projects' noMargin>
-        <TitleH2>Propuestas de ley</TitleH2>
-        <SubtitleH3>Acá podés acceder a las propuestas de ley para leerlas, apoyarlas y hacer tus aportes. ¡Ayudanos a mejorarlas!</SubtitleH3>
+        <TitleH2 style={{paddingLeft:'1%'}}>Propuestas de ley</TitleH2>
+        <SubH3>Acá podés acceder a las propuestas de ley para leerlas, apoyarlas y hacer tus aportes. ¡Ayudanos a mejorarlas!</SubH3>
         <Options>
-          <Search type='text' placeholder='Buscá por nombre de la Diputada o Diputado o propuesta' onInput={(e) => this.toggleSort('textFilter', e.target.value)} />
+          <CustomSearch type='text' placeholder='Buscá por nombre de la Diputada o Diputado o propuesta' onInput={(e) => this.toggleSort('textFilter', e.target.value)} />
           <OptionsWrapper>
             <FilterButton onClick={this.handleShowFilters}>Filtrar <Icon icon='down-arrow.svg' /></FilterButton>
             <Filters style={{ display: this.state.filterShow ? 'block' : 'none' }}>
@@ -427,13 +456,16 @@ class Projects extends Component {
         </Options>
         {projects &&
           <Fragment>
-            <Masonry
+            <MasonryStyled
               style={{ width: '100%', margin: '4.8rem 0 1.6rem' }}
-              options={masonryOptions}>
+              options={masonryOptions}
+              cover={this.state.filterShow}
+              >
               {projects.map((p, i) => (
                 <Card project={p} key={i} tags={tags} />
               ))}
-            </Masonry>
+
+            </MasonryStyled>
           </Fragment>
         }
         {

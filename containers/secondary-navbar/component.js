@@ -14,31 +14,10 @@ const SecondaryBar = styled.div`
   display: flex;
   
   justify-content:center;
-  padding: 2rem 5%;
-  z-index:1060;
-  transition: height 0.4s ease-out;
-  @media(max-width:700px){
-    transition: height 0.4s ease-out;
-   }
-  ${(props) => {
-    if (props.position >= props.y) {
-      return `top: 0!important;
-              position: fixed!important;
-              box-shadow: 0px 3px 4px 0px #9999996b;
-              width: 100%;
-              background: #fff;
-              height:8rem;
-              @media(max-width:700px){
-                height:10rem;
-               }
-               > div {
-                width: 32%;
-                justify-content: space-around;
-              }
-              `
-    }
+  padding: 2rem 2rem;
+  @media (max-width: 930px){
+    height:auto
   }
-}
   a {
     &:last-child{
       padding-right:20px;
@@ -96,28 +75,21 @@ NavbarLink.propTypes = {
 }
 
 const SecondaryNavbar = () => {
-  const [scroll, setScroll] = useState(0)
-  const handleScroll = (position) => setScroll(position)
-  const [y, setY] = useState()
-
-  useEffect(() => {
-    window.addEventListener('scroll', (e) => handleScroll(e.target.documentElement.scrollTop))
-    // window.addEventListener('resize', () => setY(document.getElementById('secondaryBar').offsetTop))
-    setY(document.getElementById('secondaryBar').offsetTop)
-  }, [])
 
   return (
-    <SecondaryBar id='secondaryBar' y={y} position={scroll}>
+    <SecondaryBar >
       {/* <SecondaryLogo>
         <NavbarLogo />
       </SecondaryLogo> */}
       <LinkBar>
         {links.map((li, i) => {
-          return <NavbarLink
-            key={i}
-            name={li.name}
-            link={li.link}
-            hash={li.hash} />
+          return <div key={i}>
+            <NavbarLink
+              name={li.name}
+              link={li.link}
+              hash={li.hash} />
+
+          </div>
         })}
       </LinkBar>
     </SecondaryBar>

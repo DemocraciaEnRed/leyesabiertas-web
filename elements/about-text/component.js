@@ -5,14 +5,14 @@ import styled from 'styled-components'
 const StyledText = styled.div`
   padding-left: 8%;
   padding-right: 8%;
-  padding-top: 6.8rem;
-  padding-bottom: 8%;
+  padding-top: 5.8rem;
+  padding-bottom: 4%;
   width: 80%;
   background-color: #B6D5F2;
   @media (max-width: 700px) {
     width:100%;
   }
-  height: 350px;
+  height: 100%;
   display:flex;
   flex-direction:column;
   justify-content:space-between;

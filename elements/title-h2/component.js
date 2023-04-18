@@ -11,7 +11,7 @@ const Title = styled.h2`
 `
 
 const TitleH2 = (props) => (
-  <Title>{ props.children }</Title>
+  <Title style={props.style} >{ props.children }</Title>
 )
 
 TitleH2.propTypes = {

@@ -4,13 +4,16 @@ import PropTypes from 'prop-types'
 
 
 const StyledAdminDrawer = styled.div`
-  width:20%;
   margin-left:auto;
   margin-right:auto;
   margin-top:2.5rem;
   margin-bottom:2.5rem;
   padding-right: 15px;
   border-right: 1px solid #dae1e7;
+  @media (max-width: 700px) {
+    width:100%;
+    border-right: none;
+    margin-bottom:1.5rem;
 
   }
 `
