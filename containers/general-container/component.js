@@ -103,7 +103,7 @@ class GeneralContainer extends Component {
       <Wrapper>
         <div>
           <NavBar />
-          <SecondaryNavbar />
+          {/* <SecondaryNavbar /> */}
         </div>
         <UserProjectContainer
           project={this.state.project}
