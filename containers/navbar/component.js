@@ -120,7 +120,6 @@ justify-content: flex-end;
 const MenuIcon = styled.div`
 background: #6CAAE4;
 color: #fff;
-
 height: 30px;
 width: 30px;
 display: flex;
@@ -193,8 +192,8 @@ class NavBar extends Component {
         <StyledNavbarTitle />
         <NavbarLogo y={y} position={scroll}/>
         <StyledNavMenuIcon style={{width:'33%'}}>
-          <MenuIcon>
-              <Icon icon={bars} size={20} onClick={this.handleShowMobileMenu}/>
+          <MenuIcon onClick={this.handleShowMobileMenu}>
+              <Icon icon={bars} size={20}/>
           </MenuIcon>
 
         </StyledNavMenuIcon>
@@ -216,8 +215,8 @@ class NavBar extends Component {
           )}
         </LinksNavBar>
         <MobileLinks show={showMenuMobile}>
-          <HeaderMobileMenu>
-            <Icon icon={timesCircle} size={30} onClick={this.handleShowMobileMenu}/>
+          <HeaderMobileMenu onClick={this.handleShowMobileMenu}>
+            <Icon icon={timesCircle} size={30} />
           </HeaderMobileMenu>
         {this.props.authContext.authenticated
           ? (

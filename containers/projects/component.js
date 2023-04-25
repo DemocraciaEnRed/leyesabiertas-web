@@ -23,7 +23,7 @@ const masonryOptions = {
 
 const MasonryStyled = styled(Masonry)`
 &:after{
-  display: ${(props) => props.cover ? 'block':'none'};
+  display: ${(props) => props.cover !== 'false' ? 'block':'none'};
   content:" ";
   position:absolute;
   width:100%;
@@ -459,7 +459,7 @@ class Projects extends Component {
             <MasonryStyled
               style={{ width: '100%', margin: '4.8rem 0 1.6rem' }}
               options={masonryOptions}
-              cover={this.state.filterShow}
+              cover={this.state.filterShow.toString()}
               >
               {projects.map((p, i) => (
                 <Card project={p} key={i} tags={tags} />

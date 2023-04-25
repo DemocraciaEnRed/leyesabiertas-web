@@ -88,11 +88,10 @@ margin-left:20px
 `
 
 const Subtitle = styled.li`
-font-size:1.4em;
+font-size:1.6em;
 margin:15px 0
-text-transform: uppercase;
 letter-spacing: 0.5px;
-font-family: var(--light);
+font-family: var(--medium);
 @media (max-width:700px){
   color:#4C4C4E;
   font-size:1.5em;
