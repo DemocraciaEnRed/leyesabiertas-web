@@ -5,6 +5,7 @@ import es from 'date-fns/locale/es';
 import ProfileLabel from '../../elements/profile-label/component'
 import EditorTitle from '../../elements/editor-title/component'
 import WithDocumentTagsContext from '../../components/document-tags-context/component'
+import WithUserContext from '../with-user-context/component';
 import ProfileTags from '../../elements/profile-tags/component'
 
 
@@ -891,7 +892,13 @@ class ProjectFields extends Component {
 
   fetchUsers = async () => {
       this.setState({fetchingUsers: true})
-      const users = await (await fetch(`${API_URL}/api/v1/users`)).json()
+      const users = await (await fetch(`${API_URL}/api/v1/users`,{
+        headers: {
+          Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
+          'Content-Type': 'application/json'
+        },
+        method: 'GET'
+      })).json()
       this.setState({
         usersList: users.results.sort((a, b) => (a.surnames - b.surnames)),
         fetchingUsers:false,
@@ -1217,4 +1224,4 @@ class ProjectFields extends Component {
   }
 }
 
-export default WithDocumentTagsContext(ProjectFields)
+export default WithDocumentTagsContext(WithUserContext(ProjectFields))

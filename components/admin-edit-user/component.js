@@ -13,6 +13,7 @@ import ProfileInput from '../../elements/profile-input/component'
 import ProfileSelect from '../../elements/profile-select/component'
 import ProfileButtonWrapper from '../../elements/profile-button-wrapper/component'
 import ProfileTags from '../../elements/profile-tags/component'
+import Alert from '../../elements/alert/component'
 import SubmitInput from '../../elements/submit-input/component'
 import WithDocumentTagsContext from '../../components/document-tags-context/component'
 import { withRouter } from 'next/router'
@@ -78,6 +79,7 @@ class UserEdit extends Component {
     tagsMaxReached: false,
     tagsNotification: '',
     isLoading:true,
+    status:'pending'
   }
 
   async componentWillMount () {
@@ -180,6 +182,9 @@ class UserEdit extends Component {
         'Authorization': 'Bearer ' + this.props.token
       },
       'body': JSON.stringify(newData)
+    }).then((res)=>{
+      this.setState({status : res.status === 200 ? 'success':'error'})
+      return res
     })).json()
     jump(-1000)
   }
@@ -193,9 +198,16 @@ class UserEdit extends Component {
   }
 
 
+  dismissAlert = () => {
+    this.setState({
+      status: 'pending'
+    })
+  }
+
   render () {
-    const { user, isLoading} = this.state
+    const { user, isLoading, status } = this.state
     if (user){return (
+      <>
       <ProfileForm onSubmit={this.handleSubmit}>
         <ProfileAvatar id={user.id} date={user.updatedAt} />
         <ProfileName>{`${user.surnames}, ${user.names}`}</ProfileName>
@@ -286,6 +298,12 @@ class UserEdit extends Component {
             : null
         }
       </ProfileForm>
+      { (status === 'success' || status === 'error') &&
+                <Alert status={status} dismissAlert={this.dismissAlert}>
+                  { status === 'success' ? 'Los cambios que ha realizado en el perfil fueron guardados con éxito.' : 'Los cambios que ha tratado de guardar no han podido ser procesados. Le aconsejamos que lo intente nuevamente.'}
+                </Alert>
+              }
+      </>
     )}else{ return (<div></div>)}
   }
 }

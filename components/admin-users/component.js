@@ -100,7 +100,13 @@ class UsersAdmin extends Component{
   fetchUsers = async () => {
     const {query} = this.state
     const currentQuery = this.createQuery(query) 
-      const users = await (await fetch(`${API_URL}/api/v1/users${currentQuery}`)).json()
+      const users = await (await fetch(`${API_URL}/api/v1/users${currentQuery}`,{
+        headers: {
+          Authorization: `Bearer ${this.props.token}`,
+          'Content-Type': 'application/json'
+        },
+        method: 'GET'
+      })).json()
 
       this.setState((prevState) =>{ 
         return{
