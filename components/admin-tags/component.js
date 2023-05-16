@@ -68,14 +68,16 @@ class TagsAdmin extends Component{
     this.fetchtags()
   }
 
-  fetchtags = async () =>{
-    this.props.fetchDocumentTags().then(documentTags => {
+  fetchtags = () =>{
+    this.props.fetchDocumentTags()
+    .then(documentTags => {
       const parsedTags = documentTags.map(documentTag => ({ id: documentTag._id, text: documentTag.name }))
 
       this.setState({
         allTags: parsedTags
       })
     })
+    .catch(err=>console.error(err))
   }
 
   handleModal=()=>{

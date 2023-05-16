@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 import TitleContent from '../title-content-admin/component'
 import getConfig from 'next/config'
 import CardUser from '../card-users/component'
@@ -97,24 +96,30 @@ class UsersAdmin extends Component{
     }
   }
 
-  fetchUsers = async () => {
+  fetchUsers = () => {
     const {query} = this.state
     const currentQuery = this.createQuery(query) 
-      const users = await (await fetch(`${API_URL}/api/v1/users${currentQuery}`,{
+      fetch(`${API_URL}/api/v1/users${currentQuery}`,{
         headers: {
           Authorization: `Bearer ${this.props.token}`,
           'Content-Type': 'application/json'
         },
         method: 'GET'
-      })).json()
-
-      this.setState((prevState) =>{ 
-        return{
-        usersList: prevState.usersList.concat(users.results),
-        fetching:false,
-        fetchMoreAvailable: users.pagination.page < users.pagination.pages
-        }
       })
+      .then(resp=>resp.json())
+      .then(data=>{
+        
+        this.setState((prevState) =>{ 
+          return{
+          usersList: prevState.usersList.concat(data.results),
+          fetching:false,
+          fetchMoreAvailable: data.pagination.page < data.pagination.pages
+          }
+        })
+      })
+      .catch(err=>console.error(err))
+
+      
     }
     
     toggleSort = (parameter, value) => {
@@ -139,7 +144,7 @@ class UsersAdmin extends Component{
 
     <Content>
     {usersList && usersList.map((user, idx) => 
-      <CardUser key={idx} user={user} />
+      <CardUser key={user._id} user={user} />
     )}
     {
         !fetching && fetchMoreAvailable && <LoadMoreButtonContainer>

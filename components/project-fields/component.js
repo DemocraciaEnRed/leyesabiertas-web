@@ -890,19 +890,22 @@ class ProjectFields extends Component {
   }
 
 
-  fetchUsers = async () => {
+  fetchUsers = () => {
       this.setState({fetchingUsers: true})
-      const users = await (await fetch(`${API_URL}/api/v1/users`,{
+      fetch(`${API_URL}/api/v1/users`,{
         headers: {
           Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
           'Content-Type': 'application/json'
         },
         method: 'GET'
-      })).json()
-      this.setState({
+      })
+      .then(resp=>resp.json())
+      .then(users =>this.setState({
         usersList: users.results.sort((a, b) => (a.surnames - b.surnames)),
         fetchingUsers:false,
-      })
+      }))
+      .catch(err=>console.error(err))
+      
     }
 
   componentDidMount() {
@@ -1003,18 +1006,6 @@ class ProjectFields extends Component {
         youtubeId: videoId
       }, () => this.props.setNewFields(this.getBodyPayload()))
     }
-    /* let videoID = this.state.youtubeURL.split('v=')[1] || null
-    if (videoID) {
-      let ampersandPosition = videoID.indexOf('&')
-      if (ampersandPosition !== -1) {
-        videoID = videoID.substring(0, ampersandPosition)
-      }
-    }
-    this.setState({
-      youtubeId: videoID
-    }, () => {
-      this.props.setNewFields(this.getBodyPayload())
-    }) */
   }
 
   handleInputChangeYoutube = (e) => {
@@ -1091,7 +1082,7 @@ class ProjectFields extends Component {
             value={this.state.author}
             name='author'
             onChange={this.handleInputChange}>
-              {this.state.usersList.map((u, i) => <option key={i} value={u._id}>{u.surnames}, {u.names}</option>)}
+              {this.state.usersList.map((u) => <option key={u._id} value={u._id}>{u.surnames}, {u.names}</option>)}
           </SelectField>
         </ProfileLabel>}
         {/* <ProfileLabel>

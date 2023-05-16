@@ -1,18 +1,14 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
-import Router from 'next/router'
+import Router,{ withRouter } from 'next/router'
 import TitleContent from '../title-content-admin/component'
 import getConfig from 'next/config'
-import { withRouter } from 'next/router'
 import WithUserContext from '../../components/with-user-context/component'
 import ProjectTableItem from '../../components/project-table-item/component'
 import Search from '../../elements/search/component'
 import { clockO } from 'react-icons-kit/fa'
 import { plus } from 'react-icons-kit/feather'
 
-import Card from '../card/component'
-import Masonry from 'react-masonry-component';
 
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
@@ -223,8 +219,7 @@ justify-content: center;
 
 const LoadMoreButton = styled.div`
 margin: 0 auto;
-font-size: 2.2
-rem;
+font-size: 2.2rem;
 padding: 5px 25px;
 border-radius: 4px;
 border: 1px solid #2c4c61
@@ -372,14 +367,12 @@ class ProjectsAdmin extends Component{
     }
   }
 
-  async getDocuments() {
-    try {
+  getDocuments() {
+    
       this.setState({
         fetching: true
       }, () => this.fetchProjects(this.props.token))
-    } catch (error) {
-      console.error(error)
-    }
+   
   }
 
   createQuery = (sort) => {
@@ -392,28 +385,29 @@ class ProjectsAdmin extends Component{
     return theQuery
   }
 
-  fetchProjects = async (token, userId) => {
-    
-    try {
+  fetchProjects = (token, userId) => {
+  
       let query = this.state.query
       if(this.props.router.query.user) query.author = this.props.router.query.user
       let currentQuery = this.createQuery(query);
-      const projects = await (await fetch(`${API_URL}/api/v1/documents?${currentQuery}`, {
+      fetch(`${API_URL}/api/v1/documents?${currentQuery}`, {
         'headers': {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token
         }
-      })).json()
-      this.setState((prevState) => {
-        return {
-          projects: prevState.projects.concat(projects.results),
-          fetchMoreAvailable: projects.pagination.page < projects.pagination.pages,
-          fetching: false
-        }
       })
-    } catch (error) {
-      console.error(error)
-    }
+      .then(resp=>resp.json())
+      .then(projects=>
+        this.setState((prevState) => {
+          return {
+            projects: prevState.projects.concat(projects.results),
+            fetchMoreAvailable: projects.pagination.page < projects.pagination.pages,
+            fetching: false
+          }
+        })
+        )
+      .catch(err=>console.error(err))
+   
   }
 
   componentDidMount(){
@@ -518,7 +512,7 @@ toggleSort = (parameter, value) => {
                 </ProjectsTableHead>
                 <ProjectsTableBody>
 
-                  {projects && projects.map((p, i) => <ProjectTableItem project={p} key={i} />)}
+                  {projects && projects.map((p, i) => <ProjectTableItem project={p} key={p._id} />)}
                 </ProjectsTableBody>
               </ProjectsTable>
               {
