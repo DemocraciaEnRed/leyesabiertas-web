@@ -16,6 +16,7 @@ const StyledStaticInfo = styled.div`
 `
 const buttons = [
   {
+    key:'1',
     name: 'Políticas de privacidad',
     value: '#politicas'
   }
@@ -104,7 +105,7 @@ export default () => (
         {buttons.map((button, i) => (
           <StaticInfoButton
             onClick={scroll(button.value)}
-            key={i}>
+            key={button.key}>
             {button.name}
           </StaticInfoButton>
         ))}

@@ -527,7 +527,6 @@ class MyProjects extends Component {
         tag => ({ value: tag._id, label: tag.name, key: tag.key })
       ),
     })
-    // if (!this.props.authContext.keycloak) return
     if (this.props.userId && this.props.authContext.user && this.props.userId !== this.props.authContext.user._id) return this.fetchDocuments() //usuario iniciado 
     if (!this.props.authContext.authenticated && !this.props.authContext.user) return this.fetchDocuments() // sin session
     if (!this.props.userId || this.props.userId === this.props.authContext.user._id) { //usuario iniciado y userprofile de usuario de sesion

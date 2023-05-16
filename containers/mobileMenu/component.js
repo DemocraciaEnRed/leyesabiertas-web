@@ -1,8 +1,7 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import jump from 'jump.js'
-import Link from 'next/link'
 import LinkBar from '../../components/link-bar/component'
 import router from 'next/router'
 import Icon from 'react-icons-kit'
@@ -10,7 +9,6 @@ import {plus} from 'react-icons-kit/fa/plus'
 import {document_download} from 'react-icons-kit/ikons/document_download'
 
 
-// import NavbarLogo from '../../elements/navbar-logo/component'
 
 const SecondaryBar = styled.div`
   height:6rem;
@@ -32,14 +30,7 @@ const SecondaryBar = styled.div`
   }
 
 `
-/* const SecondaryLogo = styled.div`
-> * {
-  >*{
-    height: 30px;
-    width:100px;
-  }
-}
-` */
+
 
 const SubMenuDiv = styled.div`
 display:flex;

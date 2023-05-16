@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import CardHeader from '../../elements/card-header/component'
 import CardSocial from '../../elements/card-social/component'
 import CardContent from '../../elements/card-content/component'
-import WithDocumentTagsContext from '../../components/document-tags-context/component'
 
 const CardContainer = styled.div`
 margin: 0 1% 30px;

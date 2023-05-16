@@ -4,7 +4,6 @@ import Link from 'next/link'
 import Icon from 'react-icons-kit'
 import { checkSquareO } from 'react-icons-kit/fa/checkSquareO'
 import { squareO } from 'react-icons-kit/fa/squareO'
-import { shareAlt } from "react-icons-kit/fa";
 import styled from 'styled-components'
 import ProjectHeaderWrapper from '../../elements/project-header-wrapper/component'
 import UserAvatar from '../../elements/user-avatar/component'

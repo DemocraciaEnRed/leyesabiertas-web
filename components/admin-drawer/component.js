@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 
 
 const StyledAdminDrawer = styled.div`
@@ -39,14 +38,17 @@ border-bottom: solid 1px #dae1e7;
 
 const buttons = [
     {
+        "key":1,
         'name': 'Etiquetas',
         'value': 'tags'
     },
     {
+        "key":2,
         'name':'Proyectos',
         'value':'projects'
     },
     {
+        "key":3,
         'name':'Usuarios',
         'value':'users'
     }
@@ -57,7 +59,7 @@ const AdminDrawer = (props) => (
   <StyledAdminDrawer id='admin-drawer'>
     <DrawerList>
         {buttons.map((button,idx) =><DrawerItem  
-          key={idx}
+          key={button.key}
           onClick={() => props.changeSection(button.value)}>
         
             {button.name}

@@ -1,9 +1,6 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
-import Icon from 'react-icons-kit'
-import {trash2} from 'react-icons-kit/feather'
 
-import PropTypes from 'prop-types'
 import WithDocumentTagsContext from '../../components/document-tags-context/component'
 
 import getConfig from 'next/config'
@@ -78,12 +75,6 @@ class TagsAdmin extends Component{
       })
     })
     .catch(err=>console.error(err))
-  }
-
-  handleModal=()=>{
-    this.setState({
-      modalActive: !this.state.modalActive
-    })
   }
 
   deleteTag = (tag)=>{

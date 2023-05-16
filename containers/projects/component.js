@@ -278,50 +278,34 @@ class Projects extends Component {
     }
   }
 
-  async fetchDocuments(token) {
+  fetchDocuments(token) {
     let tag = this.props.router.query.tag;
     let currentQuery = {...this.state.query};
     currentQuery.tag = tag
     
     let query = this.createQuery(currentQuery)
-    let projects = []
-    try {
-      if (token) {
-        projects = await (await fetch(`${API_URL}/api/v1/documents${query}`, {
-          method: 'get',
-          headers: {
-            'Authorization': 'Bearer ' + token.token
+
+    const url = `${API_URL}/api/v1/documents${query}`;
+    const headers = token.token ? { 'Authorization': 'Bearer ' + token.token } : {};
+
+    if (token) {
+        fetch(url, { method: 'get', headers })
+        .then(resp=>resp.json())
+        .then(data=>{this.setState((prevState) => {
+          let query = prevState.query
+          query.page = data.pagination.page + 1
+          return {
+            projects: prevState.projects.concat(data.results),
+            // projectsFiltered: projects.results,
+            loadMoreAvailable: data.pagination.page < data.pagination.pages,
+            query: {
+              ...query,    
+              tag
+            },
+            loading: false
           }
-        }
-        )).json()
-      } else {
-        projects = await (await fetch(`${API_URL}/api/v1/documents${query}`)).json()
-      }
-      this.setState((prevState) => {
-        let query = prevState.query
-        query.page = projects.pagination.page + 1
-        return {
-          projects: prevState.projects.concat(projects.results),
-          // projectsFiltered: projects.results,
-          loadMoreAvailable: projects.pagination.page < projects.pagination.pages,
-          query: {
-            ...query,    
-            tag
-          },
-          loading: false
-        }
-      })
-    } catch (err) {
-      console.error(err)
-    }
-    //const projects = await (await fetch(`${API_URL}/api/v1/documents${query}`)).json()
-    // let mergedProjects = this.state.projects.concat(projects.results)
-    // const projectsFiltered = mergedProjects.filter((p) => {
-    //   if (this.state.query.closed !== null) {
-    //     return (this.state.query.closed === p.closed) && p
-    //   }
-    //   return p
-    // })
+        })})
+      } 
    
   }
 
