@@ -12,11 +12,11 @@ import StaticInfoButton from '../../elements/static-info-button/component'
 const StyledStaticInfo = styled.div`
   display: flex;
   justify-content: center;
-  background-image: url('/static/assets/header-background.jpg');
   background-repeat: no-repeat;
 `
 const buttons = [
   {
+    key:'1',
     name: 'Políticas de privacidad',
     value: '#politicas'
   }
@@ -28,7 +28,7 @@ const scroll = (target) => (e) => {
 
 export default () => (
   <StyledStaticInfo>
-    <StaticInfoWrapper>
+    <StaticInfoWrapper style={{marginTop:'0', width:'100%'}}>
       <section>
         <StaticInfoTitle>
       Políticas de privacidad
@@ -105,7 +105,7 @@ export default () => (
         {buttons.map((button, i) => (
           <StaticInfoButton
             onClick={scroll(button.value)}
-            key={i}>
+            key={button.key}>
             {button.name}
           </StaticInfoButton>
         ))}

@@ -19,7 +19,7 @@ const Span = styled.span`
 
 const H3 = styled.div`
   font-size:3rem;
-  color:#454246;
+  color:#4C4C4E;
   font-family:var(--bold);
 `
 const ActionWrapper = styled.div`

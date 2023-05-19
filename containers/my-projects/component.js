@@ -15,6 +15,8 @@ import ProjectTableItem from '../../components/project-table-item/component'
 import { clockO } from 'react-icons-kit/fa'
 import Icon from 'react-icons-kit'
 import { plus, download } from 'react-icons-kit/feather'
+import WithDocumentTagsContext from '../../components/document-tags-context/component'
+
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 const masonryOptions = {
@@ -233,6 +235,19 @@ const ProjectsTableHeader = styled.th`
   ${(props) => props.hiddenMobile && '@media(max-width:700px){display: none;}'}
 `
 
+const ProjectsNoSession = styled.div`
+padding: 40px 0;
+`
+
+const Projects = styled.div`
+padding:0 70px 40px;
+display: flex;
+flex-direction:column;
+align-items:flex-start
+@media (max-width: 700px) {
+  padding:0 10px 0
+}
+`
 const ButtonsBar = styled.div`
   width: 100%
 `
@@ -312,6 +327,45 @@ const LoadMoreButton = styled.div`
     border-color: #777;
   }
 `
+const LoadMoreButtonNoUser = styled.div`
+margin: 0 auto;
+font-size: 2.2
+rem;
+padding: 5px 25px;
+border-radius: 4px;
+border: 1px solid #2c4c61
+cursor: pointer
+color: #2c4c61;
+&:hover{
+  background-color: #2c4c61;
+  color: #FFF
+}
+&:first-child{
+  margin-left: 0;
+}
+&:last-child{
+  margin-right: 0;
+}
+&.disabled{
+  color: #777;
+  border-color: #777;
+}
+`
+const IconLoading = styled(Icon)`
+width:20px;
+height:20px;
+filter:grayscale(100%);
+animation: rotation 2s infinite linear;
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+`
 const MessagePaginator = styled.div`
   font-size: 2.5rem;
   color: #454246;
@@ -319,6 +373,7 @@ const MessagePaginator = styled.div`
   text-align: center;
   width: 100%;
 `
+
 
 class MyProjects extends Component {
   constructor(props) {
@@ -334,10 +389,13 @@ class MyProjects extends Component {
       fetching: true,
       fetchMoreAvailable: false,
       query: {
-        created: 'DESC',
-        limit: 12,
+        created: 'ASC',
+        limit: 10,
         page: 1,
-      }
+        closed: null,
+        author: props.userId
+      },
+      tags: []
     }
   }
 
@@ -357,11 +415,11 @@ class MyProjects extends Component {
         return encodeURIComponent(key) + '=' +
           encodeURIComponent(sort[key])
       }).join('&');
-    console.log(theQuery)
+
     return theQuery
   }
 
-  fetchProjects = async (token) => {
+  fetchProjects = async (token, userId) => {
     try {
       let query = this.createQuery(this.state.query);
       const projects = await (await fetch(`${API_URL}/api/v1/documents/my-documents?${query}`, {
@@ -371,18 +429,52 @@ class MyProjects extends Component {
         }
       })).json()
       this.setState((prevState) => {
-        let query = prevState.query
-        query.page = projects.pagination.page + 1
         return {
           projects: prevState.projects.concat(projects.results),
           fetchMoreAvailable: projects.pagination.page < projects.pagination.pages,
-          query: query,
           fetching: false
         }
       })
     } catch (error) {
       console.error(error)
     }
+  }
+
+  async getMoreDocuments() {
+    try {
+      this.setState(prevState => {
+        return{
+          loading: true,
+          fetching: true,
+          query:{
+            ...prevState.query,
+            page: this.state.query.page + 1
+          }
+        }
+      },()=>{
+        if (this.props.userId && this.props.authContext.user && this.props.userId !== this.props.authContext.user._id) return this.fetchDocuments() //usuario iniciado 
+        if (!this.props.authContext.authenticated && !this.props.authContext.user) return this.fetchDocuments()
+        if(!this.props.userId || this.props.userId === this.props.authContext.user._id) return this.getDocuments();
+
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async fetchDocuments () {
+    let currentQuery = { ...this.state.query }
+    let query = this.createQuery(currentQuery)
+    const projects = await (await fetch(`${API_URL}/api/v1/documents${query}`)).json()
+
+    this.setState((prevState) => {
+      return {
+        projects: prevState.projects.concat(projects.results),
+        // projectsFiltered: projects.results,
+        fetchMoreAvailable: projects.pagination.page < projects.pagination.pages,
+        fetching: false
+      }
+    })
   }
 
   createProject = async () => {
@@ -430,9 +522,14 @@ class MyProjects extends Component {
   }
 
   async componentDidMount() {
-    if (!this.props.authContext.keycloak) return
-    if (!this.props.authContext.keycloak.authenticated && !this.props.authContext.user) return
-    if (!this.props.userId || this.props.userId === this.props.authContext.user._id) {
+    this.setState({
+      tags: (await this.props.fetchDocumentTags()).map(
+        tag => ({ value: tag._id, label: tag.name, key: tag.key })
+      ),
+    })
+    if (this.props.userId && this.props.authContext.user && this.props.userId !== this.props.authContext.user._id) return this.fetchDocuments() //usuario iniciado 
+    if (!this.props.authContext.authenticated && !this.props.authContext.user) return this.fetchDocuments() // sin session
+    if (!this.props.userId || this.props.userId === this.props.authContext.user._id) { //usuario iniciado y userprofile de usuario de sesion
       this.fetchProjects(this.props.authContext.keycloak.token)
     }
   }
@@ -441,10 +538,25 @@ class MyProjects extends Component {
     if (!props.authContext.keycloak) return
     if (!props.authContext.keycloak.authenticated && !props.authContext.user) return
     if (props === this.props) return
-    if (!props.userId || props.userId === props.authContext.user._id) {
+
+    if (!props.userId || props.userId === props.authContext.user._id) {//usuario iniciado y userprofile de usuario de sesion
+      this.setState({projects:[]})
       this.fetchProjects(props.authContext.keycloak.token)
     }
   }
+
+/*   loadMore(){
+    this.setState((prevState) => {
+      return{
+      query:{
+        ...prevState,
+        page: this.state.page + 1
+      }}
+    })
+    if(!this.props.userId || this.props.userId === this.props.authContext.user._id) this.getDocuments();
+
+   
+  } */
 
   downloadXls = async () => {
     try {
@@ -499,82 +611,113 @@ class MyProjects extends Component {
       projects,
       isLoading,
       fetching,
-      fetchMoreAvailable
+      fetchMoreAvailable,
+      tags
     } = this.state
     if (this.props.authContext.user) {
-      if (this.props.authContext.isAuthor) {
-        const hasProjects = projects && projects.length
-        return (
-          <Section id='projects' noMargin >
-            <TitleH2>Mis proyectos</TitleH2>
-            <ButtonsBar>
+      if(this.props.authContext.user._id === this.props.userId || !this.props.userId) {
+        if (this.props.authContext.isAuthor || this.props.authContext.isAdmin) {
+          const hasProjects = projects && projects.length
+          return (
+            <Section id='projects' noMargin >
+              <TitleH2>Mis propuestas</TitleH2>
+              <ButtonsBar>
+                {
+                  isLoading
+                    ? <ButtonTableDisabled float='left'><Icon icon={clockO} size={20} />&nbsp;&nbsp;Creando nuevo proyecto... Espere unos segundos...</ButtonTableDisabled>
+                    : <ButtonTable onClick={this.createProject} float='left'><Icon icon={plus} size={20} />&nbsp;&nbsp;Agregar una nueva propuesta</ButtonTable>
+                }
+                <ButtonTable
+                  onClick={hasProjects && this.downloadXls}
+                  float='right'
+                  disabled={!hasProjects}>
+                  <Icon icon={download} size={20} />&nbsp;&nbsp;Descargar info. de participantes
+                </ButtonTable>
+                <ButtonTable
+                  onClick={hasProjects && this.downloadApoyos}
+                  float='right'
+                  disabled={!hasProjects}>
+                  <Icon icon={download} size={20} />&nbsp;&nbsp;Descargar apoyos
+                </ButtonTable>
+              </ButtonsBar>
+              <ProjectsTable>
+                <ProjectsTableHead>
+                  <ProjectsTableRow>
+                    <ProjectsTableHeader>Nombre</ProjectsTableHeader>
+                    <ProjectsTableHeader hiddenMobile centered>Status</ProjectsTableHeader>
+                    <ProjectsTableHeader width={100} hiddenMobile centered>Aportes</ProjectsTableHeader>
+                    <ProjectsTableHeader width={100} hiddenMobile centered>Apoyos</ProjectsTableHeader>
+                    <ProjectsTableHeader width={100} hiddenMobile centered>Fecha creación</ProjectsTableHeader>
+                    <ProjectsTableHeader width={100} hiddenMobile centered>Fecha de cierre</ProjectsTableHeader>
+                    <ProjectsTableHeader width={120} hiddenMobile centered>Acciones</ProjectsTableHeader>
+                  </ProjectsTableRow>
+                </ProjectsTableHead>
+                <ProjectsTableBody>
+                  {/* <ProjectsTableRow>
+                    <ProjectsTableCell {projects && projects.map((p, i) => <ProjectTableItem project={p} key={i} />)} centered colSpan={6}>
+                      {
+                        isLoading
+                          ? <ButtonTableDisabled><Icon icon={clockO} size={20} />Creando nuevo proyecto.. espere</ButtonTableDisabled> :
+                          <ButtonTable onClick={this.createProject}><Icon icon={plus} size={20} />Agregar un nuevo proyecto</ButtonTable>
+                      }
+                    </ProjectsTableCell>
+                  </ProjectsTableRow> */}
+                  {projects && projects.map((p, i) => <ProjectTableItem project={p} key={i} />)}
+                </ProjectsTableBody>
+              </ProjectsTable>
               {
-                isLoading
-                  ? <ButtonTableDisabled float='left'><Icon icon={clockO} size={20} />&nbsp;&nbsp;Creando nuevo proyecto... Espere unos segundos...</ButtonTableDisabled>
-                  : <ButtonTable onClick={this.createProject} float='left'><Icon icon={plus} size={20} />&nbsp;&nbsp;Agregar un nuevo proyecto</ButtonTable>
+                this.state.showAlert &&
+                <Alert status={this.state.alertStatus} dismissAlert={this.dismissAlert}>
+                  {this.state.alertText}
+                </Alert>
               }
-              <ButtonTable
-                onClick={hasProjects && this.downloadXls}
-                float='right'
-                disabled={!hasProjects}>
-                <Icon icon={download} size={20} />&nbsp;&nbsp;Descargar info. de participantes
-              </ButtonTable>
-              <ButtonTable
-                onClick={hasProjects && this.downloadApoyos}
-                float='right'
-                disabled={!hasProjects}>
-                <Icon icon={download} size={20} />&nbsp;&nbsp;Descargar apoyos
-              </ButtonTable>
-            </ButtonsBar>
-            <ProjectsTable>
-              <ProjectsTableHead>
-                <ProjectsTableRow>
-                  <ProjectsTableHeader>Nombre</ProjectsTableHeader>
-                  <ProjectsTableHeader hiddenMobile centered>Status</ProjectsTableHeader>
-                  <ProjectsTableHeader width={100} hiddenMobile centered>Aportes</ProjectsTableHeader>
-                  <ProjectsTableHeader width={100} hiddenMobile centered>Apoyos</ProjectsTableHeader>
-                  <ProjectsTableHeader width={100} hiddenMobile centered>Fecha creación</ProjectsTableHeader>
-                  <ProjectsTableHeader width={100} hiddenMobile centered>Fecha de cierre</ProjectsTableHeader>
-                  <ProjectsTableHeader width={120} hiddenMobile centered>Acciones</ProjectsTableHeader>
-                </ProjectsTableRow>
-              </ProjectsTableHead>
-              <ProjectsTableBody>
-                {/* <ProjectsTableRow>
-                  <ProjectsTableCell centered colSpan={6}>
-                    {
-                      isLoading
-                        ? <ButtonTableDisabled><Icon icon={clockO} size={20} />Creando nuevo proyecto.. espere</ButtonTableDisabled> :
-                        <ButtonTable onClick={this.createProject}><Icon icon={plus} size={20} />Agregar un nuevo proyecto</ButtonTable>
-                    }
-                  </ProjectsTableCell>
-                </ProjectsTableRow> */}
-                {projects && projects.map((p, i) => <ProjectTableItem project={p} key={i} />)}
-              </ProjectsTableBody>
-            </ProjectsTable>
-            {
-              this.state.showAlert &&
-              <Alert status={this.state.alertStatus} dismissAlert={this.dismissAlert}>
-                {this.state.alertText}
-              </Alert>
-            }
-            {
-              !fetching && fetchMoreAvailable && <LoadMoreButtonContainer>
-                <LoadMoreButton onClick={() => this.getDocuments()}>Cargar más</LoadMoreButton>
-              </LoadMoreButtonContainer>
-            }
-            {
-              fetching && <MessagePaginator>Cargando...</MessagePaginator>
-            }
-            {
-              !fetching && !fetchMoreAvailable &&
-              <MessagePaginator>No hay más propuestas de leyes</MessagePaginator>
-            }
-          </Section>
-        )
+              {
+                !fetching && fetchMoreAvailable && <LoadMoreButtonContainer>
+                  <LoadMoreButton onClick={() => this.getMoreDocuments()}>Cargar más</LoadMoreButton>
+                </LoadMoreButtonContainer>
+              }
+              {
+                fetching && <MessagePaginator>Cargando...</MessagePaginator>
+              }
+              {
+                !fetching && !fetchMoreAvailable &&
+                <MessagePaginator>No hay más propuestas de leyes</MessagePaginator>
+              }
+            </Section>
+          )
+        }
       }
+    }
+    if (this.props.userId && projects && tags) {
+      return <ProjectsNoSession>
+        <Projects>
+        <Fragment>
+          <Masonry
+            style={{ width: '100%', margin: '4.8rem 0 1.6rem' }}
+            options={masonryOptions}>
+            {projects.map((p, i) => (
+              <Card project={p} key={i} tags={tags} />
+            ))}
+          </Masonry>
+        </Fragment>
+      </Projects>
+      {
+        !fetching && fetchMoreAvailable && <LoadMoreButtonContainer>
+          <LoadMoreButtonNoUser onClick={() => this.getMoreDocuments()}>Ver más</LoadMoreButtonNoUser>
+        </LoadMoreButtonContainer>
+      }
+      {
+        fetching && <MessagePaginator> Cargando...</MessagePaginator>
+      }
+      {
+        !fetching && !fetchMoreAvailable  &&
+        <MessagePaginator>No hay más propuestas de leyes</MessagePaginator>
+      }
+      
+      </ProjectsNoSession>
     }
     return null
   }
 }
 
-export default WithUserContext(MyProjects)
+export default WithUserContext(WithDocumentTagsContext(MyProjects))

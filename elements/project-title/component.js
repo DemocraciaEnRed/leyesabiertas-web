@@ -14,7 +14,7 @@ const ProjectTitle = styled.h1`
     line-height: 3.5rem;
   }
   margin-top: 15px;
-  margin-bottom: 5px;
+  margin-bottom: 45px;
   // border-bottom: 1px solid #CACACA;
 `
 ProjectTitle.propTypes = {

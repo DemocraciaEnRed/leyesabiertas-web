@@ -6,9 +6,14 @@ import styled from 'styled-components'
 const StyledBar = styled.div`
 display:flex;
 justify-content:flex-end;
-width:33%;
 margin-top:auto;
+margin-bottom:auto;
 padding-bottom:.5rem;
+@media(max-width:760px){
+  justify-content: center;
+  border-bottom: 1px solid #D6D6D6
+
+ }
 `
 
 const LoggedUserBar = ({ children }) => (

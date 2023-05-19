@@ -6,10 +6,10 @@ import Link from 'next/link'
 const StyledLinkButton = styled.button`
   border: none;
   padding: 10px 20px;
-  text-transform: uppercase;
+  //text-transform: uppercase;
   font-size: 1.4rem;
   color: ${(props) => props.active ? '#FFF' : '#4a5d68'};
-  background-color: ${(props) => props.active ? '#5c97bc' : 'white'};
+  background-color: ${(props) => props.active ? '#567B9A' : 'white'};
   font-family: ${(props) => props.active ? 'var(--bold)' : 'var(--regular)'};
   &:hover{
     cursor: pointer;

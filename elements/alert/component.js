@@ -5,7 +5,7 @@ const StyledAlert = styled.div`
   width: 100%;
   height: 70px;
   position: fixed;
-  z-index:1000;
+  z-index:1061;
   top: 0;
   left: 0;
   background-color: ${(props) => props.status === 'success' ? '#b8e986' : '#ea5f5f'};

@@ -58,14 +58,14 @@ export default class extends Component {
     const { project, section, fetchDocument, apoyarProyecto } = this.props
     const { withComments, isPublished } = this.state
     if (!project || !project.document) return null
-    const { isAuthor } = project
+    const isAuthorOrAdmin = project.isAuthor || this.props.isAdmin
     return (
       <div className='user-container'>
         <ArticlesContext.Provider value={{
           project: project.document,
           withComments: withComments,
           switchComments: this.switchComments,
-          isAuthor: isAuthor,
+          isAuthor: isAuthorOrAdmin,
           editMode: this.state.editMode,
           toggleSelectedComment: this.toggleSelectedComment,
           toggleEditMode: this.toggleEditMode,
@@ -80,7 +80,7 @@ export default class extends Component {
             isPublished={isPublished}
             setPublish={this.setPublish}
             togglePublish={this.togglePublish}
-            isAuthor={isAuthor}
+            isAuthor={isAuthorOrAdmin}
             contributorsCount={project.contributorsCount}
             contextualCommentsCount={project.contextualCommentsCount}
             contributionsCount={project.contributionsCount}
@@ -91,7 +91,7 @@ export default class extends Component {
 
           {this.props.section === '/propuesta' &&
             <Fragment>
-              <ProjectBody project={project.document} />
+              <ProjectBody project={project.document} isAdmin={this.props.isAdmin} />
               <ProjectTags project={project.document} />
               <ProjectComments project={project.document} />
             </Fragment>
@@ -100,7 +100,7 @@ export default class extends Component {
             <Fragment>
               <UserEditor
                 value={project.document.currentVersion.content.articles}
-                isAuthor={isAuthor}
+                isAuthor={isAuthorOrAdmin}
                 editMode={this.state.editMode}
                 withComments={withComments}
                 id={project.document._id}

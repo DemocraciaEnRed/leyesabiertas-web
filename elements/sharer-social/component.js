@@ -6,9 +6,14 @@ const SocialWrapper = styled.div`
   display:flex;
   flex-direction:column;
   flex: 0 0 auto;
-  padding-right: 15px
+  padding: 1.2em
   border-right: 1px solid #CACACA;
-  margin-right: 15px
+  z-index: 2
+  position: absolute
+  right: 0
+  background-color: white
+  box-shadow: 0px 2px 4px #cac7c7
+  margin-top:7px;
   @media(max-width:700px){
     padding-right: 0px;
     border-right: 0px;
@@ -24,7 +29,6 @@ const SocialWrapper = styled.div`
     height: 25px;
     width: 25px;
   }
-  max-height: 60px;
 `
 
 // const SocialIconWrapper = styled.div`

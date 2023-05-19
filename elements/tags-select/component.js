@@ -7,8 +7,25 @@ import Select from 'react-select';
 
 const WrapperDiv = styled.div`
   display: inline-block
-  width: 200px
+  width: 100%;
   font-size: 1.4rem
+`
+const SelectTags = styled(Select)`
+> *{
+  border: none!important;
+  border-radius:0!important;
+  background:#F1ECEA!important;
+  &:first-child{
+    >*{
+      padding-left:20px!important
+
+    }
+  }
+/*   &:nth-child(3){
+    margin-top:0;
+  } */
+
+}
 `
 
 class TagsSelect extends Component {
@@ -44,7 +61,7 @@ class TagsSelect extends Component {
   render () {
     return (
       <WrapperDiv>
-        <Select
+        <SelectTags
           className='react-select-container'
           value={this.state.selectedOption}
           onChange={this.handleChange}

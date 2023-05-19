@@ -65,13 +65,15 @@ class UserProfile extends Component {
 
   fetchUser = async (authenticated, token) => {
     const { authContext } = this.props
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
     try {
       let user = null
       let isOwner = null
-      if (this.props.userId) {
+      if (params.id && this.props.userId) {
         user = await (await fetch(`${API_URL}/api/v1/users/${this.props.userId}`)).json()
         isOwner = false
-        if (authenticated) isOwner = (user.keycloak == authContext.keycloak.userInfo.sub)
+        if (authContext.authenticated) isOwner = (user.keycloak == authContext.keycloak.userInfo.sub)
       } else {
         user = await (await fetch(`${API_URL}/api/v1/users/me`, {
           'headers': {

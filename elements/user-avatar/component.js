@@ -12,13 +12,14 @@ const Wrapper = styled.div`
   display:flex;
   align-items:flex-start;
   text-align:left;
-  padding-right: ${(props) => props.projectView ? '15px' : '0'};
+  padding-right: 15px;
   border-right: ${(props) => props.projectView ? '1px solid #CACACA' : '0'};
   margin-right: ${(props) => props.projectView ? '15px' : '0'};
   min-width:150px;
   @media (max-width:700px){
     border-right: 0px;
     margin-right: 0px; 
+    flex:${(props) => props.projectView && '1'};
   }
 `
 const Avatar = styled.div`
@@ -31,46 +32,53 @@ const Avatar = styled.div`
   background-position: center;
   cursor: pointer;
   border: 1px solid #CACACA;
+  @media (max-width:700px){
+    margin-bottom: ${(props) => !props.cardUser && `-20px`};
+  }
+  margin-bottom:${(props) => !props.cardUser && `-20px`};
 `
 const Name = styled.div`
-color: #2d4b5e;
+color: #6CAAE4;
 font-size: 20px;
-font-family:var(--medium);
+font-family:var(--bold);
 cursor: pointer;
 min-width:100px;
 `
 const Party = styled.div`
 font-size: 12px;
-color: #5c97bc;
+color: #7e7e7e;
 text-transform:uppercase;
 display:flex;
-margin-top:.4rem;
+margin-top:.9rem;
+@media (max-width:700px){
+  font-size:10px
+}
 align-items:center;
 `
 
 const TextWrapper = styled.div`
 // margin-top:3px;
-padding-left:10px;
+padding-left:20px;
 display:flex;
+flex:1;
 flex-direction:column;
-justify-content:space-between;
 `
 const IconWrapper = styled.div`
   padding-right:.5rem;`
 
-const UserAvatar = ({ projectView, userId, name, party, badge }) => (
+const UserAvatar = ({ projectView, userId, name, party, badge,cardUser }) => (
   <Wrapper projectView={projectView}>
     <Link href={{ pathname: '/userprofile', query: { id: userId } }}>
-      <Avatar projectView={projectView} userId={userId} />
+      <Avatar projectView={projectView} userId={userId} cardUser={cardUser}/>
     </Link>
     <TextWrapper>
       <Link href={{ pathname: '/userprofile', query: { id: userId } }}>
         <Name>{name}</Name>
       </Link>
-      <Party>
+      {window.location.pathname === '/admin' && <Party>
         {badge && <IconWrapper><Icon icon={checkCircle} /></IconWrapper>}
         <p>{party}</p>
-      </Party>
+      </Party>}
     </TextWrapper>
   </Wrapper>
 )

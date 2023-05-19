@@ -22,6 +22,9 @@ const FooterBar = styled.div`
     max-width:220px;
 
     box-sizing:border-box;
+    @media (max-width: 760px) {
+      padding:10px 12px
+    }
   }
 `
 

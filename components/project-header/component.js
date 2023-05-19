@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 import Icon from 'react-icons-kit'
@@ -25,13 +25,15 @@ import ModeBar from '../../components/mode-bar/component'
 import ModeButton from '../../elements/mode-button/component'
 import ModeBarLinkButton from '../../elements/mode-bar-link-button/component'
 import ModeBarApoyarButton from '../../elements/mode-bar-apoyar-button/component'
+import ModeBarSharedButton from '../../elements/mode-bar-shared-button/component'
 import ProjectMobileTools from "../project-mobile-tools/component"
+import ProgressBar from '../../elements/progress-bar/component'
 
 const ProjectHeaderContainer = styled.div`
   min-height: 383px;
   width:100%;
-  background-color: #1b95ba;
-  background-image: url('${(props) => props.img}');
+  background-color: #395595;
+  //background-image: url('${(props) => props.img}');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -40,6 +42,21 @@ const ProjectHeaderContainer = styled.div`
   align-items: flex-end;
   // display: block;
 `
+const InfoHeader = styled.div`
+margin:30px
+`
+const SocialSection = styled.div`
+display: flex;
+`
+
+const ProgressBarWrapper = styled.div`
+width:33%
+@media(max-width:700px){
+  width:50%;
+  margin-bottom: 16px;
+}
+`
+
 const TopBarWrapper = styled.div`
   display: flex;
   flex-direction:row;
@@ -73,78 +90,141 @@ const TopBarWrapper = styled.div`
   // }
   `
 
-const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, togglePublish, contextualCommentsCount, contributionsCount, contributorsCount, currentSection, withComments, apoyarProyecto }) => (
+const SharerButton = styled(ModeBarLinkButton)`
+color:#567B9A;
+`
 
+const SharerSpan = styled.span`
+font-family: var(--bold);
+margin-right:8px
+`
+
+const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, togglePublish, contextualCommentsCount, contributionsCount, contributorsCount, currentSection, withComments, apoyarProyecto }) => {
+  const childSuportRef = useRef()
+  const childSharedRef = useRef()
+  const toogleform = (element)=> {
+    if (element.apoyarProyecto) {
+      childSharedRef.current.close()
+    } else {
+      childSuportRef.current.close()
+    }
+  }
+
+  return(
   // <ProjectHeaderContainer img={project.currentVersion.content.imageCover}>
-  <ProjectHeaderContainer img='/static/assets/images/trama-default.jpg'>
-    <ProjectBreadcrumb
-      title={project.currentVersion.content.title}
-      id={project._id}
-      section={section} />
-    <ProjectHeaderWrapper>
-      <TopBarWrapper>
-        <SharerSocial id={project._id} />
-        <UserAvatar
-          projectView
-          authorId={project.author._id}
-          userId={project.author._id}
-          name={project.author.fullname}
-          party={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
-        <ClosingDate date={project.currentVersion.content.closingDate} />
-        <ProjectHeaderVersion
-          project={project._id}
-          version={project.currentVersion.version}
-        />
-        <ArticlesCommentsCounter commentsCount={project.commentsCount} project={project._id} />
-        <ProjectEditMode />
-        {isAuthor &&
-          <TogglePublish project={project} isPublished={isPublished} setPublish={setPublish} togglePublish={togglePublish} />
+    <ProjectHeaderContainer img='/static/assets/images/trama-default.jpg'>
+      <ProjectBreadcrumb
+        title={project.currentVersion.content.title}
+        id={project._id}
+        section={section} />
+      <ProjectHeaderWrapper>
+        <InfoHeader>
+          <TopBarWrapper>
+            {/* <SharerSocial id={project._id} /> */}
+            <UserAvatar
+              projectView
+              authorId={project.author._id}
+              userId={project.author._id}
+              name={project.author.fullname}
+              party={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
+            <ClosingDate closingDate={project.currentVersion.content.closingDate} closed={project.closed} creationDate={project.currentVersion.createdAt} />
+            <ArticlesCommentsCounter commentsCount={project.commentsCount} apoyosCount={project.apoyosCount} project={project._id} />
+            <ProjectHeaderVersion
+              project={project._id}
+              version={project.currentVersion.version}
+            />
+            <ProjectEditMode />
+            {isAuthor &&
+              <TogglePublish project={project} isPublished={isPublished} setPublish={setPublish} togglePublish={togglePublish} />
+            }
+          </TopBarWrapper>
+          {/* <ProjectStatus closed={project.closed} /> */}
+          <ProjectTitle>{project.currentVersion.content.title}</ProjectTitle>
+          <ProgressBarWrapper>
+            <ProgressBar closingDate={project.currentVersion.content.closingDate} creationDate={project.currentVersion.createdAt} closed={project.closed} />
+
+          </ProgressBarWrapper>
+
+          {/* <ProjectSubtitle
+            project={project._id}
+            version={project.currentVersion.version}
+            createdAt={project.currentVersion.createdAt}
+            commentsCount={project.commentsCount} /> */}
+          {isAuthor &&
+            <ProjectMobileTools project={project} isPublished={isPublished} setPublish={setPublish} togglePublish={togglePublish} />
+          }
+          {project.closed &&
+            <ClosedProposal
+              contributors={contributorsCount}
+              contributions={contributionsCount}
+              contextualComments={contextualCommentsCount} />
+          }
+        </InfoHeader>
+        {currentSection === '/propuesta' &&
+          <ModeBar>
+            <div>
+              <ModeBarLinkButton active>Presentación</ModeBarLinkButton>
+              <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project._id } }}>Artículos</ModeBarLinkButton>
+            </div>
+            <SocialSection>
+              {/* <SharerButton>
+                <SharerSpan>
+                  Compartir proyecto
+                </SharerSpan>
+                <Icon icon={shareAlt} size={15} />
+              </SharerButton> */}
+              <ModeBarSharedButton ref={childSharedRef} project={project} toogleForm={toogleform}/>
+              <ModeBarApoyarButton ref={childSuportRef} project={project} apoyarProyecto={apoyarProyecto} toogleForm={toogleform} />
+            </SocialSection>
+          </ModeBar>
         }
-      </TopBarWrapper>
-      <ProjectStatus closed={project.closed} />
-      <ProjectTitle>{project.currentVersion.content.title}</ProjectTitle>
-      <ProjectSubtitle
-        project={project._id}
-        version={project.currentVersion.version}
-        createdAt={project.currentVersion.createdAt}
-        commentsCount={project.commentsCount} />
-      {isAuthor &&
-        <ProjectMobileTools project={project} isPublished={isPublished} setPublish={setPublish} togglePublish={togglePublish} />
-      }
-      {project.closed &&
-        <ClosedProposal
-          contributors={contributorsCount}
-          contributions={contributionsCount}
-          contextualComments={contextualCommentsCount} />
-      }
-      {currentSection === '/propuesta' &&
-        <ModeBar>
-          <ModeBarLinkButton active>Presentación</ModeBarLinkButton>
-          <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project._id } }}>Artículos</ModeBarLinkButton>
-          <ModeBarApoyarButton project={project} apoyarProyecto={apoyarProyecto} />
-        </ModeBar>
-      }
-      {currentSection === '/versiones' &&
-        <ModeBar>
-          <ModeBarLinkButton href={{ pathname: '/propuesta', query: { id: project._id } }}>Presentación</ModeBarLinkButton>
-          <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project._id } }}>Artículos</ModeBarLinkButton>
-          <ModeBarApoyarButton project={project} apoyarProyecto={apoyarProyecto} />
-        </ModeBar>
-      }
-      {currentSection === '/articulado' &&
-        <ModeBar>
-          <ModeBarLinkButton href={{ pathname: '/propuesta', query: { id: project._id } }}>Presentación</ModeBarLinkButton>
-          <ModeBarLinkButton active>Artículos</ModeBarLinkButton>
-          <ModeBarApoyarButton project={project} apoyarProyecto={apoyarProyecto} />
-          <ModeButton>
-            {withComments ? <Icon icon={squareO} size={20} /> : <Icon icon={checkSquareO} size={20} />}&nbsp;
-            Modo lectura
-          </ModeButton>
-        </ModeBar>
-      }
-    </ProjectHeaderWrapper>
-  </ProjectHeaderContainer>
-)
+        {currentSection === '/versiones' &&
+          <ModeBar>
+            <div>
+              <ModeBarLinkButton href={{ pathname: '/propuesta', query: { id: project._id } }}>Presentación</ModeBarLinkButton>
+              <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project._id } }}>Artículos</ModeBarLinkButton>
+            </div>
+
+            <SocialSection>
+              {/* <SharerButton>
+                <SharerSpan>
+                  Compartir proyecto
+                </SharerSpan>
+                <Icon icon={shareAlt} size={15} />
+              </SharerButton> */}
+              <ModeBarSharedButton project={project} />
+              <ModeBarApoyarButton project={project} apoyarProyecto={apoyarProyecto} />
+
+            </SocialSection>
+          </ModeBar>
+        }
+        {currentSection === '/articulado' &&
+          <ModeBar>
+            <div>
+              <ModeBarLinkButton href={{ pathname: '/propuesta', query: { id: project._id } }}>Presentación</ModeBarLinkButton>
+              <ModeBarLinkButton active>Artículos</ModeBarLinkButton>
+              <ModeButton>
+                {withComments ? <Icon icon={squareO} size={20} /> : <Icon icon={checkSquareO} size={20} />}&nbsp;
+                Modo lectura
+              </ModeButton>
+
+            </div>
+            <SocialSection>
+              {/* <SharerButton>
+                <SharerSpan>
+                  Compartir proyecto
+                </SharerSpan>
+                <Icon icon={shareAlt} size={15} />
+              </SharerButton> */}
+              <ModeBarSharedButton project={project} />
+              <ModeBarApoyarButton project={project} apoyarProyecto={apoyarProyecto} />
+            </SocialSection>
+          </ModeBar>
+        }
+      </ProjectHeaderWrapper>
+    </ProjectHeaderContainer>
+  )
+}
 
 ProjectHeader.propTypes = {
   project: PropTypes.object.isRequired,

@@ -24,7 +24,7 @@ class UserProfile extends Component {
       <Wrapper>
         <div>
           <NavBar />
-          <SecondaryNavbar />
+          {/* <SecondaryNavbar /> */}
           <UserProfileContainer userId={this.props.id} />
           <MyProjects userId={this.props.id} />
         </div>

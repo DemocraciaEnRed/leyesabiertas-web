@@ -20,17 +20,20 @@ const Wrapper = styled.div`
 
 class GeneralContainer extends Component {
   state = {
-    project: null
+    project: null,
+    isAdmin:null
   }
 
   componentDidMount () {
     if (!this.props.authContext.keycloak) return
+    if (this.props.authContext.user.roles.includes('admin')) {this.setState({isAdmin: true})}
     this.fetchDocument(this.props.project, this.props.authContext.keycloak.token)
   }
 
   componentWillUpdate (props) {
     if (!props.authContext.keycloak) return
     if (props === this.props) return
+    if (props.authContext.authenticated && props.authContext.user.roles.includes('admin')) {this.setState({isAdmin: true})}
     this.fetchDocument(props.project, props.authContext.keycloak.token)
   }
 
@@ -95,17 +98,19 @@ class GeneralContainer extends Component {
   }
 
   render () {
+    const {isAdmin} = this.state
     return (
       <Wrapper>
         <div>
           <NavBar />
-          <SecondaryNavbar />
+          {/* <SecondaryNavbar /> */}
         </div>
         <UserProjectContainer
           project={this.state.project}
           section={this.props.path}
           fetchDocument={this.fetchDocument}
           apoyarProyecto={this.apoyarProyecto}
+          isAdmin={isAdmin}
           />
         <Footer />
       </Wrapper>

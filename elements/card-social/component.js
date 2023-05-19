@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import WithUserContext from '../../components/with-user-context/component'
 
 const Wrapper = styled.div`
-height:85px;
-border-top: 1px solid #e9e9e9;
 font-size:1.4rem;
 display:flex;
 flex-direction:column;
@@ -14,15 +13,15 @@ box-sizing:border-box;
 color: #2d4b5e;
 font-size:1.6em;
 box-sizing:border-box;
-margin:0px 20px 0px 20px;
+margin:26px 5px;
+padding:0px 15px 0px 15px;
 box-sizing:border-box;
 `
 const CommentaryItems = styled.div`
-padding-bottom: 1rem;
 text-transform:uppercase;
 display: flex;
 width: 100%;
-justify-content: space-evenly;
+justify-content: space-around;
 `
 
 const CommentaryIcon = styled.div`
@@ -33,7 +32,7 @@ const CommentaryIcon = styled.div`
   background-repeat: no-repeat;
   display: inline-block;
   position: relative;
-  top: 3px;
+  top: 2px;
 `
 
 const LimitDate = styled.div`
@@ -46,30 +45,49 @@ const LimitDate = styled.div`
   border-radius: 2px;
   margin: 0 auto;
 `
-const Span = styled.span`
-  font-family: var(--bold);
-  margin: 0 0.2rem 0 0.3rem;
+const ContribDiv = styled.div`
+> * {
+  ${(props) => props.closed && `
+  
+  filter: brightness(2.5);
+  `}
+  
+
+}
 `
-const Social = ({ commentaries, closed, apoyosCount }) => (
+
+const Span = styled.span`
+  font-family: var(--ligth);
+  color:#4C4C4E;
+`
+const Contributions = styled.span`
+  font-family: var(--ligth);
+  margin: 0 8px
+  color:#4C4C4E;
+`
+const Support = styled(Contributions)``
+
+const Social = ({ commentaries, apoyosCount, userIsApoyado, closed }) => (
   <Wrapper>
-    <CommentaryItems>
+    <CommentaryItems >
+      <ContribDiv closed={closed}>
+        <Span> {commentaries}</Span> <Contributions>{commentaries === 1 ? ' Aporte' : ' Aportes'}</Contributions>
+        <CommentaryIcon icon='pencil.svg' />
+      </ContribDiv>
       <div>
-        <CommentaryIcon icon='comment-icon.svg' />
-        <Span> {commentaries}</Span> {commentaries === 1 ? ' Aporte' : ' Aportes'}
-      </div>
-      <div>
-        <CommentaryIcon icon='signature.svg' />
-        <Span> {apoyosCount}</Span> {apoyosCount === 1 ? ' Apoyo' : ' Apoyos'}
+        <Span> {apoyosCount}</Span> <span>
+          <Support>{userIsApoyado ? 'apoyando' : (apoyosCount === 1 ? ' Apoyo' : ' Apoyos' )  }</Support>
+          <CommentaryIcon icon={userIsApoyado ? 'check-in-a-circle-.svg': 'hand-holding-heart-solid.svg' } />
+        </span>
       </div>
     </CommentaryItems>
-    {closed &&
-      <LimitDate>Finalizó el periodo para aportes</LimitDate>
-    }
   </Wrapper>
 )
 
 Social.propTypes = {
   commentaries: PropTypes.number,
+  apoyosCount: PropTypes.number,
+  userIsApoyado: PropTypes.bool,
   closed: PropTypes.bool
 }
 

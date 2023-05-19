@@ -43,7 +43,7 @@ class Info extends Component {
     return (
       <div>
         <NavBar />
-        <SecondaryNavbar />
+        {/* <SecondaryNavbar /> */}
         <StaticInfo
           section={this.state.section}
           changeSection={this.changeSection} />

@@ -5,7 +5,12 @@ import es from 'date-fns/locale/es';
 import ProfileLabel from '../../elements/profile-label/component'
 import EditorTitle from '../../elements/editor-title/component'
 import WithDocumentTagsContext from '../../components/document-tags-context/component'
+import WithUserContext from '../with-user-context/component';
 import ProfileTags from '../../elements/profile-tags/component'
+
+
+import getConfig from 'next/config'
+const { publicRuntimeConfig: { API_URL } } = getConfig()
 
 injectGlobal`
 //--------------------------------------
@@ -786,6 +791,17 @@ const InputField = styled.input`
     background-color: #f7f7f7
   }
 `
+const SelectField = styled.select`
+  width: 100%;
+  height: 40px;
+  border: solid 1px #dae1e7;
+  background-color: #ffffff;
+  font-size: 1.4rem;
+  line-height: 1.5rem;
+  color: #203340;
+`
+
+
 const TextareaField = styled.textarea`
   width: 100%;
   min-height: 250px;
@@ -828,26 +844,74 @@ const TagsNotificationCheckboxDiv = styled.div`
     top: 2px;
   }
 `
+const VideoSource = styled.div`
+margin-top:10px;
+display:inline-block;
+`
+
+const OptionSourceVideo = styled.input`
+display:none;
+`
+const LabelOptionSource = styled.label`
+  font-size:1.4rem;
+  padding:14px;
+  border:solid 1px #dae1e7;
+  border-right:none;
+  cursor:pointer;
+  text-transform:capitalize;
+  display:inline-block;
+  background-color:${props => props.active && '#567B9A'};
+  color:${props => props.active ? '#fff' : '#203340'};
+  &:last-child{
+    border-right:solid 1px #dae1e7;
+  }
+`
 
 class ProjectFields extends Component {
   state = {
     title: null,
+    author: null,
+    usersList: [],
+    fetchingUsers: false,
     closingDate: null,
     imageCover: null,
     youtubeId: null,
+    prevYoutubeId:null,
     customVideoId: null,
+    prevCustomVideoId: null,
     youtubeURL: null,
     closure: null,
     tags: [],
     allTags: [],
     tagsMaxReached: false,
     sendTagsNotification: null,
-    publishedMailSent: null
+    publishedMailSent: null,
+    videoSource:null
   }
+
+
+  fetchUsers = () => {
+      this.setState({fetchingUsers: true})
+      fetch(`${API_URL}/api/v1/users`,{
+        headers: {
+          Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
+          'Content-Type': 'application/json'
+        },
+        method: 'GET'
+      })
+      .then(resp=>resp.json())
+      .then(users =>this.setState({
+        usersList: users.results.sort((a, b) => (a.surnames - b.surnames)),
+        fetchingUsers:false,
+      }))
+      .catch(err=>console.error(err))
+      
+    }
 
   componentDidMount() {
     let {
       title,
+      author,
       closingDate,
       imageCover,
       youtubeId,
@@ -858,17 +922,25 @@ class ProjectFields extends Component {
       publishedMailSent
     } = this.props
 
+    if (this.props.isAdmin) {
+      this.fetchUsers();
+    }
+
     this.setState({
       title,
+      author,
       imageCover,
       youtubeId,
       youtubeURL: youtubeId ? 'https://www.youtube.com/watch?v=' + youtubeId : '',
+      prevYoutubeId:youtubeId ? 'https://www.youtube.com/watch?v=' + youtubeId : '',
       customVideoId: customVideoId || null,
+      prevCustomVideoId: customVideoId || null,
       closingDate: new Date(closingDate.split('T')[0].replace(/-/g, '\/')),
       closure: closure || null,
       tags: tags || [],
       sendTagsNotification,
-      publishedMailSent
+      publishedMailSent,
+      videoSource: youtubeId ? 'youtube' : customVideoId ? 'hcdn' : 'noVideo'
     }, () => {
       this.props.setNewFields(this.getBodyPayload())
 
@@ -888,6 +960,7 @@ class ProjectFields extends Component {
   getBodyPayload = () => {
     return {
       title: this.state.title,
+      author: this.state.author,
       imageCover: this.state.imageCover,
       closingDate: new Date(this.state.closingDate).toISOString(),
       youtubeId: this.state.youtubeId,
@@ -913,18 +986,26 @@ class ProjectFields extends Component {
   }
 
   parseVideoId = () => {
-    let videoID = this.state.youtubeURL.split('v=')[1] || null
-    if (videoID) {
-      let ampersandPosition = videoID.indexOf('&')
-      if (ampersandPosition !== -1) {
-        videoID = videoID.substring(0, ampersandPosition)
+    let videoId = this.state.youtubeURL
+    if (videoId) {
+      if (videoId.indexOf('v=') > -1) {
+        videoId = videoId.split('v=')[1]
+        const ampersandPosition = videoId.indexOf('&')
+        if (ampersandPosition !== -1) {
+          videoId = videoId.substring(0, ampersandPosition)
+        }
+      } else if (videoId.indexOf('youtu.be/') > -1) {
+        videoId = videoId.split('youtu.be/')[1]
+        const ampersandPosition = videoId.indexOf('&')
+        if (ampersandPosition !== -1) {
+          videoId = videoId.substring(0, ampersandPosition)
+        }
       }
+      console.log(videoId);
+      this.setState({
+        youtubeId: videoId
+      }, () => this.props.setNewFields(this.getBodyPayload()))
     }
-    this.setState({
-      youtubeId: videoID
-    }, () => {
-      this.props.setNewFields(this.getBodyPayload())
-    })
   }
 
   handleInputChangeYoutube = (e) => {
@@ -952,6 +1033,19 @@ class ProjectFields extends Component {
       else
         this.setState((prevState) => ({tags: prevState.tags.concat(clickedTagId)}), callback)
     }
+  }
+
+  handleVideoSource = (e)=>{
+    this.setState({videoSource : e.currentTarget.value});
+    if (e.target.value === 'hcdn') this.setState({youtubeId: null, customVideoId: this.state.prevCustomVideoId || null},() => {
+      this.props.setNewFields(this.getBodyPayload())
+    })
+    if (e.target.value === 'youtube') this.setState({customVideoId: null, youtubeId: this.state.prevYoutubeId},() => {
+      this.props.setNewFields(this.getBodyPayload())
+    })
+    if (e.target.value === 'noVideo') this.setState({customVideoId: null, youtubeId: null},() => {
+      this.props.setNewFields(this.getBodyPayload())
+    })
   }
 
   toggleTagsNotificationCheckbox = () => {
@@ -982,6 +1076,15 @@ class ProjectFields extends Component {
             onChange={this.handleInputChange}
             placeholder='Hacer uso correcto de mayúsculas y minúsculas' />
         </ProfileLabel>
+        {this.props.isAdmin && <ProfileLabel>
+          Autor/a:
+          <SelectField
+            value={this.state.author}
+            name='author'
+            onChange={this.handleInputChange}>
+              {this.state.usersList.map((u) => <option key={u._id} value={u._id}>{u.surnames}, {u.names}</option>)}
+          </SelectField>
+        </ProfileLabel>}
         {/* <ProfileLabel>
           Ingrese la URL para la imagen de encabezado:
           <InputField
@@ -1010,6 +1113,35 @@ class ProjectFields extends Component {
           }
         </ProfileLabel>
         <ProfileLabel>
+          Video:
+        <VideoSource >
+          <OptionSourceVideo 
+            onChange={this.handleVideoSource} 
+            checked={this.state.videoSource === 'noVideo'} 
+            name='optionSource' 
+            id='noVideo' 
+            value='noVideo' 
+            type={'radio'} />
+              <LabelOptionSource active={this.state.videoSource === 'noVideo'} for='noVideo'>sin video</LabelOptionSource>
+          <OptionSourceVideo 
+            onChange={this.handleVideoSource} 
+            checked={this.state.videoSource === 'youtube'} 
+            name='optionSource' 
+            id='youtube' 
+            value='youtube' 
+            type={'radio'} />
+              <LabelOptionSource active={this.state.videoSource === 'youtube'} for='youtube'>Youtube</LabelOptionSource>
+          <OptionSourceVideo 
+            onChange={this.handleVideoSource} 
+            checked={this.state.videoSource === 'hcdn'}    
+            name='optionSource' 
+            id='hcdn' 
+            value='hcdn' 
+            type={'radio'} />
+              <LabelOptionSource active={this.state.videoSource === 'hcdn'} for='hcdn'>camara de diputados</LabelOptionSource>
+        </VideoSource>
+        </ProfileLabel>
+        { this.state.videoSource === 'hcdn' && <ProfileLabel>
           Ingrese el link del video (Reproductor oficial HCDN) (Opcional)
           <InputField
             type='text'
@@ -1019,8 +1151,8 @@ class ProjectFields extends Component {
           {!this.state.customVideoId && <SpanOk>Link invalido o vacio (El proyecto se publicará sin video)</SpanOk>
           }
           <SpanOk>NOTA: Ingrese solamente el dominio del video, sin "https://", que termina hasta ".mp4". (Ej: argos.hcdn.gob.ar/DMPARL/tutorial.mp4)</SpanOk>
-        </ProfileLabel>
-        {/* <ProfileLabel>
+        </ProfileLabel>}
+        { this.state.videoSource === 'youtube' && <ProfileLabel>
           Ingrese el link del video de Youtube (Opcional)
           <InputField
             type='text'
@@ -1029,7 +1161,11 @@ class ProjectFields extends Component {
             onChange={this.handleInputChangeYoutube} />
           {!this.state.youtubeId && <SpanOk>Link invalido o vacio (El proyecto se publicará sin video)</SpanOk>
           }
-        </ProfileLabel> */}
+        </ProfileLabel>}
+        { this.state.videoSource === 'noVideo' && <ProfileLabel>
+          
+          <SpanOk>NOTA: El proyecto se publicará sin video</SpanOk>
+        </ProfileLabel>}
         <ProfileLabel>
           Palabras de cierre
           <TextareaField
@@ -1079,4 +1215,4 @@ class ProjectFields extends Component {
   }
 }
 
-export default WithDocumentTagsContext(ProjectFields)
+export default WithDocumentTagsContext(WithUserContext(ProjectFields))

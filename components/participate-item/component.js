@@ -15,13 +15,35 @@ const ParticipateItem = styled.div`
     margin-left: auto;
     margin-right: auto;
   }
+  @media (max-width:700px){
+    padding-left:auto!important;
+    padding-right:auto!important;
+    border-left:none!important;
+    border-right: none!important;
+    margin-left:0!important;
+    margin-right: 0!important;
+  }
   &:nth-child(even) {
-      padding-left:1rem;
-      padding-right:1rem;
-      border-left:1px solid #dae1e7;
-      border-right:1px solid #dae1e7;
-      margin-left:.5rem;
-      margin-right:.5rem;
+    position: relative;
+    &:after {
+      content: " ";
+      background-color: #dae1e7;
+      position: absolute;
+      top:25%
+      left: 0;
+      height: 50%;
+      width: 2px;
+    };
+    &:before {
+      content: " ";
+      background-color: #dae1e7;
+      position: absolute;
+      top:25%
+      right: 0;
+      height: 50%;
+      width: 2px;
+    };
+     
     }
 `
 

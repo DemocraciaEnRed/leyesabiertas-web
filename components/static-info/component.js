@@ -46,13 +46,26 @@ const content = {
 const StyledStaticInfo = styled.div`
   display: flex;
   justify-content: center;
-  background-image: url('/static/assets/header-background.jpg');
+  background-image: ${(props)=> `url(${props.backgroundImg})`};
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% auto;
 `
 
+const selectBackground = (section)=>{
+  switch (section){
+    case 'como-participar':
+      return '/static/assets/images/como_participar.jpg'
+    case 'sobre-el-sitio':
+      return '/static/assets/images/sobre_el_sitio.jpg'
+    case 'faq':
+        return '/static/assets/images/preguntas_frecuentes.jpg'
+    default:
+      return '/static/assets/images/foto_acerca_de.jpg'
+  }
+}
+
 const StaticInfo = (props) => (
-  <StyledStaticInfo>
+  <StyledStaticInfo backgroundImg={selectBackground(props.section)}>
     <StaticInfoWrapper>
     <StaticInfoNav>
         {buttons.map((button, i) => (

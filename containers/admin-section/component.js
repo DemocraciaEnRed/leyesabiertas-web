@@ -1,0 +1,45 @@
+import React from 'react'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import TagsAdmin from '../../components/admin-tags/component'
+import ProjectsAdmin from '../../components/admin-projects/component'
+import UsersAdmin from '../../components/admin-users/component'
+import UserEdit from '../../components/admin-edit-user/component'
+
+const StyledAdminSection = styled.div`
+width:70%;
+margin-left:auto;
+margin-right:auto;
+margin-top:2.5rem;
+margin-bottom:2.5rem;
+display:flex;
+padding:16px;
+@media (max-width: 700px) {
+  width:100%;
+  margin-top:1.5rem;
+
+}
+
+`
+
+
+
+const AdminSection = (props) => {
+  const content = {
+    'tags':<TagsAdmin token={props.token}/>,
+    'projects':<ProjectsAdmin token={props.token}/>,
+    'users':<UsersAdmin token={props.token}/>,
+    'userEdit':<UserEdit token={props.token}/>
+  
+  }
+    return(
+          <StyledAdminSection id='admin-container'>
+            {content[props.section]}
+          </StyledAdminSection>
+)}
+
+AdminSection.propTypes = {
+  section:PropTypes.string
+}
+
+export default AdminSection

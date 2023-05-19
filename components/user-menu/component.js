@@ -4,11 +4,10 @@ import fetch from 'isomorphic-unfetch'
 import styled from 'styled-components'
 
 const StyledUl = styled.ul`
-  height: ${(props) => props.isAuthor ? '154px' : '104px'};
   width: 200px;
   @media (max-width: 760px) {
     width: 150px;
-    height: 74px;
+
   }
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
   border: solid 1px #e9e9e9;
@@ -73,7 +72,7 @@ const StyledA = styled.span`
 
 `
 
-const Usermenu = ({ logout }) => (
+const Usermenu = ({ logout,user }) => (
 
   <StyledUl>
     <Li>
@@ -83,6 +82,13 @@ const Usermenu = ({ logout }) => (
         </a>
       </Link>
     </Li>
+    {user && user.roles.includes('admin') &&  <Li>
+      <Link href={{ pathname: '/admin' }}>
+        <a>
+          <StyledA>Admin</StyledA>
+        </a>
+      </Link>
+    </Li>}    
     {/* { isAuthor &&
     <Li>
       <StyledA onClick={create}>Nueva propuesta</StyledA>
@@ -91,6 +97,7 @@ const Usermenu = ({ logout }) => (
     <Li>
       <StyledA onClick={logout}>Cerrar sesión</StyledA>
     </Li>
+    
   </StyledUl>
 )
 

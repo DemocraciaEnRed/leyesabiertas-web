@@ -25,7 +25,7 @@ const StyledTooltip = styled.div`
   position: fixed;
   top: ${(props) => props.top};
   right: ${(props) => props.right};
-  z-index: 9;
+  z-index: 200;
   animation-name: ${transition};
   animation-duration: 2s;
   animation-iteration-count: infinite;

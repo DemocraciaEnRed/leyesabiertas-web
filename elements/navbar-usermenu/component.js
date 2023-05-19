@@ -12,6 +12,9 @@ display:flex;
 align-items:flex-start;
 text-align:left;
 margin-bottom:2rem;
+@media(max-width:760px){
+  padding-right:16px
+ }
 `
 const Avatar = styled.div`
   width: 40px;
@@ -21,6 +24,11 @@ const Avatar = styled.div`
   background-image: url('${(props) => props.userId ? `${API_URL}/api/v1/users/${props.userId}/avatar?${props.updatedAt}` : '/static/assets/userdefault.png'}');
   background-size: cover;
   background-position: center;
+  @media (max-width: 760px) {
+    width: 30px;
+    min-width:30px;
+    height: 30px;
+  }
 `
 const Name = styled.div`
 color: #2d4b5e;
@@ -34,6 +42,9 @@ text-transform:uppercase;
 display:flex;
 margin-top:0px;
 align-items:center;
+@media (max-width: 660px) {
+  display:none;
+}
 
 `
 const TextWrapper = styled.div`
@@ -46,7 +57,7 @@ padding-left:10px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
-@media (max-width: 660px) {
+@media (max-width:760px) {
     display:none;
   }
 `
@@ -58,10 +69,14 @@ const Arrow = styled.i`
   padding: 4px;
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+  @media (max-width:760px) {
+    display:none;
+  }
 `
 const IconWrapper = styled.div`
   padding-left:.5rem;
   color: #5c97bc;
+  @media(max-width:760px){
   `
 
 const UserAvatar = ({ userId, name, party, badge, updatedAt }) => (

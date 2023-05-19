@@ -10,13 +10,13 @@ const StyledSection = styled.section`
     flex-direction: column;
     align-items: flex-start;
     box-sizing: border-box;
-    background-color: #f6f6f6;
+    background-color: #fff;
     > h2 {
         color: #2c4c61;
       }
     }
     @media (max-width:700px){
-      padding: 35px 20px;
+      padding: 35px 10px;
     }
 `
 
