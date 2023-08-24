@@ -24,6 +24,11 @@ const StyledP = styled.p`
   cursor:pointer;
   border-radius:5px;
   border:1px solid #4C7394
+  &:hover{
+    background-color: #5c97bc;
+    color: var(--white);
+    border: none;
+  }
 `
 const ArrowRightlink = () => (
   <Link href={'/info?section=acerca-de'}>

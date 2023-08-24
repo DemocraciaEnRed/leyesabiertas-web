@@ -103,15 +103,15 @@ justify-content: center;
 
 const LoadMoreButton = styled.div`
 margin: 0 auto;
-font-size: 2.2
-rem;
-padding: 5px 25px;
+font-size: 1.4rem;
+padding: 10px 20px;
 border-radius: 4px;
-border: 1px solid #2c4c61
+border: 1px solid #5c97bc;
 cursor: pointer
 color: #2c4c61;
+font-family: var(--bold);
 &:hover{
-  background-color: #2c4c61;
+  background-color: #5c97bc;
   color: #FFF
 }
 &:first-child{

@@ -9,7 +9,7 @@ const StyledButton = styled.button`
   background-color: var(--white);
   font-size: 1.4rem;
   color: #5c97bc;
-  border-style: none;
+  border-radius:5px
   cursor: pointer;
   padding: 0 2rem;
   font-family: var(--bold);
@@ -18,6 +18,11 @@ const StyledButton = styled.button`
   color: ${(props) => props.primary ? 'var(--white)' : '#2c4c61'};
   border: ${(props) => props.withBorder ? 'solid 2px #5c97bc' : 'none'};
   align-self: ${(props) => props.center ? 'center' : 'auto'};
+  &:hover{
+    background-color: ${(props) => props.primary ? 'var(--white)' : '#5c97bc'};
+    color: ${(props) => props.primary ? '#5c97bc' : 'var(--white)'};
+    border: ${(props) => props.withBorder ? 'none' : 'solid 2px #5c97bc'};
+  }
 `
 
 const styledButton = (props) => (

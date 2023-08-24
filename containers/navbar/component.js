@@ -73,6 +73,7 @@ width:40%
 display: flex;
 align-items: center;
 justify-content: flex-end;
+flex: 1 1 0px
 @media(max-width:760px){
   display:none;
  }

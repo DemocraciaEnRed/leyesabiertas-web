@@ -44,11 +44,17 @@ const content = {
 }
 
 const StyledStaticInfo = styled.div`
-  display: flex;
-  justify-content: center;
-  background-image: ${(props)=> `url(${props.backgroundImg})`};
-  background-repeat: no-repeat;
-  background-size: 100% auto;
+`
+
+const BannerWrapper = styled.div`
+width:100%;
+
+height: 0;
+padding-top: 30%;
+
+background-image: ${(props)=> `url(${props.backgroundImg})`};
+background-repeat: no-repeat;
+background-size: 100% auto;
 `
 
 const selectBackground = (section)=>{
@@ -65,7 +71,8 @@ const selectBackground = (section)=>{
 }
 
 const StaticInfo = (props) => (
-  <StyledStaticInfo backgroundImg={selectBackground(props.section)}>
+  <StyledStaticInfo >
+    <BannerWrapper backgroundImg={selectBackground(props.section)} />
     <StaticInfoWrapper>
     <StaticInfoNav>
         {buttons.map((button, i) => (

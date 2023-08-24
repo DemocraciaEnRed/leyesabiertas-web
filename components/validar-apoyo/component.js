@@ -6,33 +6,52 @@ const { publicRuntimeConfig: { API_URL } } = getConfig()
 import fetch from 'isomorphic-unfetch'
 import Masonry from 'react-masonry-component';
 import Card from '../../components/card/component'
+import Button from '../../elements/button/component'
+
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 60px 0 60px;
+  padding: 10rem 60px 10rem 60px;
+  background-color: #5c98bd;
+  @media (max-width:760px){
+    padding: 8rem 0;
+  }
+
 `
+
+const ValidateBoxWrapper= styled.div`
+width:80%;
+background-color: #fFf;
+text-align:center
+`
+const ApoyoLogo = styled.img`
+margin:3rem 0
+filter: invert(0.6) sepia(0.4) saturate(5) hue-rotate(175deg);
+`
+
 const Box = styled.div`
   font-size: 1.8rem;
-  padding: 20px 40px;
-  background-color: #74acce;
-  color: white;
-  margin-bottom: 20px;
-`
-const Note = styled.div`
-  font-size: 1.6rem;
-  a {
-    color:#5c97bc
-    font-weight: bold;
-  }
-  a:hover,a:active,a:focus {
-    color:#2f6a8e
+  padding: 20px 40px 0 40px;
+  p{
+    font-family: var(--light);
+    :first-of-type{
+      margin: 24px 0
+      font-size:3.5rem
+      font-family: var(--bold)
+    }
   }
 `
 
 const ProjectsTitle = styled.h1`
+  font-weight: 100;
+  font-family: var(--light);
   margin-top: 50px;
+  padding-bottom: 20px;
+  a{
+    color:#5c98bd;
+  }
 `
 
 export default () => {
@@ -63,6 +82,7 @@ export default () => {
 
   return (
     <Wrapper>
+      <ValidateBoxWrapper>
 
       <Box>
         { isValidado === null ?
@@ -70,9 +90,9 @@ export default () => {
         : (
           isValidado ?
           <div>
-            <img src={`${'/static/assets/corazon.svg'}`} />
-            <p><bold>Gracias</bold></p>
-            <p>¡Su apoyo ha sido validado con éxito!</p>
+            <p><bold>¡Gracias!</bold></p>
+            <p>Su apoyo se ha validado con éxito</p>
+            <ApoyoLogo src={`${'/static/assets/hand-holding-heart-solid.svg'}`} height={100} />
           </div>
             
           :
@@ -81,22 +101,21 @@ export default () => {
         }
       </Box>
 
-      <Note>
-        Haga click&nbsp;
         <Link href={project && { pathname: '/propuesta', query: { id: project._id } } || '/'}>
-          aquí
+          <Button primary>
+            volver al {project && 'proyecto' || 'inicio'}
+          </Button>
         </Link>
-        &nbsp;para volver al {project && 'proyecto' || 'inicio'}
-      </Note>
 
-      <ProjectsTitle>Otros proyectos que puedes apoyar:</ProjectsTitle>
-      {projects &&
+      <ProjectsTitle>O vea otros proyectos <Link href='/' >aquí</Link></ProjectsTitle>
+      {/* {projects &&
         <Masonry style={{ width: '100%', margin: '3.1rem 0 1.6rem' }}>
           {projects.map((p, i) => (
             <Card project={p} key={i} />
           ))}
         </Masonry>
-      }
+      } */}
+      </ValidateBoxWrapper>
 
     </Wrapper>
   )

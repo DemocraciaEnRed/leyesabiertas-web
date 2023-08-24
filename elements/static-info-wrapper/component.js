@@ -8,7 +8,6 @@ const StaticInfoWrapper = styled.div`
   @media(max-width:700px){
     padding:20px;
   }
-  margin-top: 108px;
   @media (min-width: 1024px) {
     > section {
       width: 90%;
