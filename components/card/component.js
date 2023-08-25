@@ -23,6 +23,7 @@ position: relative;
   width: 48%;
   }
 @media (max-width: 600px) {
+  margin: 0;
   width: 100%;
   }
 `
