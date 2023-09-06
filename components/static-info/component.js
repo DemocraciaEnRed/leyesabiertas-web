@@ -55,6 +55,7 @@ padding-top: 30%;
 background-image: ${(props)=> `url(${props.backgroundImg})`};
 background-repeat: no-repeat;
 background-size: 100% auto;
+background-position: center
 `
 
 const selectBackground = (section)=>{
@@ -66,7 +67,7 @@ const selectBackground = (section)=>{
     case 'faq':
         return '/static/assets/images/preguntas_frecuentes.jpg'
     default:
-      return '/static/assets/images/foto_acerca_de.jpg'
+      return '/static/assets/images/foto_acerca_de.png'
   }
 }
 
