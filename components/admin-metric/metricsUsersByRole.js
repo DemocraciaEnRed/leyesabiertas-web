@@ -161,7 +161,7 @@ class MetricsUsersByRole extends Component {
   init () {
     fetch(`${API_URL}/api/v1/metric/usersByRole`, {
       headers: {
-        Authorization: `Bearer ${this.props.token}`,
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
       },
       method: 'GET'

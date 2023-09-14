@@ -207,14 +207,14 @@ class MetricsTags extends Component {
     const fetchArrays = []
     fetchArrays.push(fetch(`${API_URL}/api/v1/metric/documentByTags`, {
       headers: {
-        Authorization: `Bearer ${this.props.token}`,
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
       },
       method: 'GET'
     }))
     fetchArrays.push(fetch(`${API_URL}/api/v1/document-tags/`, {
       headers: {
-        Authorization: `Bearer ${this.props.token}`,
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
       },
       method: 'GET'
@@ -337,7 +337,7 @@ class MetricsTags extends Component {
     }
     fetch(`${API_URL}/api/v1/metric/documentByTags${query}`, {
       headers: {
-        Authorization: `Bearer ${this.props.token}`,
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
       },
       method: 'GET'

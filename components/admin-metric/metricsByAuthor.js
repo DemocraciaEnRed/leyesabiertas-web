@@ -147,7 +147,7 @@ class MetricsByAuthor extends Component {
   init () {
     fetch(`${API_URL}/api/v1/metric/documentByAuthors`, {
       headers: {
-        Authorization: `Bearer ${this.props.token}`,
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
       },
       method: 'GET'
@@ -199,7 +199,7 @@ class MetricsByAuthor extends Component {
     }
     fetch(`${API_URL}/api/v1/metric/documentByAuthors${query}`, {
       headers: {
-        Authorization: `Bearer ${this.props.token}`,
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
       },
       method: 'GET'

@@ -168,7 +168,7 @@ class MetricsUsers extends Component {
   init () {
     fetch(`${API_URL}/api/v1/metric/users?months=1`, {
       headers: {
-        Authorization: `Bearer ${this.props.token}`,
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
       },
       method: 'GET'
@@ -216,7 +216,7 @@ class MetricsUsers extends Component {
     }
     fetch(`${API_URL}/api/v1/metric/users${query}`, {
       headers: {
-        Authorization: `Bearer ${this.props.token}`,
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
       },
       method: 'GET'

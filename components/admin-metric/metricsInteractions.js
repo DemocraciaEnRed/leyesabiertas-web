@@ -168,21 +168,21 @@ class MetricsInteractions extends Component {
     const fetchArrays = []
     fetchArrays.push(fetch(`${API_URL}/api/v1/metric/interactions`, {
       headers: {
-        Authorization: `Bearer ${this.props.token}`,
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
       },
       method: 'GET'
     }))
     fetchArrays.push(fetch(`${API_URL}/api/v1/metric/usersByRole`, {
       headers: {
-        Authorization: `Bearer ${this.props.token}`,
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
       },
       method: 'GET'
     }))
     fetchArrays.push(fetch(`${API_URL}/api/v1/document-tags/`, {
       headers: {
-        Authorization: `Bearer ${this.props.token}`,
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
       },
       method: 'GET'
@@ -213,7 +213,7 @@ class MetricsInteractions extends Component {
 
     // fetch(`${API_URL}/api/v1/metric/interactions`, {
     //   headers: {
-    //     Authorization: `Bearer ${this.props.token}`,
+    //     Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
     //     'Content-Type': 'application/json'
     //   },
     //   method: 'GET'
@@ -298,7 +298,7 @@ class MetricsInteractions extends Component {
     }
     fetch(`${API_URL}/api/v1/metric/interactions${query}`, {
       headers: {
-        Authorization: `Bearer ${this.props.token}`,
+        Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
         'Content-Type': 'application/json'
       },
       method: 'GET'
