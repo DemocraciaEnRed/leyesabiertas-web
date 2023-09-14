@@ -15,6 +15,24 @@ const LoadingAnimation = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #eaeaea;
+  padding: 20px 5px;
+  margin-bottom: 5px;
+  // animate text loading to fade in and out
+  p {
+    animation: fadeInOut 1.5s ease-in-out infinite;
+  }
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+    45% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 `
 
 const UserWrapper = styled.div`
@@ -235,7 +253,7 @@ class MetricsUsersByRole extends Component {
         </TitleMetric>
         { isLoading && (
           <LoadingAnimation>
-            Cargando...
+            <p>Cargando...</p>
           </LoadingAnimation>
         )}
         { !isLoading && (<div>
