@@ -12,6 +12,7 @@ import MetricsUsers from './metricsUsers'
 import MetricsUsersByRole from './metricsUsersByRole'
 import MetricsInteractions from './metricsInteractions'
 import MetricsTags from './metricsTags'
+import WithUserContext from '../with-user-context/component'
 
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
@@ -57,6 +58,19 @@ const TitleMetric = styled.div`
   font-weight: bold;
   font-size: 1.6rem;
 `
+
+const DownloadButton = styled.button`
+  background-color: #5c97bc;
+  color: #FFF;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: #2c4c61;
+  }
+`
+
 class MetricAdmin extends Component {
   constructor (props) {
     super(props)
@@ -68,10 +82,38 @@ class MetricAdmin extends Component {
       showMetricInteractions: false
     }
   }
-
+  
   componentDidMount () {
 
   }
+
+  downloadXls = async (theUrl, filename) => {
+    try {
+      const result = await fetch(`${theUrl}`,{
+        headers: {
+          Authorization: `Bearer ${this.props.authContext.keycloak.token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      const blob = await result.blob()
+
+      // Download API Files With React & Fetch - https://medium.com/yellowcode/download-api-files-with-react-fetch-393e4dae0d9e
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement('a');
+      link.href = url;
+      // set the name as YYYYMMDD_HHmmss.xls
+      const date = new Date()
+      const dateString = `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}_${date.getHours()}${date.getMinutes()}${date.getSeconds()}`
+      link.setAttribute('download', `${dateString}_${filename}.xlsx`);  // 3. Append to html page
+      document.body.appendChild(link);  // 4. Force download
+      link.click();  // 5. Clean up and remove the link
+      link.parentNode.removeChild(link);
+
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
 
   render () {
     const { showMetricByAuthor, showMetricByTags, showMetricUsers, showMetricInteractions } = this.state
@@ -124,12 +166,10 @@ class MetricAdmin extends Component {
           </TitleMetric>
           <br/>
           <p style={{display: 'block', marginBottom: '3px'}}>Listado completo de usuarios</p>
-          <a style={{display: 'inline-block', marginBottom: '5px', color: '#5c97bc', padding: '5px 5px', borderRadius: '2px', border: '1px solid #5c97bc', cursor: 'pointer'}}
-            href={`${API_URL}/api/v1/metric/users/xls`} target='_blank' rel='noopener noreferrer'>Descargar dataset</a>
+          <DownloadButton onClick={() => this.downloadXls(`${API_URL}/api/v1/metric/users/xls`, 'usuarios')}>Descargar dataset</DownloadButton>
           <br/><br/>
           <p style={{display: 'block', marginBottom: '3px'}}>Listado completo de proyectos con sus autores e interacciones</p>
-          <a style={{display: 'inline-block', marginBottom: '5px', color: '#5c97bc', padding: '5px 5px', borderRadius: '2px', border: '1px solid #5c97bc', cursor: 'pointer'}} 
-            href={`${API_URL}/api/v1/metric/interactions/xls`} target='_blank' rel='noopener noreferrer'>Descargar dataset</a>
+          <DownloadButton onClick={() => this.downloadXls(`${API_URL}/api/v1/metric/interactions/xls`, 'proyectos')}>Descargar dataset</DownloadButton>
         </div>
       </StyledMetricAdmin>
     )
@@ -139,4 +179,4 @@ class MetricAdmin extends Component {
 MetricAdmin.propTypes = {
 }
 
-export default WithDocumentTagsContext(MetricAdmin)
+export default WithUserContext(MetricAdmin)
