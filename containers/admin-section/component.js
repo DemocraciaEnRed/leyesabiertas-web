@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import TagsAdmin from '../../components/admin-tags/component'
+import MetricAdmin from '../../components/admin-metric/component'
 import ProjectsAdmin from '../../components/admin-projects/component'
 import UsersAdmin from '../../components/admin-users/component'
 import UserEdit from '../../components/admin-edit-user/component'
@@ -29,7 +30,9 @@ const AdminSection = (props) => {
     'tags':<TagsAdmin token={props.token}/>,
     'projects':<ProjectsAdmin token={props.token}/>,
     'users':<UsersAdmin token={props.token}/>,
-    'userEdit':<UserEdit token={props.token}/>
+    'userEdit':<UserEdit token={props.token}/>,
+    'metric': <MetricAdmin token={props.token}/>
+
   
   }
     return(

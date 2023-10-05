@@ -51,7 +51,12 @@ const buttons = [
         "key":3,
         'name':'Usuarios',
         'value':'users'
-    }
+    },
+    {
+      "key":4,
+      'name':'Metricas',
+      'value':'metric'
+  }
 
 ]
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Icon from 'react-icons-kit'
 import { checkCircle } from 'react-icons-kit/fa/checkCircle'
+// import { exclamationCircle } from 'react-icons-kit/fa/exclamationCircle'
 import getConfig from 'next/config'
 
 const { publicRuntimeConfig: { API_URL } } = getConfig()
@@ -24,6 +25,7 @@ const Avatar = styled.div`
   background-image: url('${(props) => props.userId ? `${API_URL}/api/v1/users/${props.userId}/avatar?${props.updatedAt}` : '/static/assets/userdefault.png'}');
   background-size: cover;
   background-position: center;
+  position: relative;
   @media (max-width: 760px) {
     width: 30px;
     min-width:30px;
@@ -73,6 +75,15 @@ const Arrow = styled.i`
     display:none;
   }
 `
+// const IconProfileNeedsUpdate = styled.div`
+//   // warning color
+//   color: #f9a825;
+//   position: absolute;
+//   bottom: 0;
+//   right: 0;
+//   background-color: #fff;
+// `
+
 const IconWrapper = styled.div`
   padding-left:.5rem;
   color: #5c97bc;
@@ -83,7 +94,9 @@ const UserAvatar = ({ userId, name, party, badge, updatedAt }) => (
   <Wrapper>
     <Avatar
       userId={userId}
-      updatedAt={updatedAt} />
+      updatedAt={updatedAt}>
+      {/* <IconProfileNeedsUpdate><Icon icon={exclamationCircle} /></IconProfileNeedsUpdate> */}
+    </Avatar>
     <TextWrapper>
       <Name>{name} </Name>
       <Party>
