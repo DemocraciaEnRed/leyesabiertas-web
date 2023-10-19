@@ -1,5 +1,174 @@
-
 # Changelog
+
+### 3.0.0
+
+> **IMPORTANTE: HAY NUEVAS VARIABLES DE ENTORNO, POR FAVOR VERIFICAR EL ARCHIVO `.env.dist` DEL NOTIFIER**
+
+* NEW: Nuevo procedimiento de init() del sistema: Implementacion de "migrations", para realizar migraciones mas concretas y de forma secuenciales. Esto permite que el sistema pueda ser actualizado de forma mas sencilla y tener mejor auditoria de los cambios que se realizan en la base de datos.
+* MIGRATION 003: Esta migracion fuerza todas las tags/etiquetas de intereses de todos los usuarios de la DB.
+* MIGRATION 004: Esta migracion fuerza las notificaciones de proyectos populares en todos los usuarios DB.
+* MIGRATION 005: Esta migracion se encarga de setear en los documentos existentes de la base de datos si ya son populares o si no. Si ya lo son, se setea que el mail de popular "ya" fue enviado (esto es para evitar que proyectos del pasado sean "populares" cuando ya están cerrados.)
+* MIGRATION 006: Esta migracion agrega el campo "authors" en los fields de los usuarios (necesario para que se puedan suscribir a sus diputados favoritos)
+* MIGRATION 007: Esta migracion fuerza que TODOS los usuarios (si no lo tenian) tengan activadas las notificaciones por tags/etiquetas de intereses.
+* NEW: Reordenados los "customForms" de los fields de usuarios y documentos en archivos separados, para mejor control de los mismos.
+* NEW: Agregado en el customForm de users el campo "popularNotification" para guardar la preferencia si el usuario desea ser notificado por proyectos populares
+* NEW: Agregado en el customForm de users el campo "authors" para guardar la lista de usuarios 
+* NEW: Agregado en el customForm de documents el campo "popular" para guardar si el documento es popular o no
+* NEW: Nuevo segmento "Mis notificaciones" en el perfil de un usuario: Ahora los usuarios tienen separado de la seccion "Editar perfil" la configuracion de sus notificaciones, que son 4: Activar notificaciones por etiquetas de interes / Seleccion de etiquetas de interes / Activar notificaciones por proyectos populares / Diputados suscriptos.
+* NEW: Nueva notificacion: "Proyectos populares": Ahora cuando un proyecto se vuelve popular (esto significa, que consigue 30 apoyos, o 10 comentarios en su fundamento, o 5 aportes en el articulado) se envia un mail a todos los usuarios que tengan activada la opcion de recibir notificaciones por proyectos populares.
+* NEW: Agregado nuevo boton en vista de proyecto: "Suscribirse al/Desuscribirse del diputado" para que los usuarios puedan suscribirse a los diputados que quieran, y recibir notificaciones cuando estos publiquen un nuevo proyecto.
+* NEW: Agregado nuevo boton al visitar el perfil de un diputado "Suscribirse al/Desuscribirse del diputado" (Similar al punto anterior)
+* NEW: Ahora al agregar una nueva etiqueta, automaticamente todos los usuarios van a ser suscriptos a esta etiqueta.
+* NEW: Ahora se guarda el lastLogin de los usuarios, para saber cuando fue la ultima vez que se loguearon.
+* NEW: Nuevos usuarios que se registran automaticamente estaran suscripto a todas las etiquetas de interes, y a recibir notificaciones por proyectos populares. (NO asi, no se los suscribe a todos los diputados, eso es decision especifica del usuario)
+* NEW - Notifier: Nueva notificacion del tipo "document-popular" para documentos que se vuelven populares. Se le notifica a los usuarios que tienen la opcion de recibir notificaciones por proyectos populares activada.
+* NEW - Notifier: Ahora la notificacion de "document-published" o documento publicado contempla a todos los usuarios que: Estan suscriptos a notificaciones por etiquetas y el documento tiene una etiqueta que le interesa al usuario, o bien, el usuario esta suscripto a notificaciones por diputados y el documento fue publicado por un diputado al que el usuario esta suscripto.
+* NEW - Notifier: Se agrego al mail de notificacion de cierre de documento, ademas de que ya se veia la cantidad de comentarios, la cantidad de aportes al articulado y la cantidad de apoyos al proyecto.
+* NEW - Notifier: Se agrego al mail de notificacion de documento publicado el recuadro del proyecto (que generalmente se mostraba en otras plantillas pero estaba faltando en la de publicacion del proyecto)
+* NEW - Notifier: Agregado **bottleneck** como dependencia, que es un paquete que se encarga de limitar la cantidad de mails que se envian por segundo, para evitar que el servidor de correo nos bloquee por abuso. **IMPORTANTE: HAY NUEVAS VARIABLES DE ENTORNO, POR FAVOR VERIFICAR EL ARCHIVO `.env.dist` DEL NOTIFIER**. Este throttle es opcional pero vital para evitar que el servidor de correo nos bloquee por abuso. Es importante que se configure correctamente, ya que si no se configura, el throttle no se activa y el servidor de correo puede colapsar.
+* FIX: Se arreglo un problema de que al eliminar una etiqueta, la misma no se borraba de la lista de tags de los documentos. 
+* FIX: Se arreglo un problema de que al eliminar una etiqueta, la misma no se borraba de la lista de tags/etiquetas de los usuarios que se suscribieron a las mismas.
+* FIX: Se arreglo un problema al apoyar un proyecto de forma anonima: El usuario recibia un correo para validar su apoyo, al ser redirigido a la pagina web, ocurrian doble HTTP GET al link, donde uno validaba, pero el ultimo devolvia error porque ya el primero lo habia validado, y el usuario siempre veia "No se encontro su apoyo" cuando en realidad el mismo fue procesado por el primer GET. Se soluciono cambiando el endpoint de HTTP GET a HTTP POST y aplicando un setTimeout en la vista de 3 segundos antes de enviar el POST.
+* FIX: Para notificaciones cuando un proyeto se publica, en el momento que se enviaba el pedido del CORE al NOTIFIER, el modulo de NOTIFIER corrobora si el mail habia sido enviado, como el CORE estaba seteando el flag `publishedMailSent`, el NOTIFIER no enviaba el mail porque este flag evitaba su envio. Ahora se cambio para que los flags (tanto `publishedMailSent` y `popularMailSent`) los setee el NOTIFIER, y no el CORE.
+* FIX - Web: Ahora en el admin, al crear una nueva etiqueta, el slug se crea en el backend de mejor forma que como se creaba en el backend.
+* FIX - Web: Ahora en el admin, en la vista de etiquetas, las mismas estan ordenadas alfabeticamente.
+* FIX - Web: Ahora en la pagina principal, las etiquetas estan ordenadas alfabeticamente.
+* FIX - Web: Las etiquetas del recuadro de un proyeto se achicaron los espacios y compactaron las etiquetas, ya que se rompia y escapaban del recuadro en algunos casos. Tambien se quito el letter-spacing que agregaba confusion a etiquetas grandes.
+* FIX - Web: Corregido el titulo "tags" por "Etiquetas" en la vista de admin de Etiquetas
+* FIX - Web: Corregido el titulo "users" por "Usuarios" en la vista de admin de Usuarios
+* FIX - Web: En la seccion de "Usuarios" del admin, no se podia diferenciar que era cada usuario, si un usuario normal o si era un admin o si un diputado. Ahora visualmente se puede diferenciar
+* FIX - Web: En la seccion de "Usuarios" del admin el buscador permite buscar a cualquier usuario, pero el placeholder especificamente decia que podia buscar diputados por nombre.
+* FIX - Notifier: Las variables de entorno se estaban cargando de forma inconsistente e incorrecta.
+* FIX - Notifier: Se agregaron mejoras en el logging del notifier, mas informacion para poder debuggear en caso de error.
+* FIX - Notifier: Las notificaciones del cierre de documentos no estaba tomando en cuenta las personas que apoyaron el proyecto. A partir de ahora los usuarios que reciben la notificacion que un proyeto cierra es la union de: Los usuarios que participaron comentando en el fundamento + Los usuarios que aportaron en el articulado + Los usuarios que dieron like a un comentario + Los usuarios que apoyaron el proyecto.
+* NOTA: La notificacion de proyectos populares se envia a todos los usuarios que tengan activada la opcion de recibir notificaciones por proyectos populares, completamente ajeno si siguen o no al diputado, o si estan o no suscriptos a notificaciones por etiquetas de interes.
+* NOTA: La notificacion de proyectos populares se envia UNA sola vez. Comentarios, aportes o apoyos posteriores no vuelven a enviar la notificacion.
+
+Compatible con:
+* `leyesabiertas-web:3.0.0`
+* `leyesabiertas-core:3.0.0`
+* `leyesabiertas-notifier:3.0.0`
+* `leyesabiertas-keycloak:2.0.0`
+
+### 2.1.0
+
+* Agregado sección de metricas para administradores
+* Agregado en los datos del usuario `lastLogin`
+* Cambio en middleware `bindUserToSession` para guardar la fecha de lastLogin
+
+#### Metricas de autores:
+
+* Cantidad de proyectos por autor
+* Cantidad de proyectos creados en X año por autor
+
+#### Metricas de etiquetas:
+
+* Cantidad de proyectos por etiquetas ordenadas de forma descendiente
+* Cantidad de proyectos creados en X año por etiqueta
+* (Al seleccionar una etiqueta) Lista de proyectos
+* (Al seleccionar una etiqueta) Lista  creados en X año
+* Lista de proyectos sin etiquetas
+
+#### Metricas de usuarios
+
+* Cantidad de usuarios registrados
+* Cantidad de usuarios comunes (sin rol admin o autor)
+* Cantidad de usuarios registrados que se registraron en X año
+* Cantidad de usuarios comunes que se registraron en X año
+* Lista de usuarios admin
+* Lista de usuarios autores
+
+#### Metricas de interaccion por proyecto
+
+* Lista de proyectos ordenados por mayor a menor interaccion en total:
+
+```
+* Total de comentarios en la fundamentacion
+* Total de comentarios en aportes
+* Total de likes (en comentarios de la fundamentacion y en aportes)
+* Total de apoyos
+* Total de interacciones (comentarios+apoyos+likes)
+```
+
+* Posibilidad de filtrar por
+
+```
+* Año de creacion de proyecto
+* Etiqueta
+* Autor
+```
+
+#### * Descarga de datasets:
+
+* Listado completo de usuarios con:
+```
+* id
+* nombre
+* apellido
+* email
+* ocupacion
+* genero
+* fecha de nacimiento
+* provincia
+* partido
+* notificaciones_activadas
+* fecha de creacion
+* fecha de actualizacion
+* fecha de ultimo login
+```
+* Listado de proyectos con interacciones y autor:
+```
+* id
+* titulo
+* version
+* tags
+* autorNombre
+* autorEmail
+* apoyos
+* likes
+* comentariosFundamentos
+* comentariosAportesArticulado
+* totalInteracciones
+* fechaCreacion
+* fechaCierre
+```
+
+Compatible con:
+* `leyesabiertas-web:2.1.0`
+* `leyesabiertas-core:2.1.0`
+* `leyesabiertas-notifier:2.0.0`
+* `leyesabiertas-keycloak:2.0.0`
+
+### 2.0.1
+
+- Ordena documentos por orden de cierre
+
+Ultimos cambios de frontend:
+
+- Banners en acerca de
+- Cambio logo
+- Sistematización de botones en home
+- ajustes en pagina apoyo sin registro
+- cambio logo navbar
+
+
+Compatible con:
+
+* `leyesabiertas-web:2.0.1`
+* `leyesabiertas-core:2.0.1`
+* `leyesabiertas-notifier:1.9.1`
+* `leyesabiertas-keycloak:1.8.0`
+
+### 2.0.0
+
+> TO BE DONE
+
+Compatible con:
+
+* `leyesabiertas-web:2.0.0`
+* `leyesabiertas-core:2.0.0`
+* `leyesabiertas-notifier:1.9.1`
+* `leyesabiertas-keycloak:1.8.0`
 
 ### 1.9.4
 

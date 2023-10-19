@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const ProgressBarWrapper = styled.div`
-  margin-top: 20px;
+  margin-top: 4px;
   background-color: #c6c8ca;
   overflow: hidden;
   height: 40px;

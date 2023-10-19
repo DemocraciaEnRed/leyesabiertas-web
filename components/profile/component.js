@@ -12,21 +12,22 @@ import ProfileLabel from '../../elements/profile-label/component'
 import ProfileInput from '../../elements/profile-input/component'
 import ProfileSelect from '../../elements/profile-select/component'
 import ProfileButtonWrapper from '../../elements/profile-button-wrapper/component'
-import ProfileTags from '../../elements/profile-tags/component'
+// import ProfileTags from '../../elements/profile-tags/component'
 import SubmitInput from '../../elements/submit-input/component'
-import WithDocumentTagsContext from '../../components/document-tags-context/component'
+// import WithDocumentTagsContext from '../../components/document-tags-context/component'
+import SubscribeButtonProfile from '../../components/subscribe-button-profile/component'
 
-const TagsNotificationCheckboxDiv = styled.div`
-  width: 350px;
-  display: flex;
-  line-height: 15px;
-  margin-top: 3px;
-  font-size:13px;
-  & > input {
-    margin-right: 7px;
-    margin-bottom: auto;
-  }
-`
+// const TagsNotificationCheckboxDiv = styled.div`
+//   width: 350px;
+//   display: flex;
+//   line-height: 15px;
+//   margin-top: 3px;
+//   font-size:13px;
+//   & > input {
+//     margin-right: 7px;
+//     margin-bottom: auto;
+//   }
+// `
 
 const ButtonLink = styled.button`
   background-color: #5c97bc;
@@ -69,14 +70,14 @@ class Profile extends Component {
     province: '',
     editMode: false,
     files: [],
-    allTags: [],
-    tags: [],
-    tagsMaxReached: false,
-    tagsNotification: ''
+    // allTags: [],
+    // tags: [],
+    // tagsMaxReached: false,
+    // tagsNotification: ''
   }
 
   async componentWillMount () {
-    this.setState({ allTags: await this.props.fetchDocumentTags() })
+    // this.setState({ allTags: await this.props.fetchDocumentTags() })
   }
 
   componentDidMount () {
@@ -87,8 +88,8 @@ class Profile extends Component {
       party: user.fields && user.fields.party ? user.fields.party : '',
       birthday: user.fields && user.fields.birthday ? user.fields.birthday : '',
       province: user.fields && user.fields.province ? user.fields.province : '',
-      tags: user.fields && user.fields.tags ? user.fields.tags : [],
-      tagsNotification: user.fields && user.fields.tagsNotification ? user.fields.tagsNotification : ''
+      // tags: user.fields && user.fields.tags ? user.fields.tags : [],
+      // tagsNotification: user.fields && user.fields.tagsNotification ? user.fields.tagsNotification : ''
     })
   }
 
@@ -115,9 +116,9 @@ class Profile extends Component {
       party: user.fields && user.fields.party ? user.fields.party : '',
       birthday: user.fields && user.fields.birthday ? user.fields.birthday : '',
       province: user.fields && user.fields.province ? user.fields.province : '',
-      tags: user.fields && user.fields.tags ? user.fields.tags : [],
-      tagsMaxReached: false,
-      tagsNotification: user.fields && user.fields.tagsNotification ? user.fields.tagsNotification : ''
+      // tags: user.fields && user.fields.tags ? user.fields.tags : [],
+      // tagsMaxReached: false,
+      // tagsNotification: user.fields && user.fields.tagsNotification ? user.fields.tagsNotification : ''
     })
   }
 
@@ -130,20 +131,20 @@ class Profile extends Component {
     })
   }
 
-  handleTagClick = (tag) => {
-    if (this.state.tagsMaxReached)
-      this.setState({tagsMaxReached: false})
+  // handleTagClick = (tag) => {
+  //   if (this.state.tagsMaxReached)
+  //     this.setState({tagsMaxReached: false})
 
-    const clickedTagId = tag._id
-    if (this.state.tags.includes(clickedTagId))
-      this.setState((prevState) => ({tags: prevState.tags.filter(tagId => tagId != clickedTagId)}))
-    else {
-      if (this.state.tags.length == 6)
-        this.setState({tagsMaxReached: true})
-      else
-        this.setState((prevState) => ({tags: prevState.tags.concat(clickedTagId)}))
-    }
-  }
+  //   const clickedTagId = tag._id
+  //   if (this.state.tags.includes(clickedTagId))
+  //     this.setState((prevState) => ({tags: prevState.tags.filter(tagId => tagId != clickedTagId)}))
+  //   else {
+  //     if (this.state.tags.length == 6)
+  //       this.setState({tagsMaxReached: true})
+  //     else
+  //       this.setState((prevState) => ({tags: prevState.tags.concat(clickedTagId)}))
+  //   }
+  // }
 
   handleSubmit = async (e) => {
     e.preventDefault()
@@ -153,9 +154,9 @@ class Profile extends Component {
         gender: this.state.gender || '',
         birthday: this.state.birthday || '',
         province: this.state.province || '',
-        party: this.state.party || '',
-        tags: this.state.tags || '',
-        tagsNotification: this.state.tagsNotification || ''
+        party: this.state.party || ''
+        // tags: this.state.tags || '',
+        // tagsNotification: this.state.tagsNotification || ''
       }
     }
     if (this.state.avatar) {
@@ -168,13 +169,13 @@ class Profile extends Component {
     jump(-1000)
   }
 
-  toggleTagsCheckboxChange = () => {
-    this.setState(({ tagsNotification }) => (
-      {
-        tagsNotification: !tagsNotification,
-      }
-    ));
-  }
+  // toggleTagsCheckboxChange = () => {
+  //   this.setState(({ tagsNotification }) => (
+  //     {
+  //       tagsNotification: !tagsNotification,
+  //     }
+  //   ));
+  // }
 
 
   render () {
@@ -184,8 +185,10 @@ class Profile extends Component {
         <ProfileAvatar id={user.id} date={user.updatedAt} />
         <ProfileName>{`${user.surnames}, ${user.names}`}</ProfileName>
         <ProfileMail mail={user.arrayData.join(' - ')} />
-        { isOwner && !this.state.editMode ? <ButtonLink onClick={this.toggleEdit}>Editar perfil</ButtonLink> : null }
+        {/* Log stuff */}
         { isLoading ? <p>...</p> : null}
+        { !isOwner && user.roles.includes('accountable') && <SubscribeButtonProfile authorId={user.id} />}
+        { isOwner && !this.state.editMode && <ButtonLink onClick={() => this.toggleEdit()}>Editar perfil</ButtonLink> }
         {
           this.state.editMode
             ? <div>
@@ -246,7 +249,7 @@ class Profile extends Component {
                 </ProfileLabel>
                 : null
               }
-              <ProfileLabel htmlFor='tags'>
+              {/* <ProfileLabel htmlFor='tags'>
           Etiquetas de interés
             <TagsNotificationCheckboxDiv>
               <input
@@ -264,7 +267,7 @@ class Profile extends Component {
                   allTags={this.state.allTags}
                   tags={this.state.tags}
                   onTagClick={this.handleTagClick} />
-              </ProfileLabel>
+              </ProfileLabel> */}
               <ProfileButtonWrapper>
                 <SubmitInput
                   type='submit'
@@ -278,4 +281,5 @@ class Profile extends Component {
   }
 }
 
-export default WithDocumentTagsContext(Profile)
+// export default WithDocumentTagsContext(Profile)
+export default Profile

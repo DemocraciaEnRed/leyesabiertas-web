@@ -5,9 +5,9 @@ import Icon from 'react-icons-kit'
 import { clockO } from 'react-icons-kit/fa/clockO'
 import { toggle } from 'react-icons-kit/ionicons/toggle'
 import { toggleFilled } from 'react-icons-kit/ionicons/toggleFilled'
+import getConfig from 'next/config'
 import WithUserContext from '../with-user-context/component'
 import Alert from '../../elements/alert/component'
-import getConfig from 'next/config'
 
 const { publicRuntimeConfig: { API_URL } } = getConfig()
 
@@ -107,7 +107,7 @@ const LoadingClick = styled.span`
 `
 
 class TogglePublished extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       showAlert: false,
@@ -159,7 +159,7 @@ class TogglePublished extends Component {
     })
   }
 
-  render() {
+  render () {
     const { isPublished } = this.props
     const { showAlert, alertType, alertText, isLoading } = this.state
     return (
@@ -176,7 +176,7 @@ class TogglePublished extends Component {
             </ToggleClick>
         }
         {
-          isLoading && 
+          isLoading &&
             <LoadingClick>
               <Icon icon={clockO} size={25} style={{ color: '#ef885d' }} />
                 &nbsp;&nbsp;Guardado...
