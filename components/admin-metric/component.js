@@ -136,7 +136,7 @@ class MetricAdmin extends Component {
             showMetricByTags && <MetricsTags />
           }
           <SectionHeader onClick={() => this.setState({ showMetricInteractions: !this.state.showMetricInteractions })}>
-            <span>Métricas de interacciónes en proyectos</span>
+            <span>Métricas de interacciones en proyectos</span>
             <Icon icon={showMetricInteractions ? caretDown : caretRight} size={20} />
           </SectionHeader>
           {
