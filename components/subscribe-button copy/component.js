@@ -68,13 +68,13 @@ class SubscribeButton extends Component {
     // when component initiates, this.props.authContext might not be fullfiled, we need to
     // set an interval to check if it is already there
     const interval = setInterval(() => {
-      console.log('Is it loaded?')
+      // console.log('Is it loaded?')
       if (this.props.authContext && this.props.authContext.user && this.props.authContext.user._id) {
-        console.log('Yes it is')
+        // console.log('Yes it is')
         clearInterval(interval)
         this.fetchData()
       } else {
-        console.log('Not yet')
+        // console.log('Not yet')
       }
     }, 1000)
   }
