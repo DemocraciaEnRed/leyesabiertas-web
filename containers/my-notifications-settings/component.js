@@ -343,7 +343,7 @@ class MyNotificationsSettings extends Component {
             />Haga clic en el checkbox para recibir notificaciones cada vez que un proyecto se vuelva popular
           </TagsNotificationCheckboxDiv>
           <SegmentTitle>Suscripción a autores de propuestas</SegmentTitle>
-          <SegmentDescription>La siguiente lista muestra los autores de propuestas a los que se ha suscripto. Para desuscribirse a las notificaciones de un autor, haga clic en el botón "Desuscribirse".</SegmentDescription>
+          <SegmentDescription>Puede suscribirse a un autor ingresando a una propuesta o al perfil del mismo. La siguiente lista muestra aquellos a los que  se ha suscripto. Para desuscribirse a las notificaciones, haga clic en el botón "Desuscribirse".</SegmentDescription>
           <AuthorsWrapper>
             {
               this.state.userSubscribedAuthors.map((author) => (
