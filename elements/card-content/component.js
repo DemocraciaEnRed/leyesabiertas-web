@@ -16,7 +16,7 @@ const Tags = styled.div`
   width:90%;
   margin: auto
   margin-bottom:0;
-  padding:20px 0 0 0
+  padding: 10px 0 0 0
   display: flex;
   flex-direction:row;
   flex-wrap: wrap;

@@ -20,11 +20,10 @@ color: #4C4C4E;
 border-radius:5px;
 font-weight: 600;
 font-family: var(--italic);
-padding:8px;
-font-size:12px
+padding: 5px 10px;
+font-size: 12px
 line-height: 15px;
 text-align: center;
-letter-spacing: 1.1px;
 text-transform: capitalize;
 `
 

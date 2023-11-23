@@ -54,7 +54,7 @@ const buttons = [
     },
     {
       "key":4,
-      'name':'Metricas',
+      'name':'Métricas',
       'value':'metric'
   }
 

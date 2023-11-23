@@ -25,6 +25,7 @@ const ValidateBoxWrapper= styled.div`
 width:80%;
 background-color: #fFf;
 text-align:center
+padding: 10px;
 `
 const ApoyoLogo = styled.img`
 margin:3rem 0
@@ -33,7 +34,7 @@ filter: invert(0.6) sepia(0.4) saturate(5) hue-rotate(175deg);
 
 const Box = styled.div`
   font-size: 1.8rem;
-  padding: 20px 40px 0 40px;
+  padding: 10px;
   p{
     font-family: var(--light);
     :first-of-type{
@@ -47,8 +48,8 @@ const Box = styled.div`
 const ProjectsTitle = styled.h1`
   font-weight: 100;
   font-family: var(--light);
-  margin-top: 50px;
-  padding-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 5px;
   a{
     color:#5c98bd;
   }
@@ -65,19 +66,23 @@ export default () => {
     const urlParams = new URLSearchParams(queryString);
     const v = urlParams.get('v');
 
-    fetch(`${API_URL}/api/v1/documents/apoyo-anon-validar/${v}`)
-      .then(r => r.json())
-      .then(j => {
-        if (j.error){
-          setIsValidado(false)
-          fetch(`${API_URL}/api/v1/documents`).then(r => r.json()).then(j => setProjects(j.results))
-        }else {
-          let rProject = j.document
-          setProject(rProject)
-          setIsValidado(true)
-          fetch(`${API_URL}/api/v1/documents`).then(r => r.json()).then(j => setProjects(j.results.filter(d => d._id != rProject._id)))
-        }
+    setTimeout(() => {
+      fetch(`${API_URL}/api/v1/documents/apoyo-anon-validar/${v}`, {
+        'method': 'POST',
+        'headers': {
+          'Content-Type': 'application/json',
+        },
       })
+        .then(r => r.json())
+        .then(j => {
+          if (j.error){
+            setIsValidado(false)
+          }else {
+            let rProject = j.document
+            setIsValidado(true)
+          }
+        })
+      }, 3000)
   }, [])
 
   return (
@@ -96,25 +101,19 @@ export default () => {
           </div>
             
           :
-            'No se ha podido validar su apoyo'
+            'No se ha podido validar su apoyo, o ya ha apoyado el proyecto'
         )
         }
       </Box>
-
+        <br></br>
         <Link href={project && { pathname: '/propuesta', query: { id: project._id } } || '/'}>
           <Button primary>
             volver al {project && 'proyecto' || 'inicio'}
           </Button>
         </Link>
-
-      <ProjectsTitle>O vea otros proyectos <Link href='/' >aquí</Link></ProjectsTitle>
-      {/* {projects &&
-        <Masonry style={{ width: '100%', margin: '3.1rem 0 1.6rem' }}>
-          {projects.map((p, i) => (
-            <Card project={p} key={i} />
-          ))}
-        </Masonry>
-      } */}
+        {
+          isValidado && <ProjectsTitle>Vea otros proyectos <Link href='/' >aquí</Link></ProjectsTitle>
+        }
       </ValidateBoxWrapper>
 
     </Wrapper>

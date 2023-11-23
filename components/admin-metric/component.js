@@ -119,24 +119,24 @@ class MetricAdmin extends Component {
     const { showMetricByAuthor, showMetricByTags, showMetricUsers, showMetricInteractions } = this.state
     return (
       <StyledMetricAdmin id='admin-metrics'>
-        <TitleContent style={{ 'marginBottom': '20px' }}>Metricas</TitleContent>
+        <TitleContent style={{ 'marginBottom': '20px' }}>Métricas</TitleContent>
         <SectionsWrapper>
           <SectionHeader onClick={() => this.setState({ showMetricByAuthor: !this.state.showMetricByAuthor })}>
-            <span>Metricas por autor</span>
+            <span>Métricas por autor</span>
             <Icon icon={this.state.showMetricByAuthor ? caretDown : caretRight} size={20} />
           </SectionHeader>
           {
             showMetricByAuthor && <MetricsByAuthor />
           }
           <SectionHeader onClick={() => this.setState({ showMetricByTags: !this.state.showMetricByTags })}>
-            <span>Metricas por etiquetas</span>
+            <span>Métricas por etiquetas</span>
             <Icon icon={showMetricByTags ? caretDown : caretRight} size={20} />
           </SectionHeader>
           {
             showMetricByTags && <MetricsTags />
           }
           <SectionHeader onClick={() => this.setState({ showMetricInteractions: !this.state.showMetricInteractions })}>
-            <span>Metricas de interacciónes en proyectos</span>
+            <span>Métricas de interacciones en proyectos</span>
             <Icon icon={showMetricInteractions ? caretDown : caretRight} size={20} />
           </SectionHeader>
           {
@@ -147,7 +147,7 @@ class MetricAdmin extends Component {
             )
           }
           <SectionHeader onClick={() => this.setState({ showMetricUsers: !this.state.showMetricUsers })}>
-            <span>Metricas de usuarios</span>
+            <span>Métricas de usuarios</span>
             <Icon icon={showMetricUsers ? caretDown : caretRight} size={20} />
           </SectionHeader>
           {

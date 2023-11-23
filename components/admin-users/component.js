@@ -139,8 +139,8 @@ class UsersAdmin extends Component{
     const { usersList, fetching, fetchMoreAvailable } = this.state
   return(
   <StyledUsersAdmin id='admin-users'>
-    <TitleContent>users</TitleContent>
-    <Search type='text' placeholder='Buscá por nombre de la Diputada o Diputado' onInput={(e) => this.toggleSort('search', e.target.value)} />
+    <TitleContent>Usuarios y Diputados</TitleContent>
+    <Search type='text' placeholder='Buscá por nombre a un usuario' onInput={(e) => this.toggleSort('search', e.target.value)} />
 
     <Content>
     {usersList && usersList.map((user, idx) => 

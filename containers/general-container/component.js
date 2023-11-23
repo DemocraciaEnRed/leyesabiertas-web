@@ -26,7 +26,8 @@ class GeneralContainer extends Component {
 
   componentDidMount () {
     if (!this.props.authContext.keycloak) return
-    if (this.props.authContext.user.roles.includes('admin')) {this.setState({isAdmin: true})}
+    // if (!this.props.authContext.user) return
+    if (this.props.authContext.authenticated && this.props.authContext.user && this.props.authContext.user.roles.includes('admin')) {this.setState({isAdmin: true})}
     this.fetchDocument(this.props.project, this.props.authContext.keycloak.token)
   }
 

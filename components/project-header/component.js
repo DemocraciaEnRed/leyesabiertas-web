@@ -28,6 +28,7 @@ import ModeBarApoyarButton from '../../elements/mode-bar-apoyar-button/component
 import ModeBarSharedButton from '../../elements/mode-bar-shared-button/component'
 import ProjectMobileTools from "../project-mobile-tools/component"
 import ProgressBar from '../../elements/progress-bar/component'
+import SubscribeButton from '../../components/subscribe-button/component'
 
 const ProjectHeaderContainer = styled.div`
   min-height: 383px;
@@ -47,6 +48,26 @@ margin:30px
 `
 const SocialSection = styled.div`
 display: flex;
+flex-direction:row;
+align-items:end;
+justify-content:flex-end;
+@media(max-width:700px){
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:flex-end;
+}
+`
+
+const ModeSection = styled.div`
+display: flex;
+flex-direction:row;
+align-items:end;
+justify-content:flex-start;
+@media(max-width:700px){
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:flex-end;
+}
 `
 
 const ProgressBarWrapper = styled.div`
@@ -126,13 +147,13 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
               authorId={project.author._id}
               userId={project.author._id}
               name={project.author.fullname}
-              party={project.author.fields && project.author.fields.party ? project.author.fields.party : ''} />
+              party={project.author.fieds && project.author.fields.party ? project.author.fields.party : ''} />
             <ClosingDate closingDate={project.currentVersion.content.closingDate} closed={project.closed} creationDate={project.currentVersion.createdAt} />
             <ArticlesCommentsCounter commentsCount={project.commentsCount} apoyosCount={project.apoyosCount} project={project._id} />
             <ProjectHeaderVersion
               project={project._id}
               version={project.currentVersion.version}
-            />
+              />
             <ProjectEditMode />
             {isAuthor &&
               <TogglePublish project={project} isPublished={isPublished} setPublish={setPublish} togglePublish={togglePublish} />
@@ -142,7 +163,6 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
           <ProjectTitle>{project.currentVersion.content.title}</ProjectTitle>
           <ProgressBarWrapper>
             <ProgressBar closingDate={project.currentVersion.content.closingDate} creationDate={project.currentVersion.createdAt} closed={project.closed} />
-
           </ProgressBarWrapper>
 
           {/* <ProjectSubtitle
@@ -162,10 +182,10 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
         </InfoHeader>
         {currentSection === '/propuesta' &&
           <ModeBar>
-            <div>
+            <ModeSection>
               <ModeBarLinkButton active>Presentación</ModeBarLinkButton>
               <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project._id } }}>Artículos</ModeBarLinkButton>
-            </div>
+            </ModeSection>
             <SocialSection>
               {/* <SharerButton>
                 <SharerSpan>
@@ -173,6 +193,7 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
                 </SharerSpan>
                 <Icon icon={shareAlt} size={15} />
               </SharerButton> */}
+              <SubscribeButton authorId={project.author._id} />
               <ModeBarSharedButton ref={childSharedRef} project={project} toogleForm={toogleform}/>
               <ModeBarApoyarButton ref={childSuportRef} project={project} apoyarProyecto={apoyarProyecto} toogleForm={toogleform} />
             </SocialSection>
@@ -180,10 +201,10 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
         }
         {currentSection === '/versiones' &&
           <ModeBar>
-            <div>
+            <ModeSection>
               <ModeBarLinkButton href={{ pathname: '/propuesta', query: { id: project._id } }}>Presentación</ModeBarLinkButton>
               <ModeBarLinkButton href={{ pathname: '/articulado', query: { id: project._id } }}>Artículos</ModeBarLinkButton>
-            </div>
+            </ModeSection>
 
             <SocialSection>
               {/* <SharerButton>
@@ -192,9 +213,9 @@ const ProjectHeader = ({ project, section, isPublished, isAuthor, setPublish, to
                 </SharerSpan>
                 <Icon icon={shareAlt} size={15} />
               </SharerButton> */}
+              <SubscribeButton authorId={project.author._id} />
               <ModeBarSharedButton project={project} />
               <ModeBarApoyarButton project={project} apoyarProyecto={apoyarProyecto} />
-
             </SocialSection>
           </ModeBar>
         }

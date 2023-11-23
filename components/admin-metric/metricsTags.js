@@ -328,6 +328,7 @@ class MetricsTags extends Component {
   }
 
   listDocuments (tagName, documents) {
+    // scroll to id=metricTitle
     this.setState((prevState) => {
       return {
         showDocumentsTagName: tagName,
@@ -338,6 +339,9 @@ class MetricsTags extends Component {
         limit: prevState.limit,
         totalPages: Math.ceil(documents.length / prevState.limit)
       }
+    },() => {
+      const element = document.getElementById('metricTitle')
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' })
     })
   }
 
@@ -457,7 +461,7 @@ class MetricsTags extends Component {
           {
             showDocumentsTagName && (
               <div>
-                <TitleMetric>
+                <TitleMetric id="metricTitle">
                   Proyectos con etiqueta "{showDocumentsTagName}"
                 </TitleMetric>
                 <DataTable>

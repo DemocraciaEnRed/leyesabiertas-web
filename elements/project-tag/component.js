@@ -8,11 +8,11 @@ color: #4C4C4E;
 border-radius:5px;
 font-weight: 600;
 font-family: var(--italic);
-padding:8px;
-font-size:13px
-line-height: 15px;
+padding:4px 6px;
+font-size:12px
+line-height: 14px;
 text-align: center;
-letter-spacing: 1.1px;
+// letter-spacing: 1.1px;
 text-transform: capitalize;
 `
 export default ProjectTag

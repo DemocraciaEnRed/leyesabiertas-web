@@ -1,8 +1,8 @@
 import React, { Component, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Icon from 'react-icons-kit'
-import {trash2} from 'react-icons-kit/feather'
-
+import { trash2 } from 'react-icons-kit/feather'
+import slugify from 'slugify'
 import PropTypes from 'prop-types'
 
 const NewTagWrapper = styled.div`
@@ -32,8 +32,8 @@ width: 100%;
 
 const TagButton = styled.button`
 margin:23px 0; 
-min-width: 125px;
-max-width: 230px;
+min-width: 100px;
+max-width: 200px;
 height: 39px;
 background-color: #5c97bc;
 font-size: 1.4rem;
@@ -42,29 +42,32 @@ border-style: none;
 cursor: pointer;
 padding: 0 2rem;
 font-family: var(--bold);
+&[disabled] {
+    background-color: #CACACA;
+    color: #FFF;
+    cursor: not-allowed;
+    }
 `
 
 const TagNew = (props) => {
-    const [input, setInput] = useState('')
-    const handleInput=(e)=>{
-        setInput(e.target.value)
-    }
-    const sendTag = ()=>{
-        props.addTag(input)
-        setInput('')
-    }
-    return(
+  const [input, setInput] = useState('')
+  const handleInput = (e) => {
+    setInput(e.target.value)
+  }
+  const sendTag = () => {
+    props.addTag(input)
+    setInput('')
+  }
+  return (
     <NewTagWrapper>
-        <TagInputLabel>Agregar nueva etiqueta
+      <TagInputLabel>Agregar nueva etiqueta
+        <TagInput type='text' value={input} onChange={(e) => handleInput(e)} />
+        <TagButton onClick={() => sendTag()} disabled={!input}>Agregar</TagButton>
+      </TagInputLabel>
+    </NewTagWrapper>
 
-        <TagInput type='text' value={input} onChange={(e)=>handleInput(e)}/>
-        <TagButton onClick={()=> sendTag()}> agregar</TagButton>
-        </TagInputLabel>
-    
-
-    </NewTagWrapper>    
-
-    )}
+  )
+}
 
 TagNew.propTypes = {
 }
