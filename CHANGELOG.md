@@ -4,7 +4,30 @@
 
 > **IMPORTANTE: HAY NUEVAS VARIABLES DE ENTORNO, POR FAVOR VERIFICAR EL ARCHIVO `.env.dist` DEL NOTIFIER**
 
+En las variables de entorno del notifier, se agregaron las variables:
+
+```bash
+BOTTLENECK_ENABLE= #true|false
+BOTTLENECK_MIN_TIME= #in milliseconds
+BOTTLENECK_MAX_CONCURRENT= #number of concurrent jobs
+```
+
+Dado que las notificaciones en esta nueva version tenderá a enviar grandes cantidades de emails, agregamos un "throttle" para evitar que el servidor de correo nos bloquee por abuso. Es importante que se configure correctamente, ya que si no se configura, el throttle no se activa y el servidor de correo puede colapsar. La forma de configurarlo es pensar "cuantas notificaciones deseamos que se envien cada X tiempo". Por ejemplo, si nuestro servidor de SMTP nos limita a que no se envien mas de 10 emails cada 5 segundos, entonces podriamos configurarlo para que, siendo precabidos, en una venta de 2.5 segundos se envien alrededor de 4 mails. Para esto, configurariamos las variables de entorno de la siguiente forma:
+
+```bash
+BOTTLENECK_ENABLE= true
+BOTTLENECK_MIN_TIME= 2500
+BOTTLENECK_MAX_CONCURRENT= 4
+```
+
+Entonces nos aseguramos que a los 5 segundos no hayamos enviado mas de 10 mails, y que en 2.5 segundos no hayamos enviado mas de 4 mails. Esto es solo un ejemplo, y es importante que se configure correctamente para evitar que el servidor de correo nos bloquee por abuso de floodings.
+
+Si no se desea activar throttle, se puede desactivar con `BOTTLENECK_ENABLE=false` y el resto de las variables no se toman en cuenta.
+
+**Listado de cambios:**
+
 * NEW: Nuevo procedimiento de init() del sistema: Implementacion de "migrations", para realizar migraciones mas concretas y de forma secuenciales. Esto permite que el sistema pueda ser actualizado de forma mas sencilla y tener mejor auditoria de los cambios que se realizan en la base de datos.
+* MIGRATION 001 & MIGRATION 002: Son migraciones que se encargan de setear datos basicos al iniciar el sistema por primera vez. Si el sistema ya esta iniciado, estas migraciones no se saltean y se marcan como ejecutadas. La 001 responde a crear la comunidad, si ya existe, no se crea. La 002 se encarga de setear las tags, si ya existen, no se crean.
 * MIGRATION 003: Esta migracion fuerza todas las tags/etiquetas de intereses de todos los usuarios de la DB.
 * MIGRATION 004: Esta migracion fuerza las notificaciones de proyectos populares en todos los usuarios DB.
 * MIGRATION 005: Esta migracion se encarga de setear en los documentos existentes de la base de datos si ya son populares o si no. Si ya lo son, se setea que el mail de popular "ya" fue enviado (esto es para evitar que proyectos del pasado sean "populares" cuando ya están cerrados.)
@@ -26,6 +49,8 @@
 * NEW - Notifier: Se agrego al mail de notificacion de cierre de documento, ademas de que ya se veia la cantidad de comentarios, la cantidad de aportes al articulado y la cantidad de apoyos al proyecto.
 * NEW - Notifier: Se agrego al mail de notificacion de documento publicado el recuadro del proyecto (que generalmente se mostraba en otras plantillas pero estaba faltando en la de publicacion del proyecto)
 * NEW - Notifier: Agregado **bottleneck** como dependencia, que es un paquete que se encarga de limitar la cantidad de mails que se envian por segundo, para evitar que el servidor de correo nos bloquee por abuso. **IMPORTANTE: HAY NUEVAS VARIABLES DE ENTORNO, POR FAVOR VERIFICAR EL ARCHIVO `.env.dist` DEL NOTIFIER**. Este throttle es opcional pero vital para evitar que el servidor de correo nos bloquee por abuso. Es importante que se configure correctamente, ya que si no se configura, el throttle no se activa y el servidor de correo puede colapsar.
+* NEW - Notifier: Se cambio el uso de la palabra "propuesta" por "proyecto" en los mails de notificaciones.
+* NEW - Notifier: Se cambiaron los titulos de los emails de notificaciones para que sean mas descriptivos. Ver Nota al final de este changelog.
 * FIX: Se arreglo un problema de que al eliminar una etiqueta, la misma no se borraba de la lista de tags de los documentos. 
 * FIX: Se arreglo un problema de que al eliminar una etiqueta, la misma no se borraba de la lista de tags/etiquetas de los usuarios que se suscribieron a las mismas.
 * FIX: Se arreglo un problema al apoyar un proyecto de forma anonima: El usuario recibia un correo para validar su apoyo, al ser redirigido a la pagina web, ocurrian doble HTTP GET al link, donde uno validaba, pero el ultimo devolvia error porque ya el primero lo habia validado, y el usuario siempre veia "No se encontro su apoyo" cuando en realidad el mismo fue procesado por el primer GET. Se soluciono cambiando el endpoint de HTTP GET a HTTP POST y aplicando un setTimeout en la vista de 3 segundos antes de enviar el POST.
@@ -43,6 +68,18 @@
 * FIX - Notifier: Las notificaciones del cierre de documentos no estaba tomando en cuenta las personas que apoyaron el proyecto. A partir de ahora los usuarios que reciben la notificacion que un proyeto cierra es la union de: Los usuarios que participaron comentando en el fundamento + Los usuarios que aportaron en el articulado + Los usuarios que dieron like a un comentario + Los usuarios que apoyaron el proyecto.
 * NOTA: La notificacion de proyectos populares se envia a todos los usuarios que tengan activada la opcion de recibir notificaciones por proyectos populares, completamente ajeno si siguen o no al diputado, o si estan o no suscriptos a notificaciones por etiquetas de interes.
 * NOTA: La notificacion de proyectos populares se envia UNA sola vez. Comentarios, aportes o apoyos posteriores no vuelven a enviar la notificacion.
+
+##### Titulos de las notificaciones
+
+* Título para notificación al autor del proyecto sobre nuevo comentario: 'Ha recibido un nuevo comentario en su proyecto de Leyes Abiertas'
+* Título para notificación al usuario autor de un aporte en el articulado de un proyecto el cual el diputado ha marcado como resuelto: 'Su comentario en un proyecto de Leyes Abiertas ha sido marcado como resuelto'
+* Título para notificación al usuario autor de un aporte en el articulado de un proyecto el cual el diputado ha dejado un like: 'Su comentario en un proyecto de Leyes Abiertas ha sido marcado como relevante'
+* Título para notificación al usuario autor de un aporte en el articulado o de un comentario en los fundamentos de un proyecto el cual el diputado ha respondido: 'Su comentario en un proyecto de Leyes Abiertas recibió una respuesta'
+* Título para notificación al usuario autor de un comentario en el articulado de un proyecto el cual el diputado ha marcado como aporte: 'Su comentario en un proyecto de Leyes Abiertas ha sido marcado como aporte'
+* Título para notificación a todos los usuarios que estan suscriptos a etiquetas del proyecto o al autor del proyecto y que tienen sus notificaciones habilitadas: 'Nuevo proyecto publicado en Leyes Abiertas'
+* Título para notificación a todos los usuarios que estan suscriptos a ser notificados cuando un proyecto se vuelve popular: 'Un proyecto en Leyes Abiertas está volviendose popular'
+* Título para notificación a un usuario no registrado para validar su apoyo: '¡Último paso para apoyar el proyecto en Leyes Abiertas!'
+
 
 Compatible con:
 * `leyesabiertas-web:3.0.0`
